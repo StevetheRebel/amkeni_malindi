@@ -23,7 +23,7 @@ function Navigation() {
   }
 
   return (
-    <nav className="relative">
+    <nav className="fixed w-full z-50 bg-white">
       <div className="border-b-2 py-2 flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
         <div className="w-[50%] sm:w-48">
           <img src={logo} alt="amkeni logo" />
