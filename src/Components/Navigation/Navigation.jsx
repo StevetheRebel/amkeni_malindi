@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "./../../../../public/Amkeni Document Logo.png";
+import logo from "./../../assets/Amkeni Document Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -23,8 +23,8 @@ function Navigation() {
   }
 
   return (
-    <nav className="fixed w-full z-50 bg-white">
-      <div className="border-b-2 py-2 flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
+    <nav className="fixed w-full z-50 sm:bg-white">
+      <div className="border-b-2 py-2 bg-white flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
         <div className="w-[50%] sm:w-48">
           <img src={logo} alt="amkeni logo" />
           <p className="uppercase font-heading text-[8px] tracking-wide sm:tracking-wider text-center">
@@ -83,7 +83,7 @@ function Navigation() {
         </div>
       </div>
       <div
-        className="sm:hidden text-3xl text-end pr-4 pt-2"
+        className="sm:hidden text-3xl text-end pr-4 pt-2 bg-white"
         onClick={toggleMenu}
       >
         {menuOpen ? (
@@ -95,9 +95,9 @@ function Navigation() {
       <div
         className={`${
           menuOpen ? "block" : "hidden"
-        } sm:block bg-white sm:bg-transparent transition-all duration-300 ease-in-out`}
+        } sm:block bg-white/30 backdrop-blur-md sm:bg-transparent transition-all duration-300 ease-in-out`}
       >
-        <ul className="uppercase font-subheading flex flex-col items-end pr-4 gap-4 pt-4 sm:flex-row sm:px-0 sm:gap-0 sm:justify-around sm:items-center lg:justify-between lg:px-[6%]">
+        <ul className="uppercase font-subheading flex flex-col items-end pr-4 gap-4 py-4 sm:flex-row sm:px-0 sm:gap-0 sm:justify-around sm:items-center lg:justify-between lg:px-[6%]">
           <li className="hover-text">
             <Link to="/" onClick={closeMenu}>
               home
