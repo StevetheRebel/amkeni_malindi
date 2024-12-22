@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import donorLogos from "../../assets/Donor Organization";
 import Marquee from "react-fast-marquee";
 import { useMediaQuery } from "react-responsive";
+import Footer from "../Footer/Footer";
 
 function Home() {
   const blogPosts = [
@@ -176,8 +177,8 @@ function Home() {
       </section>
 
       {/* Carousel Donor Logos Marquee */}
-      <section className="py-12">
-        <Marquee gradient gradientWidth={gradientWidth} pauseOnHover>
+      <section className="py-12 ">
+        <Marquee gradient gradientWidth={gradientWidth} pauseOnHover className="overflow-hidden">
           {Object.values(donorLogos).map((logo, index) => (
             <img
               key={index}
@@ -188,7 +189,11 @@ function Home() {
           ))}
         </Marquee>
       </section>
-      
+
+      {/* Footer Section */}
+      <section className=" ">
+        <Footer />
+      </section>
     </div>
   );
 }
