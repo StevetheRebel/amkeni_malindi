@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Footer from "../Footer/Footer";
 
 function NewsBlog() {
   return (
-    <div>NewsBlog</div>
-  )
+    <>
+      <Footer />
+    </>
+  );
 }
 
-export default NewsBlog
+export default NewsBlog;

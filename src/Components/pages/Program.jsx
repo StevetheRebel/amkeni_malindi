@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Footer from "../Footer/Footer";
 
 function Program() {
   return (
-    <div >Program</div>
-  )
+    <>
+      <Footer />
+    </>
+  );
 }
 
-export default Program
+export default Program;

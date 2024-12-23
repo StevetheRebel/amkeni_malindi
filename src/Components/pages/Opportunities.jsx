@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Footer from "../Footer/Footer";
 
 function Opportunities() {
   return (
-    <div>Opportunities</div>
-  )
+    <>
+      <Footer />
+    </>
+  );
 }
 
-export default Opportunities
+export default Opportunities;

@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function Reachout() {
   return (
-    <div>Reachout</div>
-  )
+    <>
+      <div>Reach Out</div>
+    </>
+  );
 }
 
-export default Reachout
+export default Reachout;

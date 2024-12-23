@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Footer from "../Footer/Footer";
 
 function About() {
   return (
-    <div >About</div>
-  )
+    <>
+      <Footer />
+    </>
+  );
 }
 
-export default About
+export default About;
