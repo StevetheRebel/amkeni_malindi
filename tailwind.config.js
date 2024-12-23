@@ -20,15 +20,10 @@ module.exports = {
         "gradient-top-bottom": "linear-gradient(to bottom, #DEEEEB, #FFF)",
         "gradient-bottom-top": "linear-gradient(to top, #DEEEEB, #FFF)",
       },
-      keyframes: {
-        marquee: {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-100%)" },
-        },
-      },
-      animation: {
-        marquee: "marquee 10s linear infinite",
-      },
+      screens: {
+        xs: "360px",
+        s: '410px'
+      }
     },
   },
   plugins: [],
