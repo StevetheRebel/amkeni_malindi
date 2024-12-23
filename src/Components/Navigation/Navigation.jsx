@@ -27,7 +27,7 @@ function Navigation() {
       <div className="border-b-2 py-2 bg-white flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
         <div className="w-[50%] sm:w-48">
           <img src={logo} alt="amkeni logo" />
-          <p className="uppercase font-heading text-[8px] tracking-wide sm:tracking-wider text-center">
+          <p className="uppercase font-heading text-[7px] tracking-wide xs:text-[8px] xs:tracking-wider text-center">
             an empowered, just and inclusive society
           </p>
         </div>
