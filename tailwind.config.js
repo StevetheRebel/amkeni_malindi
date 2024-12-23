@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         heading: ['"DM Serif Display"', "serif"],
-        subheading: ['"PT Sans"', "sans-serif"],
+        subheading: ['"PT Serif"', "sans-serif"],
         bodyText: ['"Nunito"', "sans-serif"],
       },
       colors: {
