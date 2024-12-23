@@ -21,15 +21,17 @@ function Footer() {
           {/* First part of the Footer */}
           <div className="flex flex-col gap-1 items-center pb-2 sm:items-start ">
             {/* Footer Logo */}
-            <div className="w-[70%] sm:w-52">
+            <div className="w-[50%] sm:w-52">
               <img src={logo} alt="amkeni logo" />
-              <p className="uppercase font-heading text-[10px] tracking-wider sm:tracking-widest text-center sm:text-[8px] ">
+              <p className="uppercase font-heading text-[7px] tracking-wide xs:text-[8px] xs:tracking-widest text-center sm:text-[8px] ">
                 an empowered, just and inclusive society
               </p>
             </div>
             <h4 className="font-subheading capitalize font-bold text-lg tracking-wider ">
               subscribe for updates
             </h4>
+
+            {/* Form submission */}
             <form className="flex flex-col gap-2">
               <input
                 type="email"
