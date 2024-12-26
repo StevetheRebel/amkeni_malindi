@@ -16,7 +16,7 @@ function Footer() {
 
   return (
     <>
-      <div className="bg-light/50 py-4">
+      <div className="bg-gradient-bottom-top py-4">
         <div className="flex flex-col sm:flex-row sm:justify-around sm:gap-4 ">
           {/* First part of the Footer */}
           <div className="flex flex-col gap-1 items-center pb-2 sm:items-start ">
