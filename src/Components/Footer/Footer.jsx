@@ -23,7 +23,7 @@ function Footer() {
             {/* Footer Logo */}
             <div className="w-[50%] sm:w-52">
               <img src={logo} alt="amkeni logo" />
-              <p className="uppercase font-heading text-[7px] tracking-wide xs:text-[8px] xs:tracking-widest text-center sm:text-[8px] ">
+              <p className="uppercase font-heading text-center text-[7px] tracking-wide xs:text-[8px] xs:tracking sm:text-[8px] ">
                 an empowered, just and inclusive society
               </p>
             </div>
@@ -78,7 +78,10 @@ function Footer() {
                 <Link to="/reachout">FAQ</Link>
               </li>
               <li className="hover:text-black">
-                <a href="https://www.privacypolicies.com/live/48b650f2-e9b6-4546-bd73-a4c878e9ba8e">
+                <a
+                  href="https://www.privacypolicies.com/live/48b650f2-e9b6-4546-bd73-a4c878e9ba8e"
+                  target="_blank"
+                >
                   Privacy Policy
                 </a>
               </li>
