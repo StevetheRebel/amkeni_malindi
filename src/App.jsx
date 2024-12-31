@@ -1,12 +1,15 @@
-import React from "react";
+import { React, lazy } from "react";
 import Navigation from "./../src/Components/Navigation/Navigation";
 import { Routes, Route } from "react-router-dom";
 import Home from "./../src/Components/pages/Home";
-import About from "./../src/Components/pages/About";
-import Program from "./../src/Components/pages/Program";
-import Opportunities from "./../src/Components/pages/Opportunities";
-import NewsBlog from "./../src/Components/pages/NewsBlog";
-import Reachout from "./../src/Components/pages/Reachout";
+
+const About = lazy(() => import("./../src/Components/pages/About"));
+const Program = lazy(() => import("./../src/Components/pages/Program"));
+const Opportunities = lazy(() =>
+  import("./../src/Components/pages/Opportunities")
+);
+const NewsBlog = lazy(() => import("./../src/Components/pages/NewsBlog"));
+const Reachout = lazy(() => import("./../src/Components/pages/Reachout"));
 
 function App() {
   return (
