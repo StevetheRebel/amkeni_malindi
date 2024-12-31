@@ -22,8 +22,31 @@ module.exports = {
       },
       screens: {
         xs: "360px",
-        s: '410px'
-      }
+        s: "410px",
+      },
+      animation: {
+        spin: "spin 1s linear infinite",
+        slideIn: "slideIn 0.5s ease-in-out",
+        fadeIn: "fadeIn 0.5s ease-in-out",
+        fadeOut: "fadeOut 0.5s ease-in-out forwards",
+      },
+      keyframes: {
+        spin: {
+          to: { transform: "rotate(360deg)" },
+        },
+        slideIn: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+        fadeOut: {
+          "0%": { opacity: 1 },
+          "100%": { opacity: 0.4 },
+        },
+      },
     },
   },
   plugins: [],
