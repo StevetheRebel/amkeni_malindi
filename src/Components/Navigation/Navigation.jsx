@@ -9,7 +9,7 @@ import {
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,13 +24,17 @@ function Navigation() {
 
   return (
     <nav className="fixed w-full z-50 sm:bg-white">
+      {/* Navigation banner */}
       <div className="border-b-2 py-2 bg-white flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
+        {/* Logo */}
         <div className="w-[50%] sm:w-48">
           <img src={logo} alt="amkeni logo" />
-          <p className="uppercase font-heading text-[7px] tracking-wide xs:text-[8px] xs:tracking-wider text-center">
+          <p className="uppercase font-heading text-center text-[7px] tracking-wide xs:text-[8px]  xs:tracking-wide ">
             an empowered, just and inclusive society
           </p>
         </div>
+
+        {/* Sign in and social media links */}
         <div className="flex gap-4 text-sm">
           <p className="capitalize font-heading hover:underline">sign in</p>
           <a
@@ -82,6 +86,8 @@ function Navigation() {
           </a>
         </div>
       </div>
+
+      {/* Navigation humberger menu button */}
       <div
         className="sm:hidden text-3xl text-end pr-4 pt-2 bg-white"
         onClick={toggleMenu}
@@ -92,6 +98,8 @@ function Navigation() {
           <FontAwesomeIcon icon={faBars} />
         )}
       </div>
+
+      {/* Menu items */}
       <div
         className={`${
           menuOpen ? "block" : "hidden"
@@ -99,34 +107,34 @@ function Navigation() {
       >
         <ul className="uppercase font-subheading flex flex-col items-end pr-4 gap-4 py-4 sm:flex-row sm:px-0 sm:gap-0 sm:justify-around sm:items-center lg:justify-between lg:px-[6%]">
           <li className="hover-text">
-            <Link to="/" onClick={closeMenu}>
+            <NavLink to="/" onClick={closeMenu}>
               home
-            </Link>
+            </NavLink>
           </li>
           <li className="hover-text">
-            <Link to="/about" onClick={closeMenu}>
+            <NavLink to="/about" onClick={closeMenu}>
               about us
-            </Link>
+            </NavLink>
           </li>
           <li className="hover-text">
-            <Link to="/program-services" onClick={closeMenu}>
+            <NavLink to="/program-services" onClick={closeMenu}>
               program & services
-            </Link>
+            </NavLink>
           </li>
           <li className="hover-text">
-            <Link to="/opportunities-services" onClick={closeMenu}>
+            <NavLink to="/opportunities-services" onClick={closeMenu}>
               opportunities & events
-            </Link>
+            </NavLink>
           </li>
           <li className="hover-text">
-            <Link to="/news-blog" onClick={closeMenu}>
+            <NavLink to="/news-blog" onClick={closeMenu}>
               news & blog
-            </Link>
+            </NavLink>
           </li>
-          <li className="bg-light px-2 py-1 rounded-3xl hover:bg-primary">
-            <Link to="/reachout" onClick={closeMenu}>
+          <li className="px-2 py-1 rounded-3xl border-2 border-black shadow-md hover:shadow-inner ">
+            <NavLink to="/reachout" onClick={closeMenu}>
               reach out
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>
