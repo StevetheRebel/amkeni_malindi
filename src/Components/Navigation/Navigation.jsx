@@ -23,9 +23,9 @@ function Navigation() {
   }
 
   return (
-    <nav className="fixed w-full z-50 sm:bg-white">
+    <nav className="fixed w-full z-50 bg-gradient-top-bottom">
       {/* Navigation banner */}
-      <div className="border-b-2 py-2 bg-white flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
+      <div className="border-b-2 py-2 flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
         {/* Logo */}
         <div className="w-[50%] sm:w-48">
           <img src={logo} alt="amkeni logo" />
@@ -89,7 +89,7 @@ function Navigation() {
 
       {/* Navigation humberger menu button */}
       <div
-        className="sm:hidden text-3xl text-end pr-4 pt-2 bg-white"
+        className="sm:hidden text-3xl text-end pr-4 pt-2 "
         onClick={toggleMenu}
       >
         {menuOpen ? (
