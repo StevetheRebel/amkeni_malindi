@@ -191,7 +191,7 @@ function Home() {
       </section>
 
       {/* Footer Section */}
-      <section className=" ">
+      <section>
         <Footer />
       </section>
     </div>
