@@ -29,6 +29,7 @@ module.exports = {
         slideIn: "slideIn 0.5s ease-in-out",
         fadeIn: "fadeIn 0.5s ease-in-out",
         fadeOut: "fadeOut 0.5s ease-in-out forwards",
+        slideUp: "slideUp 0.5s ease-in-out",
       },
       keyframes: {
         spin: {
@@ -46,6 +47,10 @@ module.exports = {
           "0%": { opacity: 1 },
           "100%": { opacity: 0.4 },
         },
+        slideUp: {
+          "0%": {top: "100%"},
+          "100%": {top: 0}
+        }
       },
     },
   },
