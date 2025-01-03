@@ -43,7 +43,7 @@ function About() {
             key={index}
             className="flex flex-col gap-2 md:gap-3 lg:gap-4 xl:gap-5 2xl:gap-6 "
           >
-            <h1 className="h1-text capitalize text-center">{item.title}</h1>
+            <h1 className="h1-text capitalize text-center text-secondary">{item.title}</h1>
             <p className="text-center body-text ">{item.description}</p>
           </div>
         ))}
@@ -51,7 +51,7 @@ function About() {
 
       {/* Our History */}
       <section className="pt-8 px-4 flex flex-col gap-1 md:gap-2 md:px-14 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-5 ">
-        <h1 className="h1-text capitalize text-center ">our history</h1>
+        <h1 className="h1-text capitalize text-center text-secondary ">our history</h1>
         <p className="font-bodyText text-justify sm:text-center md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl ">
           Amkeni Malindi began in 2009 as a small support group dedicated to
           creating a safe space for men who have sex with men in Malindi, Kilifi
@@ -85,7 +85,7 @@ function About() {
 
       {/* Organizational Work */}
       <section className="h-auto my-4 pt-4 flex flex-col gap-1 md:gap-2 md:px-14 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-6 ">
-        <h1 className="h1-text text-center capitalize">our work</h1>
+        <h1 className="h1-text text-center capitalize text-secondary">our work</h1>
         <div className=" mx-4 py-4">
           <Swiper
             modules={[Pagination, Autoplay]}
@@ -122,7 +122,7 @@ function About() {
 
       {/* Organigram */}
       <section className="h-auto my-4 pt-4 flex flex-col gap-1 md:gap-2 md:px-14 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-5 ">
-        <h1 className="h1-text capitalize text-center mt-4">our structure</h1>
+        <h1 className="h1-text capitalize text-center mt-4 text-secondary">our structure</h1>
         <div className="px-4">
           <LazyLoadImage
             src={staff}
@@ -139,7 +139,7 @@ function About() {
 
       {/* The Board Team */}
       <section className="py-6 flex flex-col gap-1 md:gap-2 md:px-14 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-5 ">
-        <h1 className="h1-text capitalize text-center">our board</h1>
+        <h1 className="h1-text capitalize text-center text-secondary">our board</h1>
         <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 ">
           <Card title="Board Chair" name="Nekesa Wandera" image={profile1} />
           <Card title="Board Member" name="Francis Gikera" image={profile5} />
@@ -151,7 +151,7 @@ function About() {
 
       {/* The Staff Team */}
       <section className="py-6 flex flex-col gap-1 md:gap-2 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5">
-        <h1 className="h1-text capitalize text-center">our staff</h1>
+        <h1 className="h1-text capitalize text-center text-secondary">our staff</h1>
         <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
           <Card
             title="Executive Director"
@@ -198,7 +198,7 @@ function About() {
 
       {/* The Volunteers Team */}
       <section className="py-6 flex flex-col gap-1 md:gap-2 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5">
-        <h1 className="h1-text capitalize text-center">our volunteers</h1>
+        <h1 className="h1-text capitalize text-center text-secondary">our volunteers</h1>
         <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
           <Card
             title="Community Paralegal"
@@ -248,7 +248,7 @@ function About() {
 function CarouselSlide({ title, description }) {
   return (
     <div className="flex flex-col gap-2 md:gap-3 lg:gap-4 xl:gap-5 2xl:gap-10 ">
-      <h2 className="h2-text capitalize text-center text-pretty ">{title}</h2>
+      <h2 className="h2-text capitalize text-center text-pretty text-secondary/70 ">{title}</h2>
       <p className="body-text mb-4 pb-4 text-justify sm:px-6 sm:text-center  ">
         {description}
       </p>
