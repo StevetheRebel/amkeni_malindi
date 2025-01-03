@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -31,6 +31,25 @@ function Home() {
       hiddenClass: "flex sm:hidden 2xl:flex",
     },
   ];
+
+  const DonorLogos = ({ donoLogos }) => {
+    const [gradientWidth, setGradientWidth] = useState(50)
+
+    useEffect(() => {
+      const handleResize = () => {
+        const width = window.innerWidth;
+        setGradientWidth(width > 1024 ? 100 : 50)
+      }
+
+      window.addEventListener('resize', handleResize)
+
+      handleResize()
+
+      return () => {
+        window.removeEventListener('resize', handleResize)
+      }
+    }, [])
+  }
 
   const officeImages = Object.values(images);
   const firstSwiperRef = useRef(null);
@@ -118,7 +137,7 @@ function Home() {
 
       {/* What We Do Section */}
       <section className="py-6">
-        <h2 className="font-heading capitalize text-4xl text-center lg:text-5xl 2xl:text-6xl">
+        <h2 className="font-heading capitalize text-4xl text-center lg:text-5xl 2xl:text-6xl text-secondary">
           what we do
         </h2>
         <div className="mt-6 relative flex flex-col items-center justify-center group">
@@ -177,18 +196,18 @@ function Home() {
       </section>
 
       {/* Carousel Donor Logos Marquee */}
-      <section className="py-12 ">
-        <Marquee gradient gradientWidth={gradientWidth} pauseOnHover className="overflow-hidden">
-          {Object.values(donorLogos).map((logo, index) => (
-            <img
-              key={index}
-              src={logo}
-              alt={`Donor logo ${index}`}
-              className="w-24 mx-4 md:w-32 md:mx-6 lg:w-40 lg:mx-8 xl:w-48 xl:mx-10 2xl:w-56 2xl:mx-12 hover:scale-150 "
-            />
-          ))}
-        </Marquee>
-      </section>
+      <section className="py-12">
+      <Marquee gradient gradientWidth={gradientWidth} pauseOnHover className="overflow-hidden">
+        {Object.values(donorLogos).map((logo, index) => (
+          <img
+            key={index}
+            src={logo}
+            alt={`Donor logo ${index}`}
+            className="w-24 mx-4 md:w-32 md:mx-6 lg:w-40 lg:mx-8 xl:w-48 xl:mx-10 2xl:w-56 2xl:mx-12 hover:scale-150"
+          />
+        ))}
+      </Marquee>
+    </section>
 
       {/* Footer Section */}
       <section>
@@ -203,7 +222,7 @@ function CarouselSlide({ title, description, link }) {
     <div className="h-fit w-full bg-light rounded-2xl flex flex-col items-center pt-4 pb-8 gap-4 sm:flex-row sm:gap-4 sm:px-4 sm:pb-0 lg:gap-8 lg:px-8 lg:items-start 2xl:gap-12 2xl:px-12">
       <div className="w-[90%] aspect-square rounded-xl border-2 border-black/20 lg:w-auto lg:h-40 2xl:h-48"></div>
       <div className="flex flex-col gap-2 sm:gap-4 mb-4">
-        <h3 className="font-subheading font-bold text-2xl px-[5%] text-center sm:text-start sm:px-0 lg:text-3xl 2xl:text-4xl">
+        <h3 className="text-secondary/70 font-subheading font-bold text-2xl px-[5%] text-center sm:text-start sm:px-0 lg:text-3xl 2xl:text-4xl">
           {title}
         </h3>
         <p className="font-bodyText text-pretty px-[5%] sm:px-0 lg:text-lg 2xl:text-xl">
