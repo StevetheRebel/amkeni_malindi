@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import Footer from "../Footer/Footer";
 import { Box, Divider, Modal } from "@mui/material";
-import condomguide from "./../../../public/Condom Pamphlet.pdf";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "80vw",
+  width: "90vw",
   maxHeight: "90vh",
   overflowY: "auto",
   bgcolor: "background.paper",
@@ -24,6 +23,7 @@ function Program() {
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
+  const [open5, setOpen5] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -39,6 +39,9 @@ function Program() {
 
   const handleOpen4 = () => setOpen4(true);
   const handleClose4 = () => setOpen4(false);
+
+  const handleOpen5 = () => setOpen5(true);
+  const handleClose5 = () => setOpen5(false);
 
   const handleDownload = () => {
     const link = document.createElement("a");
@@ -93,12 +96,11 @@ function Program() {
             Book an Appointment
           </button>
           <div className="flex flex-col gap-4 items-center justify-center py-4 sm:flex-row flex-wrap lg:gap-6 2xl:gap-4 ">
-
             {/* HIV Testing Services */}
             <div className="w-[80%] aspect-square bg-muted rounded-2xl flex flex-col items-center justify-center gap-4 px-2 sm:justify-between sm:py-4 sm:px-0 sm:max-w-44 lg:py-6 lg:max-w-60 lg:px-2 xl:max-w-72 xl:px-4 2xl:max-w-80">
               <h4 className="h4-text text-center">HIV Testing Services</h4>
               <button
-                className="p-2 body-text bg-primary rounded-full"
+                className="py-2 px-4 body-text bg-primary rounded-full"
                 onClick={handleOpen}
               >
                 Read More
@@ -286,7 +288,7 @@ function Program() {
             <div className="w-[80%] aspect-square bg-muted rounded-2xl flex flex-col items-center justify-center gap-4 px-2 sm:justify-between sm:py-4 sm:px-0 sm:max-w-44 lg:py-6 lg:max-w-60 lg:px-2 xl:max-w-72 xl:px-4 2xl:max-w-80">
               <h4 className="h4-text text-center">STI Screening & Treatment</h4>
               <button
-                className="p-2 body-text bg-primary rounded-full"
+                className="py-2 px-4 body-text bg-primary rounded-full"
                 onClick={handleOpen1}
               >
                 Read More
@@ -423,7 +425,7 @@ function Program() {
                 Commodity Distribution & Education
               </h4>
               <button
-                className="p-2 body-text bg-primary rounded-full"
+                className="py-2 px-4 body-text bg-primary rounded-full"
                 onClick={handleOpen2}
               >
                 Read More
@@ -556,17 +558,32 @@ function Program() {
 
                       {/* Free & Easy access */}
                       <li>
-                        <h4 className="h4-text text-accent/70">Free & Easy Access</h4>
-                        <p className="body-text">Good news! Our condoms and lubricants are available for <span className="font-bold">free</span>. Just drop by our facility or reach out, and we'll provide them with complete privacy and discretion. No judgement, just support. </p>
+                        <h4 className="h4-text text-accent/70">
+                          Free & Easy Access
+                        </h4>
+                        <p className="body-text">
+                          Good news! Our condoms and lubricants are available
+                          for <span className="font-bold">free</span>. Just drop
+                          by our facility or reach out, and we'll provide them
+                          with complete privacy and discretion. No judgement,
+                          just support.{" "}
+                        </p>
                         <br />
-                        <p className="body-text">Safe sex should be accessible to everyone.</p>
+                        <p className="body-text">
+                          Safe sex should be accessible to everyone.
+                        </p>
                       </li>
                       <Divider />
 
                       {/* Stay in the Know */}
                       <li>
-                        <h4 className="h4-text text-accent/70">Stay in the Know</h4>
-                        <p className="body-text">Explore more of our website to find related services, including:</p>
+                        <h4 className="h4-text text-accent/70">
+                          Stay in the Know
+                        </h4>
+                        <p className="body-text">
+                          Explore more of our website to find related services,
+                          including:
+                        </p>
                         <ol className="list-disc list-inside text-pretty body-text flex flex-col gap-1 md:gap-2 md:pt-1 lg:gap-3 xl:gap-4 2xl:gap-5">
                           <li>STI Screening and Treatment</li>
                           <li>HIV Testing Services</li>
@@ -577,10 +594,20 @@ function Program() {
 
                       {/* Ready to Stock Up */}
                       <li>
-                        <h4 className="h4-text text-accent/70">Ready to Stock Up?</h4>
-                        <p className="body-text">Swing by our facility today or contact us for more information. Whether you're here for a few essentials or just browsing, we're happy to help you stay safe while enjoying life to the fullest.</p>
+                        <h4 className="h4-text text-accent/70">
+                          Ready to Stock Up?
+                        </h4>
+                        <p className="body-text">
+                          Swing by our facility today or contact us for more
+                          information. Whether you're here for a few essentials
+                          or just browsing, we're happy to help you stay safe
+                          while enjoying life to the fullest.
+                        </p>
                         <br />
-                        <p className="body-text">Keep scrolling, keep exploring, and remember: <span>safe is sexy!</span></p>
+                        <p className="body-text">
+                          Keep scrolling, keep exploring, and remember:{" "}
+                          <span>safe is sexy!</span>
+                        </p>
                       </li>
                     </ol>
                   </div>
@@ -592,7 +619,7 @@ function Program() {
             <div className="w-[80%] aspect-square bg-muted rounded-2xl flex flex-col items-center justify-center gap-4 px-2 sm:justify-between sm:py-4 sm:px-0 sm:max-w-44 lg:py-6 lg:max-w-60 lg:px-2 xl:max-w-72 xl:px-4 2xl:max-w-80">
               <h4 className="h4-text text-center">PrEP & PEP</h4>
               <button
-                className="p-2 body-text bg-primary rounded-full"
+                className="py-2 px-4 body-text bg-primary rounded-full"
                 onClick={handleOpen3}
               >
                 Read More
@@ -605,27 +632,56 @@ function Program() {
               >
                 <Box sx={style}>
                   <div className="2xl:px-10">
-                    <h3 className="h3-text text-accent">Discover Our PrEP & PEP Services</h3>
-                    <p className="py-2 body-text">Whether you're thinking ahead or responding to a recent risk, we’re here to help you stay protected. Our <span className="font-bold">PrEP</span> (Pre-Exposure Prophylaxis) and <span className="font-bold">PEP</span> (Post-Exposure Prophylaxis) services are designed to give you peace of mind, empower you to take control of your health, and prevent HIV transmission effectively.</p>
+                    <h3 className="h3-text text-accent">
+                      Discover Our PrEP & PEP Services
+                    </h3>
+                    <p className="py-2 body-text">
+                      Whether you're thinking ahead or responding to a recent
+                      risk, we’re here to help you stay protected. Our{" "}
+                      <span className="font-bold">PrEP</span> (Pre-Exposure
+                      Prophylaxis) and <span className="font-bold">PEP</span>{" "}
+                      (Post-Exposure Prophylaxis) services are designed to give
+                      you peace of mind, empower you to take control of your
+                      health, and prevent HIV transmission effectively.
+                    </p>
                     <Divider />
-                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12" >
+                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
                       {/* What is PrEP */}
                       <li>
-                        <h4 className="h4-text text-accent/70">What is PrEP?</h4>
-                        <p>Think of <span className="font-bold">PrEP</span> as your daily shield. It’s a medication taken <span className="font-bold">before potential exposure to HIV</span>, proven to reduce the risk of transmission by more than 90%.</p>
+                        <h4 className="h4-text text-accent/70">
+                          What is PrEP?
+                        </h4>
+                        <p>
+                          Think of <span className="font-bold">PrEP</span> as
+                          your daily shield. It’s a medication taken{" "}
+                          <span className="font-bold">
+                            before potential exposure to HIV
+                          </span>
+                          , proven to reduce the risk of transmission by more
+                          than 90%.
+                        </p>
                         <ol className="list-lower-alpha list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
                           <li>
                             <span className="font-bold">Who can use it?</span>
                             <p>PrEP is ideal for individuals who:</p>
-                            <ul className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5" >
+                            <ul className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
                               <li>Have an HIV-positive Partner.</li>
-                              <li>Are sexually active in high-risk settings.</li>
-                              <li>Are part of gender and sexually diverse communities seeking added protection.</li>
+                              <li>
+                                Are sexually active in high-risk settings.
+                              </li>
+                              <li>
+                                Are part of gender and sexually diverse
+                                communities seeking added protection.
+                              </li>
                             </ul>
                           </li>
                           <li>
                             <span className="font-bold">How do I start?</span>
-                            <p>Starting PrEP is simple: visit us, get tested, and we’ll guide you through every step, and ongoing support.</p>
+                            <p>
+                              Starting PrEP is simple: visit us, get tested, and
+                              we’ll guide you through every step, and ongoing
+                              support.
+                            </p>
                           </li>
                         </ol>
                       </li>
@@ -634,20 +690,41 @@ function Program() {
                       {/* What is PEP */}
                       <li>
                         <h4 className="h4-text text-accent/70">What is PEP?</h4>
-                        <p>Sometimes, life surprises us. <span className="font-bold">PEP</span> is your emergency armor—a medication taken <span className="font-bold">within 72 hours of potential HIV exposure</span> to significantly lower the risk of infection.</p>
+                        <p>
+                          Sometimes, life surprises us.{" "}
+                          <span className="font-bold">PEP</span> is your
+                          emergency armor—a medication taken{" "}
+                          <span className="font-bold">
+                            within 72 hours of potential HIV exposure
+                          </span>{" "}
+                          to significantly lower the risk of infection.
+                        </p>
                         <ol className="list-lower-alpha list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
                           <li>
-                            <span className="font-bold">Who should take PEP?</span>
+                            <span className="font-bold">
+                              Who should take PEP?
+                            </span>
                             <p>PEP is recommended if you've:</p>
                             <ol className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
-                              <li>Had unprotected sex with an unknown or HIV-positive partner.</li>
+                              <li>
+                                Had unprotected sex with an unknown or
+                                HIV-positive partner.
+                              </li>
                               <li>Experienced condom failure during sex.</li>
-                              <li>Been exposed to HIV through needle sharing or occupational hazards.</li>
+                              <li>
+                                Been exposed to HIV through needle sharing or
+                                occupational hazards.
+                              </li>
                             </ol>
                           </li>
                           <li>
                             <span className="font-bold">How does it work?</span>
-                            <p>After evaluating your risk, our healthcare professionals will initiate PEP, which involves a 28-day course of antiretroviral medications, along with follow-up testing and care.</p>
+                            <p>
+                              After evaluating your risk, our healthcare
+                              professionals will initiate PEP, which involves a
+                              28-day course of antiretroviral medications, along
+                              with follow-up testing and care.
+                            </p>
                           </li>
                         </ol>
                       </li>
@@ -655,37 +732,80 @@ function Program() {
 
                       {/* Why choose our PrEP & PEP Services */}
                       <li>
-                        <h4 className="h4-text text-accent/70">Why Choose Our PrEP & PEP Services</h4>
+                        <h4 className="h4-text text-accent/70">
+                          Why Choose Our PrEP & PEP Services
+                        </h4>
                         <ol className="list-lower-alpha list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
                           <li>
                             <span className="font-bold">GSD-Friendly Care</span>
                             <ul className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
-                              <li>Our services are inclusive and welcoming to <span className="font-bold">gender and sexually diverse individuals</span>, ensuring that everyone feels safe and respected.</li>
                               <li>
-                              Our team is trained in providing <span className="font-bold">non-judgmental and compassionate care</span> tailored to your unique needs.
+                                Our services are inclusive and welcoming to{" "}
+                                <span className="font-bold">
+                                  gender and sexually diverse individuals
+                                </span>
+                                , ensuring that everyone feels safe and
+                                respected.
+                              </li>
+                              <li>
+                                Our team is trained in providing{" "}
+                                <span className="font-bold">
+                                  non-judgmental and compassionate care
+                                </span>{" "}
+                                tailored to your unique needs.
                               </li>
                             </ul>
                           </li>
                           <li>
-                            <span className="font-bold">Qualified Practitioners</span>
+                            <span className="font-bold">
+                              Qualified Practitioners
+                            </span>
                             <ul className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
-                              <li>Our healthcare professionals have extensive experience in <span className="font-bold">HIV prevention</span> and will provide personalized advice, monitoring, and support throughout your PrEP or PEP journey.</li>
+                              <li>
+                                Our healthcare professionals have extensive
+                                experience in{" "}
+                                <span className="font-bold">
+                                  HIV prevention
+                                </span>{" "}
+                                and will provide personalized advice,
+                                monitoring, and support throughout your PrEP or
+                                PEP journey.
+                              </li>
                             </ul>
                           </li>
                           <li>
-                            <span className="font-bold">Affordable and Accessible</span>
+                            <span className="font-bold">
+                              Affordable and Accessible
+                            </span>
                             <ul className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
-                              <li>We believe prevention should be accessible to all. That's why we offer <span className="font-bold">free aceess</span> to PrEP and PEP for eligible individuals.</li>
-                              </ul>
+                              <li>
+                                We believe prevention should be accessible to
+                                all. That's why we offer{" "}
+                                <span className="font-bold">free aceess</span>{" "}
+                                to PrEP and PEP for eligible individuals.
+                              </li>
+                            </ul>
                           </li>
                         </ol>
                       </li>
                       <Divider />
 
                       {/* Your Next Step to Protection */}
-                      <h4 className="h4-text text-accent/70">Your Next Step to Protection</h4>
-                      <p>Taking charge of your health is easy. Whether you're interested in starting PrEP or need PEP urgently, our doors are open. We ensure complete <span className="font-bold">privacy</span> and offer <span className="font-bold">same-day initiation</span> for PEP to act fast when you need it most.</p>
-                      <p className="font-bold text-center">Ready to protect yourself? Visit us today, book an appointment or contact us for more information!</p>
+                      <h4 className="h4-text text-accent/70">
+                        Your Next Step to Protection
+                      </h4>
+                      <p>
+                        Taking charge of your health is easy. Whether you're
+                        interested in starting PrEP or need PEP urgently, our
+                        doors are open. We ensure complete{" "}
+                        <span className="font-bold">privacy</span> and offer{" "}
+                        <span className="font-bold">same-day initiation</span>{" "}
+                        for PEP to act fast when you need it most.
+                      </p>
+                      <p className="font-bold text-center">
+                        Ready to protect yourself? Visit us today, book an
+                        appointment or contact us for more information!
+                      </p>
                     </ol>
                   </div>
                 </Box>
@@ -708,7 +828,310 @@ function Program() {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div></div>
+                  <div className="2xl:px-10">
+                    <h3 className="h3-text text-accent">
+                      Explore Our ART (Antiretroviral Therapy) Services
+                    </h3>
+                    <p className="body-text py-4">
+                      Living a healthy, fulfilling life with HIV is possible,
+                      and Antiretroviral Therapy (ART) plays a crucial role in
+                      achieving that. At our facility, we offer comprehensive
+                      ART services, ensuring that individuals living with HIV
+                      receive the best care, support, and guidance on their
+                      journey toward a strong, healthy future.
+                    </p>
+                    <Divider />
+
+                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                      {/* What is ART? */}
+                      <li>
+                        <h4 className="h4-text text-accent/70">What is ART?</h4>
+                        <p>
+                          <span className="font-bold">
+                            Antiretroviral Therapy (ART)
+                          </span>{" "}
+                          involves taking a combination of medications that
+                          suppress the HIV virus, helping to:
+                        </p>
+                        <ul className="list-disc list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
+                          <li>
+                            <span className="font-bold">
+                              Reduce the viral load
+                            </span>{" "}
+                            in your body to undetectable levels.
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              Prevent transmission
+                            </span>{" "}
+                            of HIV to sexual partners.
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              Restore and protect your immune system
+                            </span>
+                            , improving overall health and quality of life.
+                          </li>
+                        </ul>
+                      </li>
+                      <Divider />
+
+                      {/* Why Choose Our ART Services */}
+                      <li>
+                        <h4 className="h4-text text-accent/70">
+                          Why Choose Our ART Services?
+                        </h4>
+                        <ol className="list-lower-alpha list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
+                          <li>
+                            <span className="font-bold">
+                              Expert Care & Monitoring
+                            </span>
+                            <p>
+                              Our experienced healthcare professionals will work
+                              with you to create a personalized treatment plan,
+                              ensuring you’re on the most effective and
+                              tolerable medication. Regular follow-ups help
+                              monitor your progress and manage any side effects.
+                            </p>
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              Inclusive & Non-judgemental Environment
+                            </span>
+                            <p>
+                              We provide{" "}
+                              <span className="font-bold">
+                                GSD-friendly care
+                              </span>
+                              , ensuring that gender and sexually diverse
+                              individuals feel comfortable and respected at
+                              every step of their treatment journey.
+                            </p>
+                          </li>
+                          <li>
+                            <span className="font-bold">Holistic Support</span>
+                            <p>
+                              Beyond medication, we offer:
+                              <ul className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
+                                <li>
+                                  <span className="font-bold">
+                                    Counseling services
+                                  </span>{" "}
+                                  to support mental and emotional well-being.
+                                </li>
+                                <li>
+                                  <span className="font-bold">
+                                    Peer support groups
+                                  </span>
+                                  , where you can connect with others living
+                                  with HIV.
+                                </li>
+                                <li>
+                                  <span className="font-bold">
+                                    Nutritional guidance
+                                  </span>{" "}
+                                  to help maintain a healthy lifestyle.
+                                </li>
+                              </ul>
+                            </p>
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              Confidential & Accessible
+                            </span>
+                            <p>
+                              Your privacy is our priority. Whether it’s your
+                              first visit or a regular follow-up, we ensure that
+                              every interaction is confidential. Our services
+                              are also free.
+                            </p>
+                          </li>
+                        </ol>
+                      </li>
+                      <Divider />
+
+                      {/* Starting ART */}
+                      <li>
+                        <h4 className="h4-text text-accent/70">Starting ART</h4>
+                        <p>
+                          Starting ART as soon as possible after an HIV
+                          diagnosis is critical for long-term health. Here’s how
+                          we can help you get started:
+                        </p>
+                        <ol className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
+                          <li>
+                            <span className="font-bold">Assessment</span> –
+                            We’ll begin by conducting tests to determine your
+                            overall health and readiness for ART.
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              Treatment Initiation
+                            </span>{" "}
+                            – Once you’re ready, we’ll prescribe the right
+                            combination of antiretroviral medications for you.
+                          </li>
+                          <li>
+                            <span className="font-bold">Ongoing Support</span> –
+                            Our team will provide regular follow-ups to ensure
+                            your treatment is effective, with adjustments made
+                            if necessary.
+                          </li>
+                        </ol>
+                      </li>
+                      <Divider />
+
+                      {/* Undetectable = Untransmittable */}
+                      <li>
+                        <h4 className="h4-text text-accent/70">
+                          Undetectable = Untransmittable (U=U)
+                        </h4>
+                        <p className="pt-2 pb-4">
+                          Achieving an undetectable viral load through ART means
+                          you cannot transmit HIV to others. This is a powerful
+                          motivator to stay on treatment and live openly without
+                          fear or stigma.
+                        </p>
+                      </li>
+                      <Divider />
+
+                      <h4 className="h4-text text-accent">
+                        Your Health, Our Commitment
+                      </h4>
+                      <p>
+                        Whether you’re newly diagnosed or already on ART, we’re
+                        here to offer you ongoing care and support. Let’s work
+                        together to keep you healthy and thriving.
+                      </p>
+                      <p className="font-bold text-center">
+                        Ready to start or continue ART? Book an appointment,
+                        visit us or contact us today!
+                      </p>
+                    </ol>
+                  </div>
+                </Box>
+              </Modal>
+            </div>
+
+            {/* Mental Health and Psychosocial Support */}
+            <div className="w-[80%] aspect-square bg-muted rounded-2xl flex flex-col items-center justify-center gap-4 px-2 sm:justify-between sm:py-4 sm:px-0 sm:max-w-44 lg:py-6 lg:max-w-60 lg:px-2 xl:max-w-72 xl:px-4 2xl:max-w-80">
+              <h4 className="h4-text text-center">
+                Mental Health & Psychosocial Support
+              </h4>
+              <button
+                className="py-2 px-4 body-text bg-primary rounded-full"
+                onClick={handleOpen5}
+              >
+                Read More
+              </button>
+              <Modal
+                open={open5}
+                onClose={handleClose5}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <div className="2xl:px-10">
+                    <h3 className="h3-text text-accent">
+                      Your Mental Health Matters: Psychosocial Support Services
+                    </h3>
+                    <p className="body-text pt-2 pb-4">
+                      We understand that mental health is key to overall
+                      well-being, especially when navigating health challenges
+                      or life’s uncertainties. That’s why we offer{" "}
+                      <span className="font-bold">
+                        mental health and psychosocial support services
+                      </span>{" "}
+                      with a dedicated psychologist who is here to listen,
+                      guide, and help you build resilience.
+                    </p>
+                    <Divider />
+
+                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                      {/* What we Offer */}
+                      <li>
+                        <h4 className="h4-text text-accent/70">
+                          What we Offer
+                        </h4>
+                        <ol className="list-disc list-inside text-pretty body-text flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
+                          <li>
+                            <span className="font-bold">
+                              One-on-One Counseling Sessions
+                            </span>
+                            <p>
+                              Sometimes, life can feel overwhelming. Our
+                              experienced psychologist provides{" "}
+                              <span className="font-bold">
+                                confidential, individualized counseling
+                              </span>{" "}
+                              to help you manage stress, anxiety, depression,
+                              trauma, or any other mental health concerns.
+                            </p>
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              Group Therapy & Peer Support
+                            </span>
+                            <p>
+                              You’re not alone. Join our{" "}
+                              <span className="font-bold">support groups</span>{" "}
+                              where individuals facing similar challenges come
+                              together to share experiences, offer mutual
+                              support, and foster a sense of community.
+                            </p>
+                          </li>
+                          <li>
+                            <span className="font-bold">Crisis Itervention</span>
+                            <p>If you’re experiencing a mental health crisis, our psychologist is trained to provide immediate care, helping you stabilize and connect with long-term support services.</p>
+                          </li>
+                          <li>
+                            <span className="font-bold">Psychosocial Support for People Living with HIV (PLHIV)</span>
+                            <p>We offer tailored mental health services for individuals living with HIV, recognizing the unique emotional and psychological challenges that can come with managing the condition. Our goal is to promote <span className="font-bold">positive mental health, adherence to treatment</span>, and overall well-being.</p>
+                          </li>
+                        </ol>
+                      </li>
+                      <Divider />
+
+                      {/* Why Choose Our Psychosocial Support Services */}
+                      <li>
+                        <h4 className="h4-text text-accent/70">Why Choose Our Psychosocial Support Services?</h4>
+                        <ol className="list-disc body-text list-inside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                          <li>
+                            <span className="font-bold">Non-judgemental, Inclusive Care</span>
+                            <p>We’re proud to provide a safe, welcoming space for everyone, including <span className="font-bold">gender and sexually diverse (GSD) communities</span>. Our psychologist and support staff are trained in offering GSD-sensitive services, ensuring you feel respected and understood.</p>
+                          </li>
+                          <li>
+                            <span className="font-bold">Qualified Mental Health Practitioners</span>
+                            <p >Our team includes a licensed psychologist with years of experience in <span className="font-bold">clinical counseling, trauma care</span>, and <span className="font-bold">stress management</span>. You’ll receive professional, compassionate support tailored to your unique needs.</p>
+                          </li>
+                          <li>
+                            <span className="font-bold">Holistic Approach to Wellness</span>
+                            <p>We believe in treating the whole person. Beyond individual counseling, we integrate psychosocial support with our health services, such as <span className="font-bold">HIV care, STI treatment, and economic empowerment programs</span>, to promote complete well-being.</p>
+                          </li>
+                        </ol>
+                      </li>
+                      <Divider />
+
+                      {/* Common Issues We Address */}
+                      <li>
+                        <h4 className="h4-text text-accent/70">Common Issues We Address</h4>
+                        <ol className="list-disc body-text list-inside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                          <li>Anxiety, depression, and stress management.</li>
+                          <li>Coping with chronic illness and health-related anxiety.</li>
+                          <li>Addiction counseling</li>
+                          <li>Trauma and grief counseling.</li>
+                          <li>Relationship challenges and identity issues.</li>
+                          <li>Building self-esteem and personal growth.</li>
+                        </ol>
+                      </li>
+                      <Divider />
+
+                      {/* Book Your Session Today */}
+                      <h3 className="h3-text text-accent">Book Your Session Today</h3>
+                      <p className="body-text">Your mental health is just as important as your physical health. Whether you need someone to talk to, tools to manage daily stress, or ongoing support, our psychologist is here to help.</p>
+                      <p className="body-text font-bold text-center">Ready to take the next step? Schedule a session with our psychologist today!</p>
+                    </ol>
+                  </div>
                 </Box>
               </Modal>
             </div>
@@ -720,17 +1143,5 @@ function Program() {
     </div>
   );
 }
-
-const DownloadButton = () => {
-  return (
-    <a
-      href="./../../../public/Condom Pamphlet.pdf"
-      download="Condom Pamphlet.pdf"
-      className="bg-primary/50 mt-4 px-4 py-2 rounded-full hover:bg-primary body-text"
-    >
-      Download Guide
-    </a>
-  );
-};
 
 export default Program;
