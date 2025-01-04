@@ -604,7 +604,90 @@ function Program() {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div></div>
+                  <div className="2xl:px-10">
+                    <h3 className="h3-text text-accent">Discover Our PrEP & PEP Services</h3>
+                    <p className="py-2 body-text">Whether you're thinking ahead or responding to a recent risk, we’re here to help you stay protected. Our <span className="font-bold">PrEP</span> (Pre-Exposure Prophylaxis) and <span className="font-bold">PEP</span> (Post-Exposure Prophylaxis) services are designed to give you peace of mind, empower you to take control of your health, and prevent HIV transmission effectively.</p>
+                    <Divider />
+                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12" >
+                      {/* What is PrEP */}
+                      <li>
+                        <h4 className="h4-text text-accent/70">What is PrEP?</h4>
+                        <p>Think of <span className="font-bold">PrEP</span> as your daily shield. It’s a medication taken <span className="font-bold">before potential exposure to HIV</span>, proven to reduce the risk of transmission by more than 90%.</p>
+                        <ol className="list-lower-alpha list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
+                          <li>
+                            <span className="font-bold">Who can use it?</span>
+                            <p>PrEP is ideal for individuals who:</p>
+                            <ul className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5" >
+                              <li>Have an HIV-positive Partner.</li>
+                              <li>Are sexually active in high-risk settings.</li>
+                              <li>Are part of gender and sexually diverse communities seeking added protection.</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <span className="font-bold">How do I start?</span>
+                            <p>Starting PrEP is simple: visit us, get tested, and we’ll guide you through every step, and ongoing support.</p>
+                          </li>
+                        </ol>
+                      </li>
+                      <Divider />
+
+                      {/* What is PEP */}
+                      <li>
+                        <h4 className="h4-text text-accent/70">What is PEP?</h4>
+                        <p>Sometimes, life surprises us. <span className="font-bold">PEP</span> is your emergency armor—a medication taken <span className="font-bold">within 72 hours of potential HIV exposure</span> to significantly lower the risk of infection.</p>
+                        <ol className="list-lower-alpha list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
+                          <li>
+                            <span className="font-bold">Who should take PEP?</span>
+                            <p>PEP is recommended if you've:</p>
+                            <ol className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
+                              <li>Had unprotected sex with an unknown or HIV-positive partner.</li>
+                              <li>Experienced condom failure during sex.</li>
+                              <li>Been exposed to HIV through needle sharing or occupational hazards.</li>
+                            </ol>
+                          </li>
+                          <li>
+                            <span className="font-bold">How does it work?</span>
+                            <p>After evaluating your risk, our healthcare professionals will initiate PEP, which involves a 28-day course of antiretroviral medications, along with follow-up testing and care.</p>
+                          </li>
+                        </ol>
+                      </li>
+                      <Divider />
+
+                      {/* Why choose our PrEP & PEP Services */}
+                      <li>
+                        <h4 className="h4-text text-accent/70">Why Choose Our PrEP & PEP Services</h4>
+                        <ol className="list-lower-alpha list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
+                          <li>
+                            <span className="font-bold">GSD-Friendly Care</span>
+                            <ul className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
+                              <li>Our services are inclusive and welcoming to <span className="font-bold">gender and sexually diverse individuals</span>, ensuring that everyone feels safe and respected.</li>
+                              <li>
+                              Our team is trained in providing <span className="font-bold">non-judgmental and compassionate care</span> tailored to your unique needs.
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <span className="font-bold">Qualified Practitioners</span>
+                            <ul className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
+                              <li>Our healthcare professionals have extensive experience in <span className="font-bold">HIV prevention</span> and will provide personalized advice, monitoring, and support throughout your PrEP or PEP journey.</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <span className="font-bold">Affordable and Accessible</span>
+                            <ul className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
+                              <li>We believe prevention should be accessible to all. That's why we offer <span className="font-bold">free aceess</span> to PrEP and PEP for eligible individuals.</li>
+                              </ul>
+                          </li>
+                        </ol>
+                      </li>
+                      <Divider />
+
+                      {/* Your Next Step to Protection */}
+                      <h4 className="h4-text text-accent/70">Your Next Step to Protection</h4>
+                      <p>Taking charge of your health is easy. Whether you're interested in starting PrEP or need PEP urgently, our doors are open. We ensure complete <span className="font-bold">privacy</span> and offer <span className="font-bold">same-day initiation</span> for PEP to act fast when you need it most.</p>
+                      <p className="font-bold text-center">Ready to protect yourself? Visit us today, book an appointment or contact us for more information!</p>
+                    </ol>
+                  </div>
                 </Box>
               </Modal>
             </div>
