@@ -48,9 +48,13 @@ module.exports = {
           "100%": { opacity: 0.4 },
         },
         slideUp: {
-          "0%": {top: "100%"},
-          "100%": {top: 0}
-        }
+          "0%": { top: "100%" },
+          "100%": { top: 0 },
+        },
+      },
+      listStyleType: {
+        "lower-alpha": "lower-alpha",
+        "lower-roman": "lower-roman",
       },
     },
   },
