@@ -52,7 +52,7 @@ function Program() {
 
   return (
     <div className="relative h-auto top-[154px] xs:top-[160px] sm:top-36 ">
-      <section className="relative flex flex-col gap-4 px-4 sm:px-4  lg:px-[6%]">
+      <section className="relative flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10">
         <h1 className="h1-text capitalize text-center text-secondary">
           our programs
         </h1>
@@ -63,30 +63,44 @@ function Program() {
             Healthcare Promotion & Service Delivery
           </h2>
           <p className="body-text py-4 text-justify sm:text-center ">
-            Our <span className="font-bold">HIV Testing Services (HTS)</span>{" "}
-            process is designed to provide high-quality, confidential, and
-            client-centered care. It begins with{" "}
-            <span className="font-bold">pre-test counseling</span>, where
-            informed consent is obtained, and clients are prepared for possible
-            outcomes. The <span className="font-bold">testing phase</span>{" "}
-            follows, using WHO-approved rapid diagnostic tests conducted by
-            trained professionals. After testing,{" "}
-            <span className="font-bold">post-test counseling</span> is offered
-            to ensure emotional support and guidance, whether the results are
-            negative or positive. For those who test positive, immediate{" "}
-            <span className="font-bold">linkage to care</span> is provided,
-            including access to antiretroviral therapy (ART) and psychosocial
-            support. Our compassionate and skilled team ensures a respectful,
-            stigma-free experience for everyone.
-          </p>
-          <p className="body-text py-4 text-justify sm:text-center">
-            Ready to take charge of your health? Our{" "}
-            <span className="font-bold">HIV Testing Services (HTS)</span>{" "}
-            process is designed with your comfort and confidentiality in mind.
-            We’ve outlined each step—from pre-test counseling to linkage to
-            care—so you know exactly what to expect. Whether you're seeking
-            peace of mind or proactive health management, our skilled
-            practitioners are here to guide you every step of the way.{" "}
+            At our facility, we provide a wide range of{" "}
+            <span className="font-bold">
+              health promotion and service delivery
+            </span>{" "}
+            options tailored to meet the diverse needs of our community. From
+            preventive care to ongoing treatment and mental health support, we
+            are dedicated to fostering healthier lives through compassionate,
+            inclusive, and professional services. <br />
+            <br /> Our{" "}
+            <span className="font-bold">HIV Testing Services (HTS)</span> are
+            designed to be quick, confidential, and supportive, encouraging
+            individuals to take charge of their health with confidence.
+            Alongside this, we offer{" "}
+            <span className="font-bold">STI screening and treatment</span>,
+            ensuring early detection and effective care while promoting safe
+            sexual health practices. <br />
+            <br /> We go a step further by offering{" "}
+            <span className="font-bold">commodity distribution</span>, including
+            free condoms and lubricants, paired with clear, engaging education
+            materials to promote proper use and safer intimacy. <br />
+            <br /> Prevention remains a top priority with our{" "}
+            <span className="font-bold">PrEP & PEP</span> services, providing
+            both long-term and emergency options for HIV prevention. For those
+            already living with HIV, our{" "}
+            <span className="font-bold">Antiretroviral Therapy (ART)</span>{" "}
+            services are designed to help individuals maintain a healthy life,
+            with personalized care and adherence support. <br />
+            <br /> Beyond physical health, we believe in a holistic approach to
+            wellness, which is why we offer{" "}
+            <span className="font-bold">
+              mental health and psychosocial support
+            </span>{" "}
+            services. Our licensed psychologist provides individual counseling,
+            peer support, and crisis intervention, ensuring everyone feels
+            heard, respected, and cared for. <br />
+            <br /> Whether you're here for preventive care, ongoing treatment,
+            or simply seeking a listening ear, we are committed to supporting
+            your well-being every step of the way.
           </p>
           <p className="font-bold body-text py-4 text-center">
             Check out the detailed steps below and visit us today to get started
@@ -1081,12 +1095,32 @@ function Program() {
                             </p>
                           </li>
                           <li>
-                            <span className="font-bold">Crisis Itervention</span>
-                            <p>If you’re experiencing a mental health crisis, our psychologist is trained to provide immediate care, helping you stabilize and connect with long-term support services.</p>
+                            <span className="font-bold">
+                              Crisis Itervention
+                            </span>
+                            <p>
+                              If you’re experiencing a mental health crisis, our
+                              psychologist is trained to provide immediate care,
+                              helping you stabilize and connect with long-term
+                              support services.
+                            </p>
                           </li>
                           <li>
-                            <span className="font-bold">Psychosocial Support for People Living with HIV (PLHIV)</span>
-                            <p>We offer tailored mental health services for individuals living with HIV, recognizing the unique emotional and psychological challenges that can come with managing the condition. Our goal is to promote <span className="font-bold">positive mental health, adherence to treatment</span>, and overall well-being.</p>
+                            <span className="font-bold">
+                              Psychosocial Support for People Living with HIV
+                              (PLHIV)
+                            </span>
+                            <p>
+                              We offer tailored mental health services for
+                              individuals living with HIV, recognizing the
+                              unique emotional and psychological challenges that
+                              can come with managing the condition. Our goal is
+                              to promote{" "}
+                              <span className="font-bold">
+                                positive mental health, adherence to treatment
+                              </span>
+                              , and overall well-being.
+                            </p>
                           </li>
                         </ol>
                       </li>
@@ -1094,19 +1128,57 @@ function Program() {
 
                       {/* Why Choose Our Psychosocial Support Services */}
                       <li>
-                        <h4 className="h4-text text-accent/70">Why Choose Our Psychosocial Support Services?</h4>
+                        <h4 className="h4-text text-accent/70">
+                          Why Choose Our Psychosocial Support Services?
+                        </h4>
                         <ol className="list-disc body-text list-inside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
                           <li>
-                            <span className="font-bold">Non-judgemental, Inclusive Care</span>
-                            <p>We’re proud to provide a safe, welcoming space for everyone, including <span className="font-bold">gender and sexually diverse (GSD) communities</span>. Our psychologist and support staff are trained in offering GSD-sensitive services, ensuring you feel respected and understood.</p>
+                            <span className="font-bold">
+                              Non-judgemental, Inclusive Care
+                            </span>
+                            <p>
+                              We’re proud to provide a safe, welcoming space for
+                              everyone, including{" "}
+                              <span className="font-bold">
+                                gender and sexually diverse (GSD) communities
+                              </span>
+                              . Our psychologist and support staff are trained
+                              in offering GSD-sensitive services, ensuring you
+                              feel respected and understood.
+                            </p>
                           </li>
                           <li>
-                            <span className="font-bold">Qualified Mental Health Practitioners</span>
-                            <p >Our team includes a licensed psychologist with years of experience in <span className="font-bold">clinical counseling, trauma care</span>, and <span className="font-bold">stress management</span>. You’ll receive professional, compassionate support tailored to your unique needs.</p>
+                            <span className="font-bold">
+                              Qualified Mental Health Practitioners
+                            </span>
+                            <p>
+                              Our team includes a licensed psychologist with
+                              years of experience in{" "}
+                              <span className="font-bold">
+                                clinical counseling, trauma care
+                              </span>
+                              , and{" "}
+                              <span className="font-bold">
+                                stress management
+                              </span>
+                              . You’ll receive professional, compassionate
+                              support tailored to your unique needs.
+                            </p>
                           </li>
                           <li>
-                            <span className="font-bold">Holistic Approach to Wellness</span>
-                            <p>We believe in treating the whole person. Beyond individual counseling, we integrate psychosocial support with our health services, such as <span className="font-bold">HIV care, STI treatment, and economic empowerment programs</span>, to promote complete well-being.</p>
+                            <span className="font-bold">
+                              Holistic Approach to Wellness
+                            </span>
+                            <p>
+                              We believe in treating the whole person. Beyond
+                              individual counseling, we integrate psychosocial
+                              support with our health services, such as{" "}
+                              <span className="font-bold">
+                                HIV care, STI treatment, and economic
+                                empowerment programs
+                              </span>
+                              , to promote complete well-being.
+                            </p>
                           </li>
                         </ol>
                       </li>
@@ -1114,10 +1186,15 @@ function Program() {
 
                       {/* Common Issues We Address */}
                       <li>
-                        <h4 className="h4-text text-accent/70">Common Issues We Address</h4>
+                        <h4 className="h4-text text-accent/70">
+                          Common Issues We Address
+                        </h4>
                         <ol className="list-disc body-text list-inside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
                           <li>Anxiety, depression, and stress management.</li>
-                          <li>Coping with chronic illness and health-related anxiety.</li>
+                          <li>
+                            Coping with chronic illness and health-related
+                            anxiety.
+                          </li>
                           <li>Addiction counseling</li>
                           <li>Trauma and grief counseling.</li>
                           <li>Relationship challenges and identity issues.</li>
@@ -1127,9 +1204,19 @@ function Program() {
                       <Divider />
 
                       {/* Book Your Session Today */}
-                      <h3 className="h3-text text-accent">Book Your Session Today</h3>
-                      <p className="body-text">Your mental health is just as important as your physical health. Whether you need someone to talk to, tools to manage daily stress, or ongoing support, our psychologist is here to help.</p>
-                      <p className="body-text font-bold text-center">Ready to take the next step? Schedule a session with our psychologist today!</p>
+                      <h3 className="h3-text text-accent">
+                        Book Your Session Today
+                      </h3>
+                      <p className="body-text">
+                        Your mental health is just as important as your physical
+                        health. Whether you need someone to talk to, tools to
+                        manage daily stress, or ongoing support, our
+                        psychologist is here to help.
+                      </p>
+                      <p className="body-text font-bold text-center">
+                        Ready to take the next step? Schedule a session with our
+                        psychologist today!
+                      </p>
                     </ol>
                   </div>
                 </Box>
@@ -1138,6 +1225,20 @@ function Program() {
           </div>
         </div>
         {/* Healthcare Promotion & Service Delivery End */}
+
+        {/* Community Social & Economic Empowerment */}
+        <div className="flex flex-col items-center">
+          <h2 className="h2-text text-secondary/70 text-center">
+            Community Social & Economic Empowerment
+          </h2>
+        </div>
+
+        {/* Research, Advocacy & Policy Reforms */}
+        <div className="flex flex-col items-center">
+          <h2 className="h2-text text-secondary/70 text-center">
+            Research, Advocacy & Policy Reforms
+          </h2>
+        </div>
       </section>
       <Footer />
     </div>
