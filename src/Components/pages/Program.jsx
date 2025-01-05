@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Footer from "../Footer/Footer";
 import { Box, Divider, Modal } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const style = {
   position: "absolute",
@@ -13,7 +15,6 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4,
   "border-radius": "24px",
 };
 
@@ -121,13 +122,19 @@ function Program() {
               </button>
               <Modal
                 open={open}
-                onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="2xl:px-10">
-                    <ol className="list-decimal body-text list-outside flex flex-col gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                  <div className="2xl:px-10 relative flex flex-col">
+                    <div className="sticky self-end top-2 right-2">
+                      <FontAwesomeIcon
+                        icon={faXmark}
+                        onClick={handleClose}
+                        className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
+                      />
+                    </div>
+                    <ol className="list-decimal body-text list-outside flex flex-col gap-4 px-8 pb-4 md:gap-6 lg:gap-8 lg:px-12 xl:gap-10 2xl:gap-12">
                       {/* Pre-Testing counseling */}
                       <li>
                         <h3 className="h3-text text-accent">
@@ -309,16 +316,22 @@ function Program() {
               </button>
               <Modal
                 open={open1}
-                onClose={handleClose1}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 2xl:px-10">
-                    <h3 className="h3-text text-accent text-center">
+                  <div className="flex flex-col">
+                  <div className="sticky self-end top-2 right-2">
+                      <FontAwesomeIcon
+                        icon={faXmark}
+                        onClick={handleClose1}
+                        className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
+                      />
+                    </div>
+                    <h3 className="h3-text text-accent px-8 pb-4 lg:px-12">
                       Why Choose Our Services?
                     </h3>
-                    <ol className="list-decimal body-text list-outside flex flex-col gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                    <ol className="list-decimal body-text list-outside flex flex-col gap-4 px-8 pb-4 md:gap-6 lg:gap-8 lg:px-12 xl:gap-10 2xl:gap-12">
                       {/* Gender and Sexual Diverse Friendly */}
                       <li>
                         <h4 className="h4-text">
@@ -446,17 +459,23 @@ function Program() {
               </button>
               <Modal
                 open={open2}
-                onClose={handleClose2}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="2xl:px-10">
-                    <h3 className="h3-text text-accent">
+                  <div className="2xl:px-10 relative flex flex-col">
+                  <div className="sticky self-end top-2 right-2">
+                      <FontAwesomeIcon
+                        icon={faXmark}
+                        onClick={handleClose2}
+                        className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
+                      />
+                    </div>
+                    <h3 className="h3-text text-accent px-8 pb-4 lg:px-12">
                       {" "}
                       Explore Our Condom & Lubricant Section
                     </h3>
-                    <p className="py-4 body-text">
+                    <p className="py-4 body-text px-8 pb-4 lg:px-12">
                       Your sexual health matters, and we're here to help you
                       make every experience safe, comfortable, and enjoyable! As
                       you scroll through this section, you'll find everything
@@ -465,7 +484,7 @@ function Program() {
                       we offer because safer sex starts with the right tools.
                     </p>
                     <Divider />
-                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 px-8 pb-4 lg:px-12 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
                       {/* What is in Stock */}
                       <li>
                         <h4 className="h4-text text-accent/70">
@@ -640,16 +659,22 @@ function Program() {
               </button>
               <Modal
                 open={open3}
-                onClose={handleClose3}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="2xl:px-10">
-                    <h3 className="h3-text text-accent">
+                  <div className="2xl:px-10 relative flex flex-col">
+                  <div className="sticky self-end top-2 right-2">
+                      <FontAwesomeIcon
+                        icon={faXmark}
+                        onClick={handleClose3}
+                        className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
+                      />
+                    </div>
+                    <h3 className="h3-text text-accent px-8 pb-4 lg:px-12">
                       Discover Our PrEP & PEP Services
                     </h3>
-                    <p className="py-2 body-text">
+                    <p className="py-2 body-text px-8 pb-4 lg:px-12">
                       Whether you're thinking ahead or responding to a recent
                       risk, we’re here to help you stay protected. Our{" "}
                       <span className="font-bold">PrEP</span> (Pre-Exposure
@@ -659,7 +684,7 @@ function Program() {
                       health, and prevent HIV transmission effectively.
                     </p>
                     <Divider />
-                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 px-8 pb-4 lg:px-12 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
                       {/* What is PrEP */}
                       <li>
                         <h4 className="h4-text text-accent/70">
@@ -837,16 +862,22 @@ function Program() {
               </button>
               <Modal
                 open={open4}
-                onClose={handleClose4}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="2xl:px-10">
-                    <h3 className="h3-text text-accent">
+                  <div className="2xl:px-10 relative flex flex-col">
+                  <div className="sticky self-end top-2 right-2">
+                      <FontAwesomeIcon
+                        icon={faXmark}
+                        onClick={handleClose4}
+                        className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
+                      />
+                    </div>
+                    <h3 className="h3-text text-accent px-8 pb-4 lg:px-12">
                       Explore Our ART (Antiretroviral Therapy) Services
                     </h3>
-                    <p className="body-text py-4">
+                    <p className="body-text py-4 px-8 pb-4 lg:px-12">
                       Living a healthy, fulfilling life with HIV is possible,
                       and Antiretroviral Therapy (ART) plays a crucial role in
                       achieving that. At our facility, we offer comprehensive
@@ -856,7 +887,7 @@ function Program() {
                     </p>
                     <Divider />
 
-                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 px-8 pb-4 lg:px-12 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
                       {/* What is ART? */}
                       <li>
                         <h4 className="h4-text text-accent/70">What is ART?</h4>
@@ -1040,16 +1071,22 @@ function Program() {
               </button>
               <Modal
                 open={open5}
-                onClose={handleClose5}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="2xl:px-10">
-                    <h3 className="h3-text text-accent">
+                  <div className="2xl:px-10 relative flex flex-col">
+                  <div className="sticky self-end top-2 right-2">
+                      <FontAwesomeIcon
+                        icon={faXmark}
+                        onClick={handleClose5}
+                        className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
+                      />
+                    </div>
+                    <h3 className="h3-text text-accent px-8 pb-4 lg:px-12">
                       Your Mental Health Matters: Psychosocial Support Services
                     </h3>
-                    <p className="body-text pt-2 pb-4">
+                    <p className="body-text pt-2 pb-4 px-8 pb-4 lg:px-12">
                       We understand that mental health is key to overall
                       well-being, especially when navigating health challenges
                       or life’s uncertainties. That’s why we offer{" "}
@@ -1061,7 +1098,7 @@ function Program() {
                     </p>
                     <Divider />
 
-                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                    <ol className="list-decimal body-text list-outside flex flex-col pt-4 gap-4 px-8 pb-4 lg:px-12 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
                       {/* What we Offer */}
                       <li>
                         <h4 className="h4-text text-accent/70">
