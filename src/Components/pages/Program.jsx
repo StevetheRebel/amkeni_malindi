@@ -3,6 +3,7 @@ import Footer from "../Footer/Footer";
 import { Box, Divider, Modal } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import AppointmentForm from "../AppointmentForm";
 
 const style = {
   position: "absolute",
@@ -15,7 +16,7 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  "border-radius": "24px",
+  borderRadius: "24px",
 };
 
 function Program() {
@@ -25,6 +26,7 @@ function Program() {
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
   const [open5, setOpen5] = useState(false);
+  const [open6, setOpen6] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -44,6 +46,9 @@ function Program() {
   const handleOpen5 = () => setOpen5(true);
   const handleClose5 = () => setOpen5(false);
 
+  const handleOpen6 = () => setOpen6(true);
+  const handleClose6 = () => setOpen6(false);
+
   const handleDownload = () => {
     const link = document.createElement("a");
     (link.href = "./../../../public/Condom Pamphlet.pdf"),
@@ -52,7 +57,7 @@ function Program() {
   };
 
   return (
-    <div className="relative h-auto top-[154px] xs:top-[160px] sm:top-36 ">
+    <div className="relative h-auto top-[154px] xs:top-[160px] sm:top-36 select-none ">
       <section className="relative flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10">
         <h1 className="h1-text capitalize text-center text-secondary">
           our programs
@@ -107,9 +112,31 @@ function Program() {
             Check out the detailed steps below and visit us today to get started
             on your journey to better health!
           </p>{" "}
-          <button className="py-2 px-4 bg-primary/50 rounded-full body-text hover:bg-primary">
+          <button
+            className="py-2 px-4 bg-primary/50 rounded-full body-text hover:bg-primary"
+            onClick={handleOpen6}
+          >
             Book an Appointment
           </button>
+          <Modal
+            open={open6}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <div className="2xl:px-10 relative flex flex-col pb-4">
+                <div className="sticky self-end top-2 right-2">
+                  <FontAwesomeIcon
+                    icon={faXmark}
+                    onClick={handleClose6}
+                    className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
+                  />
+                </div>
+                <h2 className="h2-text text-secondary/70 text-center pb-2 md:pb-4">Book An Appointment</h2>
+                <AppointmentForm handleFormClose={handleClose6}/>
+              </div>
+            </Box>
+          </Modal>
           <div className="flex flex-col gap-4 items-center justify-center py-4 sm:flex-row flex-wrap lg:gap-6 2xl:gap-4 ">
             {/* HIV Testing Services */}
             <div className="w-[80%] aspect-square bg-muted rounded-2xl flex flex-col items-center justify-center gap-4 px-2 sm:justify-between sm:py-4 sm:px-0 sm:max-w-44 lg:py-6 lg:max-w-60 lg:px-2 xl:max-w-72 xl:px-4 2xl:max-w-80">
@@ -126,7 +153,7 @@ function Program() {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="2xl:px-10 relative flex flex-col">
+                  <div className="2xl:px-10 relative flex flex-col select-none">
                     <div className="sticky self-end top-2 right-2">
                       <FontAwesomeIcon
                         icon={faXmark}
@@ -320,8 +347,8 @@ function Program() {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="flex flex-col">
-                  <div className="sticky self-end top-2 right-2">
+                  <div className="flex flex-col select-none">
+                    <div className="sticky self-end top-2 right-2">
                       <FontAwesomeIcon
                         icon={faXmark}
                         onClick={handleClose1}
@@ -339,7 +366,7 @@ function Program() {
                         </h4>
                         <ul className="list-disc list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
                           <li>
-                            We understand the unique healthcare needs of gnder
+                            We understand the unique healthcare needs of gender
                             and sexually diverse individuals, including LGBTQIA+
                             communities.
                           </li>
@@ -463,8 +490,8 @@ function Program() {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="2xl:px-10 relative flex flex-col">
-                  <div className="sticky self-end top-2 right-2">
+                  <div className="2xl:px-10 relative flex flex-col select-none">
+                    <div className="sticky self-end top-2 right-2">
                       <FontAwesomeIcon
                         icon={faXmark}
                         onClick={handleClose2}
@@ -663,8 +690,8 @@ function Program() {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="2xl:px-10 relative flex flex-col">
-                  <div className="sticky self-end top-2 right-2">
+                  <div className="2xl:px-10 relative flex flex-col select-none">
+                    <div className="sticky self-end top-2 right-2">
                       <FontAwesomeIcon
                         icon={faXmark}
                         onClick={handleClose3}
@@ -866,8 +893,8 @@ function Program() {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="2xl:px-10 relative flex flex-col">
-                  <div className="sticky self-end top-2 right-2">
+                  <div className="2xl:px-10 relative flex flex-col select-none">
+                    <div className="sticky self-end top-2 right-2">
                       <FontAwesomeIcon
                         icon={faXmark}
                         onClick={handleClose4}
@@ -1075,8 +1102,8 @@ function Program() {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="2xl:px-10 relative flex flex-col">
-                  <div className="sticky self-end top-2 right-2">
+                  <div className="2xl:px-10 relative flex flex-col select-none">
+                    <div className="sticky self-end top-2 right-2">
                       <FontAwesomeIcon
                         icon={faXmark}
                         onClick={handleClose5}
@@ -1086,7 +1113,7 @@ function Program() {
                     <h3 className="h3-text text-accent px-8 pb-4 lg:px-12">
                       Your Mental Health Matters: Psychosocial Support Services
                     </h3>
-                    <p className="body-text pt-2 pb-4 px-8 pb-4 lg:px-12">
+                    <p className="body-text pt-2 pb-4 px-8 lg:px-12">
                       We understand that mental health is key to overall
                       well-being, especially when navigating health challenges
                       or life’s uncertainties. That’s why we offer{" "}
