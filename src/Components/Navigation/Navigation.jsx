@@ -23,7 +23,7 @@ function Navigation() {
   }
 
   return (
-    <nav className="fixed w-full z-50 bg-gradient-top-bottom">
+    <nav className="fixed w-full z-50 bg-gradient-top-bottom select-none">
       {/* Navigation banner */}
       <div className="border-b-2 py-2 flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
         {/* Logo */}

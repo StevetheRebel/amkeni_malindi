@@ -35,7 +35,7 @@ function About() {
   const swiperRef = useRef(null);
 
   return (
-    <div className="relative h-auto top-[154px] xs:top-[160px] sm:top-36 ">
+    <div className="relative h-auto top-[154px] xs:top-[160px] sm:top-36 select-none ">
       {/* Mission, Vision and Our Values */}
       <section className="flex flex-col gap-6 p-4 md:gap-12 md:py-8 md:px-14 lg:px-20 xl:px-28 2xl:gap-24 2xl:py-20 ">
         {aboutData.map((item, index) => (

@@ -9,25 +9,33 @@
 }
 
 .body-text {
-    @apply font-bodyText text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl
+    @apply font-bodyText text-[10px] xs:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl
 }
 
 .h1-text {
-    @apply font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl
+    @apply font-heading text-2xl xs:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl
 }
 
 .h2-text {
-    @apply font-subheading font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl 
+    @apply font-subheading font-bold text-xl xs:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl 
 }
 
 .h3-text {
-    @apply font-subheading font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl
+    @apply font-subheading font-bold text-lg xs:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl
 }
 
 .h4-text {
-    @apply font-bodyText font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl
+    @apply font-bodyText font-bold text-base xs:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl
 }
 
 .active {
     @apply text-primary
+}
+
+.input-style {
+    @apply outline outline-1 px-1 body-text rounded-sm outline-primary focus:outline-green-500
+}
+
+.legend {
+    @apply pb-2 h4-text text-accent
 }

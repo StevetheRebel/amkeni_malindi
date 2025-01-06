@@ -69,7 +69,7 @@ function Home() {
     : 0;
 
   return (
-    <div className="relative h-auto top-36 sm:top-32">
+    <div className="relative h-auto top-36 sm:top-32 select-none">
       {/* Hero Section */}
       <section className="flex flex-col gap-4 items-center sm:gap-6 lg:items-start lg:px-[6%] lg:flex-row lg:gap-10 lg:h-auto lg:pb-10">
         {/* Carousel */}
