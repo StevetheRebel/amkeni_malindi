@@ -11,8 +11,7 @@ const AppointmentForm = ({ handleFormClose }) => {
 
   const form = useRef();
 
-  const onSubmit = (data) => {
-    console.log("Form Data", data);
+  const onSubmit = () => {
 
     emailjs
       .sendForm("service_l8csohb", "template_7q0rjm7", form.current, {
