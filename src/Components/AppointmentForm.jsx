@@ -40,7 +40,7 @@ const AppointmentForm = ({ handleFormClose }) => {
     return (
       ((hour > 9 || (hour === 9 && minute >= 0)) &&
         (hour < 17 || (hour === 17 && minute === 0))) ||
-      "Please select a time between 9:00 AM and 5:00 PM"
+      "We're open between 9:00 AM and 5:00 PM"
     );
   };
 
