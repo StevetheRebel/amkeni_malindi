@@ -129,7 +129,7 @@ function Program() {
                   <FontAwesomeIcon
                     icon={faXmark}
                     onClick={handleClose6}
-                    className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
+                    className="body-text p-2 z-30 bg-black rounded-full text-white hover:text-secondary"
                   />
                 </div>
                 <h2 className="h2-text text-secondary/70 text-center pb-2 md:pb-4">Book An Appointment</h2>
