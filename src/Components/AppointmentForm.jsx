@@ -12,7 +12,6 @@ const AppointmentForm = ({ handleFormClose }) => {
   const form = useRef();
 
   const onSubmit = () => {
-
     emailjs
       .sendForm("service_l8csohb", "template_7q0rjm7", form.current, {
         publicKey: "zrkXof7Y58Enl4aks",
@@ -40,7 +39,7 @@ const AppointmentForm = ({ handleFormClose }) => {
     return (
       ((hour > 9 || (hour === 9 && minute >= 0)) &&
         (hour < 17 || (hour === 17 && minute === 0))) ||
-      "We're open between 9:00 AM and 5:00 PM"
+      "Open between 9:00 AM and 5:00 PM"
     );
   };
 
