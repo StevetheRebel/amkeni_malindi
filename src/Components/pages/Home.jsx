@@ -197,6 +197,7 @@ function Home() {
 
       {/* Carousel Donor Logos Marquee */}
       <section className="py-12">
+        <h2 className="h2-text text-center text-secondary">Donors and Partners</h2>
       <Marquee gradient gradientWidth={gradientWidth} pauseOnHover className="overflow-hidden">
         {Object.values(donorLogos).map((logo, index) => (
           <img
