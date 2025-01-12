@@ -45,7 +45,7 @@ module.exports = {
         },
         fadeOut: {
           "0%": { opacity: 1 },
-          "100%": { opacity: 0.4 },
+          "100%": { opacity: 0.12 },
         },
         slideUp: {
           "0%": { top: "100%" },
