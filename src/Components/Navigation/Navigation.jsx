@@ -118,7 +118,7 @@ function Navigation() {
           </li>
           <li className="hover-text">
             <NavLink to="/program-services" onClick={closeMenu}>
-              program & services
+              programs & services
             </NavLink>
           </li>
           <li className="hover-text">
