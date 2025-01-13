@@ -71,14 +71,14 @@ const LocalAddress = () => {
         <div>
           <FontAwesomeIcon
             icon={faHospital}
-            className="w-12 h-12 text-gray-500 md:w-8 md:h-8"
+            className="w-12 h-12 text-gray-500 md:w-8 md:h-8 xl:w-12 xl:h-12 2xl:w-20 2xl:h-20"
           />
         </div>
         <div className="flex flex-col gap-1">
-          <p className="font-bold text-xs xs:text-sm">
+          <p className="font-bold text-xs xs:text-sm lg:text-base xl:text-lg 2xl:text-xl">
             Mtangani Rd, Opposite Kiddie Stars
           </p>
-          <p className="text-gray-400 text-xs xs:text-sm">
+          <p className="text-gray-400 text-xs xs:text-sm lg:text-base xl:text-lg 2xl:text-xl">
             5438 - 80200, Malindi - Kenya
           </p>
         </div>
@@ -89,12 +89,12 @@ const LocalAddress = () => {
         <div>
           <FontAwesomeIcon
             icon={faPhoneVolume}
-            className="w-12 h-12 text-gray-500 md:w-8 md:h-8"
+            className="w-12 h-12 text-gray-500 md:w-8 md:h-8 xl:w-12 xl:h-12 2xl:w-20 2xl:h-20"
           />
         </div>
         <div>
-          <p className="font-bold text-xs xs:text-sm">+254 796 237 882</p>
-          <p className="text-gray-400 text-xs xs:text-sm">
+          <p className="font-bold text-xs xs:text-sm lg:text-base xl:text-lg 2xl:text-xl">+254 796 237 882</p>
+          <p className="text-gray-400 text-xs xs:text-sm lg:text-base xl:text-lg 2xl:text-xl">
             Mon to Fri 9am to 5pm
           </p>
         </div>
@@ -105,12 +105,12 @@ const LocalAddress = () => {
         <div>
           <FontAwesomeIcon
             icon={faEnvelopeOpenText}
-            className="w-12 h-12 text-gray-500 md:w-8 md:h-8"
+            className="w-12 h-12 text-gray-500 md:w-8 md:h-8 xl:w-12 xl:h-12 2xl:w-20 2xl:h-20"
           />
         </div>
         <div>
-          <p className="font-bold text-xs xs:text-sm">info@amkenimalindi.ke</p>
-          <p className="text-gray-400 text-xs xs:text-sm">
+          <p className="font-bold text-xs xs:text-sm lg:text-base xl:text-lg 2xl:text-xl">info@amkenimalindi.ke</p>
+          <p className="text-gray-400 text-xs xs:text-sm lg:text-base xl:text-lg 2xl:text-xl">
             Send us your query anytime!
           </p>
         </div>
