@@ -1,41 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@200..1000&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
+/* filepath: /E:/Software Development/amkeni_malindi/src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Heading */
+@font-face {
+  font-family: "DM Serif Display";
+  src: url(./assets/Fonts/DMSerifDisplay-Regular.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Subheadings */
+@font-face {
+  font-family: "PT Serif";
+  src: url(./assets/Fonts/PTSerif-Regular.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PT Serif";
+  src: url(./assets/Fonts/PTSerif-Bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Body text */
+@font-face {
+  font-family: "DM Sans";
+  src: url(./assets/Fonts/DMSans-Light.ttf) format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./assets/Fonts/DMSans-Bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Buttons and Links */
+@font-face {
+  font-family: "PT Sans";
+  src: url(./assets/Fonts/PTSansNarrow-Regular.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 .hover-text {
-    @apply hover:text-primary cursor-pointer
+  @apply hover:text-primary cursor-pointer;
 }
 
 .body-text {
-    @apply font-bodyText text-[10px] xs:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl
+  @apply font-bodyText text-[12px] xs:text-base lg:text-lg xl:text-xl;
 }
 
 .h1-text {
-    @apply font-heading text-2xl xs:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl
+  @apply font-heading py-2 text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl;
 }
 
 .h2-text {
-    @apply font-subheading font-bold text-xl xs:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl 
+  @apply font-subheading py-2 font-bold text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl;
 }
 
 .h3-text {
-    @apply font-subheading font-bold text-lg xs:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl
+  @apply font-subheading py-2 font-bold text-lg xs:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl;
 }
 
 .h4-text {
-    @apply font-bodyText font-bold text-base xs:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl
+  @apply font-bodyText font-bold py-2 text-lg xs:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl;
 }
 
 .active {
-    @apply text-primary
+  @apply text-primary;
 }
 
 .input-style {
-    @apply outline outline-1 px-1 body-text rounded-sm outline-primary focus:outline-green-500
+  @apply outline outline-1 px-1 body-text rounded-sm outline-primary focus:outline-green-500;
 }
 
 .legend {
-    @apply pb-2 h4-text text-accent
+  @apply pb-2 h4-text text-accent;
 }
