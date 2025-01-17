@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -12,68 +12,40 @@ import images from "../../assets/Office Pics";
 import { Link } from "react-router-dom";
 import donorLogos from "../../assets/Donor Organization";
 import Marquee from "react-fast-marquee";
-import { useMediaQuery } from "react-responsive";
 import Footer from "../Footer/Footer";
+import postPic from "./../../assets/Posts/Post1.jpg";
+import { truncateByWords } from "../../truncateByWords";
 
 function Home() {
   const blogPosts = [
-    { topic: "Apply Now: Program Coordinator for...", author: "Author" },
-    { topic: "Creating a Mentally Healthy Workplace...", author: "Author" },
+    {
+      topic: "Apply Now: Program Coordinator for Strategic Advocacy at AMKENI",
+      author: "Author",
+    },
+    { topic: "Creating a Mentally Healthy Workplace", author: "Author" },
     { topic: "Do Condoms Expire? How Can You Tell?", author: "Author" },
     {
       topic: "Peer Education Training",
       author: "Author",
-      hiddenClass: "flex sm:hidden xl:flex",
+      hiddenClass: "sm:hidden lg:flex",
     },
     {
       topic: "Sexual Assault Awareness Month",
       author: "Author",
-      hiddenClass: "flex sm:hidden 2xl:flex",
+      hiddenClass: "sm:hidden 2xl:hidden",
     },
   ];
-
-  const DonorLogos = ({ donoLogos }) => {
-    const [gradientWidth, setGradientWidth] = useState(50)
-
-    useEffect(() => {
-      const handleResize = () => {
-        const width = window.innerWidth;
-        setGradientWidth(width > 1024 ? 100 : 50)
-      }
-
-      window.addEventListener('resize', handleResize)
-
-      handleResize()
-
-      return () => {
-        window.removeEventListener('resize', handleResize)
-      }
-    }, [])
-  }
 
   const officeImages = Object.values(images);
   const firstSwiperRef = useRef(null);
   const secondSwiperRef = useRef(null);
 
-  // Responsive gradientWidth logic
-  const isSmallScreen = useMediaQuery({ maxWidth: 640 });
-  const isMediumScreen = useMediaQuery({ minWidth: 641, maxWidth: 1024 });
-  const isLargeScreen = useMediaQuery({ minWidth: 1025 });
-
-  const gradientWidth = isSmallScreen
-    ? 20
-    : isMediumScreen
-    ? 50
-    : isLargeScreen
-    ? 100
-    : 0;
-
   return (
-    <div className="relative h-auto top-36 sm:top-32 select-none">
+    <div className="relative h-autoselect-none">
       {/* Hero Section */}
-      <section className="flex flex-col gap-4 items-center sm:gap-6 lg:items-start lg:px-[6%] lg:flex-row lg:gap-10 lg:h-auto lg:pb-10">
+      <section className="bg-image9 bg-fixed bg-center bg-no-repeat pt-36 flex flex-col gap-4 items-center sm:pt-36 sm:gap-6 lg:h-screen lg:items-start lg:px-[6%] lg:flex-row lg:gap-6 lg:pb-10 2xl:gap-20">
         {/* Carousel */}
-        <div className="relative w-[90%] h-[60vh] border-2 mt-4 rounded-2xl lg:w-2/3 group">
+        <div className="relative w-[90%] h-[60vh] min-h-[320px] xs:min-h-[500px] shadow-custom mt-4 rounded-2xl lg:w-2/3 group">
           <Swiper
             modules={[Pagination, Autoplay]}
             pagination={{ clickable: true }}
@@ -113,35 +85,31 @@ function Home() {
         </div>
 
         {/* Separator */}
-        <div className="border-2 w-[90%] border-black/80 lg:w-0 lg:h-[60vh] sm:mt-4"></div>
+        <div className="border-2 w-[90%] border-white/80 lg:w-0 lg:h-[60vh] lg:min-h-[500px] sm:mt-4"></div>
 
         {/* Blog Posts */}
-        <div className="flex flex-col gap-4 mb-4 items-center lg:h-[60vh] sm:w-[90%] sm:gap-0 sm:justify-between sm:flex-row lg:w-auto lg:flex-col lg:mt-4">
-          {blogPosts.map((post, index) => (
-            <div
-              key={index}
-              className={`flex gap-4 w-[90%] sm:w-full items-center ${
-                post.hiddenClass || ""
-              }`}
-            >
-              <div className="w-24 h-24 aspect-square border-2 rounded-xl"></div>
-              <div className="flex flex-col justify-between">
-                <h6 className="font-subheading text-secondary">Topic</h6>
-                <h4 className="font-heading">{post.topic}</h4>
-                <h5 className="font-bodyText text-accent">{post.author}</h5>
-              </div>
-            </div>
-          ))}
+        <div className="flex flex-col w-[90%] bg-muted/30 backdrop-blur-md rounded-3xl px-4 pb-4 mb-4 lg:h-[60vh] lg:min-h-[500px] lg:mt-4 lg:mb-0 lg:pb-0 ">
+          <h4 className="h4-text text-white text-center w-full ">Latest Posts...</h4>
+          <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-5 2xl:px-8">
+            {
+              blogPosts.map((post, index) => (
+                <div className={`relative overflow-hidden group w-full rounded-xl ${post.hiddenClass || ""}`}>
+                  <img src={postPic} alt="picture" className="group-hover:grayscale group-hover:brightness-50 " />
+                  <p className="body-text font-bold text-white p-4 absolute top-[100%] group-hover:animate-slideUp lg:p-2 xl:p-4">{truncateByWords(post.topic, 5)}</p>
+                </div>
+              ))
+            }
+          </div>
         </div>
       </section>
 
       {/* What We Do Section */}
-      <section className="py-6">
-        <h2 className="font-heading capitalize text-4xl text-center lg:text-5xl 2xl:text-6xl text-secondary">
+      <section className="pt-6 pb-12 bg-light">
+        <h1 className="font-heading capitalize h1-text text-center text-primary">
           what we do
-        </h2>
-        <div className="mt-6 relative flex flex-col items-center justify-center group">
-          <div className="bg-light h-auto w-[80%] rounded-2xl sm:w-[85%] xl:w-[80%] xl:py-4 2xl:w-[70%] 2xl:py-6">
+        </h1>
+        <div className="mt-6 relative flex flex-col items-center justify-center group ">
+          <div className="bg-light border-2 border-black h-auto w-[80%] rounded-2xl sm:w-[85%] xl:w-[80%] xl:py-4 2xl:w-[70%] 2xl:py-6 shadow-custom-shadow">
             <Swiper
               modules={[Pagination, Autoplay]}
               pagination={{ clickable: true }}
@@ -196,19 +164,21 @@ function Home() {
       </section>
 
       {/* Carousel Donor Logos Marquee */}
-      <section className="py-12">
-        <h2 className="h2-text text-center text-secondary">Donors and Partners</h2>
-      <Marquee gradient gradientWidth={gradientWidth} pauseOnHover className="overflow-hidden">
-        {Object.values(donorLogos).map((logo, index) => (
-          <img
-            key={index}
-            src={logo}
-            alt={`Donor logo ${index}`}
-            className="w-24 mx-4 md:w-32 md:mx-6 lg:w-40 lg:mx-8 xl:w-48 xl:mx-10 2xl:w-56 2xl:mx-12 hover:scale-150"
-          />
-        ))}
-      </Marquee>
-    </section>
+      <section className="pt-6 pb-12 bg-image1 bg-center bg-cover bg-fixed flex flex-col gap-4">
+        <h1 className="h1-text text-center text-primary">
+          Donors and Partners
+        </h1>
+        <Marquee pauseOnHover>
+          {Object.values(donorLogos).map((logo, index) => (
+            <img
+              key={index}
+              src={logo}
+              alt={`Donor logo ${index}`}
+              className="w-24 my-8 mx-4 md:w-32 md:mx-6 lg:w-40 lg:mx-8 xl:w-48 xl:mx-10 2xl:w-56 2xl:mx-12 hover:scale-125 drop-shadow-white-custom"
+            />
+          ))}
+        </Marquee>
+      </section>
 
       {/* Footer Section */}
       <section>
@@ -220,10 +190,10 @@ function Home() {
 
 function CarouselSlide({ title, description, link }) {
   return (
-    <div className="h-fit w-full bg-light rounded-2xl flex flex-col items-center pt-4 pb-8 gap-4 sm:flex-row sm:gap-4 sm:px-4 sm:pb-0 lg:gap-8 lg:px-8 lg:items-start 2xl:gap-12 2xl:px-12">
+    <div className="h-fit w-full rounded-2xl flex flex-col items-center pt-4 pb-8 gap-4 sm:flex-row sm:gap-4 sm:px-4 sm:pb-0 lg:gap-8 lg:px-8 lg:items-start 2xl:gap-12 2xl:px-12">
       <div className="w-[90%] aspect-square rounded-xl border-2 border-black/20 lg:w-auto lg:h-40 2xl:h-48"></div>
       <div className="flex flex-col gap-2 sm:gap-4 mb-4">
-        <h3 className="text-secondary/70 font-subheading font-bold text-2xl px-[5%] text-center sm:text-start sm:px-0 lg:text-3xl 2xl:text-4xl">
+        <h3 className="text-primary/70 font-subheading font-bold text-2xl px-[5%] text-center sm:text-start sm:px-0 lg:text-3xl 2xl:text-4xl">
           {title}
         </h3>
         <p className="font-bodyText text-pretty px-[5%] sm:px-0 lg:text-lg 2xl:text-xl">
