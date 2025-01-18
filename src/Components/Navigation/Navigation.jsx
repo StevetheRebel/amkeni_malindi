@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./../../assets/Amkeni Document Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,6 +13,7 @@ import { NavLink } from "react-router-dom";
 
 function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
@@ -22,21 +23,32 @@ function Navigation() {
     setMenuOpen(false);
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if(window.scrollY > 15) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+
+  }, [])
+
   return (
-    <nav className="fixed w-full z-50 bg-gradient-top-bottom select-none">
+    <nav className={`fixed top-0 w-full z-50 select-none bg-white/20 backdrop-blur-md transform transition-opacity duration-500 ${isScrolled ? "bg-gradient-top-bottom opacity-100 shadow-md" : "bg-transparent opacity-80 text-white"}`}>
       {/* Navigation banner */}
-      <div className="border-b-2 py-2 flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
+      <div className="flex py-2 flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
         {/* Logo */}
         <div className="w-[50%] sm:w-48">
           <img src={logo} alt="amkeni logo" />
-          <p className="uppercase font-heading text-center text-[7px] tracking-wide xs:text-[8px]  xs:tracking-wide ">
-            an empowered, just and inclusive society
-          </p>
         </div>
 
         {/* Sign in and social media links */}
         <div className="flex gap-4 text-sm">
-          <p className="capitalize font-heading hover:underline">sign in</p>
+          <p className="capitalize font-subheading font-bold hover:underline">sign in</p>
           <a
             href="https://web.facebook.com/profile.php?id=100017571492191"
             target="_blank"
@@ -103,7 +115,7 @@ function Navigation() {
       <div
         className={`${
           menuOpen ? "block" : "hidden"
-        } sm:block bg-white/30 backdrop-blur-md sm:bg-transparent transition-all duration-300 ease-in-out`}
+        } sm:block sm:backdrop-blur-none sm:bg-transparent transition-all duration-300 ease-in-out`}
       >
         <ul className="uppercase font-subheading flex flex-col items-end pr-4 gap-4 py-4 sm:flex-row sm:px-0 sm:gap-0 sm:justify-around sm:items-center lg:justify-between lg:px-[6%]">
           <li className="hover-text">
