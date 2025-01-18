@@ -15,6 +15,13 @@ import Marquee from "react-fast-marquee";
 import Footer from "../Footer/Footer";
 import postPic from "./../../assets/Posts/Post1.jpg";
 import { truncateByWords } from "../../truncateByWords";
+import programData from "./../../pillars.json";
+import {
+  HealthPromotionImg,
+  AdvocacyImg,
+  SustainableLivelihoodImg,
+  SystemStrengtheningImg,
+} from "../../assets/Pillar Pictures";
 
 function Home() {
   const blogPosts = [
@@ -40,10 +47,17 @@ function Home() {
   const firstSwiperRef = useRef(null);
   const secondSwiperRef = useRef(null);
 
+  const imagesMap = {
+    "HealthPromotion.jpg": HealthPromotionImg,
+    "Advocacy.jpg": AdvocacyImg,
+    "SustainableLivelihood.jpg": SustainableLivelihoodImg,
+    "System Strengthening.png": SystemStrengtheningImg,
+  };
+
   return (
-    <div className="relative h-autoselect-none">
+    <div className="relative h-auto select-none">
       {/* Hero Section */}
-      <section className="bg-image9 bg-fixed bg-center bg-no-repeat pt-36 flex flex-col gap-4 items-center sm:pt-36 sm:gap-6 lg:h-screen lg:items-start lg:px-[6%] lg:flex-row lg:gap-6 lg:pb-10 2xl:gap-20">
+      <section className="bg-image9 bg-fixed bg-center bg-no-repeat pt-36 flex flex-col brightness-90 gap-4 items-center sm:pt-36 sm:gap-6 lg:h-screen lg:items-start lg:px-[6%] lg:flex-row lg:gap-6 lg:pb-10 2xl:gap-20">
         {/* Carousel */}
         <div className="relative w-[90%] h-[60vh] min-h-[320px] xs:min-h-[500px] shadow-custom mt-4 rounded-2xl lg:w-2/3 group">
           <Swiper
@@ -62,7 +76,7 @@ function Home() {
                 <img
                   src={image}
                   alt={`Office ${index + 1}`}
-                  className="w-full h-full object-cover rounded-2xl"
+                  className="w-full h-full object-cover rounded-2xl brightness-60"
                 />
               </SwiperSlide>
             ))}
@@ -89,27 +103,40 @@ function Home() {
 
         {/* Blog Posts */}
         <div className="flex flex-col w-[90%] bg-muted/30 backdrop-blur-md rounded-3xl px-4 pb-4 mb-4 lg:h-[60vh] lg:min-h-[500px] lg:mt-4 lg:mb-0 lg:pb-0 ">
-          <h4 className="h4-text text-white text-center w-full ">Latest Posts...</h4>
+          <h4 className="h4-text text-white text-center w-full ">
+            Latest Posts...
+          </h4>
           <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-5 2xl:px-8">
-            {
-              blogPosts.map((post, index) => (
-                <div className={`relative overflow-hidden group w-full rounded-xl ${post.hiddenClass || ""}`}>
-                  <img src={postPic} alt="picture" className="group-hover:grayscale group-hover:brightness-50 " />
-                  <p className="body-text font-bold text-white p-4 absolute top-[100%] group-hover:animate-slideUp lg:p-2 xl:p-4">{truncateByWords(post.topic, 5)}</p>
-                </div>
-              ))
-            }
+            {blogPosts.map((post, index) => (
+              <div
+                className={`relative overflow-hidden group w-full rounded-xl ${
+                  post.hiddenClass || ""
+                }`}
+              >
+                <img
+                  src={postPic}
+                  alt="picture"
+                  className="group-hover:grayscale group-hover:brightness-50 "
+                />
+                <p className="body-text font-bold text-white p-4 absolute top-[100%] group-hover:animate-slideUp lg:p-2 xl:p-4">
+                  {truncateByWords(post.topic, 5)}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* What We Do Section */}
       <section className="pt-6 pb-12 bg-light">
-        <h1 className="font-heading capitalize h1-text text-center text-primary">
+        {/* title */}
+        <h1 className="font-heading capitalize h1-text text-center text-secondary">
           what we do
         </h1>
+
+        {/* Carousel Container */}
         <div className="mt-6 relative flex flex-col items-center justify-center group ">
-          <div className="bg-light border-2 border-black h-auto w-[80%] rounded-2xl sm:w-[85%] xl:w-[80%] xl:py-4 2xl:w-[70%] 2xl:py-6 shadow-custom-shadow">
+          <div className="bg-light h-auto w-[80%] rounded-2xl sm:w-[85%] xl:w-[80%] xl:py-4 2xl:w-[70%] 2xl:py-6 shadow-custom-shadow">
             <Swiper
               modules={[Pagination, Autoplay]}
               pagination={{ clickable: true }}
@@ -121,27 +148,16 @@ function Home() {
               className="h-full rounded-2xl"
               onSwiper={(swiper) => (secondSwiperRef.current = swiper)}
             >
-              <SwiperSlide>
-                <CarouselSlide
-                  title="Health Promotion & Service Delivery"
-                  description="Comprehensive Sexual and Reproductive Health Promotion and Care: Providing testing, treatment, contraception, STI screening, health education, and counselling. We empower individuals with knowledge and resources for healthier, inclusive communities, promoting well-being for all."
-                  link="/program-services"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CarouselSlide
-                  title="Community Social & Economic Empowerment"
-                  description="We empower communities through peer-led initiatives, mentorship, and capacity building. By promoting personal development, fostering income-generating activities, and linking individuals to opportunities, we drive self-reliance and sustainable growth. Collaborations with stakeholders ensure holistic support..."
-                  link="/program-services"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CarouselSlide
-                  title="Research, Advocacy & Policy Reforms"
-                  description="We drive change through awareness campaigns, partnerships, and media engagement. Collaborating with research organizations and human rights advocates, we empower LGBTI communities to influence research agendas and policy development. Together, we champion inclusive reforms and amplify..."
-                  link="/program-services"
-                />
-              </SwiperSlide>
+              {programData.pillars.map((pillar, index) => (
+                <SwiperSlide key={index}>
+                  <CarouselSlide
+                    title={pillar.title}
+                    description={truncateByWords(pillar.description, 30)}
+                    link={`/program-services`}
+                    imagePath={imagesMap[pillar.image[0].src]}
+                  />
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
 
@@ -188,21 +204,27 @@ function Home() {
   );
 }
 
-function CarouselSlide({ title, description, link }) {
+function CarouselSlide({ title, description, link, imagePath }) {
   return (
     <div className="h-fit w-full rounded-2xl flex flex-col items-center pt-4 pb-8 gap-4 sm:flex-row sm:gap-4 sm:px-4 sm:pb-0 lg:gap-8 lg:px-8 lg:items-start 2xl:gap-12 2xl:px-12">
-      <div className="w-[90%] aspect-square rounded-xl border-2 border-black/20 lg:w-auto lg:h-40 2xl:h-48"></div>
-      <div className="flex flex-col gap-2 sm:gap-4 mb-4">
-        <h3 className="text-primary/70 font-subheading font-bold text-2xl px-[5%] text-center sm:text-start sm:px-0 lg:text-3xl 2xl:text-4xl">
+      <div className="w-[90%] aspect-square rounded-xl lg:w-auto lg:h-40 2xl:h-48">
+        <img
+          src={imagePath}
+          alt={title}
+          className="w-full h-full rounded-xl bg-cover"
+        />
+      </div>
+      <div className="flex flex-col h-[390px] py-4 justify-between md:h-[300px] md:py-6 2xl:h-[350px] 2xl:py-8 ">
+        <h3 className="text-secondary/70 px-[5%] h3-text text-center sm:text-start sm:px-0 ">
           {title}
         </h3>
-        <p className="font-bodyText text-pretty px-[5%] sm:px-0 lg:text-lg 2xl:text-xl">
+        <p className="font-bodyText text-center text-balance px-[5%] sm:px-0 md:text-start lg:text-lg 2xl:text-xl">
           {description}
         </p>
 
         <Link
           to={link}
-          className="bg-accent/50 text-white p-2 hover:bg-accent rounded-full focus:outline-none self-end mr-[5%]"
+          className="bg-accent/50 button-type button-text hover:bg-accent focus:outline-none self-end mr-[5%]"
           style={{ cursor: "pointer" }}
         >
           Learn More
