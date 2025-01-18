@@ -54,7 +54,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         className="flex flex-col gap-4 items-center"
       >
         {/* Full Name */}
-        <fieldset className="px-2 py-2 w-[95%] border-2 lg:w-[70%] xl:w-[60%]">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%]">
           <legend className="legend">Full Name</legend>
           <div className="flex flex-col gap-4 justify-end sm:flex-row sm:justify-between sm:gap-0">
             {/* First Name */}
@@ -66,7 +66,7 @@ const AppointmentForm = ({ handleFormClose }) => {
                 type="text"
                 name="firstName"
                 id="firstName"
-                className="input-style sm:w-[90%]"
+                className="input-style w-2/3 sm:w-[90%]"
                 {...register("firstName", {
                   required: "First name is required",
                 })}
@@ -87,7 +87,7 @@ const AppointmentForm = ({ handleFormClose }) => {
                 type="text"
                 name="lastName"
                 id="lastName"
-                className="input-style sm:w-[90%]"
+                className="input-style w-2/3 sm:w-[90%]"
                 {...register("lastName", { required: "Last name is required" })}
               />
               {errors.lastName && (
@@ -100,7 +100,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Contact Details */}
-        <fieldset className="px-2 py-2 w-[95%] border-2 lg:w-[70%] xl:w-[60%]">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%]">
           <legend className="legend">Contact Details</legend>
           <div className="flex flex-col gap-4 justify-end sm:flex-row sm:justify-between sm:gap-0">
             {/* Phone No: */}
@@ -113,7 +113,7 @@ const AppointmentForm = ({ handleFormClose }) => {
                 name="phoneNo"
                 id="phoneNo"
                 placeholder="+254xx, 07xx, 01xx"
-                className="input-style sm:w-[90%]"
+                className="input-style w-2/3  sm:w-[90%]"
                 {...register("phoneNo", {
                   required: "Phone number is required",
                   pattern: {
@@ -139,7 +139,7 @@ const AppointmentForm = ({ handleFormClose }) => {
                 name="email"
                 id="email"
                 placeholder="example@site.com"
-                className="input-style sm:w-[90%] "
+                className="input-style w-2/3 sm:w-[90%] "
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -158,7 +158,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Contact Method */}
-        <fieldset className="px-2 py-2 w-[95%] border-2 lg:w-[70%] xl:w-[60%] ">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%] ">
           <legend className="legend">Preferred Contact method</legend>
 
           <div className="flex justify-between sm:px-10 lg:px-14">
@@ -218,13 +218,13 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Services Required */}
-        <fieldset className="px-2 py-2 w-[95%] border-2 lg:w-[70%] xl:w-[60%] body-text">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%] body-text">
           <legend className="legend">Select Services You Require</legend>
           <p className="body-text pb-2">
             (You can select more than one option)
           </p>
           <div className="flex flex-col gap-1">
-            <div className="flex gap-2 lg:gap-3 items-center">
+            <div className="flex gap-1 lg:gap-3 items-center">
               <input
                 type="checkbox"
                 name="hts"
@@ -237,7 +237,7 @@ const AppointmentForm = ({ handleFormClose }) => {
               />
               <label htmlFor="hts">HIV Testing Services</label>
             </div>
-            <div className="flex gap-2 lg:gap-3 items-center">
+            <div className="flex gap-1 lg:gap-3 items-center">
               <input
                 type="checkbox"
                 name="stiScreening"
@@ -250,7 +250,7 @@ const AppointmentForm = ({ handleFormClose }) => {
               />
               <label htmlFor="stiScreening">STI Screening & Treatment</label>
             </div>
-            <div className="flex gap-2 lg:gap-3 items-center">
+            <div className="flex gap-1 lg:gap-3 items-center">
               <input
                 type="checkbox"
                 name="condomLube"
@@ -263,7 +263,7 @@ const AppointmentForm = ({ handleFormClose }) => {
               />
               <label htmlFor="condomLube">Condom & Lubricant</label>
             </div>
-            <div className="flex gap-2 lg:gap-3 items-center">
+            <div className="flex gap-1 lg:gap-3 items-center">
               <input
                 type="checkbox"
                 name="prepPep"
@@ -276,7 +276,7 @@ const AppointmentForm = ({ handleFormClose }) => {
               />
               <label htmlFor="prepPep">PrEP / PEP</label>
             </div>
-            <div className="flex gap-2 lg:gap-3 items-center">
+            <div className="flex gap-1 lg:gap-3 items-center">
               <input
                 type="checkbox"
                 name="art"
@@ -289,7 +289,7 @@ const AppointmentForm = ({ handleFormClose }) => {
               />
               <label htmlFor="art">Antiretroviral Therapy (ART)</label>
             </div>
-            <div className="flex gap-2 lg:gap-3 items-center">
+            <div className="flex gap-1 lg:gap-3 items-center">
               <input
                 type="checkbox"
                 name="mental"
@@ -313,7 +313,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Date of appointment */}
-        <fieldset className="px-2 py-2 w-[95%] border-2 lg:w-[70%] xl:w-[60%] ">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%] ">
           <legend className="legend">Appointment Date</legend>
           <p className="body-text pb-2">
             We're open <span className="font-bold">Mon - Fri</span> 9:00AM to
@@ -332,7 +332,7 @@ const AppointmentForm = ({ handleFormClose }) => {
                 type="date"
                 name="appointmentDate"
                 id="appointmentDate"
-                className="input-style w-[60%] sm:w-[90%]"
+                className="input-style w-2/3 sm:w-[90%]"
                 {...register("appointmentDate", {
                   required: "Please select a Date",
                   validate: validateDate,
@@ -357,7 +357,7 @@ const AppointmentForm = ({ handleFormClose }) => {
                 type="time"
                 name="appointmentTime"
                 id="appointmentTime"
-                className="input-style w-[60%] sm:w-[90%]"
+                className="input-style w-2/3 sm:w-[90%]"
                 {...register("appointmentTime", {
                   required: "Please select a Time",
                   validate: validateTime,
@@ -373,7 +373,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Additional Information Text Area */}
-        <fieldset className="px-2 py-2 w-[95%] border-2 lg:w-[70%] xl:w-[60%] ">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%] ">
           <legend className="legend">Additional Information</legend>
           <textarea
             name="additionalInfo"
@@ -386,7 +386,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Consent Confirmation */}
-        <fieldset className="px-2 py-2 w-[95%] border-2 lg:w-[70%] xl:w-[60%] ">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%] ">
           <legend className="legend">Consent</legend>
           <div>
             <input
