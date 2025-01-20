@@ -51,18 +51,18 @@ function Home() {
     "HealthPromotion.jpg": HealthPromotionImg,
     "Advocacy.jpg": AdvocacyImg,
     "SustainableLivelihood.jpg": SustainableLivelihoodImg,
-    "System Strengthening.png": SystemStrengtheningImg,
+    "System-Strengthening.jpg": SystemStrengtheningImg,
   };
 
   return (
-    <div className="relative h-auto select-none">
+    <div className="relative h-auto select-none scroll-smooth ">
       {/* Hero Section */}
-      <section className="bg-image9 bg-fixed bg-center bg-no-repeat pt-36 flex flex-col brightness-90 gap-4 items-center sm:pt-36 sm:gap-6 lg:h-screen lg:items-start lg:px-[6%] lg:flex-row lg:gap-6 lg:pb-10 2xl:gap-20">
+      <section className="bg-image9 bg-fixed bg-center bg-no-repeat pt-36 flex flex-col brightness-90 gap-4 items-center sm:pt-36 sm:gap-6 lg:min-h-screen lg:px-[6%] lg:flex-row lg:gap-6 lg:pb-10 2xl:gap-20">
         {/* Carousel */}
-        <div className="relative w-[90%] h-[60vh] min-h-[320px] xs:min-h-[500px] shadow-custom mt-4 rounded-2xl lg:w-2/3 group">
+        <div className="relative w-[90%] h-[60vh] min-h-[320px] xs:min-h-[500px] shadow-custom mt-4 rounded-2xl lg:w-2/3 xl:min-h-[550px] group">
           <Swiper
             modules={[Pagination, Autoplay]}
-            pagination={{ clickable: true }}
+            pagination={{ clickable: true, dynamicBullets: true }}
             autoplay={{ delay: 10000 }}
             spaceBetween={30}
             slidesPerView={1}
@@ -72,7 +72,7 @@ function Home() {
             onSwiper={(swiper) => (firstSwiperRef.current = swiper)}
           >
             {officeImages.map((image, index) => (
-              <SwiperSlide key={index} className="h-full">
+              <SwiperSlide key={index} className="h-full object-cover">
                 <img
                   src={image}
                   alt={`Office ${index + 1}`}
@@ -99,16 +99,17 @@ function Home() {
         </div>
 
         {/* Separator */}
-        <div className="border-2 w-[90%] border-white/80 lg:w-0 lg:h-[60vh] lg:min-h-[500px] sm:mt-4"></div>
+        <div className="border-2 w-[90%] border-white/80 lg:w-0 lg:h-[60vh] lg:min-h-[500px] xl:min-h-[550px] sm:mt-4"></div>
 
         {/* Blog Posts */}
-        <div className="flex flex-col w-[90%] bg-muted/30 backdrop-blur-md rounded-3xl px-4 pb-4 mb-4 lg:h-[60vh] lg:min-h-[500px] lg:mt-4 lg:mb-0 lg:pb-0 ">
+        <div className="flex flex-col w-[90%] bg-muted/30 backdrop-blur-md rounded-3xl px-4 pb-4 mb-4 lg:h-[60vh] lg:min-h-[500px] lg:mt-4 lg:mb-0 lg:pb-0 xl:min-h-[550px] ">
           <h4 className="h4-text text-white text-center w-full ">
             Latest Posts...
           </h4>
           <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-5 2xl:px-8">
             {blogPosts.map((post, index) => (
               <div
+                key={index}
                 className={`relative overflow-hidden group w-full rounded-xl ${
                   post.hiddenClass || ""
                 }`}
@@ -139,7 +140,7 @@ function Home() {
           <div className="bg-light h-auto w-[80%] rounded-2xl sm:w-[85%] xl:w-[80%] xl:py-4 2xl:w-[70%] 2xl:py-6 shadow-custom-shadow">
             <Swiper
               modules={[Pagination, Autoplay]}
-              pagination={{ clickable: true }}
+              pagination={{ clickable: true, dynamicBullets: true }}
               autoplay={{ delay: 10000 }}
               spaceBetween={30}
               slidesPerView={1}

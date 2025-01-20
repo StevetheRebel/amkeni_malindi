@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Footer from "../Footer/Footer";
 import portfolioData from "./../../portfolio.json";
+import { Link } from "react-router-dom";
+import posts from "./../../posts"
+import { truncateText } from "../../truncateText";
 
 function NewsBlog() {
   return (
@@ -12,7 +15,16 @@ function NewsBlog() {
         <EventTimeline />
       </section>
       <section className="px-4 lg:px-[6%]">
-        <h1 className="h2-text text-secondary text-center my-2">Blog Space</h1>
+        <h1 className="h2-text text-secondary text-center my-2">News & Blog</h1>
+        <div className="grid grid-cols-1 gap-y-4 justify-items-center sm:grid-cols-2 sm:gap-4 md:grid-cols-3 md:gap-4">
+          {posts.map((post) => (
+            <div key={post.id} className="border-2 w-[80%] min-w-[200px] flex flex-col gap-4 p-2 ">
+              <h3 className="h3-text text-secondary/70">{post.title}</h3>
+              <p className="body-text">{truncateText(post.content, 100)}</p>
+              <Link to={`/blog/${post.id}`} className='py-2 px-4 bg-primary/70 hover:bg-primary self-start rounded-2xl'>Read More</Link>
+            </div>
+          ))}
+        </div>
       </section>
       <Footer />
     </div>

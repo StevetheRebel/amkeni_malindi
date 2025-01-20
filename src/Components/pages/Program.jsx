@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Footer from "../Footer/Footer";
-import { Box, Divider, Modal } from "@mui/material";
+import { Box, Divider, Modal, Pagination } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import AppointmentForm from "../AppointmentForm";
@@ -13,6 +13,18 @@ import {
   photo6,
 } from "../../assets/Program Pics";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import programData from "./../../pillars.json";
+import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
+import { AdvocacyImg } from "../../assets/Pillar Pictures";
+import "swiper/css";
+import "swiper/css/pagination";
+import 'swiper/css/effect-coverflow';
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Autoplay,
+  EffectCoverflow,
+  Pagination as SlidePagination,
+} from "swiper/modules";
 
 const style = {
   position: "absolute",
@@ -66,63 +78,34 @@ function Program() {
   };
 
   return (
-    <div className="relative h-auto top-[154px] xs:top-[160px] sm:top-36 select-none ">
-      <section className="relative flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10">
+    <div className="relative h-auto select-none scroll-smooth ">
+      {/* Integrated and Intersectional Health Promotion and Access */}
+      <section className="relative min-h-screen bg-image4 bg-fixed bg-no-repeat bg-cover pt-[154px] xs:pt-[160px] sm:pt-36 flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10">
         <h1 className="h1-text capitalize text-center text-secondary">
           our programs
         </h1>
 
-        {/* Healthcare Promotion & Service Delivery Start */}
-        <div className="flex flex-col items-center">
-          <h2 className="h2-text text-secondary/70 text-center">
-            Healthcare Promotion & Service Delivery
-          </h2>
-          <p className="body-text py-4 text-justify sm:text-center ">
-            At our facility, we provide a wide range of{" "}
-            <span className="font-bold">
-              health promotion and service delivery
-            </span>{" "}
-            options tailored to meet the diverse needs of our community. From
-            preventive care to ongoing treatment and mental health support, we
-            are dedicated to fostering healthier lives through compassionate,
-            inclusive, and professional services. <br />
-            <br /> Our{" "}
-            <span className="font-bold">HIV Testing Services (HTS)</span> are
-            designed to be quick, confidential, and supportive, encouraging
-            individuals to take charge of their health with confidence.
-            Alongside this, we offer{" "}
-            <span className="font-bold">STI screening and treatment</span>,
-            ensuring early detection and effective care while promoting safe
-            sexual health practices. <br />
-            <br /> We go a step further by offering{" "}
-            <span className="font-bold">commodity distribution</span>, including
-            free condoms and lubricants, paired with clear, engaging education
-            materials to promote proper use and safer intimacy. <br />
-            <br /> Prevention remains a top priority with our{" "}
-            <span className="font-bold">PrEP & PEP</span> services, providing
-            both long-term and emergency options for HIV prevention. For those
-            already living with HIV, our{" "}
-            <span className="font-bold">Antiretroviral Therapy (ART)</span>{" "}
-            services are designed to help individuals maintain a healthy life,
-            with personalized care and adherence support. <br />
-            <br /> Beyond physical health, we believe in a holistic approach to
-            wellness, which is why we offer{" "}
-            <span className="font-bold">
-              mental health and psychosocial support
-            </span>{" "}
-            services. Our licensed psychologist provides individual counseling,
-            peer support, and crisis intervention, ensuring everyone feels
-            heard, respected, and cared for. <br />
-            <br /> Whether you're here for preventive care, ongoing treatment,
-            or simply seeking a listening ear, we are committed to supporting
-            your well-being every step of the way.
-          </p>
-          <p className="font-bold body-text py-4 text-center">
+        <div className="flex flex-col items-center mb-4 md:mb-6">
+          {
+            <h2 className="h2-text font-bold text-center text-secondary/70">
+              {programData.pillars[0].title}
+            </h2>
+          }
+          {bundleTextIntoParagraphs(programData.pillars[0].description, 5).map(
+            (para, index) => (
+              <p key={index} className="text-justify body-text text-white">
+                {para}
+                <br />
+                <br />
+              </p>
+            )
+          )}
+          <p className="font-bold body-text text-white py-4 text-center">
             Check out the detailed steps below and visit us today to get started
             on your journey to better health!
-          </p>{" "}
+          </p>
           <button
-            className="py-2 px-4 bg-primary/50 rounded-full body-text hover:bg-primary"
+            className="button-type button-text bg-primary/50 rounded-full hover:bg-primary"
             onClick={handleOpen6}
           >
             Book an Appointment
@@ -150,11 +133,11 @@ function Program() {
           </Modal>
           <div className="flex flex-col gap-4 items-center justify-center py-4 sm:flex-row flex-wrap lg:gap-6 w-full 2xl:gap-4 ">
             {/* HIV Testing Services */}
-            <div className="relative border-2 overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
+            <div className="relative overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
               <LazyLoadImage
                 src={photo1}
                 alt="HIV Testing Services"
-                className="absolute h-full z-10 group-hover:animate-fadeOut group-hover:z-0"
+                className="absolute h-full z-10 group-hover:brightness-50 group-hover:z-0"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -162,9 +145,11 @@ function Program() {
                 }
               />
               <div className="absolute right-[100%] z-10 flex flex-col h-full w-full items-center justify-center gap-4 px-2 group-hover:animate-slideIn group-hover:right-0 sm:justify-between sm:py-4 sm:px-0 lg:py-6 lg:px-2 xl:px-4 ">
-                <h4 className="h4-text text-center">HIV Testing Services</h4>
+                <h4 className="h4-text text-white text-center">
+                  HIV Testing Services
+                </h4>
                 <button
-                  className="py-2 px-4 body-text bg-primary/70 hover:bg-primary rounded-full"
+                  className="button-type button-text bg-primary/70 hover:bg-primary rounded-full"
                   onClick={handleOpen}
                 >
                   Read More
@@ -368,11 +353,11 @@ function Program() {
             </div>
 
             {/* STI Screening and Treatment */}
-            <div className="relative border-2 overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
+            <div className="relative overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
               <LazyLoadImage
                 src={photo2}
                 alt="STI Screening"
-                className="absolute w-full h-full object-cover z-10 group-hover:animate-fadeOut group-hover:z-0"
+                className="absolute w-full h-full object-cover z-10 group-hover:brightness-50 group-hover:z-0"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -380,11 +365,11 @@ function Program() {
                 }
               />
               <div className="absolute right-[100%] z-10 flex flex-col h-full w-full items-center justify-center gap-4 px-2 group-hover:animate-slideIn group-hover:right-0 sm:justify-between sm:py-4 sm:px-0 lg:py-6 lg:px-2 xl:px-4">
-                <h4 className="h4-text text-center">
+                <h4 className="h4-text text-white text-center">
                   STI Screening & Treatment
                 </h4>
                 <button
-                  className="py-2 px-4 body-text bg-primary/70 hover:bg-primary rounded-full"
+                  className="button-type button-text bg-primary/70 hover:bg-primary rounded-full"
                   onClick={handleOpen1}
                 >
                   Read More
@@ -531,11 +516,11 @@ function Program() {
             </div>
 
             {/* Condom and Lubrican Distribution */}
-            <div className="relative border-2 overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
+            <div className="relative overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
               <LazyLoadImage
                 src={photo3}
                 alt="Condom and Lubricants"
-                className="absolute h-full z-10 group-hover:animate-fadeOut group-hover:z-0"
+                className="absolute h-full z-10 group-hover:brightness-50 group-hover:z-0"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -543,11 +528,11 @@ function Program() {
                 }
               />
               <div className="absolute right-[100%] z-10 flex flex-col h-full w-full items-center justify-center gap-4 px-2 group-hover:animate-slideIn group-hover:right-0 sm:justify-between sm:py-4 sm:px-0 lg:py-6 lg:px-2 xl:px-4">
-                <h4 className="h4-text text-center">
+                <h4 className="h4-text text-white text-center">
                   Commodity Distribution & Education
                 </h4>
                 <button
-                  className="py-2 px-4 body-text bg-primary/70 hover:bg-inherit rounded-full"
+                  className="button-type button-text bg-primary/70 hover:bg-primary rounded-full"
                   onClick={handleOpen2}
                 >
                   Read More
@@ -747,11 +732,11 @@ function Program() {
             </div>
 
             {/* PrEP and PEP */}
-            <div className="relative border-2 overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
+            <div className="relative overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
               <LazyLoadImage
                 src={photo4}
                 alt="PrEP and PEP"
-                className="absolute h-full w-full object-cover z-10 group-hover:animate-fadeOut group-hover:z-0"
+                className="absolute h-full w-full object-cover z-10 group-hover:brightness-50 group-hover:z-0"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -759,9 +744,9 @@ function Program() {
                 }
               />
               <div className="absolute right-[100%] z-10 flex flex-col w-full h-full items-center justify-center gap-4 px-2 group-hover:animate-slideIn group-hover:right-0 sm:justify-between sm:py-4 sm:px-0 lg:py-6 lg:px-2 xl:px-4">
-                <h4 className="h4-text text-center">PrEP & PEP</h4>
+                <h4 className="h4-text text-white text-center">PrEP & PEP</h4>
                 <button
-                  className="py-2 px-4 body-text bg-primary/70 bg-primary rounded-full"
+                  className="button-type button-text bg-primary/70 hover:bg-primary rounded-full"
                   onClick={handleOpen3}
                 >
                   Read More
@@ -968,11 +953,11 @@ function Program() {
             </div>
 
             {/* ART */}
-            <div className="relative border-2 overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
+            <div className="relative overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
               <LazyLoadImage
                 src={photo5}
                 alt="ART Services"
-                className="absolute w-full h-full object-cover z-10 group-hover:animate-fadeOut group-hover:z-0"
+                className="absolute w-full h-full object-cover z-10 group-hover:brightness-50 group-hover:z-0"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -980,9 +965,9 @@ function Program() {
                 }
               />
               <div className="absolute right-[100%] z-10 w-full flex flex-col h-full items-center justify-center gap-4 px-2 group-hover:animate-slideIn group-hover:right-0 sm:justify-between sm:py-4 sm:px-0 lg:py-6 lg:px-2 xl:px-4 ">
-                <h4 className="h4-text text-center">ART</h4>
+                <h4 className="h4-text text-white text-center">ART</h4>
                 <button
-                  className="p-2 body-text bg-primary/70 hover:bg-primary rounded-full"
+                  className="button-type button-text bg-primary/70 hover:bg-primary rounded-full"
                   onClick={handleOpen4}
                 >
                   Read More
@@ -1194,11 +1179,11 @@ function Program() {
             </div>
 
             {/* Mental Health and Psychosocial Support */}
-            <div className="relative border-2 overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
-            <LazyLoadImage
+            <div className="relative overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
+              <LazyLoadImage
                 src={photo6}
                 alt="Mental Health"
-                className="absolute w-full h-full object-cover z-10 group-hover:animate-fadeOut group-hover:z-0"
+                className="absolute w-full h-full object-cover z-10 group-hover:brightness-50 group-hover:z-0"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -1206,11 +1191,11 @@ function Program() {
                 }
               />
               <div className="absolute right-[100%] z-10 flex flex-col h-full w-full items-center justify-center gap-4 px-2 group-hover:animate-slideIn group-hover:right-0 sm:justify-between sm:py-4 sm:px-0 lg:py-6 lg:px-2 xl:px-4">
-                <h4 className="h4-text text-center">
+                <h4 className="h4-text text-white text-center">
                   Mental Health & Psychosocial Support
                 </h4>
                 <button
-                  className="py-2 px-4 body-text bg-primary/70 hover:bg-primary rounded-full"
+                  className="button-type button-text bg-primary/70 hover:bg-primary rounded-full"
                   onClick={handleOpen5}
                 >
                   Read More
@@ -1413,19 +1398,98 @@ function Program() {
             </div>
           </div>
         </div>
-        {/* Healthcare Promotion & Service Delivery End */}
+      </section>
+      {/* Integrated and Intersectional Health Promotion and Access End */}
 
-        {/* Community Social & Economic Empowerment */}
-        <div className="flex flex-col items-center">
-          <h2 className="h2-text text-secondary/70 text-center">
-            Community Social & Economic Empowerment
+      {/* Start Strategic Advocacy and Justice */}
+      <section className="bg-light flex flex-col gap-4 justify-center p-4 lg:px-[6%]">
+        {
+          <h2 className="h2-text font-bold text-center text-secondary/70">
+            {programData.pillars[1].title}
           </h2>
-        </div>
+        }
+        {/* Heading and Overview with highlight */}
+        <div className="flex flex-col gap-2 items-center shadow-custom-shadow rounded-2xl p-4 xs:px-5 md:mb-4 xl:mb-8 ">
+          <div className="relative w-full flex flex-col items-center gap-4 pt-2">
+            <img
+              src={AdvocacyImg}
+              alt="Advocacy image"
+              className="w-2/3 rounded-2xl sm:h-[90%] sm:absolute sm:top-0 sm:z-0 sm:opacity-20"
+            />
+            <div className="sm:z-10">
+              {bundleTextIntoParagraphs(
+                programData.pillars[1].description,
+                4
+              ).map((para, index) => (
+                <p key={index} className="body-text text-justify">
+                  {para}
+                  <br />
+                  <br />
+                </p>
+              ))}
+            </div>
+          </div>
 
-        {/* Research, Advocacy & Policy Reforms */}
-        <div className="flex flex-col items-center">
+          {/* Focus Areas */}
+          <div className="w-full sm:w-[70%] lg:w-[60%] ">
+            <Swiper
+              modules={[EffectCoverflow, SlidePagination, Autoplay]}
+              effect={"coverflow"}
+              centeredSlides={true}
+              grabCursor={true}
+              pagination={{clickable: true, dynamicBullets: true}}
+              loop
+              spaceBetween={40}
+              slidesPerView={'auto'}
+              className="w-full sm:w-[100%] py-2 "
+              autoplay={{ delay: 10000 }}
+              speed={1000}
+              coverflowEffect={{
+                rotate: 50,
+                stretch: 10,
+                depth: 600,
+                modifier: 1,
+                slideShadows: true,
+              }}
+            >
+              {programData.pillars[1].focusAreasDescription.map(
+                (area, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="p-2 min-h-[380px] text-center rounded-2xl xs:p-4  ">
+                      <h3 className="h3-text" data-swiper-parallax="-200">
+                        {area.title}
+                      </h3>
+                      <div
+                        className="flex flex-col-reverse justify-around gap-3 items-center py-2"
+                        data-swiper-parallax="-100"
+                      >
+                        <p className="body-text text-center">{area.description}</p>
+                        <img src={AdvocacyImg} alt={area.title} className="h-auto object-cover sm:w-[70%] " />
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                )
+              )}
+            </Swiper>
+          </div>
+
+          {/* Porgram Highlight */}
+          {
+            <p className="body-text italic text-center">
+              {programData.pillars[1].highlights}
+            </p>
+          }
+        </div>
+      </section>
+      {/* Strategic Advocacy and Justice End */}
+
+      {/*  */}
+      <section>
+        <div className="flex flex-col items-center bg-image6 min-h-screen bg-fixed bg-cover bg-no-repeat bg-center">
           <h2 className="h2-text text-secondary/70 text-center">
-            Research, Advocacy & Policy Reforms
+            {
+              programData.pillars[2].title
+            }
           </h2>
         </div>
       </section>

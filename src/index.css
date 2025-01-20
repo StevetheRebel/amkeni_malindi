@@ -54,7 +54,7 @@
 }
 
 .body-text {
-  @apply font-bodyText text-[12px] xs:text-base lg:text-lg xl:text-xl 2xl:text-2xl;
+  @apply font-bodyText text-[12px] xs:text-[14px] sm:text-base lg:text-lg xl:text-xl 2xl:text-2xl;
 }
 
 .h1-text {
@@ -62,7 +62,7 @@
 }
 
 .h2-text {
-  @apply font-subheading py-2 text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl;
+  @apply font-subheading font-bold py-2 text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl;
 }
 
 .h3-text {
@@ -70,7 +70,11 @@
 }
 
 .h4-text {
-  @apply font-bodyText font-bold py-2 text-lg xs:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl;
+  @apply font-subheading py-2 text-lg xs:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl;
+}
+
+.h5-text {
+  @apply font-subheading py-2 text-base md:text-xl xl:text-2xl 2xl:text-3xl;
 }
 
 .active {
@@ -86,9 +90,9 @@
 }
 
 .button-text {
-  @apply font-button-links text-[12px] text-white xs:text-base lg:text-lg xl:text-xl;
+  @apply font-button-links text-[12px] text-white xs:text-base lg:text-lg xl:text-xl 2xl:text-2xl;
 }
 
 .button-type {
-  @apply py-1 px-2 rounded-2xl xs:py-2 xs:px-3
+  @apply py-1 px-2 rounded-2xl xs:py-2 xs:px-3;
 }
