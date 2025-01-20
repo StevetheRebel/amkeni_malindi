@@ -23,9 +23,6 @@ function Footer() {
             {/* Footer Logo */}
             <div className="w-[50%] sm:w-52">
               <img src={logo} alt="amkeni logo" />
-              <p className="uppercase font-heading text-center text-[7px] tracking-wide xs:text-[8px] xs:tracking sm:text-[8px] ">
-                an empowered, just and inclusive society
-              </p>
             </div>
             <h4 className="font-subheading capitalize font-bold text-lg tracking-wider ">
               subscribe for updates
