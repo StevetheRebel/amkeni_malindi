@@ -27,7 +27,7 @@ const BlogPost = () => {
   }
 
   return (
-    <div className='relative select-none px-4 top-[154px] xs:top-[160px] sm:top-36 lg:px-[6%]'>
+    <div className='relative select-none px-4 lg:px-[6%]'>
       <h1 className='h1-text text-center font-bold'>{post.title}</h1>
       {/* <p className='body-text text-justified'>{paragraphs}</p> */}
       {paragraphs.map((para, index) => (

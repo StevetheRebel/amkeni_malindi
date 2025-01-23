@@ -17,8 +17,8 @@ import postPic from "./../../assets/Posts/Post1.jpg";
 import { truncateByWords } from "../../truncateByWords";
 import programData from "./../../pillars.json";
 import {
-  HealthPromotionImg,
   AdvocacyImg,
+  HealthPromotionImg,
   SustainableLivelihoodImg,
   SystemStrengtheningImg,
 } from "../../assets/Pillar Pictures";

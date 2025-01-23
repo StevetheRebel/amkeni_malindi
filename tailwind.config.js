@@ -27,7 +27,7 @@ export default {
         image3: 'url("/image3.jpg")',
         image4: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image4.jpg")',
         image5: 'url("/image5.jpg")',
-        image6: 'url("/image6.jpg")',
+        image6: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image6.jpg")',
         image7: 'url("/image7.jpg")',
         image8: 'url("/image8.jpg")',
         image9:

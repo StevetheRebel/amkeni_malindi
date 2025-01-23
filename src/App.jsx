@@ -1,6 +1,6 @@
 import { React, lazy } from "react";
 import Navigation from "./../src/Components/Navigation/Navigation";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./../src/Components/pages/Home";
 import ScrollToTop from "./Components/ScrollToTop";
 import "./index.css";
@@ -15,9 +15,11 @@ const Reachout = lazy(() => import("./../src/Components/pages/Reachout"));
 const BlogPost = lazy(() => import("./Components/pages/BlogPost"));
 
 function App() {
+  const location = useLocation();
+
   return (
     <>
-      <Navigation />
+      {location.pathname.startsWith("/blog") ? null : <Navigation />}
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />
