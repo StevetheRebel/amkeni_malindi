@@ -270,10 +270,10 @@ function CarouselSlide({ title, focusArea, highlights }) {
       <h3 className="h3-text capitalize text-center text-pretty text-secondary/70 ">
         {title}
       </h3>
-      <p className="body-text self-center ">
-        Our Areas of focus are:
+      <div className="body-text self-center ">
+        <p>Our Areas of focus are:</p>
         {focusArea}
-      </p>
+      </div>
       <p className="body-text italic text-center text-muted">"{highlights}"</p>
     </div>
   );
