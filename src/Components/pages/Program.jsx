@@ -15,19 +15,8 @@ import {
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import programData from "./../../pillars.json";
 import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
-import {
-  AdvocacyImg,
-  SustainableLivelihoodImg,
-} from "../../assets/Pillar Pictures";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-coverflow";
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Autoplay,
-  EffectCoverflow,
-  Pagination as SlidePagination,
-} from "swiper/modules";
+import StrategicAdvocacy from "../StrategicAdvocacy/StrategicAdvocacy";
+import Sustainablelivelihoods from "../SustainableLivelihoods/Sustainablelivelihoods";
 
 const style = {
   position: "absolute",
@@ -82,7 +71,6 @@ function Program() {
 
   return (
     <div className="relative h-auto select-none scroll-smooth ">
-
       {/* Integrated and Intersectional Health Promotion and Access */}
       <section className="relative min-h-screen bg-image4 bg-fixed bg-no-repeat bg-cover pt-[154px] xs:pt-[160px] sm:pt-36 flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10">
         <h1 className="h1-text capitalize text-center text-secondary">
@@ -91,7 +79,7 @@ function Program() {
 
         <div className="flex flex-col items-center mb-4 md:mb-6">
           {
-            <h2 className="h2-text font-bold text-center text-secondary/70">
+            <h2 className="h2-text font-bold text-center text-primary">
               {programData.pillars[0].title}
             </h2>
           }
@@ -1405,183 +1393,9 @@ function Program() {
       </section>
       {/* Integrated and Intersectional Health Promotion and Access End */}
 
+      <StrategicAdvocacy />
 
-      {/* Start Strategic Advocacy and Justice */}
-      <section className="bg-light flex flex-col gap-4 justify-center p-4 lg:px-[6%]">
-        {/* Program Heading */}
-        <h2 className="h2-text font-bold text-center text-secondary/70">
-          {programData.pillars[1].title}
-        </h2>
-        {/* Heading and Overview with highlight */}
-        <div className="flex flex-col gap-2 items-center shadow-custom-shadow rounded-2xl p-4 xs:px-5 md:mb-4 xl:mb-8 ">
-          <div className="relative w-full flex flex-col items-center gap-4 pt-2">
-            <img
-              src={AdvocacyImg}
-              alt="Advocacy image"
-              className="w-2/3 rounded-2xl sm:h-[90%] sm:absolute sm:top-0 sm:z-0 sm:opacity-20"
-            />
-            <div className="sm:z-10">
-              {bundleTextIntoParagraphs(
-                programData.pillars[1].description,
-                4
-              ).map((para, index) => (
-                <p key={index} className="body-text text-justify">
-                  {para}
-                  <br />
-                  <br />
-                </p>
-              ))}
-            </div>
-          </div>
-
-          {/* Focus Areas */}
-          <div className="w-full sm:w-[70%] lg:w-[60%] ">
-            <Swiper
-              modules={[EffectCoverflow, SlidePagination, Autoplay]}
-              effect={"coverflow"}
-              centeredSlides={true}
-              grabCursor={true}
-              pagination={{ clickable: true, dynamicBullets: true }}
-              loop
-              spaceBetween={40}
-              slidesPerView={"auto"}
-              className="w-full sm:w-[100%] py-2 "
-              autoplay={{ delay: 10000 }}
-              speed={1000}
-              coverflowEffect={{
-                rotate: 50,
-                stretch: 10,
-                depth: 600,
-                modifier: 1,
-                slideShadows: true,
-              }}
-            >
-              {programData.pillars[1].focusAreasDescription.map(
-                (area, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="p-2 min-h-[380px] text-center rounded-2xl xs:p-4  ">
-                      <h3 className="h3-text" data-swiper-parallax="-200">
-                        {area.title}
-                      </h3>
-                      <div
-                        className="flex flex-col-reverse justify-around gap-3 items-center py-2"
-                        data-swiper-parallax="-100"
-                      >
-                        <p className="body-text text-center">
-                          {area.description}
-                        </p>
-                        <img
-                          src={AdvocacyImg}
-                          alt={area.title}
-                          className="h-auto object-cover sm:w-[70%] "
-                        />
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                )
-              )}
-            </Swiper>
-          </div>
-
-          {/* Porgram Highlight */}
-          {
-            <p className="body-text italic text-center">
-              {programData.pillars[1].highlights}
-            </p>
-          }
-        </div>
-      </section>
-      {/* Strategic Advocacy and Justice End */}
-
-
-
-      {/* Start of Improved Quality and Sustainable Livelihoods */}
-      <section className="p-4 lg:px-[6%] md:pl-0 bg-image6 min-h-screen bg-fixed bg-cover bg-no-repeat bg-center">
-        {/* Program Heading */}
-        <h2 className="h2-text text-secondary/70 text-center">
-          {programData.pillars[2].title}
-        </h2>
-
-        {/* Description Focus Areas and Highlight of the Program */}
-        <div className="flex flex-col items-center rounded-2xl bg-white/70 backdrop-blur- p-4 xs:px-5 md:mb-4 md:rounded-tr-2xl md:rounded-br-2xl lg:px-8 xl:mb-8 ">
-          <div className="relative w-full flex flex-col items-center gap-4 pt-2">
-            {/* Description of the Program */}
-            <div className="text-justify body-text">
-              {bundleTextIntoParagraphs(programData.pillars[2].description).map(
-                (para, index) => (
-                  <p>
-                    {para}
-                    <br />
-                    <br />
-                  </p>
-                )
-              )}
-            </div>
-
-            {/* Program Image and Focus Areas */}
-            <div className="w-full flex flex-col items-center sm:flex-row justify-center">
-              {/* Program Image */}
-              <img
-                src={SustainableLivelihoodImg}
-                alt="Advocacy image"
-                className="w-2/3 rounded-2xl sm:hidden animate-fadeIn"
-              />
-
-              {/* Focus Areas */}
-              <div className="w-full sm:w-[70%] lg:w-[60%] ">
-                <Swiper
-                  modules={[EffectCoverflow, SlidePagination, Autoplay]}
-                  effect={"coverflow"}
-                  centeredSlides={true}
-                  grabCursor={true}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  loop
-                  spaceBetween={40}
-                  slidesPerView={"auto"}
-                  className="w-full sm:w-[100%] py-2 "
-                  autoplay={{ delay: 10000 }}
-                  speed={1000}
-                  coverflowEffect={{
-                    rotate: 50,
-                    stretch: 10,
-                    depth: 700,
-                    modifier: 1,
-                    slideShadows: true,
-                  }}
-                >
-                  {programData.pillars[2].focusAreasDescription.map(
-                    (area, index) => (
-                      <SwiperSlide key={index}>
-                        <div className="p-2 min-h-[380px] text-center rounded-2xl xs:p-4  ">
-                          <h3 className="h3-text" data-swiper-parallax="-200">
-                            {area.title}
-                          </h3>
-                          <div
-                            className="flex flex-col-reverse justify-around gap-3 items-center py-2"
-                            data-swiper-parallax="-100"
-                          >
-                            <p className="body-text text-center">
-                              {area.description}
-                            </p>
-                            <img
-                              src={SustainableLivelihoodImg}
-                              alt={area.title}
-                              className="h-auto object-cover sm:w-[70%] "
-                            />
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    )
-                  )}
-                </Swiper>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Improved Quality and Sustainable Livelihood End */}
-
-
+      <Sustainablelivelihoods />
 
       <Footer />
     </div>
