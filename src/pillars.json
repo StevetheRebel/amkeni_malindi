@@ -96,27 +96,63 @@
       "focusAreasDescription": [
         {
           "title": "Income Generation Projects",
-          "description": "We support the economic independence of individuals and communities by initiating and scaling group and individual income-generating ventures."
+          "description": "We support the economic independence of individuals and communities by initiating and scaling group and individual income-generating ventures.",
+          "image": [
+            {
+              "src": "IncomegeneratingProjects.webp",
+              "alt": "Income Generation Projects"
+            }
+          ]
         },
         {
           "title": "Skills Training Programs",
-          "description": "Through vocational training, apprenticeships, and entrepreneurial mentorship, we empower participants with the skills and knowledge needed for meaningful employment."
+          "description": "Through vocational training, apprenticeships, and entrepreneurial mentorship, we empower participants with the skills and knowledge needed for meaningful employment.",
+          "image": [
+            {
+              "src": "SkillstrainingPrograms.webp",
+              "alt": "Skills Training Programs"
+            }
+          ]
         },
         {
           "title": "Scholarship Opportunities",
-          "description": "We connect individuals with educational opportunities through scholarships aimed at reducing financial barriers to learning."
+          "description": "We connect individuals with educational opportunities through scholarships aimed at reducing financial barriers to learning.",
+          "image": [
+            {
+              "src": "Scholarshipopportunities.webp",
+              "alt": "Scholarship Opportunities"
+            }
+          ]
         },
         {
           "title": "Exchange Programs",
-          "description": "Our exchange programs facilitate experiential learning by creating opportunities for cross-cultural and professional engagements."
+          "description": "Our exchange programs facilitate experiential learning by creating opportunities for cross-cultural and professional engagements.",
+          "image": [
+            {
+              "src": "Exchangeprograms.webp",
+              "alt": "Exchange Programs"
+            }
+          ]
         },
         {
           "title": "Leadership Development",
-          "description": "We nurture leadership qualities through mentorship and training programs that empower individuals to lead initiatives and inspire their communities."
+          "description": "We nurture leadership qualities through mentorship and training programs that empower individuals to lead initiatives and inspire their communities.",
+          "image": [
+            {
+              "src": "Leadershipdevelopment.webp",
+              "alt": "Leadership Development"
+            }
+          ]
         },
         {
           "title": "Self-Improvement Initiatives",
-          "description": "Our initiatives focus on overcoming self-stigma, fostering self-efficacy, and building resilience to help individuals unlock their potential."
+          "description": "Our initiatives focus on overcoming self-stigma, fostering self-efficacy, and building resilience to help individuals unlock their potential.",
+          "image": [
+            {
+              "src": "SelfimprovementInitiatives.webp",
+              "alt": "Self-Improvement Initiatives"
+            }
+          ]
         }
       ],
       "highlights": "Promoting self-reliance and economic empowerment through training, mentorship, and innovation."
