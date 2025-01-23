@@ -1494,6 +1494,7 @@ function Program() {
       {/* Strategic Advocacy and Justice End */}
 
 
+
       {/* Start of Improved Quality and Sustainable Livelihoods */}
       <section className="p-4 lg:px-[6%] md:pl-0 bg-image6 min-h-screen bg-fixed bg-cover bg-no-repeat bg-center">
         {/* Program Heading */}
