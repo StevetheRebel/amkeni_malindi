@@ -8,10 +8,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 
-function StrategicAdvocacy() {
+function StrategicAdvocacy({ id }) {
   return (
     <>
-      <section className="bg-light flex flex-col gap-4 justify-center p-4 lg:px-[6%]">
+      <section
+        className="bg-light flex flex-col gap-4 justify-center p-4 lg:px-[6%]"
+        id={id}
+      >
         {/* Program Heding */}
         <h2 className="h2-text font-bold text-center text-secondary/70">
           {programData.pillars[1].title}
@@ -90,7 +93,7 @@ function StrategicAdvocacy() {
           </div>
 
           {/* Program Highlight */}
-          <p className="body-text italic text-ceter">
+          <p className="body-text italic text-center">
             {programData.pillars[1].highlights}
           </p>
         </div>
