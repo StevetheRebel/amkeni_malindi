@@ -22,6 +22,7 @@ import {
   SustainableLivelihoodImg,
   SystemStrengtheningImg,
 } from "../../assets/Pillar Pictures";
+import { HashLink } from "react-router-hash-link";
 
 function Home() {
   const blogPosts = [
@@ -53,6 +54,13 @@ function Home() {
     "SustainableLivelihood.jpg": SustainableLivelihoodImg,
     "System-Strengthening.jpg": SystemStrengtheningImg,
   };
+
+  const navMap = [
+    "/program-services#health-promotion",
+    "/program-services#strategic-advocacy",
+    "/program-services#sustainable-livelihoods",
+    "/program-services#systems-strengthening",
+  ];
 
   return (
     <div className="relative h-auto select-none scroll-smooth ">
@@ -154,7 +162,7 @@ function Home() {
                   <CarouselSlide
                     title={pillar.title}
                     description={truncateByWords(pillar.description, 30)}
-                    link={`/program-services`}
+                    link={navMap[index % navMap.length]}
                     imagePath={imagesMap[pillar.image[0].src]}
                   />
                 </SwiperSlide>
@@ -206,6 +214,15 @@ function Home() {
 }
 
 function CarouselSlide({ title, description, link, imagePath }) {
+
+  const scrollWithOffset = (el) => {
+    const yOffset = -130;
+    const yPosition = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: yPosition, behavior: "smooth" });
+  }
+
+
   return (
     <div className="h-fit w-full rounded-2xl flex flex-col items-center pt-4 pb-8 gap-4 sm:flex-row sm:gap-4 sm:px-4 sm:pb-0 lg:gap-8 lg:px-8 lg:items-start 2xl:gap-12 2xl:px-12">
       <div className="w-[90%] aspect-square rounded-xl lg:w-auto lg:h-40 2xl:h-48">
@@ -223,13 +240,15 @@ function CarouselSlide({ title, description, link, imagePath }) {
           {description}
         </p>
 
-        <Link
+        <HashLink
+          smooth
           to={link}
+          scroll={scrollWithOffset}
           className="bg-accent/50 button-type button-text hover:bg-accent focus:outline-none self-end mr-[5%]"
           style={{ cursor: "pointer" }}
         >
           Learn More
-        </Link>
+        </HashLink>
       </div>
     </div>
   );
