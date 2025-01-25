@@ -23,8 +23,8 @@ export default {
         pride: 'url("/pride.jpg")',
         image1:
           'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image1.jpg")',
-        image2: 'url("/image2.jpg")',
-        image3: 'url("/image3.jpg")',
+        image2: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image2.jpg")',
+        image3: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image3.jpg")',
         image4: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image4.jpg")',
         image5: 'url("/image5.jpg")',
         image6: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image6.jpg")',

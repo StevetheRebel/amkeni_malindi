@@ -1397,9 +1397,7 @@ function Program() {
       </section>
       {/* Integrated and Intersectional Health Promotion and Access End */}
 
-
-        <StrategicAdvocacy id="strategic-advocacy" />
-
+      <StrategicAdvocacy id="strategic-advocacy" />
 
       <Sustainablelivelihoods id="sustainable-livelihoods" />
 
