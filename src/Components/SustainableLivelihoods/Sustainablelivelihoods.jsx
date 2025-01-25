@@ -17,7 +17,7 @@ import {
   SelfImprovInit,
 } from "./../../assets/Sustainable Livelihoods";
 
-function Sustainablelivelihoods() {
+function Sustainablelivelihoods({ id }) {
   const imageMap = {
     "IncomegeneratingProjects.webp": IncomeGen,
     "SkillstrainingPrograms.webp": SkillsTraining,
@@ -55,13 +55,15 @@ function Sustainablelivelihoods() {
       }
     });
   };
-  
 
   return (
     <>
-      <section className="p-4 lg:px-[6%] md:pl-0 bg-image6 min-h-screen bg-fixed bg-cover bg-no-repeat bg-center">
+      <section
+        className="p-4 lg:px-[6%] bg-image6 min-h-screen bg-fixed bg-cover bg-no-repeat bg-center"
+        id={id}
+      >
         {/* Program Heading */}
-        <h2 className="h2-text text-primary text-center">
+        <h2 className="h2-text text-primary/80 text-center mb-2 md:mb-4 2xl:mb-6">
           {programData.pillars[2].title}
         </h2>
 
