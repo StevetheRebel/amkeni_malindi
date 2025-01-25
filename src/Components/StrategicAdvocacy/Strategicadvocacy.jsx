@@ -1,5 +1,5 @@
 import React from "react";
-import programData from "./../../pillars.json";
+import programData from "../../pillars.json";
 import { AdvocacyImg } from "../../assets/Pillar Pictures";
 import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
 import { Swiper, SwiperSlide } from "swiper/react";
