@@ -1,7 +1,5 @@
 import React from "react";
 import Footer from "../Footer/Footer";
-import backgroundImage from "./../../assets/OpportunitiesPhoto.jpg";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Opportunities() {
   return (

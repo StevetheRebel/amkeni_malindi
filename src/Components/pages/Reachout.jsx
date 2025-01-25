@@ -13,7 +13,6 @@ import {
   faTiktok,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import pride from "./../../assets/pride.jpg";
 import Footer from "./../Footer/Footer.jsx";
 
 function Reachout() {

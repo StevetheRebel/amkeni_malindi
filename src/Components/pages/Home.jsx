@@ -9,7 +9,6 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import images from "../../assets/Office Pics";
-import { Link } from "react-router-dom";
 import donorLogos from "../../assets/Donor Organization";
 import Marquee from "react-fast-marquee";
 import Footer from "../Footer/Footer";
