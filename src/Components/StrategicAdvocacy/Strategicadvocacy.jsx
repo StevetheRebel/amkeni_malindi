@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 
-function StrategicAdvocacy({ id }) {
+function Strategicadvocacy({ id }) {
   return (
     <>
       <section
@@ -102,4 +102,4 @@ function StrategicAdvocacy({ id }) {
   );
 }
 
-export default StrategicAdvocacy;
+export default Strategicadvocacy;

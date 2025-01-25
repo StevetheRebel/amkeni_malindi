@@ -15,7 +15,7 @@ import {
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import programData from "./../../pillars.json";
 import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
-import StrategicAdvocacy from "./../StrategicAdvocacy/StrategicAdvocacy.jsx";
+import Strategicadvocacy from "../StrategicAdvocacy/Strategicadvocacy.jsx";
 import Sustainablelivelihoods from "../SustainableLivelihoods/Sustainablelivelihoods";
 import SystemStrengthening from "../SystemStrengthening/SystemStrengthening";
 
@@ -1397,7 +1397,7 @@ function Program() {
       </section>
       {/* Integrated and Intersectional Health Promotion and Access End */}
 
-      <StrategicAdvocacy id="strategic-advocacy" />
+      <Strategicadvocacy id="strategic-advocacy" />
 
       <Sustainablelivelihoods id="sustainable-livelihoods" />
 
