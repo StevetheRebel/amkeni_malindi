@@ -15,7 +15,7 @@ import {
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import programData from "./../../pillars.json";
 import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
-import StrategicAdvocacy from "../StrategicAdvocacy/StrategicAdvocacy";
+import StrategicAdvocacy from "./../StrategicAdvocacy/StrategicAdvocacy.jsx";
 import Sustainablelivelihoods from "../SustainableLivelihoods/Sustainablelivelihoods";
 import SystemStrengthening from "../SystemStrengthening/SystemStrengthening";
 
