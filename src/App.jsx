@@ -4,9 +4,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./../src/Components/pages/Home";
 import ScrollToTop from "./Components/ScrollToTop";
 import "./index.css";
-import StrategicAdvocacy from "./Components/StrategicAdvocacy/StrategicAdvocacy";
-import Sustainablelivelihoods from "./Components/SustainableLivelihoods/Sustainablelivelihoods";
-import SystemStrengthening from "./Components/SystemStrengthening/SystemStrengthening";
 
 const About = lazy(() => import("./../src/Components/pages/About"));
 const Program = lazy(() => import("./../src/Components/pages/Program"));
