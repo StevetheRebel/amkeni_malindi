@@ -17,6 +17,7 @@ import programData from "./../../pillars.json";
 import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
 import StrategicAdvocacy from "../StrategicAdvocacy/StrategicAdvocacy";
 import Sustainablelivelihoods from "../SustainableLivelihoods/Sustainablelivelihoods";
+import SystemStrengthening from "../SystemStrengthening/SystemStrengthening";
 
 const style = {
   position: "absolute",
@@ -72,14 +73,17 @@ function Program() {
   return (
     <div className="relative h-auto select-none scroll-smooth ">
       {/* Integrated and Intersectional Health Promotion and Access */}
-      <section className="relative min-h-screen bg-image4 bg-fixed bg-no-repeat bg-cover pt-[154px] xs:pt-[160px] sm:pt-36 flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10">
+      <section
+        className="relative min-h-screen bg-image4 bg-fixed bg-no-repeat bg-cover pt-[154px] xs:pt-[160px] sm:pt-36 flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10"
+        id="health-promotion"
+      >
         <h1 className="h1-text capitalize text-center text-secondary">
           our programs
         </h1>
 
         <div className="flex flex-col items-center mb-4 md:mb-6">
           {
-            <h2 className="h2-text font-bold text-center text-primary">
+            <h2 className="h2-text font-bold text-center text-primary/80">
               {programData.pillars[0].title}
             </h2>
           }
@@ -1393,9 +1397,13 @@ function Program() {
       </section>
       {/* Integrated and Intersectional Health Promotion and Access End */}
 
-      <StrategicAdvocacy />
+      <div id="strategic-advocacy">
+        <StrategicAdvocacy />
+      </div>
 
-      <Sustainablelivelihoods />
+      <Sustainablelivelihoods id="sustainable-livelihoods" />
+
+      <SystemStrengthening id="systems-strengthening" />
 
       <Footer />
     </div>
