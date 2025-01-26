@@ -29,7 +29,6 @@ function Home() {
   
   const sortedPosts = [...posts].reverse();
   
-
   const [postLimit, setPostLimit] = useState(() => {
     if (window.innerWidth >= 1024) return 4;
     if (window.innerWidth >- 768) return 3;

@@ -4,6 +4,7 @@ import posts from "./../../posts";
 import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { HashLink } from "react-router-hash-link";
+import Footer from "../Footer/Footer";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -20,8 +21,10 @@ const BlogPost = () => {
 
   return (
     <div className="relative select-none ">
+
       {/* Blog container */}
       <div className=" flex flex-col gap-4">
+
         {/* header image container */}
         <div className="w-full h-[50svh] min-h-[280px] relative xs:max-h-[280px] z-10 sm:min-h-[400px] 2xl:min-h-[500px] ">
           <LazyLoadImage
@@ -55,7 +58,7 @@ const BlogPost = () => {
         </div>
 
         {/* content container */}
-        <div className="px-4 lg:px-[6%] absolute pt-[290px] bg-gradient-bottom-top z-0 sm:pt-[420px] 2xl:pt-[520px] ">
+        <div className="px-4 lg:px-[6%] ">
           {bundleTextIntoParagraphs(post.content, 4).map((para, index) => (
             <p key={index} className="body-text text-justify">
               {para}
@@ -65,6 +68,7 @@ const BlogPost = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
