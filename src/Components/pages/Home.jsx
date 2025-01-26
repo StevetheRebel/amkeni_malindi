@@ -12,7 +12,6 @@ import images from "../../assets/Office Pics";
 import donorLogos from "../../assets/Donor Organization";
 import Marquee from "react-fast-marquee";
 import Footer from "../Footer/Footer";
-import postPic from "./../../assets/Posts/Post1.jpg";
 import { truncateByWords } from "../../truncateByWords";
 import programData from "./../../pillars.json";
 import {
