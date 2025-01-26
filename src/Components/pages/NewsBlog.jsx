@@ -27,7 +27,7 @@ function NewsBlog() {
         <h1 className="h2-text text-secondary text-center mb-2 md:mb-4">
           Annual Milestones and Achievements
         </h1>
-        <EventTimeline />
+        <EventTimeline id="blogSpot" />
       </section>
 
       {/* Blog Spot */}
