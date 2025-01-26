@@ -1,55 +1,70 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import posts from './../../posts';
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import posts from "./../../posts";
+import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { HashLink } from "react-router-hash-link";
 
 const BlogPost = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
   const post = posts.find((p) => p.id === postId);
 
-  const splitIntoParagraphs = (content, sentencesPerParagraph = 8) => {
+  const scrollWithOffset = (el) => {
+    const yOffset = -130;
+    const yPosition =
+      el.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-    const sentences = content.match(/[^.!?]+[.!?]/g) || [content]
-
-    const paragraph = []
-
-    for (let i = 0; i < sentences.length; i += sentencesPerParagraph) {
-      paragraph.push(sentences.slice(i, i + sentencesPerParagraph).join(' '))
-    }
-
-    return paragraph;
-  }
-
-  const paragraphs = splitIntoParagraphs(post.content)
-
-  if (!post) {
-    return <h2>Post not found</h2>;
-  }
+    window.scrollTo({ top: yPosition, behavior: "smooth" });
+  };
 
   return (
-    <div className='relative select-none px-4 lg:px-[6%]'>
-      <h1 className='h1-text text-center font-bold'>{post.title}</h1>
-      {/* <p className='body-text text-justified'>{paragraphs}</p> */}
-      {paragraphs.map((para, index) => (
-        <p key={index} className='body-text text-justify'>{para}</p>
-      ))}
+    <div className="relative select-none ">
+      {/* Blog container */}
+      <div className=" flex flex-col gap-4">
+        {/* header image container */}
+        <div className="w-full h-[50svh] min-h-[280px] relative xs:max-h-[280px] z-10 sm:min-h-[400px] 2xl:min-h-[500px] ">
+          <LazyLoadImage
+            src={post.image_url}
+            alt={post.title}
+            className="w-full h-full object-cover absolute brightness-[.4]"
+          />
+          <div className="absolute px-2 h-full flex flex-col justify-between py-4 z-10 md:px-6 lg:px-[6%]">
+            <h1 className="h1-text text-white text-center sm:px-10">
+              {post.title}
+            </h1>
+            <p className="body-text text-white h-1/3 flex items-end pb-2">{`Date: ${post.date} Time: ${post.time}`}</p>
 
-      {/* Related Posts */}
-      <h3 className='h3-text '>Related Posts</h3>
-      <ul>
-        {posts
-          .filter((p) => p.id !== postId)
-          .slice(0, 3)
-          .map((relatedPost) => (
-            <li key={relatedPost.id} onClick={() => navigate(`/blog/${relatedPost.id}`)}>
-              {relatedPost.title}
-            </li>
+            {/* Navigation Options */}
+            <div className="flex w-1/2 justify-between md:w-1/4 2xl:w-1/5">
+              <button
+                className="button-type button-text bg-primary/70 hover:bg-primary hover:text-black"
+                onClick={() => navigate("/")}
+              >
+                Home
+              </button>
+              <HashLink 
+              smooth 
+              to={"/news-blog#blogSpot"}
+              scroll={scrollWithOffset} 
+              className="button-type button-text bg-primary/70 hover:bg-primary hover:text-black">
+                News & Blog
+              </HashLink>
+            </div>
+          </div>
+        </div>
+
+        {/* content container */}
+        <div className="px-4 lg:px-[6%] absolute pt-[290px] bg-gradient-bottom-top z-0 sm:pt-[420px] 2xl:pt-[520px] ">
+          {bundleTextIntoParagraphs(post.content, 4).map((para, index) => (
+            <p key={index} className="body-text text-justify">
+              {para}
+              <br />
+              <br />
+            </p>
           ))}
-      </ul>
-
-      {/* Navigation Options */}
-      <button onClick={() => navigate('/')} className='py-2 px-4 bg-primary/70 hover:bg-primary rounded-2xl'>Back to Home</button>
-      <button onClick={() => navigate('/news-blog')} className='py-2 px-4 bg-primary/70 hover:bg-primary rounded-2xl'>Back to News & Blog</button>
+        </div>
+      </div>
     </div>
   );
 };
