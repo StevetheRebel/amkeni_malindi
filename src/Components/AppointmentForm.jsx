@@ -1,8 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import emailjs from "@emailjs/browser";
+import SubmissionModal from "./SubmissionModal";
 
 const AppointmentForm = ({ handleFormClose }) => {
+  const [openSubmission, setOpenSubmission] = useState(false)
+  const handleModalClose = () => setOpenSubmission(false);
+
   const {
     register,
     handleSubmit,
@@ -25,7 +29,9 @@ const AppointmentForm = ({ handleFormClose }) => {
         }
       );
 
-    handleFormClose();
+    setOpenSubmission(true);
+
+    // handleFormClose();
   };
 
   const validateDate = (value) => {
@@ -418,6 +424,12 @@ const AppointmentForm = ({ handleFormClose }) => {
           >
             Submit
           </button>
+          <SubmissionModal
+            openValue={openSubmission}
+            closefunction={handleModalClose}
+            addedfunction={handleFormClose}
+            message="Your Form has successfully be submitted!"
+          />
         </fieldset>
       </form>
     </div>

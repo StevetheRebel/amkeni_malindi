@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   faFacebookF,
   faInstagram,
@@ -9,10 +9,32 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/Amkeni Document Logo.png";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import SubmissionModal from "../SubmissionModal";
 
 function Footer() {
   const date = new Date();
   const year = date.getFullYear();
+
+  const [openSubmission, setOpenSubmission] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const form = useRef();
+
+  const onSubmit = (date) => {
+    console.log("date:", date);
+    setOpenSubmission(true);
+    
+    reset();
+  };
+
+  const handleModalClose = () => setOpenSubmission(false);
 
   return (
     <>
@@ -29,15 +51,33 @@ function Footer() {
             </h4>
 
             {/* Form submission */}
-            <form className="flex flex-col gap-2">
+            <form
+              className="flex flex-col gap-2"
+              onSubmit={handleSubmit(onSubmit)}
+              name="subscriber"
+              id="subscriber"
+              autoComplete="yes"
+              ref={form}
+            >
               <input
                 type="email"
+                name="subscriberEmail"
+                id="subscriberEmail"
                 placeholder="Enter your email"
                 className="bg-light p-2 rounded-xl focus:outline-none focus:bg-accent/60 focus:text-muted"
+                {...register("subscriberEmail")}
               />
-              <button className="bg-primary/50 text-dark p-2 rounded-xl hover:bg-primary hover:font-bold sm:w-fit sm:px-4 ">
+              <button
+                type="submit"
+                className="bg-primary/50 text-dark p-2 rounded-xl hover:bg-primary hover:font-bold sm:w-fit sm:px-4 "
+              >
                 Subscribe
               </button>
+              <SubmissionModal
+                openValue={openSubmission}
+                closefunction={handleModalClose}
+                message="You have successfully subscribed!"
+              />
             </form>
           </div>
 
