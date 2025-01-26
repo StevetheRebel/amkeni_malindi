@@ -70,7 +70,7 @@
 }
 
 .h4-text {
-  @apply font-subheading py-2 text-lg xs:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl;
+  @apply font-subheading py-1 text-lg xs:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl;
 }
 
 .h5-text {
