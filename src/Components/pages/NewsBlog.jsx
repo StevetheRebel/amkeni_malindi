@@ -2,30 +2,89 @@ import React, { useState } from "react";
 import Footer from "../Footer/Footer";
 import portfolioData from "./../../portfolio.json";
 import { Link } from "react-router-dom";
-import posts from "./../../posts"
-import { truncateText } from "../../truncateText";
+import posts from "./../../posts.json";
+import { truncateByWords } from "../../truncateByWords";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function NewsBlog() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const postPerPage = 9;
+
+  const totalPages = Math.ceil(posts.length / postPerPage);
+
+  const startIndex = (currentPage - 1) * postPerPage;
+  const currentPosts = posts.slice(startIndex, startIndex + postPerPage);
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+  console.log(currentPosts);
+
   return (
-    <div className="relative select-none h-auto top-[154px] xs:top-[160px] sm:top-36 ">
-      <section className="px-4 lg:px-[6%]">
+    <div className="select-none ">
+      <section className="bg-image12 pb-4 bg-fixed bg-cover bg-no-repeat min-h-screen px-4 pt-[154px] xs:pt-[160px] sm:pt-36  lg:px-[6%]">
         <h1 className="h2-text text-secondary text-center mb-2 md:mb-4">
           Annual Milestones and Achievements
         </h1>
         <EventTimeline />
       </section>
-      <section className="px-4 lg:px-[6%]">
-        <h1 className="h2-text text-secondary text-center my-2">News & Blog</h1>
-        <div className="grid grid-cols-1 gap-y-4 justify-items-center sm:grid-cols-2 sm:gap-4 md:grid-cols-3 md:gap-4">
-          {posts.map((post) => (
-            <div key={post.id} className="border-2 w-[80%] min-w-[200px] flex flex-col gap-4 p-2 ">
-              <h3 className="h3-text text-secondary/70">{post.title}</h3>
-              <p className="body-text">{truncateText(post.content, 100)}</p>
-              <Link to={`/blog/${post.id}`} className='py-2 px-4 bg-primary/70 hover:bg-primary self-start rounded-2xl'>Read More</Link>
-            </div>
+
+      {/* Blog Spot */}
+      <section
+        className="bg-light pt-4 pb-4 px-4 lg:px-[6%] min-h-screen"
+        id="blogSpot"
+      >
+        <h2 className="h2-text text-center text-secondary">Blog Spot</h2>
+
+        {/* Blog grid */}
+        <div className="w-full grid place-items-center gap-y-4">
+          {currentPosts.map((post, index) => (
+            <BlogPost
+              index={index}
+              pic={post.image_url}
+              title={post.title}
+              date={post.date}
+              time={post.time}
+              blogpiece={post.content}
+              link={`/blog/${post.id}`}
+            />
           ))}
         </div>
+
+        {/* Pagination */}
+        <div className="flex justify-center items-center mt-6 space-x-2">
+          <button
+            className="px-3 py-1 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          {[...Array(totalPages).keys()].map((_, index) => (
+            <button
+              key={index}
+              className={`px-3 py-1 border rounded-lg ${
+                currentPage === index + 1
+                  ? "bg-primary text-white"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+              onClick={() => handlePageChange(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button
+            className="px-3 py-1 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
       </section>
+
       <Footer />
     </div>
   );
@@ -45,7 +104,7 @@ const EventTimeline = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full gap-4 sm:flex-row sm:gap-6">
+      <div className=" bg-white/40 backdrop-blur-sm flex flex-col w-full gap-4 p-4 rounded-2xl sm:flex-row sm:gap-6">
         {/* Render Button for Each Year */}
         <div className="flex gap-2 flex-wrap justify-center py-2 sm:flex-col sm:gap-5 xl:gap-6 ">
           {sortedData.map((item) => (
@@ -70,7 +129,7 @@ const EventTimeline = () => {
             {sortedData
               .find((item) => item.year === selectedYear)
               .events.map((event, index) => (
-                <li key={index} className="bg-light p-1 rounded-md">
+                <li key={index} className="bg-light p-1 rounded-md text-pretty">
                   {event}
                 </li>
               ))}
@@ -82,5 +141,39 @@ const EventTimeline = () => {
 };
 
 // Template for the Blog posts
+const BlogPost = ({ pic, title, date, time, blogpiece, link }) => {
+  return (
+    <>
+      <div className=" w-[80%] aspect-[1/1.5] p-2 shadow-custom-shadow rounded-2xl overflow-hidden flex relative group md:w-full md:h-80">
+        <LazyLoadImage
+          src={pic}
+          alt={title}
+          className="w-full rounded-2xl object-cover h-full group-hover:brightness-50"
+          placeholder={
+            <div className="flex items-center justify-center bg-gray-300 h-full">
+              <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+            </div>
+          }
+        />
+        <div className="w-full h-full px-2 pb-4 absolute right-[100%] group-hover:right-0 group-hover:animate-slideIn z-10 flex flex-col justify-around ">
+          <h4 className="h3-text text-white px-2">{title}</h4>
+          <div className="text-white flex gap-4 px-2 text-xs">
+            <p>{date}</p>
+            <p>{time}</p>
+          </div>
+          <p className="px-2 text-white body-text">
+            {truncateByWords(blogpiece, 15)}
+          </p>
+          <Link
+            to={link}
+            className="button-type self-start button-text bg-primary/70 hover:bg-primary hover:text-black px-4 py-2 ml-2"
+          >
+            Read More
+          </Link>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default NewsBlog;
