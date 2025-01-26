@@ -13,7 +13,7 @@ function NewsBlog() {
   const totalPages = Math.ceil(posts.length / postPerPage);
 
   const startIndex = (currentPage - 1) * postPerPage;
-  const currentPosts = posts.slice(startIndex, startIndex + postPerPage);
+  const currentPosts = [...posts].reverse().slice(startIndex, startIndex + postPerPage);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {

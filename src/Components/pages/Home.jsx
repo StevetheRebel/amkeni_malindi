@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -22,26 +22,32 @@ import {
   SystemStrengtheningImg,
 } from "../../assets/Pillar Pictures";
 import { HashLink } from "react-router-hash-link";
+import posts from "./../../posts.json";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
 
 function Home() {
-  const blogPosts = [
-    {
-      topic: "Apply Now: Program Coordinator for Strategic Advocacy at AMKENI",
-      author: "Author",
-    },
-    { topic: "Creating a Mentally Healthy Workplace", author: "Author" },
-    { topic: "Do Condoms Expire? How Can You Tell?", author: "Author" },
-    {
-      topic: "Peer Education Training",
-      author: "Author",
-      hiddenClass: "sm:hidden lg:flex",
-    },
-    {
-      topic: "Sexual Assault Awareness Month",
-      author: "Author",
-      hiddenClass: "sm:hidden 2xl:hidden",
-    },
-  ];
+  
+  const sortedPosts = [...posts].reverse();
+  console.log(sortedPosts);
+  
+
+  const [postLimit, setPostLimit] = useState(() => {
+    if (window.innerWidth >= 1024) return 4;
+    if (window.innerWidth >- 768) return 3;
+    return 5
+  })
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) return setPostLimit(4);
+      if (window.innerWidth >= 768) return setPostLimit(3);
+      return setPostLimit(5);
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [])
 
   const officeImages = Object.values(images);
   const firstSwiperRef = useRef(null);
@@ -113,22 +119,25 @@ function Home() {
           <h4 className="h4-text text-white text-center w-full ">
             Latest Posts...
           </h4>
+
+          {/* Blog Spot */}
           <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-5 2xl:px-8">
-            {blogPosts.map((post, index) => (
+            {sortedPosts.slice(0, postLimit).map((post, index) => (
               <div
                 key={index}
-                className={`relative overflow-hidden group w-full rounded-xl ${
+                className={`relative overflow-hidden group w-full rounded-xl h-[88px] xs:h-[112px] md:h-[110px] lg:h-[100px] xl:h-[100px] 2xl:h-[112px] ${
                   post.hiddenClass || ""
                 }`}
               >
-                <img
-                  src={postPic}
-                  alt="picture"
+                <LazyLoadImage
+                  src={post.image_url}
+                  alt={post.title}
                   className="group-hover:grayscale group-hover:brightness-50 "
                 />
-                <p className="body-text font-bold text-white p-4 absolute top-[100%] group-hover:animate-slideUp lg:p-2 xl:p-4">
-                  {truncateByWords(post.topic, 5)}
-                </p>
+                <div className="body-text flex flex-col justify-around h-full w-full font-bold text-white p-2 absolute top-[100%] group-hover:animate-slideUp lg:p-2">
+                  <h4 className="body-text">{truncateByWords(post.title, 5)}</h4>
+                  <Link to={`/blog/${post.id}`} className="button-type button-text self-end bg-primary/70 hover:bg-primary hover:text-black">Read more</Link>
+                </div>
               </div>
             ))}
           </div>
@@ -213,14 +222,13 @@ function Home() {
 }
 
 function CarouselSlide({ title, description, link, imagePath }) {
-
   const scrollWithOffset = (el) => {
     const yOffset = -130;
-    const yPosition = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    const yPosition =
+      el.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
     window.scrollTo({ top: yPosition, behavior: "smooth" });
-  }
-
+  };
 
   return (
     <div className="h-fit w-full rounded-2xl flex flex-col items-center pt-4 pb-8 gap-4 sm:flex-row sm:gap-4 sm:px-4 sm:pb-0 lg:gap-8 lg:px-8 lg:items-start 2xl:gap-12 2xl:px-12">
