@@ -29,7 +29,6 @@ import { Link } from "react-router-dom";
 function Home() {
   
   const sortedPosts = [...posts].reverse();
-  console.log(sortedPosts);
   
 
   const [postLimit, setPostLimit] = useState(() => {

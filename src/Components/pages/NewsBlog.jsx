@@ -20,7 +20,6 @@ function NewsBlog() {
       setCurrentPage(page);
     }
   };
-  console.log(currentPosts);
 
   return (
     <div className="select-none ">
