@@ -8,7 +8,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function NewsBlog() {
   const [currentPage, setCurrentPage] = useState(1);
-  const postPerPage = 9;
+  const postPerPage = 8;
 
   const totalPages = Math.ceil(posts.length / postPerPage);
 
@@ -38,10 +38,10 @@ function NewsBlog() {
         <h2 className="h2-text text-center text-secondary">Blog Spot</h2>
 
         {/* Blog grid */}
-        <div className="w-full grid place-items-center gap-y-4">
+        <div className="w-full grid place-items-center gap-y-4 2xl:grid-cols-2 2xl:gap-x-8 ">
           {currentPosts.map((post, index) => (
             <BlogPost
-              index={index}
+              key={index}
               pic={post.image_url}
               title={post.title}
               date={post.date}
@@ -143,7 +143,7 @@ const EventTimeline = () => {
 const BlogPost = ({ pic, title, date, time, blogpiece, link }) => {
   return (
     <>
-      <div className=" w-[80%] aspect-[1/1.5] p-2 shadow-custom-shadow rounded-2xl overflow-hidden flex relative group md:w-full md:h-80">
+      <div className=" w-[80%] aspect-[1/1.5] p-2 shadow-custom-shadow rounded-2xl overflow-hidden flex relative group md:w-full md:h-80 xl:h-96">
         <LazyLoadImage
           src={pic}
           alt={title}

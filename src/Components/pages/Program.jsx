@@ -108,6 +108,7 @@ function Program() {
           </button>
           <Modal
             open={open6}
+            onClose={handleClose6}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
