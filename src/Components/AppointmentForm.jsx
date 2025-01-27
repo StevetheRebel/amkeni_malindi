@@ -1,10 +1,26 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import emailjs from "@emailjs/browser";
-import SubmissionModal from "./SubmissionModal";
+import { Box, Modal, Typography } from "@mui/material";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "300px",
+  maxHeight: "400px",
+  bgcolor: "background.paper",
+  border: "1px solid #000",
+  boxShadow: 24,
+  borderRadius: "24px",
+  p: 3,
+};
 
 const AppointmentForm = ({ handleFormClose }) => {
-  const [openSubmission, setOpenSubmission] = useState(false)
+  const [openSubmission, setOpenSubmission] = useState(false);
+  const [countDown, setCountDown] = useState(5);
+
   const handleModalClose = () => setOpenSubmission(false);
 
   const {
@@ -30,9 +46,31 @@ const AppointmentForm = ({ handleFormClose }) => {
       );
 
     setOpenSubmission(true);
-
-    // handleFormClose();
   };
+
+  useEffect(() => {
+    let timer;
+
+    if (openSubmission) {
+      setCountDown(5);
+
+      timer = setInterval(() => {
+        setCountDown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            handleModalClose();
+            handleFormClose();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [openSubmission]);
 
   const validateDate = (value) => {
     const date = new Date(value);
@@ -424,12 +462,21 @@ const AppointmentForm = ({ handleFormClose }) => {
           >
             Submit
           </button>
-          <SubmissionModal
-            openValue={openSubmission}
-            closefunction={handleModalClose}
-            addedfunction={handleFormClose}
-            message="Your Form has successfully be submitted!"
-          />
+          <Modal
+            open={openSubmission}
+            onClose={handleModalClose}
+            arial-labelledby="modal-modal-title"
+            arial-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                You have successfully booked your appointment!
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                Closing in {countDown} seconds...
+              </Typography>
+            </Box>
+          </Modal>
         </fieldset>
       </form>
     </div>
