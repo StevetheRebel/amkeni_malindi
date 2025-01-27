@@ -26,25 +26,24 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 
 function Home() {
-  
   const sortedPosts = [...posts].reverse();
-  
+
   const [postLimit, setPostLimit] = useState(() => {
     if (window.innerWidth >= 1024) return 4;
-    if (window.innerWidth >- 768) return 3;
-    return 5
-  })
+    if (window.innerWidth > -768) return 3;
+    return 5;
+  });
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) return setPostLimit(4);
       if (window.innerWidth >= 768) return setPostLimit(3);
       return setPostLimit(5);
-    }
+    };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [])
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const officeImages = Object.values(images);
   const firstSwiperRef = useRef(null);
@@ -118,11 +117,11 @@ function Home() {
           </h4>
 
           {/* Blog Spot */}
-          <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-5 2xl:px-8">
+          <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-4 2xl:px-4">
             {sortedPosts.slice(0, postLimit).map((post, index) => (
               <div
                 key={index}
-                className={`relative overflow-hidden group w-full rounded-xl h-[88px] xs:h-[112px] md:h-[110px] lg:h-[100px] xl:h-[100px] 2xl:h-[112px] ${
+                className={`relative overflow-hidden group w-full rounded-xl h-[88px] xs:h-[112px] md:h-[110px] lg:h-[100px] xl:h-[108px] 2xl:h-[115px] ${
                   post.hiddenClass || ""
                 }`}
               >
@@ -132,8 +131,15 @@ function Home() {
                   className="group-hover:grayscale group-hover:brightness-50 "
                 />
                 <div className="body-text flex flex-col justify-around h-full w-full font-bold text-white p-2 absolute top-[100%] group-hover:animate-slideUp lg:p-2">
-                  <h4 className="body-text">{truncateByWords(post.title, 5)}</h4>
-                  <Link to={`/blog/${post.id}`} className="button-type button-text self-end bg-primary/70 hover:bg-primary hover:text-black">Read more</Link>
+                  <h4 className="body-text">
+                    {truncateByWords(post.title, 5)}
+                  </h4>
+                  <Link
+                    to={`/blog/${post.id}`}
+                    className="button-type button-text self-end bg-primary/70 hover:bg-primary hover:text-black"
+                  >
+                    Read more
+                  </Link>
                 </div>
               </div>
             ))}
