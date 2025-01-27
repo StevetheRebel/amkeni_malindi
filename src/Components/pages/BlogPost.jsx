@@ -5,6 +5,7 @@ import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { HashLink } from "react-router-hash-link";
 import Footer from "../Footer/Footer";
+import { truncateByWords } from "../../truncateByWords";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -21,10 +22,8 @@ const BlogPost = () => {
 
   return (
     <div className="relative select-none ">
-
       {/* Blog container */}
       <div className=" flex flex-col gap-4">
-
         {/* header image container */}
         <div className="w-full h-[50svh] min-h-[280px] relative xs:max-h-[280px] z-10 sm:min-h-[400px] 2xl:min-h-[500px] ">
           <LazyLoadImage
@@ -46,11 +45,12 @@ const BlogPost = () => {
               >
                 Home
               </button>
-              <HashLink 
-              smooth 
-              to={"/news-blog#blogSpot"}
-              scroll={scrollWithOffset} 
-              className="button-type button-text bg-primary/70 hover:bg-primary hover:text-black">
+              <HashLink
+                smooth
+                to={"/news-blog#blogSpot"}
+                scroll={scrollWithOffset}
+                className="button-type button-text bg-primary/70 hover:bg-primary hover:text-black"
+              >
                 News & Blog
               </HashLink>
             </div>
@@ -68,8 +68,59 @@ const BlogPost = () => {
           ))}
         </div>
       </div>
+
+      {/* Related Posts */}
+      <div className="px-4 lg:px-[6%] mb-4 ">
+        <h3 className="h3-text text-secondary">Related Posts</h3>
+        <ul className="flex flex-col gap-4 md:gap-8 xl:grid xl:gap-x-4 xl:grid-cols-2">
+          {[...posts]
+            .filter((p) => p.id !== postId)
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 4)
+            .map((relatedItem) => (
+              <Relatedpost
+                key={relatedItem.id}
+                image={relatedItem.image_url}
+                title={relatedItem.title}
+                date={relatedItem.date}
+                time={relatedItem.time}
+                detail={relatedItem.content}
+                nav={relatedItem.id}
+              />
+            ))}
+        </ul>
+      </div>
+
       <Footer />
     </div>
+  );
+};
+
+const Relatedpost = ({ image, title, date, time, detail, nav }) => {
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <li className="flex flex-col gap-2 w-full rounded-2xl overflow-hidden bg-muted/10 hover:bg-primary/10 group md:flex-row md:h-60 xl:h-auto 2xl:h-[450px] ">
+        {/* Image Container */}
+        <div className="w-full h-28 xs:h-32 md:h-full ">
+          <img src={image} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0" />
+        </div>
+
+        {/* Content Container */}
+        <div className="w-full h-full flex flex-col gap-2 px-2 pb-4 md:justify-between md:p-4">
+          <h4 className="h4-text">{title}</h4>
+          <p className="text-sm">{`Date: ${date} Time: ${time}`}</p>
+          <p className="body-text">{truncateByWords(detail, 10)}</p>
+          <button
+            className="button-type button-text bg-primary/70 hover:bg-primary hover:text-black self-end"
+            onClick={() => navigate(`/blog/${nav}`)}
+          >
+            Read More
+          </button>
+        </div>
+      </li>
+    </>
   );
 };
 
