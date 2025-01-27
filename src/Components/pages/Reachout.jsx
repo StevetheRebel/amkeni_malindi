@@ -33,26 +33,31 @@ function Reachout() {
 
   return (
     <>
-      <div className="relative h-auto top-[154px] xs:top-[160px] sm:top-36 select-none ">
-        <h1 className="h1-text text-center text-secondary">Contact Us</h1>
+      <div className="relative h-auto select-none ">
+        <section className="pt-[154px] xs:pt-[160px] sm:pt-36 bg-image11 bg-fixed bg-cover bg-center min-h-screen ">
+          {/* Page Heading */}
+          <h1 className="h1-text text-center text-secondary">Contact Us</h1>
 
-        {/* Google Map */}
-        <section className="flex flex-col w-full items-center px-4 lg:px-[6%] gap-2 md:gap-4 ">
-          <h2 className="h2-text text-secondary/70 self-start">Our Location</h2>
-          <div className="w-[90%] h-[50vh] min-h-[250px] rounded-2xl overflow-hidden md:h-[30vh] md:w-[95%] lg:h-[40vh] lg:w-full ">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.563961706868!2d40.10625507588628!3d-3.2085529407505606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18158fead2fdff6f%3A0xb5dfe9eeea6ebb21!2sAmkeni%20Malindi%20Organization!5e0!3m2!1sen!2ske!4v1736760470740!5m2!1sen!2ske"
-              width="100%"
-              height="100%"
-              style={{
-                border: 0,
-                pointerEvents: isScrolling ? "none" : "auto",
-              }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Amkeni Malindi Organization Location"
-            ></iframe>
+          {/* Google Map */}
+          <div className="flex flex-col w-full items-center px-4 lg:px-[6%] gap-2 md:gap-4 ">
+            <h2 className="h2-text text-primary/70 self-start">
+              Our Location
+            </h2>
+            <div className="w-[90%] h-[50vh] min-h-[250px] rounded-2xl overflow-hidden md:h-[40vh] md:w-[95%] lg:h-[50vh] lg:w-full ">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.563961706868!2d40.10625507588628!3d-3.2085529407505606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18158fead2fdff6f%3A0xb5dfe9eeea6ebb21!2sAmkeni%20Malindi%20Organization!5e0!3m2!1sen!2ske!4v1736760470740!5m2!1sen!2ske"
+                width="100%"
+                height="100%"
+                style={{
+                  border: 0,
+                  pointerEvents: isScrolling ? "none" : "auto",
+                }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Amkeni Malindi Organization Location"
+              ></iframe>
+            </div>
           </div>
         </section>
 
@@ -68,13 +73,17 @@ function Reachout() {
         </section>
 
         {/* Subscription */}
-        <section className="min-h-screen bg-pride bg-no-repeat bg-cover bg-fixed bg-center flex items-center justify-center">
-          <div className="w-[90%] h-[40vh] backdrop-blur-lg bg-muted/20 rounded-2xl ">
+        <section className="min-h-[60dvh] bg-image2 bg-no-repeat bg-cover bg-fixed bg-center flex items-center justify-center">
+          <div className="w-[90%] h-[40vh] backdrop-blur-lg bg-white/40 rounded-2xl ">
             <h3 className="h3-text text-white text-center">
               Subscribe to our Newsletters
             </h3>
             <form action="">
-              <input type="email" name="subscriptionMail" id="subscriptionMail" />
+              <input
+                type="email"
+                name="subscriptionMail"
+                id="subscriptionMail"
+              />
               <button type="submit">Subscribe</button>
             </form>
           </div>

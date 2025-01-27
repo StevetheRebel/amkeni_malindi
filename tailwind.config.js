@@ -33,7 +33,7 @@ export default {
         image9:
           'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image9.jpg")',
         image10: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image10.jpg")',
-        image11: 'url("/image11.jpg")',
+        image11: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image11.jpg")',
         image12: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image12.jpg")',
         image13: 'url("/image13.jpg")',
         image14: 'url("/image14.jpg")',
