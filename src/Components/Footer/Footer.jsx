@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   faFacebookF,
   faInstagram,
@@ -10,13 +10,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/Amkeni Document Logo.png";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import SubmissionModal from "../SubmissionModal";
+import { Box, Modal, Typography } from "@mui/material";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "300px",
+  maxHeight: "400px",
+  bgcolor: "background.paper",
+  border: "1px solid #000",
+  boxShadow: 24,
+  borderRadius: "24px",
+  p: 3,
+};
 
 function Footer() {
   const date = new Date();
   const year = date.getFullYear();
 
   const [openSubmission, setOpenSubmission] = useState(false);
+  const [countDown, setCountDown] = useState(5);
+
+  const handleModalClose = () => setOpenSubmission(false);
 
   const {
     register,
@@ -27,14 +44,35 @@ function Footer() {
 
   const form = useRef();
 
-  const onSubmit = (date) => {
-    console.log("date:", date);
+  const onSubmit = (data) => {
+    console.log("date:", data);
     setOpenSubmission(true);
-    
+
     reset();
   };
 
-  const handleModalClose = () => setOpenSubmission(false);
+  useEffect(() => {
+      let timer;
+  
+      if (openSubmission) {
+        setCountDown(5);
+  
+        timer = setInterval(() => {
+          setCountDown((prev) => {
+            if (prev <= 1) {
+              clearInterval(timer); 
+              handleModalClose(); 
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+      }
+  
+      return () => {
+        clearInterval(timer);
+      };
+    }, [openSubmission]);
 
   return (
     <>
@@ -65,19 +103,44 @@ function Footer() {
                 id="subscriberEmail"
                 placeholder="Enter your email"
                 className="bg-light p-2 rounded-xl focus:outline-none focus:bg-accent/60 focus:text-muted"
-                {...register("subscriberEmail")}
+                {...register("subscriberEmail", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    message: "Enter a valid email address",
+                  },
+                })}
               />
+              {errors.subscriberEmail && (
+                <p className="text-[10px] text-secondary">
+                  {errors.subscriberEmail.message}
+                </p>
+              )}
               <button
                 type="submit"
                 className="bg-primary/50 text-dark p-2 rounded-xl hover:bg-primary hover:font-bold sm:w-fit sm:px-4 "
               >
                 Subscribe
               </button>
-              <SubmissionModal
-                openValue={openSubmission}
-                closefunction={handleModalClose}
-                message="You have successfully subscribed!"
-              />
+              <Modal
+                open={openSubmission}
+                onClose={handleModalClose}
+                aria-labelledby="modal-modal-title"
+                ario-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Your have successfully subscribed!
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Closing in {countDown} seconds...
+                  </Typography>
+                </Box>
+              </Modal>
             </form>
           </div>
 
