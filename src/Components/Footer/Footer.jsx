@@ -134,7 +134,7 @@ function Footer() {
                     variant="h6"
                     component="h2"
                   >
-                    Your have successfully subscribed!
+                    Your have subscribed for Organizational Updates!
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     Closing in {countDown} seconds...
