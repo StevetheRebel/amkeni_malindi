@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ContactForm from "../ContactForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHospital } from "@fortawesome/free-regular-svg-icons";
@@ -14,9 +14,45 @@ import {
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import Footer from "./../Footer/Footer.jsx";
+import { useForm } from "react-hook-form";
+import { Box, Modal, Typography } from "@mui/material";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "300px",
+  maxHeight: "400px",
+  bgcolor: "background.paper",
+  border: "1px solid #000",
+  boxShadow: 24,
+  borderRadius: "24px",
+  p: 3,
+};
 
 function Reachout() {
   const [isScrolling, setIsScrolling] = useState(false);
+  const [openSubmission, setOpenSubmission] = useState(false);
+  const [countDown, setCountDown] = useState(5);
+
+  const handleModalClose = () => setOpenSubmission(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const form = useRef();
+
+  const onSubmit = (data) => {
+    console.log("data:", data);
+    setOpenSubmission(true);
+
+    reset();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +67,29 @@ function Reachout() {
     };
   }, []);
 
+  useEffect(() => {
+    let timer;
+
+    if (openSubmission) {
+      setCountDown(5);
+
+      timer = setInterval(() => {
+        setCountDown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            handleModalClose();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [openSubmission]);
+
   return (
     <>
       <div className="relative h-auto select-none ">
@@ -40,10 +99,8 @@ function Reachout() {
 
           {/* Google Map */}
           <div className="flex flex-col w-full items-center px-4 lg:px-[6%] gap-2 md:gap-4 ">
-            <h2 className="h2-text text-primary/70 self-start">
-              Our Location
-            </h2>
-            <div className="w-[90%] h-[50vh] min-h-[250px] rounded-2xl overflow-hidden md:h-[40vh] md:w-[95%] lg:h-[50vh] lg:w-full ">
+            <h2 className="h2-text text-primary/70 self-start">Our Location</h2>
+            <div className="w-[90%] h-[50vh] mb-4 min-h-[250px] rounded-2xl overflow-hidden md:h-[60vh] md:w-[95%] lg:h-[50vh] lg:w-full ">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.563961706868!2d40.10625507588628!3d-3.2085529407505606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18158fead2fdff6f%3A0xb5dfe9eeea6ebb21!2sAmkeni%20Malindi%20Organization!5e0!3m2!1sen!2ske!4v1736760470740!5m2!1sen!2ske"
                 width="100%"
@@ -73,18 +130,84 @@ function Reachout() {
         </section>
 
         {/* Subscription */}
-        <section className="min-h-[60dvh] bg-image2 bg-no-repeat bg-cover bg-fixed bg-center flex items-center justify-center">
-          <div className="w-[90%] h-[40vh] backdrop-blur-lg bg-white/40 rounded-2xl ">
-            <h3 className="h3-text text-white text-center">
+        <section className="min-h-[400px] bg-image2 bg-no-repeat bg-cover bg-fixed bg-center grid place-items-center">
+          <div className="w-[90%] backdrop-blur-lg bg-white/40 rounded-2xl my-6 xs:p-4 md:w-[70%] md:p-6 md:my-10 lg:w-[50%] ">
+            <h2 className="h2-text text-center text-balance ">
               Subscribe to our Newsletters
-            </h3>
-            <form action="">
+            </h2>
+            <form
+              action=""
+              className="flex flex-col items-center gap-4 py-4 xs:pb-0 "
+              ref={form}
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <input
                 type="email"
                 name="subscriptionMail"
                 id="subscriptionMail"
+                className="py-1 px-2 text-black rounded-xl w-[90%] h5-text focus:border-0 focus:outline-none invalid:bg-secondary/70 invalid:text-white"
+                placeholder="Enter your Email..."
+                {...register("subscriptionMail", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Enter a valid Email Address",
+                  },
+                })}
               />
-              <button type="submit">Subscribe</button>
+              {errors.subscriptionMail && (
+                <p className="body-text text-secondary/90 w-[90%] ">
+                  {errors.subscriptionMail.message}
+                </p>
+              )}
+              <fieldset className="w-[90%]">
+                <legend className="legend ">Consent</legend>
+                <div className="py-1">
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    id="consent"
+                    className="inline-block accent-primary"
+                    {...register("consent", {
+                      required: "Please confirm consent before submitting",
+                    })}
+                  />
+                  <label htmlFor="consent" className="body-text pl-2 ">
+                    I consent to the collection and use of my personal email for
+                    the purpose of receiving Organizational Newsletters.
+                  </label>
+                  {errors.consent && (
+                    <p className="body-text text-secondary/90">
+                      {errors.consent.message}
+                    </p>
+                  )}
+                </div>
+              </fieldset>
+              <button
+                type="submit"
+                className="button-type button-text bg-primary/70 hover:bg-primary hover:text-black"
+              >
+                Subscribe
+              </button>
+              <Modal
+                open={openSubmission}
+                onClose={handleModalClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    You have successfully subscribed to Newslettes!
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Closing in {countDown} seconds...
+                  </Typography>
+                </Box>
+              </Modal>
             </form>
           </div>
         </section>
