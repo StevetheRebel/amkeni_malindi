@@ -86,11 +86,11 @@
 }
 
 .legend {
-  @apply pb-2 h4-text text-accent;
+  @apply pb-2 h4-text;
 }
 
 .button-text {
-  @apply font-button-links text-[12px] text-white xs:text-base lg:text-lg;
+  @apply font-button-links text-[14px] text-white xs:text-base lg:text-lg;
 }
 
 .button-type {
