@@ -14,6 +14,8 @@ import profile4 from "./../../assets/Profiles/Profile4.webp";
 import profile5 from "./../../assets/Profiles/Profile5.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import programData from "./../../pillars.json";
+import secretariat from "./../../secretariat.json";
+import Marquee from "react-fast-marquee";
 
 const aboutData = [
   {
@@ -34,6 +36,8 @@ const aboutData = [
 
 function About() {
   const swiperRef = useRef(null);
+
+  console.log(secretariat.BodMem);
 
   return (
     <div className="relative h-auto select-none ">
@@ -109,17 +113,22 @@ function About() {
               className="h-full rounded-2xl"
               onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
-              {
-                programData.pillars.map((pillar, index) => (
-                  <SwiperSlide key={index}>
-                    <CarouselSlide title={pillar.title} focusArea={pillar.focusAreas.map((area, index) => (
-                      <ul key={index} className="list-disc list-inside indent-2">
+              {programData.pillars.map((pillar, index) => (
+                <SwiperSlide key={index}>
+                  <CarouselSlide
+                    title={pillar.title}
+                    focusArea={pillar.focusAreas.map((area, index) => (
+                      <ul
+                        key={index}
+                        className="list-disc list-inside indent-2"
+                      >
                         <li>{area}</li>
                       </ul>
-                    ))} highlights={pillar.highlights} />
-                  </SwiperSlide>
-                ))
-              }
+                    ))}
+                    highlights={pillar.highlights}
+                  />
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>
@@ -151,11 +160,14 @@ function About() {
           our board of directors
         </h1>
         <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 ">
-          <Card title="Board Chair" name="Nekesa Wandera" image={profile1} />
-          <Card title="Board Member" name="Francis Gikera" image={profile5} />
-          <Card title="Board Member" name="Shadrack Babu" image={profile5} />
-          <Card title="Board Member" name="Kimani Makobu" image={profile5} />
-          <Card title="Board Member" name="Kennedy Masinya" image={profile5} />
+          {secretariat.BodMem.map((bod, index) => (
+            <Card
+              key={index}
+              title={bod.Position}
+              name={bod.Name}
+              image={profile5}
+            />
+          ))}
         </div>
       </section>
 
@@ -165,95 +177,30 @@ function About() {
           our staff
         </h1>
         <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
-          <Card
-            title="Executive Director"
-            name="Abdulwahid Hassan"
-            image={profile5}
-          />
-          <Card title="Program Manager" name="Gilbert Asuri" image={profile2} />
-          <Card
-            title="Finance/HR Manager"
-            name="Zebedi Maina"
-            image={profile2}
-          />
-          <Card title="MEARL Officer" name="Anthony Noah" image={profile4} />
-          <Card
-            title="Clinical Officer"
-            name="Fredrick Odongo"
-            image={profile5}
-          />
-          <Card title="Social Worker" name="Grace Mwamburi" image={profile3} />
-          <Card title="HTS Officer" name="Muthoni Kinyajui" image={profile1} />
-          <Card
-            title="Program Coordinator Kilifi"
-            name="Naomy Zawadi"
-            image={profile3}
-          />
-          <Card
-            title="Program Coordinator Kilifi"
-            name="John Omollo"
-            image={profile2}
-          />
-          <Card
-            title="Program Coordinator Tana River"
-            name="Rashid Hamad"
-            image={profile2}
-          />
-          <Card
-            title="Admin & Comms Officer"
-            name="Steve Okoth"
-            image={profile4}
-          />
-          <Card title="Assistant Finance" name="Nerry Kai" image={profile4} />
-          <Card
-            title="Assistant MEARL Officer"
-            name="Abubakar Bakary"
-            image={profile2}
-          />
+          {
+            secretariat.Staffs.map((staff, index) => (
+              <Card key={index} title={staff.Position} name={staff.Name} image={profile4} />
+            ))
+          }
         </div>
       </section>
 
       {/* The Volunteers Team */}
-      <section className="py-6 flex flex-col gap-1 md:gap-2 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5">
+      <section className=" ">
         <h1 className="h1-text capitalize text-center text-secondary">
           our volunteers
         </h1>
-        <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
-          <Card
-            title="Community Paralegal"
-            name="Benjamin Kenga"
-            image={profile4}
-          />
-          <Card
-            title="Community Paralegal"
-            name="Calvince Ochieng"
-            image={profile4}
-          />
-          <Card
-            title="Outreach Worker"
-            name="Christopher Baraka"
-            image={profile4}
-          />
-          <Card title="Outreach Worker" name="Doctor Dullu" image={profile4} />
-          <Card title="Outreach Worker" name="Fuad Said" image={profile4} />
-          <Card
-            title="Community Paralegal"
-            name="Hilda Natasha"
-            image={profile3}
-          />
-          <Card title="Outreach Worker" name="Jimmy Ruwa" image={profile4} />
-          <Card title="Outreach Worker" name="Juma Lwambi" image={profile4} />
-          <Card title="Outreach worker" name="Melvin Ogaga" image={profile4} />
-          <Card
-            title="Community Paralegal"
-            name="Salim Furaha"
-            image={profile4}
-          />
-          <Card
-            title="Outreach Worker"
-            name="Tashley Gitonga"
-            image={profile1}
-          />
+        <div className="">
+          <Marquee pauseOnHover gradient gradientWidth={50}>
+            {secretariat.Volunteers.map((vol, index) => (
+              <Card
+                key={index}
+                title={vol.Position}
+                name={vol.Name}
+                image={profile3}
+              />
+            ))}
+          </Marquee>
         </div>
       </section>
 
@@ -283,7 +230,7 @@ function CarouselSlide({ title, focusArea, highlights }) {
 function Card({ title, name, link, image }) {
   return (
     <>
-      <div className="relative w-52 flex-wrap gap-4 aspect-[1/1.5] rounded-xl md:w-48 lg:w-52 2xl:w-72 overflow-hidden group ">
+      <div className="relative w-48 m-4 flex-wrap gap-4 aspect-[1/1.5] rounded-xl md:w-48 lg:w-52 2xl:w-72 overflow-hidden group ">
         <LazyLoadImage
           src={image}
           alt={`${name} ${title}`}
@@ -300,9 +247,9 @@ function Card({ title, name, link, image }) {
           <p className="body-text font-bold ">{name}</p>
           <a
             href={link}
-            className="font-button-links button-type self-start bg-primary hover:shadow-innner "
+            className="w-16 grid place-items-center button-text button-type self-start bg-primary/70 hover:bg-primary hover:text-black rounded-3xl "
           >
-            <FontAwesomeIcon icon={faLinkedin} className="text-xl " />
+            <FontAwesomeIcon icon={faLinkedin} />
           </a>
         </div>
       </div>
