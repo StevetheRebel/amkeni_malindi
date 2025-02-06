@@ -49,6 +49,40 @@
   font-style: normal;
 }
 
+@layer base {
+  h1:not([class]) {
+    @apply h2-text tracking-widest xl:tracking-wide
+  }
+
+  h2:not([class]) {
+    @apply h3-text tracking-wider xl:tracking-normal
+  }
+
+  h3:not([class]) {
+    @apply h4-text tracking-wide xl:tracking-tight
+  }
+
+  img:not([class]) {
+    @apply w-full my-4 md:inline-block md:w-[45%] md:mx-2
+  }
+
+  p:not([class]) {
+    @apply body-text 
+  }
+
+  ul:not([class]) {
+    @apply list-disc list-inside indent-2;
+  }
+
+  li:not([class]) {
+    @apply body-text mb-2 xs:mb-4;
+  }
+
+  a:not([class]):nth-child(2) {
+    @apply m-2
+  }
+}
+
 .hover-text {
   @apply hover:text-primary cursor-pointer;
 }
