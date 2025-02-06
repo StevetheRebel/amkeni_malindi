@@ -53,6 +53,7 @@ function Navigation() {
             href="https://web.facebook.com/profile.php?id=100017571492191"
             target="_blank"
             rel="noopener noreferrer"
+            className=""
           >
             <FontAwesomeIcon
               icon={faFacebookF}
@@ -63,6 +64,7 @@ function Navigation() {
             href="https://www.instagram.com/amkeni_org/"
             target="_blank"
             rel="noopener noreferrer"
+            className=""
           >
             <FontAwesomeIcon
               icon={faInstagram}
@@ -73,6 +75,7 @@ function Navigation() {
             href="https://x.com/Amkeni_Org"
             target="_blank"
             rel="noopener noreferrer"
+            className=""
           >
             <FontAwesomeIcon
               icon={faXTwitter}
@@ -83,6 +86,7 @@ function Navigation() {
             href="https://www.linkedin.com/company/amkeni-malindi/posts/?feedView=all"
             target="_blank"
             rel="noopener noreferrer"
+            className=""
           >
             <FontAwesomeIcon
               icon={faLinkedin}
@@ -93,6 +97,7 @@ function Navigation() {
             href="https://www.tiktok.com/@amkenimalindiorg?_t=ZM-8s2ZxeBlVnp&_r=1"
             target="_blank"
             rel="noopener noreferrer"
+            className=""
           >
             <FontAwesomeIcon icon={faTiktok} className="text-base hover-text" />
           </a>

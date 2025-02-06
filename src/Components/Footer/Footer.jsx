@@ -134,7 +134,7 @@ function Footer() {
                     variant="h6"
                     component="h2"
                   >
-                    Your have subscribed for Organizational Updates!
+                    Your have subscribed to Organizational Updates!
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     Closing in {countDown} seconds...
@@ -199,6 +199,7 @@ function Footer() {
               href="https://web.facebook.com/profile.php?id=100017571492191"
               target="_blank"
               rel="noopener noreferrer"
+              className=""
             >
               <FontAwesomeIcon
                 icon={faFacebookF}
@@ -209,6 +210,7 @@ function Footer() {
               href="https://www.instagram.com/amkeni_org/"
               target="_blank"
               rel="noopener noreferrer"
+              className=""
             >
               <FontAwesomeIcon
                 icon={faInstagram}
@@ -219,6 +221,7 @@ function Footer() {
               href="https://x.com/Amkeni_Org"
               target="_blank"
               rel="noopener noreferrer"
+              className=""
             >
               <FontAwesomeIcon
                 icon={faXTwitter}
@@ -229,6 +232,7 @@ function Footer() {
               href="https://www.linkedin.com/company/amkeni-malindi/posts/?feedView=all"
               target="_blank"
               rel="noopener noreferrer"
+              className=""
             >
               <FontAwesomeIcon
                 icon={faLinkedin}
@@ -239,6 +243,7 @@ function Footer() {
               href="https://www.tiktok.com/@amkenimalindiorg?_t=ZM-8s2ZxeBlVnp&_r=1"
               target="_blank"
               rel="noopener noreferrer"
+              className=""
             >
               <FontAwesomeIcon
                 icon={faTiktok}
