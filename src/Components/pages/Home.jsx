@@ -21,18 +21,36 @@ import {
   SystemStrengtheningImg,
 } from "../../assets/Pillar Pictures";
 import { HashLink } from "react-router-hash-link";
-import posts from "./../../posts.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
+import he from "he";
+import pic1 from "./../../assets/Office Pics/Office1.webp"
 
 function Home() {
-  const sortedPosts = [...posts].reverse();
+  const [posts, setPosts] = useState([]);
+  const sortedPosts = [...posts];
 
   const [postLimit, setPostLimit] = useState(() => {
     if (window.innerWidth >= 1024) return 4;
     if (window.innerWidth > -768) return 3;
     return 5;
   });
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(
+          "https://public-api.wordpress.com/rest/v1.1/sites/amkenimalindi.wordpress.com/posts"
+        );
+        const data = await response.json();
+        setPosts(data.posts);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -118,31 +136,38 @@ function Home() {
 
           {/* Blog Spot */}
           <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-4 2xl:px-4">
-            {sortedPosts.slice(0, postLimit).map((post, index) => (
-              <div
+            {sortedPosts.slice(0, postLimit).map((post, index) => {
+              const firstAttachmentKey = Object.keys(post.attachments)[0];
+              const imageUrl = post.attachments[firstAttachmentKey]?.URL || pic1;
+
+              console.log(firstAttachmentKey)
+
+              return (
+                <div
                 key={index}
                 className={`relative overflow-hidden group w-full rounded-xl h-[88px] xs:h-[112px] md:h-[110px] lg:h-[100px] xl:h-[108px] 2xl:h-[115px] ${
                   post.hiddenClass || ""
                 }`}
               >
                 <LazyLoadImage
-                  src={post.image_url}
-                  alt={post.title}
+                  src={imageUrl}
+                  alt={he.decode(post.title)}
                   className="group-hover:grayscale group-hover:brightness-50 "
                 />
                 <div className="body-text flex flex-col justify-around h-full w-full font-bold text-white p-2 absolute top-[100%] group-hover:animate-slideUp lg:p-2">
                   <h4 className="body-text">
-                    {truncateByWords(post.title, 5)}
+                    {truncateByWords(he.decode(post.title), 5)}
                   </h4>
                   <Link
-                    to={`/blog/${post.id}`}
+                    to={`/blog/${post.ID}`}
                     className="button-type button-text self-end bg-primary/70 hover:bg-primary hover:text-black"
                   >
                     Read more
                   </Link>
                 </div>
               </div>
-            ))}
+              )
+})}
           </div>
         </div>
       </section>

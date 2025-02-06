@@ -7,6 +7,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import axios from "axios";
 import pic1 from "./../../assets/Office Pics/Office1.webp";
 import DOMPurify from "dompurify";
+import he from "he";
 
 function NewsBlog() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -133,11 +134,11 @@ function NewsBlog() {
               <BlogPost
                 key={index}
                 pic={imageUrl}
-                title={post.title}
+                title={he.decode(post.title)}
                 date={post.date}
                 time={post.date}
                 blogpiece={truncateByWords(sanitizedContent, 15)}
-                link={`/blog/${post.id}`}
+                link={`/blog/${post.ID}`}
               />
             );
           })}
