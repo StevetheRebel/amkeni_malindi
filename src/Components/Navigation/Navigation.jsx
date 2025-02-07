@@ -43,7 +43,7 @@ function Navigation() {
       <div className="flex py-2 flex-col items-center gap-4 sm:flex-row sm:justify-between sm:px-10 lg:px-[6%]">
         {/* Logo */}
         <div className="w-[50%] sm:w-48">
-          <img src={logo} alt="amkeni logo" />
+          <img src={logo} alt="amkeni logo" className="" />
         </div>
 
         {/* Sign in and social media links */}
