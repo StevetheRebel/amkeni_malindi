@@ -9,6 +9,21 @@ import axios from "axios";
 import DOMPurify from "dompurify";
 import pic1 from "./../../assets/Office Pics/Office1.webp";
 import he from "he";
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  FacebookShareCount,
+  InstapaperIcon,
+  InstapaperShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+  XIcon,
+} from "react-share";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -17,6 +32,7 @@ const BlogPost = () => {
   const [allposts, setAllPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const page = window.location.href;
 
   // Fetch the specific blog post
   useEffect(() => {
@@ -66,7 +82,7 @@ const BlogPost = () => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center bg-gray-300 h-dvh">
+      <div className="flex items-center justify-center flex-col bg-gray-300 h-dvh md:flex-row ">
         <p className="text-red-500">{error}</p>
         <button
           className="button-type button-text bg-primary/70 hover:bg-primary hover:text-black mt-4"
@@ -86,15 +102,17 @@ const BlogPost = () => {
     );
   }
 
-  const downloadLinks = Array.from(document.querySelectorAll('a')).filter(a => a.textContent.trim() === "Download");
+  const downloadLinks = Array.from(document.querySelectorAll("a")).filter(
+    (a) => a.textContent.trim() === "Download"
+  );
 
   if (downloadLinks.length > 0) {
     const lastDownloadLink = downloadLinks[downloadLinks.length - 1];
-    lastDownloadLink.style.backgroundColor = "RGBA(132,202,234,0.7)"  
-    lastDownloadLink.style.paddingBlock = "0.25rem"
-    lastDownloadLink.style.paddingInline = "0.5rem"
-    lastDownloadLink.style.borderRadius = "12px"
-    lastDownloadLink.style.margin = "0.5rem"
+    lastDownloadLink.style.backgroundColor = "RGBA(132,202,234,0.7)";
+    lastDownloadLink.style.paddingBlock = "0.25rem";
+    lastDownloadLink.style.paddingInline = "0.5rem";
+    lastDownloadLink.style.borderRadius = "12px";
+    lastDownloadLink.style.margin = "0.5rem";
   }
 
   const cleanContent = (html) => {
@@ -111,7 +129,7 @@ const BlogPost = () => {
   return (
     <div className="relative select-none ">
       {/* Blog container */}
-      <div className="flex flex-col gap-4">
+      <section className="flex flex-col gap-4">
         {/* Header image container */}
         <div className=" h-[380px] relative xs:h-[280px] sm:h-[100px] md:h-[400px] 2xl:h-[500px] bg-muted ">
           <LazyLoadImage
@@ -151,7 +169,7 @@ const BlogPost = () => {
         </div>
 
         {/* Content container */}
-        <div className="px-4 lg:px-[6%]">
+        <div className="px-4 lg:px-[6%] mb-2">
           <div
             className="blog-content"
             dangerouslySetInnerHTML={{
@@ -192,9 +210,42 @@ const BlogPost = () => {
             }}
           />
         </div>
-      </div>
+      </section>
 
       {/* Social Media Share Container */}
+      <section className="py-2 px-4 lg:px-[6%] ">
+        <h4 className="h4-text text-secondary">Share</h4>
+        <div className="flex gap-2">
+          <div className="flex flex-col items-center">
+            <FacebookShareButton url={page} className="text-black bg-blue-500">
+              <FacebookIcon className="rounded-full" size={32} />
+            </FacebookShareButton>
+            <FacebookShareCount className="body-text">
+              {(count) => count}
+            </FacebookShareCount>
+          </div>
+          <div>
+            <TwitterShareButton url={page}>
+              <XIcon className="rounded-full" size={32} />
+            </TwitterShareButton>
+          </div>
+          <div>
+            <EmailShareButton url={page}>
+              <EmailIcon className="rounded-full" size={32} />
+            </EmailShareButton>
+          </div>
+          <div>
+            <LinkedinShareButton url={page}>
+              <LinkedinIcon className="rounded-full" size={32} />
+            </LinkedinShareButton>
+          </div>
+          <div>
+            <WhatsappShareButton url={page}>
+              <WhatsappIcon className="rounded-full" size={32} />
+            </WhatsappShareButton>
+          </div>
+        </div>
+      </section>
 
       {/* Comment Container */}
 
@@ -211,7 +262,9 @@ const BlogPost = () => {
                 relatedItem.attachments?.[
                   Object.keys(relatedItem.attachments || {})[0]
                 ]?.URL || pic1; // Fallback image
-                const cleanedDetails = he.decode(relatedItem.content.replace(/<[^>]+>/g, ""));
+              const cleanedDetails = he.decode(
+                relatedItem.content.replace(/<[^>]+>/g, "")
+              );
 
               return (
                 <Relatedpost
