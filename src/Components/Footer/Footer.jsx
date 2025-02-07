@@ -133,10 +133,11 @@ function Footer() {
                     id="modal-modal-title"
                     variant="h6"
                     component="h2"
+                    className="text-center"
                   >
-                    Your have subscribed to Organizational Updates!
+                    Welcome to the inside scoop🌈!😉
                   </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }} className="text-center" >
                     Closing in {countDown} seconds...
                   </Typography>
                 </Box>

@@ -200,10 +200,11 @@ function Reachout() {
                     id="modal-modal-title"
                     variant="h6"
                     component="h2"
+                    className="text-center"
                   >
-                    You have successfully subscribed to Newslettes!
+                    Success👏🏽! You've joined the inner Circle!
                   </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }} className="text-center">
                     Closing in {countDown} seconds...
                   </Typography>
                 </Box>
