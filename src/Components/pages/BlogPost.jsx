@@ -18,8 +18,6 @@ const BlogPost = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log(post);
-
   // Fetch the specific blog post
   useEffect(() => {
     const fetchPost = async () => {
@@ -88,6 +86,17 @@ const BlogPost = () => {
     );
   }
 
+  const downloadLinks = Array.from(document.querySelectorAll('a')).filter(a => a.textContent.trim() === "Download");
+
+  if (downloadLinks.length > 0) {
+    const lastDownloadLink = downloadLinks[downloadLinks.length - 1];
+    lastDownloadLink.style.backgroundColor = "RGBA(132,202,234,0.7)"  
+    lastDownloadLink.style.paddingBlock = "0.25rem"
+    lastDownloadLink.style.paddingInline = "0.5rem"
+    lastDownloadLink.style.borderRadius = "12px"
+    lastDownloadLink.style.margin = "0.5rem"
+  }
+
   const cleanContent = (html) => {
     return html
       .replace(/<p>\s*<\/p>/g, "") // Remove empty paragraphs
@@ -100,7 +109,7 @@ const BlogPost = () => {
   const imageUrl = post.attachments?.[firstAttachmentKey]?.URL || pic1; // Fallback image
 
   return (
-    <div className="relative ">
+    <div className="relative select-none ">
       {/* Blog container */}
       <div className="flex flex-col gap-4">
         {/* Header image container */}
@@ -144,7 +153,7 @@ const BlogPost = () => {
         {/* Content container */}
         <div className="px-4 lg:px-[6%]">
           <div
-            className="px-4 lg:px-[6%] blog-content"
+            className="blog-content"
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(
                 cleanContent(he.decode(post.content)),
@@ -185,6 +194,10 @@ const BlogPost = () => {
         </div>
       </div>
 
+      {/* Social Media Share Container */}
+
+      {/* Comment Container */}
+
       {/* Related Posts */}
       <div className="px-4 lg:px-[6%] mb-4">
         <h3 className="h3-text text-secondary">Related Posts</h3>
@@ -204,7 +217,7 @@ const BlogPost = () => {
                 <Relatedpost
                   key={relatedItem.ID}
                   image={relatedImageUrl}
-                  title={relatedItem.title}
+                  title={truncateByWords(relatedItem.title, 6)}
                   date={relatedItem.date}
                   time={relatedItem.date} // Use date for time if no separate time field
                   detail={truncateByWords(cleanedDetails, 10)}
@@ -247,7 +260,7 @@ const Relatedpost = ({ image, title, date, time, detail, nav }) => {
           ).toLocaleDateString()} Time: ${new Date(
             time
           ).toLocaleTimeString()}`}</p>
-          <p className="body-text">{detail}</p>
+          <p className="body-text hidden xl:block">{detail}</p>
           <button
             className="button-type button-text bg-primary/70 hover:bg-primary hover:text-black self-end"
             onClick={() => navigate(`/blog/${nav}`)}
