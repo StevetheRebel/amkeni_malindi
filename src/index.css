@@ -62,6 +62,10 @@
     @apply h4-text tracking-wide xl:tracking-tight
   }
 
+  h4:not([class]) {
+    @apply h5-text text-muted
+  }
+
   img:not([class]) {
     @apply w-full my-4 md:inline-block md:w-[45%] md:mx-2
   }
