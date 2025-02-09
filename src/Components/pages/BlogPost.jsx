@@ -21,9 +21,11 @@ import {
   WhatsappShareButton,
   XIcon,
 } from "react-share";
-import profile from "./../../assets/Profiles/Profile2.webp";
 import { useForm } from "react-hook-form";
 import OrgLogo from "./../../assets/Amkeni Brand.webp";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import 'animate.css'
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -138,7 +140,7 @@ const BlogPost = () => {
       {/* Blog container */}
       <section className="flex flex-col gap-4">
         {/* Header image container */}
-        <div className=" h-[380px] relative xs:h-[280px] sm:h-[100px] md:h-[400px] 2xl:h-[500px] bg-muted ">
+        <div className=" h-[380px] relative xs:h-[320px] sm:h-[230px] md:h-[400px] 2xl:h-[500px] bg-muted ">
           <LazyLoadImage
             src={imageUrl}
             alt={post.title}
@@ -275,35 +277,42 @@ const BlogPost = () => {
       </section>
 
       {/* Social Media Share Container */}
-      <section className="py-2 px-4 lg:px-[6%] ">
-        <h4 className="h4-text text-secondary">Share</h4>
-        <div className="flex gap-2">
-          <div className="flex flex-col items-center">
+      <section className="py-2 px-4 lg:px-[6%] flex gap-2 items-center md:gap-4 lg:gap-6 ">
+        <h4 className="h4-text text-secondary flex items-center ">Share</h4>
+        <div className="border w-4 h-0 border-black/40 xs:w-8 md:w-12 2xl:border-2 2xl:w-16 "></div>
+        <div className="flex gap-2 py-1 items-start lg:gap-4">
+          {/* Facebook Share Icon */}
+          <div className="flex items-center xl:items-end h-full ">
             <FacebookShareButton url={page} className="text-black bg-blue-500">
-              <FacebookIcon className="rounded-full" size={32} />
+              <FacebookIcon className="rounded-full" size={36} />
             </FacebookShareButton>
-            <FacebookShareCount className="body-text">
-              {(count) => count}
-            </FacebookShareCount>
           </div>
-          <div>
+
+          {/* X Share Icon */}
+          <div className="flex items-center xl:items-end h-full ">
             <TwitterShareButton url={page}>
-              <XIcon className="rounded-full" size={32} />
+              <XIcon className="rounded-full" size={36} />
             </TwitterShareButton>
           </div>
-          <div>
+
+          {/* Email Share Icon */}
+          <div className="flex items-center xl:items-end h-full ">
             <EmailShareButton url={page}>
-              <EmailIcon className="rounded-full" size={32} />
+              <EmailIcon className="rounded-full" size={36} />
             </EmailShareButton>
           </div>
-          <div>
+
+          {/* LinkedIn ShareIcon */}
+          <div className="flex items-center xl:items-end h-full ">
             <LinkedinShareButton url={page}>
-              <LinkedinIcon className="rounded-full" size={32} />
+              <LinkedinIcon className="rounded-full" size={36} />
             </LinkedinShareButton>
           </div>
-          <div>
+
+          {/* Whatsapp Share Icon */}
+          <div className="flex items-center xl:items-end h-full ">
             <WhatsappShareButton url={page}>
-              <WhatsappIcon className="rounded-full" size={32} />
+              <WhatsappIcon className="rounded-full" size={36} />
             </WhatsappShareButton>
           </div>
         </div>
@@ -312,7 +321,7 @@ const BlogPost = () => {
       {/* Comment Container */}
       {comments.found > 0 && (
         <section className="px-4 lg:px-[6%] ">
-          <h3>
+          <h3 className="h3-text text-secondary">
             {`${comments.found}`} {comments.found > 1 ? "Comments" : "Comment"}
           </h3>
           {comments.comments.map((comment, index) => {
@@ -367,6 +376,9 @@ const BlogPost = () => {
             })}
         </ul>
       </div>
+
+      {/* Scroll to top button */}
+      <ScrollToTopButton />
 
       <div>
         <Footer />
@@ -580,5 +592,48 @@ const CommentInputcontainer = () => {
     </>
   );
 };
+
+// Scroll To Top Button Component 
+const ScrollToTopButton = () => {
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  // UseEffect for scroll button
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // Condition to display scroll button
+      if (scrollPosition > windowHeight * 0.75) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <div>
+      {
+      showScrollButton && (
+        <button onClick={scrollToTop} className="w-10 aspect-square fixed z-50 bottom-[70px] text-xl right-4 rounded-full overflow-hidden flex items-center justify-center bg-primary/40 group hover:bg-primary md:w-16 md:bottom-[50px] 2xl:right-12 animate__animated animate__bounce animate__infinite hover:[animation-play-state:paused] ">
+          <FontAwesomeIcon icon={faChevronUp} className="opacity-20 group-hover:opacity-100 body-text" />
+        </button>
+      )
+    }
+    </div>
+  )
+
+}
 
 export default BlogPost;
