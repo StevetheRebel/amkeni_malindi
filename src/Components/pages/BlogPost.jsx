@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { HashLink } from "react-router-hash-link";
 import Footer from "../Footer/Footer";
@@ -15,8 +14,6 @@ import {
   FacebookIcon,
   FacebookShareButton,
   FacebookShareCount,
-  InstapaperIcon,
-  InstapaperShareButton,
   LinkedinIcon,
   LinkedinShareButton,
   TwitterShareButton,
@@ -24,6 +21,9 @@ import {
   WhatsappShareButton,
   XIcon,
 } from "react-share";
+import profile from "./../../assets/Profiles/Profile2.webp";
+import { useForm } from "react-hook-form";
+import OrgLogo from "./../../assets/Amkeni Brand.webp";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -32,6 +32,8 @@ const BlogPost = () => {
   const [allposts, setAllPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [comments, setComments] = useState([]);
   const page = window.location.href;
 
   // Fetch the specific blog post
@@ -48,6 +50,11 @@ const BlogPost = () => {
           "https://public-api.wordpress.com/rest/v1.1/sites/amkenimalindi.wordpress.com/posts"
         );
         setAllPosts(allPostsResponse.data.posts);
+
+        const allCommentsRes = await axios.get(
+          `https://public-api.wordpress.com/rest/v1.1/sites/145259521/posts/${postId}/replies/`
+        );
+        setComments(allCommentsRes.data);
 
         setLoading(false);
       } catch (error) {
@@ -210,6 +217,61 @@ const BlogPost = () => {
             }}
           />
         </div>
+
+        {/* Post Tags */}
+        {post.tags && Object.keys(post.tags).length > 0 && (
+          <div className="px-4 lg:px-[6%]">
+            <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
+              <h5 className="h5-text tracking-widest">Post Tags</h5>
+              <div className="w-12 h-0 border border-black/30"></div>
+              {Object.keys(post.tags).map((tag, index) => (
+                <div key={index}>
+                  <p className="border border-black/60 px-2 font-button-links uppercase tracking-widest">
+                    {tag}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* About the Author */}
+      <section className="py-4 px-4 lg:px-[6%] flex gap-4 md:gap-8 xl:gap-12 ">
+        <div className="w-16 h-16 border border-black/30 rounded-full overflow-hidden">
+          <img src={OrgLogo} alt="Organization Logo" className="" />
+        </div>
+        <div className="w-[80%]">
+          <h5 className="h5-text tracking-wider ">Amkeni Organization</h5>
+          <p className="body-text text-pretty">
+            Founded in November 2009 as a support group for MSM/MSW and
+            officially registered as a Community-Based Organization (CBO) in
+            March 2013. AMKENI has grown into a beacon of hope and empowerment.
+            Headquartered in Malindi, Kilifi County, Kenya, we are dedicated to
+            creating safe spaces and providing essential services for Gender and
+            Sexual Diverse populations and Sex Workers.
+          </p>
+          {isExpanded && (
+            <>
+              <p className="body-text text-pretty">
+                <br /> Our mission is simple yet powerful - ensuring access to
+                affordable social, legal, and health services, including
+                psychosocial and mental health support. At AMKENI, we belive in
+                dignity, inclusion, and the right to thrive. <br />
+              </p>
+              <p className="body-text text-pretty">
+                <br /> Join us as we continue building a future where everyone
+                has access to the support they deserve.
+              </p>
+            </>
+          )}
+          <button
+            className="font-button-links text-secondary/70"
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            {isExpanded ? "Read Less" : "Read More"}
+          </button>
+        </div>
       </section>
 
       {/* Social Media Share Container */}
@@ -248,6 +310,31 @@ const BlogPost = () => {
       </section>
 
       {/* Comment Container */}
+      {comments.found > 0 && (
+        <section className="px-4 lg:px-[6%] ">
+          <h3>
+            {`${comments.found}`} {comments.found > 1 ? "Comments" : "Comment"}
+          </h3>
+          {comments.comments.map((comment, index) => {
+            console.log(comment.author.avatar_URL);
+            return (
+              <CommentContainer
+                key={index}
+                imageLink={comment.author.avatar_URL}
+                name={comment.author.name}
+                detail={comment}
+                dateString={comment.date}
+              />
+            );
+          })}
+        </section>
+      )}
+
+      {/* Comment Input */}
+      <section className="px-4 lg:px-[6%] ">
+        <h4 className="h4-text text-muted">Leave a Comment</h4>
+        <CommentInputcontainer />
+      </section>
 
       {/* Related Posts */}
       <div className="px-4 lg:px-[6%] mb-4">
@@ -322,6 +409,174 @@ const Relatedpost = ({ image, title, date, time, detail, nav }) => {
           </button>
         </div>
       </li>
+    </>
+  );
+};
+
+// Comment Container
+const CommentContainer = ({ name, detail, dateString, imageLink }) => {
+  const cleanContent = (html) => {
+    return html
+      .replace(/<p>\s*<\/p>/g, "") // Remove empty paragraphs
+      .replace(/<br\s*\/?>/g, "") // Remove unnecessary line breaks
+      .replace(/style="[^"]*"/g, ""); // Remove inline styles
+  };
+
+  const date = new Date(dateString);
+
+  const formattedDate = date.toLocaleDateString("en-us", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  const formattedTime = date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+
+  return (
+    <>
+      <div className="flex w-full p-2 justify-between md:w-[80%] md:justify-start md:gap-8 xl:gap-10 xl:w-[70%] ">
+        {/* Commentor image container */}
+        <div className="w-16 h-16 rounded-full overflow-hidden border-black mt-3 lg:w-24 lg:h-24">
+          <img
+            src={imageLink}
+            alt="profile"
+            className="object-cover h-full w-full"
+          />
+        </div>
+
+        {/* Content image container */}
+        <div className="w-[70%]">
+          {/* Commentor's name */}
+          <h5 className="h5-text font-bold tracking-wider">{name}</h5>
+
+          {/* Time of comment publication and reply button */}
+          <div className="flex gap-4">
+            <p className="body-text tracking-wider">
+              {`${formattedDate} @ ${formattedTime}`}
+            </p>
+            <p className="body-text font-bold text-blue-900 hover:text-primary active:text-secondary uppercase">
+              reply
+            </p>
+          </div>
+
+          {/* Comment */}
+          <div className="pt-2 text-pretty">
+            <div
+              className="blog-content"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(
+                  cleanContent(he.decode(detail.content)),
+                  {
+                    ALLOWED_TAGS: ["p"],
+                    ALLOWED_ATTR: [],
+                  }
+                ),
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+// Comment Reply Container
+const CommentReplyContainer = () => {
+  return <></>;
+};
+
+// Comment Input Container
+const CommentInputcontainer = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const form = useRef();
+
+  const onSubmit = (data) => {
+    console.log("data:", data);
+    reset();
+  };
+
+  return (
+    <>
+      <form
+        action=""
+        name="commentInput"
+        id="commentInput"
+        autoComplete="yes"
+        onSubmit={handleSubmit(onSubmit)}
+        ref={form}
+        className="md:w-[65%] xl:w-[50%] "
+      >
+        <fieldset className="border-b-2 border-black">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            className="pb-4 pt-2 body-text w-full focus:outline-none focus:border-none "
+            placeholder="Your Name"
+            {...register("name", {
+              required: "Name is required",
+            })}
+          />
+          {errors.name && (
+            <p className="text-secondary text-[10px] xs:text-sm lg:text-base ">
+              {errors.name.message}
+            </p>
+          )}
+        </fieldset>
+        <fieldset className="border-b-2 border-black">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="pb-4 pt-2 body-text w-full focus:outline-none focus:border-none "
+            placeholder="Your Email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Enter a valid Email Address",
+              },
+            })}
+          />
+          {errors.email && (
+            <p className="text-secondary text-[10px] xs:text-sm lg:text-base ">
+              {errors.email.message}
+            </p>
+          )}
+        </fieldset>
+        <fieldset className="border-b-2 border-black">
+          <textarea
+            name="commentMsg"
+            id="commentMsg"
+            className="pb-4 pt-2 body-text w-full focus:outline-none focus:border-none "
+            placeholder="Your Comment..."
+            rows={8}
+            {...register("commentMsg", {
+              required: "Add Comment",
+            })}
+          ></textarea>
+          {errors.commentMsg && (
+            <p className="text-secondary text-[10px] xs:text-sm lg:text-base">
+              {errors.commentMsg.message}
+            </p>
+          )}
+        </fieldset>
+        <button
+          type="submit"
+          className="py-2 text-center tracking-widest bg-muted text-white w-full uppercase font-button-links hover:bg-black"
+        >
+          submit
+        </button>
+      </form>
     </>
   );
 };
