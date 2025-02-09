@@ -63,7 +63,7 @@ function ContactForm() {
             <textarea
               name="userMessage"
               id="userMessage"
-              className="pg-4 body-text w-full focus:outline-none focus:border-none"
+              className="pb-4 body-text w-full focus:outline-none focus:border-none"
               placeholder="Your Message"
               rows={8}
               {...register("userMessage", {
