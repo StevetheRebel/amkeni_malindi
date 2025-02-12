@@ -13,7 +13,6 @@ import {
   EmailShareButton,
   FacebookIcon,
   FacebookShareButton,
-  FacebookShareCount,
   LinkedinIcon,
   LinkedinShareButton,
   TwitterShareButton,
