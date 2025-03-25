@@ -84,7 +84,7 @@ function Home() {
   return (
     <div className="relative h-auto select-none scroll-smooth ">
       {/* Hero Section */}
-      <section className="bg-image9 bg-fixed bg-center bg-no-repeat pt-36 flex flex-col brightness-90 gap-4 items-center sm:pt-36 sm:gap-6 lg:min-h-screen lg:px-[6%] lg:flex-row lg:gap-6 lg:pb-10 2xl:gap-20">
+      <section className="bg-image9 bg-fixed bg-center bg-no-repeat pt-36 flex flex-col brightness-90 gap-4 items-center sm:pt-36 sm:gap-6 lg:min-h-screen lg:px-[6%] lg:flex-row lg:gap-4 lg:pb-10 2xl:gap-20">
         {/* Carousel */}
         <div className="relative w-[90%] h-[60vh] min-h-[320px] xs:min-h-[500px] shadow-custom mt-4 rounded-2xl lg:w-2/3 xl:min-h-[550px] group">
           <Swiper
@@ -154,9 +154,9 @@ function Home() {
                   alt={he.decode(post.title)}
                   className="group-hover:grayscale group-hover:brightness-50 "
                 />
-                <div className="body-text flex flex-col justify-around h-full w-full font-bold text-white p-2 absolute top-[100%] group-hover:animate-slideUp lg:p-2">
+                <div className="body-text flex flex-col justify-around h-full w-full font-bold text-white p-2 absolute top-[100%] group-hover:animate-slideUp lg:py-2">
                   <h4 className="body-text">
-                    {truncateByWords(he.decode(post.title), 5)}
+                    {truncateByWords(he.decode(post.title), 4)}
                   </h4>
                   <Link
                     to={`/blog/${post.ID}`}

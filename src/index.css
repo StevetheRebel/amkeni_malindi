@@ -108,7 +108,7 @@
 }
 
 .h4-text {
-  @apply font-subheading py-1 text-lg xs:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl;
+  @apply font-subheading py-1 text-lg xs:text-xl md:text-2xl lg:text-2xl xl:text-4xl 2xl:text-5xl;
 }
 
 .h5-text {
@@ -128,9 +128,9 @@
 }
 
 .button-text {
-  @apply font-button-links text-[14px] text-white xs:text-base lg:text-lg;
+  @apply font-button-links text-[14px] text-white xs:text-base lg:text-base;
 }
 
 .button-type {
-  @apply py-1 px-2 rounded-2xl xs:py-2 xs:px-3 xl:py-1 xl:px-2;
+  @apply py-1 px-2 rounded-2xl xs:py-2 xs:px-3 lg:py-0 lg:px-2 xl:py-1 xl:px-2;
 }
