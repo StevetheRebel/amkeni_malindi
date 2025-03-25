@@ -8,9 +8,6 @@ import staff from "./../../assets/Our Staff.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import profile1 from "./../../assets/Profiles/Profile1.webp";
-import profile2 from "./../../assets/Profiles/Profile2.webp";
-import profile3 from "./../../assets/Profiles/Profile3.webp";
-import profile4 from "./../../assets/Profiles/Profile4.webp";
 import profile5 from "./../../assets/Profiles/Profile5.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import programData from "./../../pillars.json";
@@ -36,8 +33,6 @@ const aboutData = [
 
 function About() {
   const swiperRef = useRef(null);
-
-  console.log(secretariat.BodMem);
 
   return (
     <div className="relative h-auto select-none ">
@@ -177,11 +172,14 @@ function About() {
           our staff
         </h1>
         <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
-          {
-            secretariat.Staffs.map((staff, index) => (
-              <Card key={index} title={staff.Position} name={staff.Name} image={profile4} />
-            ))
-          }
+          {secretariat.Staffs.map((staff, index) => (
+            <Card
+              key={index}
+              title={staff.Position}
+              name={staff.Name}
+              image={staff.Image}
+            />
+          ))}
         </div>
       </section>
 
@@ -197,7 +195,7 @@ function About() {
                 key={index}
                 title={vol.Position}
                 name={vol.Name}
-                image={profile3}
+                image={vol.Image}
               />
             ))}
           </Marquee>
@@ -231,16 +229,32 @@ function Card({ title, name, link, image }) {
   return (
     <>
       <div className="relative w-48 m-4 flex-wrap gap-4 aspect-[1/1.5] rounded-xl md:w-48 lg:w-52 2xl:w-72 overflow-hidden group ">
+        {/* Display the image or a placeholder */}
+      {image ? (
+        // Show the image if image path is valid
         <LazyLoadImage
           src={image}
           alt={`${name} ${title}`}
-          className="absolute h-full z-10 group-hover:animate-fadeOut group-hover:z-0"
+          className="absolute h-full z-10 group-hover:scale-125 group-hover:animate-fadeOut group-hover:transition-all group-hover:duration-1000 group-hover:z-0"
           placeholder={
             <div className="flex items-center justify-center bg-gray-300 h-full">
               <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
             </div>
           }
         />
+      ) : (
+        // Show a placeholder if no image is found
+        <LazyLoadImage
+          src={profile1}
+          alt={`${name} ${title}`}
+          className="absolute h-full z-10 group-hover:scale-125 group-hover:animate-fadeOut group-hover:transition-all group-hover:duration-1000 group-hover:z-0"
+          placeholder={
+            <div className="flex items-center justify-center bg-gray-300 h-full">
+              <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+            </div>
+          }
+        />
+      )}
 
         <div className="absolute flex flex-col h-full justify-center opacity-0 gap-10 px-4 group-hover:z-10 group-hover:opacity-100 group-hover:animate-slideIn ">
           <h4 className="h4-text capitalize">{title}</h4>
