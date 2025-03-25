@@ -25,6 +25,7 @@ import OrgLogo from "./../../assets/Amkeni Brand.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import "animate.css";
+import RainbowSpinner from "../Loader/RainbowSpinner";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -83,7 +84,7 @@ const BlogPost = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center bg-gray-300 h-dvh">
-        <div className="w-[100px] h-[100px] border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+        <RainbowSpinner />
       </div>
     );
   }

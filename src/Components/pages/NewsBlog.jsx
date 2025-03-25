@@ -8,6 +8,7 @@ import axios from "axios";
 import pic1 from "./../../assets/Office Pics/Office1.webp";
 import DOMPurify from "dompurify";
 import he from "he";
+import RainbowSpinner from "../Loader/RainbowSpinner";
 
 function NewsBlog() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +48,7 @@ function NewsBlog() {
   if (loading) {
     return (
       <div className="flex items-center justify-center bg-gray-300 h-dvh">
-        <div className="w-[100px] h-[100px] border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+        <RainbowSpinner />
       </div>
     );
   }

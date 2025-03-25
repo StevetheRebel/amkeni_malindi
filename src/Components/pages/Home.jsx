@@ -140,8 +140,6 @@ function Home() {
               const firstAttachmentKey = Object.keys(post.attachments)[0];
               const imageUrl = post.attachments[firstAttachmentKey]?.URL || pic1;
 
-              console.log(firstAttachmentKey)
-
               return (
                 <div
                 key={index}

@@ -55,6 +55,7 @@ export default {
         fadeOut: "fadeOut 0.5s ease-in-out forwards",
         slideUp: "slideUp 0.5s ease-in-out forwards",
         slideDown: "slideDown 0.5s ease-in-out forwards",
+        spinCustom: "spin 1.5s infinite"
       },
       keyframes: {
         spin: {
