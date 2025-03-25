@@ -24,7 +24,7 @@ import { useForm } from "react-hook-form";
 import OrgLogo from "./../../assets/Amkeni Brand.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import 'animate.css'
+import "animate.css";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -592,7 +592,7 @@ const CommentInputcontainer = () => {
   );
 };
 
-// Scroll To Top Button Component 
+// Scroll To Top Button Component
 const ScrollToTopButton = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
@@ -623,16 +623,19 @@ const ScrollToTopButton = () => {
 
   return (
     <div>
-      {
-      showScrollButton && (
-        <button onClick={scrollToTop} className="w-10 aspect-square fixed z-50 bottom-[70px] text-xl right-4 rounded-full overflow-hidden flex items-center justify-center bg-primary/40 group hover:bg-primary md:w-16 md:bottom-[50px] 2xl:right-12 animate__animated animate__bounce animate__infinite hover:[animation-play-state:paused] ">
-          <FontAwesomeIcon icon={faChevronUp} className="opacity-20 group-hover:opacity-100 body-text" />
+      {showScrollButton && (
+        <button
+          onClick={scrollToTop}
+          className="w-10 aspect-square fixed z-50 bottom-[70px] text-xl right-4 rounded-full overflow-hidden flex items-center justify-center bg-primary/40 group hover:bg-primary md:w-16 md:bottom-[50px] 2xl:right-12 animate__animated animate__bounce animate__infinite hover:[animation-play-state:paused] "
+        >
+          <FontAwesomeIcon
+            icon={faChevronUp}
+            className="opacity-20 group-hover:opacity-100 body-text"
+          />
         </button>
-      )
-    }
+      )}
     </div>
-  )
-
-}
+  );
+};
 
 export default BlogPost;
