@@ -56,7 +56,7 @@ const BlogPost = () => {
           `https://public-api.wordpress.com/rest/v1.1/sites/145259521/posts/${postId}/replies/`
         );
         setComments(allCommentsRes.data);
-
+        setIsExpanded(false);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching post:", error);
