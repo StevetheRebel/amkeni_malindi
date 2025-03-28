@@ -25,6 +25,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import he from "he";
 import pic1 from "./../../assets/Office Pics/Office1.webp"
+import ScrollAnimation from "react-animate-on-scroll";
+import "animate.css/animate.compat.css"
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -84,8 +86,10 @@ function Home() {
   return (
     <div className="relative h-auto select-none scroll-smooth ">
       {/* Hero Section */}
-      <section className="bg-image9 bg-fixed bg-center bg-no-repeat pt-36 flex flex-col brightness-90 gap-4 items-center sm:pt-36 sm:gap-6 lg:min-h-screen lg:px-[6%] lg:flex-row lg:gap-4 lg:pb-10 2xl:gap-20">
-        {/* Carousel */}
+      <section className="relative min-h-dvh overflow-hidden">
+        <div className="fixed inset-0 bg-image9 bg-cover bg-center brightness-90 -z-10"></div>
+        <div className="pt-36 flex flex-col gap-4 items-center sm:gap-6 lg:px-[6%] lg:flex-row lg:gap-4 lg:pb-10 2xl:gap-20 ">
+                  {/* Carousel */}
         <div className="relative w-[90%] h-[60vh] min-h-[320px] xs:min-h-[500px] shadow-custom mt-4 rounded-2xl lg:w-2/3 xl:min-h-[550px] group">
           <Swiper
             modules={[Pagination, Autoplay]}
@@ -168,14 +172,18 @@ function Home() {
 })}
           </div>
         </div>
+
+        </div>
       </section>
 
       {/* What We Do Section */}
       <section className="pt-6 pb-12 bg-light">
         {/* title */}
+        <ScrollAnimation animateIn="flipInY" animateOut="flipOutY">
         <h1 className="font-heading capitalize h1-text text-center text-secondary">
           what we do
         </h1>
+        </ScrollAnimation>
 
         {/* Carousel Container */}
         <div className="mt-6 relative flex flex-col items-center justify-center group ">

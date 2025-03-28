@@ -7,6 +7,7 @@ import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
+import ScrollAnimation from "react-animate-on-scroll";
 
 function SystemStrengthening({ id }) {
   return (
@@ -16,27 +17,47 @@ function SystemStrengthening({ id }) {
         id={id}
       >
         {/* Program Heading */}
-        <h2 className="h2-text font-bold text-center text-secondary/70">
-          {programData.pillars[3].title}
-        </h2>
+        <ScrollAnimation
+          animateIn="fadeInLeft"
+          animateOut="fadeOutRight"
+          offset={100}
+        >
+          <h2 className="h2-text font-bold text-center text-secondary/70">
+            {programData.pillars[3].title}
+          </h2>
+        </ScrollAnimation>
 
         {/* Program Overview with image */}
         <div className="flex flex-col gap-2 items-center shadow-custom-shadow rounded-2xl p-4 xs:px-5 md:mb-4 xl:mb-8 ">
           {/* Description */}
           <div className="relative w-full flex flex-col items-center gap-4 pt-2">
-            <img
-              src={SystemStrengtheningImg}
-              alt="Sustainable Livelihood"
-              className="w-2/3 rounded-2xl sm:h-[90%] sm:absolute sm:top-0 sm:z-0 sm:opacity-20"
-            />
+            <ScrollAnimation
+              animateIn="fadeInLeft"
+              animateOut="fadeOutRight"
+              offset={100}
+              className="flex justify-center"
+            >
+              <img
+                src={SystemStrengtheningImg}
+                alt="Sustainable Livelihood"
+                className="w-2/3 rounded-2xl sm:h-[90%] sm:absolute sm:top-0 sm:z-0 sm:opacity-20"
+              />
+            </ScrollAnimation>
             <div className="sm:z-10">
               {bundleTextIntoParagraphs(programData.pillars[3].description).map(
                 (para, index) => (
-                  <p key={index} className="body-text text-justify">
-                    {para}
-                    <br />
-                    <br />
-                  </p>
+                  <ScrollAnimation
+                    key={index}
+                    animateIn="fadeIn"
+                    animateOut="fadeOut"
+                    offset={100}
+                  >
+                    <p className="body-text text-justify">
+                      {para}
+                      <br />
+                      <br />
+                    </p>
+                  </ScrollAnimation>
                 )
               )}
             </div>
@@ -89,9 +110,11 @@ function SystemStrengthening({ id }) {
           </div>
 
           {/* Program Highlight */}
-          <p className="body-text text-center italic">
-            {programData.pillars[3].highlights}
-          </p>
+          <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutRight" offset={100} animateOnce>
+            <p className="body-text text-center italic">
+              {programData.pillars[3].highlights}
+            </p>
+          </ScrollAnimation>
         </div>
       </section>
     </>

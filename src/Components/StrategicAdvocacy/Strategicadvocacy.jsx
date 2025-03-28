@@ -7,6 +7,7 @@ import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
+import ScrollAnimation from "react-animate-on-scroll";
 
 function Strategicadvocacy({ id }) {
   return (
@@ -16,9 +17,16 @@ function Strategicadvocacy({ id }) {
         id={id}
       >
         {/* Program Heding */}
-        <h2 className="h2-text font-bold text-center text-secondary/70">
-          {programData.pillars[1].title}
-        </h2>
+        <ScrollAnimation
+          animateIn="fadeInLeft"
+          animateOut="fadeOutRight"
+          offset={100}
+          animateOnce
+        >
+          <h2 className="h2-text font-bold text-center text-secondary/70">
+            {programData.pillars[1].title}
+          </h2>
+        </ScrollAnimation>
 
         {/* Heading and Overview with Highlight */}
         <div className="flex flex-col gap-2 items-center shadow-custom-shadow rounded-2xl p-4 xs:px-5 md:mb-4 xl:mb-8 ">
@@ -27,18 +35,25 @@ function Strategicadvocacy({ id }) {
             <img
               src={AdvocacyImg}
               alt="Advocacy Image"
-              className="w-2/3 rounded-2xl sm:h-[90%] sm:absolute sm:top-0 sm:z-0 sm:opacity-20"
+              className="w-2/3 rounded-2xl sm:h-[90%] sm:absolute sm:top-0 sm:z-0 sm:opacity-20 xl:w-1/2 xl:top-10 2xl:w-[30%]"
             />
             <div className="sm:z-10">
               {bundleTextIntoParagraphs(
                 programData.pillars[1].description,
                 4
               ).map((para, index) => (
-                <p key={index} className="body-text text-justify">
-                  {para}
-                  <br />
-                  <br />
-                </p>
+                <ScrollAnimation
+                  animateIn="fadeIn"
+                  animateOut="fadeOut"
+                  offset={100}
+                  key={index}
+                >
+                  <p className="body-text text-justify">
+                    {para}
+                    <br />
+                    <br />
+                  </p>
+                </ScrollAnimation>
               ))}
             </div>
           </div>
@@ -93,9 +108,11 @@ function Strategicadvocacy({ id }) {
           </div>
 
           {/* Program Highlight */}
-          <p className="body-text italic text-center">
-            {programData.pillars[1].highlights}
-          </p>
+          <ScrollAnimation animateIn="fadeInLeft" animateOnce offset={50} animateOnce>
+            <p className="body-text italic text-center">
+              {programData.pillars[1].highlights}
+            </p>
+          </ScrollAnimation>
         </div>
       </section>
     </>

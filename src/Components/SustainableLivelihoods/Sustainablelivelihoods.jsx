@@ -16,6 +16,7 @@ import {
   LeadershipProg,
   SelfImprovInit,
 } from "./../../assets/Sustainable Livelihoods";
+import ScrollAnimation from "react-animate-on-scroll";
 
 function Sustainablelivelihoods({ id }) {
   const imageMap = {
@@ -63,9 +64,16 @@ function Sustainablelivelihoods({ id }) {
         id={id}
       >
         {/* Program Heading */}
-        <h2 className="h2-text text-primary/80 text-center mb-2 md:mb-4 2xl:mb-6">
-          {programData.pillars[2].title}
-        </h2>
+        <ScrollAnimation
+          animateIn="fadeInLeft"
+          animateOut="fadeOutRight"
+          offset={100}
+          animateOnce
+        >
+          <h2 className="h2-text text-primary/80 text-center mb-2 md:mb-4 2xl:mb-6">
+            {programData.pillars[2].title}
+          </h2>
+        </ScrollAnimation>
 
         {/* Description Docus Areas and Highlight of the Program */}
         <div className="flex flex-col items-center rounded-2xl bg-white/70 backdrop-blur- p-4 xs:px-5 md:mb-4 md:rounded-tr-2xl md:rounded-br-2xl lg:px-8 xl:mb-8">
@@ -74,11 +82,18 @@ function Sustainablelivelihoods({ id }) {
             <div className="text-justify body-text">
               {bundleTextIntoParagraphs(programData.pillars[2].description).map(
                 (para, index) => (
-                  <p key={index}>
-                    {para}
-                    <br />
-                    <br />
-                  </p>
+                  <ScrollAnimation
+                    key={index}
+                    animateIn="fadeIn"
+                    animateOut="fadeOut"
+                    offset={100}
+                  >
+                    <p key={index}>
+                      {para}
+                      <br />
+                      <br />
+                    </p>
+                  </ScrollAnimation>
                 )
               )}
             </div>
@@ -86,11 +101,19 @@ function Sustainablelivelihoods({ id }) {
             {/* Program Image and Fic */}
             <div className="w-full flex flex-col items-center justify-center">
               {/* Program Image */}
-              <img
-                src={SustainableLivelihoodImg}
-                alt="Sustainable Livelihoods"
-                className="w-2/3 rounded-2xl sm:hidden"
-              />
+              <ScrollAnimation
+                animateIn="fadeInLeft"
+                animateOut="fadeOutRight"
+                offset={100}
+                className="flex justify-center"
+                animateOnce
+              >
+                <img
+                  src={SustainableLivelihoodImg}
+                  alt="Sustainable Livelihoods"
+                  className="w-2/3 rounded-2xl sm:hidden"
+                />
+              </ScrollAnimation>
 
               {/* Focus Areas */}
               <div className="w-full sm:w-[70%] lg:w-[60%] ">
@@ -145,9 +168,16 @@ function Sustainablelivelihoods({ id }) {
               </div>
 
               {/* Program Highlight */}
-              <p className="body-text italic text-center">
-                {programData.pillars[2].highlights}
-              </p>
+              <ScrollAnimation
+                animateIn="fadeInLeft"
+                animateOut="fadeOutRight"
+                offset={100}
+                animateOnce
+              >
+                <p className="body-text italic text-center">
+                  {programData.pillars[2].highlights}
+                </p>
+              </ScrollAnimation>
             </div>
           </div>
         </div>

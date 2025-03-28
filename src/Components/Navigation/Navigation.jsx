@@ -106,7 +106,7 @@ function Navigation() {
 
       {/* Navigation humberger menu button */}
       <div
-        className="sm:hidden text-3xl text-end pr-4 pt-2 "
+        className="sm:hidden text-3xl text-end pr-4 pt-2 animate__animated animate__flipInY "
         onClick={toggleMenu}
       >
         {menuOpen ? (
@@ -119,8 +119,8 @@ function Navigation() {
       {/* Menu items */}
       <div
         className={`${
-          menuOpen ? "block" : "hidden"
-        } sm:block sm:backdrop-blur-none sm:bg-transparent transition-all duration-300 ease-in-out`}
+          menuOpen ? "block animate__animated animate__lightSpeedInRight animate__fast " : "hidden"
+        } sm:block`}
       >
         <ul className="uppercase font-subheading flex flex-col items-end pr-4 gap-4 py-4 sm:flex-row sm:px-0 sm:gap-0 sm:justify-around sm:items-center lg:justify-between lg:px-[6%]">
           <li className="hover-text">

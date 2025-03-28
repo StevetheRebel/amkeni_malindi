@@ -13,6 +13,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import programData from "./../../pillars.json";
 import secretariat from "./../../secretariat.json";
 import Marquee from "react-fast-marquee";
+import ScrollAnimation from "react-animate-on-scroll";
+import "animate.css/animate.min.css";
 
 const aboutData = [
   {
@@ -134,16 +136,18 @@ function About() {
             our organizational structure
           </h1>
           <div className="px-1">
-            <LazyLoadImage
-              src={staff}
-              alt="our organogram"
-              className="w-full"
-              placeholder={
-                <div className="flex items-center justify-center bg-gray-300 h-full">
-                  <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
-                </div>
-              }
-            />
+            <ScrollAnimation animateIn="zoomIn" animateOut="zoomOut" offset={100}>
+              <LazyLoadImage
+                src={staff}
+                alt="our organogram"
+                className="w-full"
+                placeholder={
+                  <div className="flex items-center justify-center bg-gray-300 h-full">
+                    <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+                  </div>
+                }
+              />
+            </ScrollAnimation>
           </div>
         </div>
       </section>
@@ -151,43 +155,57 @@ function About() {
       {/* The Board of Directors */}
       {/* Add Authentication to access this */}
       <section className="py-6 flex flex-col gap-1 md:gap-2 md:px-14 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-5 ">
-        <h1 className="h1-text capitalize text-center text-secondary">
-          our board of directors
-        </h1>
+        <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutRight">
+          <h1 className="h1-text capitalize text-center text-secondary">
+            our board of directors
+          </h1>
+        </ScrollAnimation>
         <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 ">
           {secretariat.BodMem.map((bod, index) => (
-            <Card
+            <ScrollAnimation
+              animateIn="fadeIn"
+              animateOut="fadeOut"
+              duration={1}
               key={index}
-              title={bod.Position}
-              name={bod.Name}
-              image={profile5}
-            />
+            >
+              <Card title={bod.Position} name={bod.Name} image={profile5} />
+            </ScrollAnimation>
           ))}
         </div>
       </section>
 
       {/* The Staff Team */}
       <section className="py-6 flex flex-col gap-1 md:gap-2 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5">
+        <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutRight">
         <h1 className="h1-text capitalize text-center text-secondary">
           our staff
         </h1>
+        </ScrollAnimation>
         <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
           {secretariat.Staffs.map((staff, index) => (
-            <Card
+            <ScrollAnimation
+              animateIn="fadeIn"
+              animateOut="fadeOut"
               key={index}
-              title={staff.Position}
-              name={staff.Name}
-              image={staff.Image}
-            />
+            >
+              <Card
+                key={index}
+                title={staff.Position}
+                name={staff.Name}
+                image={staff.Image}
+              />
+            </ScrollAnimation>
           ))}
         </div>
       </section>
 
       {/* The Volunteers Team */}
       <section className=" ">
+        <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutRight">
         <h1 className="h1-text capitalize text-center text-secondary">
           our volunteers
         </h1>
+        </ScrollAnimation>
         <div className="">
           <Marquee pauseOnHover gradient gradientWidth={50}>
             {secretariat.Volunteers.map((vol, index) => (
@@ -230,35 +248,35 @@ function Card({ title, name, link, image }) {
     <>
       <div className="relative w-48 m-4 flex-wrap gap-4 aspect-[1/1.5] rounded-xl md:w-48 lg:w-52 2xl:w-72 overflow-hidden group ">
         {/* Display the image or a placeholder */}
-      {image ? (
-        // Show the image if image path is valid
-        <LazyLoadImage
-          src={image}
-          alt={`${name} ${title}`}
-          className="absolute h-full z-10 group-hover:scale-125 group-hover:animate-fadeOut group-hover:transition-all group-hover:duration-1000 group-hover:z-0"
-          placeholder={
-            <div className="flex items-center justify-center bg-gray-300 h-full">
-              <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
-            </div>
-          }
-        />
-      ) : (
-        // Show a placeholder if no image is found
-        <LazyLoadImage
-          src={profile1}
-          alt={`${name} ${title}`}
-          className="absolute h-full z-10 group-hover:scale-125 group-hover:animate-fadeOut group-hover:transition-all group-hover:duration-1000 group-hover:z-0"
-          placeholder={
-            <div className="flex items-center justify-center bg-gray-300 h-full">
-              <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
-            </div>
-          }
-        />
-      )}
+        {image ? (
+          // Show the image if image path is valid
+          <LazyLoadImage
+            src={image}
+            alt={`${name} ${title}`}
+            className="absolute h-full z-10 group-hover:scale-125 group-hover:blur-sm group-hover:brightness-50 group-hover:transition-all group-hover:duration-1000 group-hover:z-0"
+            placeholder={
+              <div className="flex items-center justify-center bg-gray-300 h-full">
+                <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+              </div>
+            }
+          />
+        ) : (
+          // Show a placeholder if no image is found
+          <LazyLoadImage
+            src={profile1}
+            alt={`${name} ${title}`}
+            className="absolute h-full z-10 group-hover:scale-125 group-hover:blur-sm group-hover:transition-all group-hover:duration-1000 group-hover:z-0"
+            placeholder={
+              <div className="flex items-center justify-center bg-gray-300 h-full">
+                <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+              </div>
+            }
+          />
+        )}
 
         <div className="absolute flex flex-col h-full justify-center opacity-0 gap-10 px-4 group-hover:z-10 group-hover:opacity-100 group-hover:animate-slideIn ">
-          <h4 className="h4-text capitalize">{title}</h4>
-          <p className="body-text font-bold ">{name}</p>
+          <h4 className="h4-text capitalize text-white">{title}</h4>
+          <p className="body-text font-bold text-white">{name}</p>
           <a
             href={link}
             className="w-16 grid place-items-center button-text button-type self-start bg-primary/70 hover:bg-primary hover:text-black rounded-3xl "

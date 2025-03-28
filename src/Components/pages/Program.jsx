@@ -18,6 +18,8 @@ import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
 import Strategicadvocacy from "../StrategicAdvocacy/Strategicadvocacy.jsx";
 import Sustainablelivelihoods from "../SustainableLivelihoods/Sustainablelivelihoods";
 import SystemStrengthening from "../SystemStrengthening/SystemStrengthening";
+import ScrollAnimation from "react-animate-on-scroll";
+import "animate.css/animate.min.css";
 
 const style = {
   position: "absolute",
@@ -89,23 +91,46 @@ function Program() {
           }
           {bundleTextIntoParagraphs(programData.pillars[0].description, 5).map(
             (para, index) => (
-              <p key={index} className="text-justify body-text text-white">
-                {para}
-                <br />
-                <br />
-              </p>
+              <ScrollAnimation
+                animatePreScroll={true}
+                animateIn="fadeIn"
+                animateOut="fadeOut"
+                offset={100}
+                animateOnce
+              >
+                <p key={index} className="text-justify body-text text-white">
+                  {para}
+                  <br />
+                  <br />
+                </p>
+              </ScrollAnimation>
             )
           )}
-          <p className="font-bold body-text text-white py-4 text-center">
-            Check out the detailed steps below and visit us today to get started
-            on your journey to better health!
-          </p>
-          <button
-            className="button-type button-text bg-primary/50 rounded-full hover:bg-primary"
-            onClick={handleOpen6}
+          <ScrollAnimation
+            animateIn="fadeIn"
+            animateOut="fadeOut"
+            offset={100}
+            animateOnce
           >
-            Book an Appointment
-          </button>
+            <p className="font-bold body-text text-white py-4 text-center">
+              Check out the detailed steps below and visit us today to get
+              started on your journey to better health!
+            </p>
+          </ScrollAnimation>
+
+          <ScrollAnimation
+            animateIn="slideInLeft"
+            animateOut="slideOutRight"
+            offset={100}
+            animateOnce
+          >
+            <button
+              className="button-type button-text bg-primary/50 rounded-full hover:bg-primary"
+              onClick={handleOpen6}
+            >
+              Book an Appointment
+            </button>
+          </ScrollAnimation>
           <Modal
             open={open6}
             onClose={handleClose6}
@@ -134,7 +159,7 @@ function Program() {
               <LazyLoadImage
                 src={photo1}
                 alt="HIV Testing Services"
-                className="absolute h-full z-10 group-hover:brightness-50 group-hover:z-0"
+                className="absolute h-full z-10 group-hover:brightness-50 group-hover:z-0 group-hover:scale-150 transition-all duration-500"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -354,7 +379,7 @@ function Program() {
               <LazyLoadImage
                 src={photo2}
                 alt="STI Screening"
-                className="absolute w-full h-full object-cover z-10 group-hover:brightness-50 group-hover:z-0"
+                className="absolute w-full h-full object-cover z-10 group-hover:brightness-50 group-hover:z-0 group-hover:scale-150 transition-all duration-500"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -517,7 +542,7 @@ function Program() {
               <LazyLoadImage
                 src={photo3}
                 alt="Condom and Lubricants"
-                className="absolute h-full z-10 group-hover:brightness-50 group-hover:z-0"
+                className="absolute h-full z-10 group-hover:brightness-50 group-hover:z-0 group-hover:scale-150 transition-all duration-500"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -733,7 +758,7 @@ function Program() {
               <LazyLoadImage
                 src={photo4}
                 alt="PrEP and PEP"
-                className="absolute h-full w-full object-cover z-10 group-hover:brightness-50 group-hover:z-0"
+                className="absolute h-full w-full object-cover z-10 group-hover:brightness-50 group-hover:z-0 group-hover:scale-150 transition-all duration-500"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -954,7 +979,7 @@ function Program() {
               <LazyLoadImage
                 src={photo5}
                 alt="ART Services"
-                className="absolute w-full h-full object-cover z-10 group-hover:brightness-50 group-hover:z-0"
+                className="absolute w-full h-full object-cover z-10 group-hover:brightness-50 group-hover:z-0 group-hover:scale-150 transition-all duration-500"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -1180,7 +1205,7 @@ function Program() {
               <LazyLoadImage
                 src={photo6}
                 alt="Mental Health"
-                className="absolute w-full h-full object-cover z-10 group-hover:brightness-50 group-hover:z-0"
+                className="absolute w-full h-full object-cover z-10 group-hover:brightness-50 group-hover:z-0 group-hover:scale-150 transition-all duration-500"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
