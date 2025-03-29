@@ -10,6 +10,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import "animate.css/animate.min.css";
+
 
 function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -106,7 +108,7 @@ function Navigation() {
 
       {/* Navigation humberger menu button */}
       <div
-        className="sm:hidden text-3xl text-end pr-4 pt-2 animate__animated animate__flipInY "
+        className="sm:hidden text-3xl text-end pr-4 pt-2 "
         onClick={toggleMenu}
       >
         {menuOpen ? (
