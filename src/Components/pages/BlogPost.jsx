@@ -24,8 +24,9 @@ import { useForm } from "react-hook-form";
 import OrgLogo from "./../../assets/Amkeni Brand.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import "animate.css";
+import "animate.css/animate.min.css";
 import RainbowSpinner from "../Loader/RainbowSpinner";
+import ScrollAnimation from "react-animate-on-scroll";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -227,8 +228,8 @@ const BlogPost = () => {
               <h5 className="h5-text tracking-widest">Post Tags</h5>
               <div className="w-12 h-0 border border-black/30"></div>
               {Object.keys(post.tags).map((tag, index) => (
-                <div key={index}>
-                  <p className="border border-black/60 px-2 font-button-links uppercase tracking-widest">
+                <div key={index} >
+                  <p className={`border border-black/60 px-2 font-button-links uppercase tracking-widest animate__animated animate__pulse animate__fast animate__delay-${index + 1}s animate__infinite`}>
                     {tag}
                   </p>
                 </div>
@@ -244,8 +245,8 @@ const BlogPost = () => {
           <img src={OrgLogo} alt="Organization Logo" className="" />
         </div>
         <div className="w-[80%]">
-          <h5 className="h5-text tracking-wider ">Amkeni Organization</h5>
-          <p className="body-text text-pretty">
+          <h5 className="h4-text tracking-wider xl:tracking-tight ">Amkeni Organization</h5>
+          <p className="body-text text-justify sm:text-pretty">
             Founded in November 2009 as a support group for MSM/MSW and
             officially registered as a Community-Based Organization (CBO) in
             March 2013. AMKENI has grown into a beacon of hope and empowerment.
@@ -255,13 +256,13 @@ const BlogPost = () => {
           </p>
           {isExpanded && (
             <>
-              <p className="body-text text-pretty">
+              <p className="body-text text-justify sm:text-pretty">
                 <br /> Our mission is simple yet powerful - ensuring access to
                 affordable social, legal, and health services, including
                 psychosocial and mental health support. At AMKENI, we belive in
                 dignity, inclusion, and the right to thrive. <br />
               </p>
-              <p className="body-text text-pretty">
+              <p className="body-text text-justify sm:text-pretty">
                 <br /> Join us as we continue building a future where everyone
                 has access to the support they deserve.
               </p>
