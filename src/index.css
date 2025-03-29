@@ -159,3 +159,42 @@
     30px -8px 0 1px #ffffff, 25px -2px 0 1px #ffffff, 25px -8px 0 1px #ffffff,
     20px -6px 0 1px #ffffff, 15px -2px 0 1px #ffffff;
 }
+
+@layer utilities {
+  @keyframes bounce-rainbow {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+    80% {
+      transform: translateY(-15px) scale(1.5);
+    }
+  }
+
+  .rainbow-bounce {
+    animation: bounce-rainbow 1s infinite;
+  }
+
+  /* Custom delays */
+  .delay-0 {
+    animation-delay: 0s;
+  }
+  .delay-1 {
+    animation-delay: 0.1s;
+  }
+  .delay-2 {
+    animation-delay: 0.2s;
+  }
+  .delay-3 {
+    animation-delay: 0.3s;
+  }
+  .delay-4 {
+    animation-delay: 0.4s;
+  }
+  .delay-5 {
+    animation-delay: 0.5s;
+  }
+  .delay-6 {
+    animation-delay: 0.6s;
+  }
+}

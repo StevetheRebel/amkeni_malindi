@@ -9,27 +9,51 @@ import pic1 from "./../../assets/Office Pics/Office1.webp";
 import DOMPurify from "dompurify";
 import he from "he";
 import RainbowSpinner from "../Loader/RainbowSpinner";
+import Rainbow from "../Loader/Rainbow";
 
 function NewsBlog() {
   const [currentPage, setCurrentPage] = useState(1);
   const postPerPage = 8;
   const [wpPosts, setWpPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isFetchingComplete, setIsFetchingComplete] = useState(false);
+  const [isPageChanging, setIsPageChanging] = useState(false);
   const blogSpotRef = useRef(null);
 
+  const fetchAllPosts = async (page = 1, accumulatedPosts = []) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        "https://public-api.wordpress.com/rest/v1.1/sites/amkenimalindi.wordpress.com/posts",
+        {
+          params: {
+            page: page,
+            number: 20, // Maximum per request
+          },
+        }
+      );
+
+      const newPosts = response.data.posts;
+      const allPosts = [...accumulatedPosts, ...newPosts];
+
+      // If we got fewer than 20 posts, we've reached the end
+      if (newPosts.length < 20) {
+        setWpPosts(allPosts);
+        setIsFetchingComplete(true);
+        setLoading(false);
+        return;
+      }
+
+      // Otherwise, fetch the next page
+      await fetchAllPosts(page + 1, allPosts);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get(
-        "https://public-api.wordpress.com/rest/v1.1/sites/amkenimalindi.wordpress.com/posts"
-      )
-      .then((response) => {
-        setWpPosts(response.data.posts);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching posts:", error);
-        setLoading(false);
-      });
+    fetchAllPosts();
   }, []);
 
   useEffect(() => {
@@ -60,7 +84,12 @@ function NewsBlog() {
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
+      setIsPageChanging(true);
       setCurrentPage(page);
+
+      setTimeout(() => {
+        setIsPageChanging(false);
+      }, 3000);
     }
   };
 
@@ -87,94 +116,103 @@ function NewsBlog() {
 
       {/* Blog Spot */}
       <section
-        className="bg-light pt-4 pb-4 px-4 lg:px-[6%] min-h-screen"
+        className="bg-light pt-4 pb-4 px-4 lg:px-[6%] h-auto flex flex-col items-center justify-center"
         id="blogSpot"
         ref={blogSpotRef}
       >
         <h2 className="h2-text text-center text-secondary">Blog Spot</h2>
 
-        {/* Pagination */}
-        <div className="flex justify-center items-center my-6 space-x-2">
-          <button
-            className="px-3 py-1 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          {getPaginationRange().map((page) => (
-            <button
-              key={page}
-              className={`px-3 py-1 border rounded-lg ${
-                currentPage === page
-                  ? "bg-primary text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
-              }`}
-              onClick={() => handlePageChange(page)}
-            >
-              {page}
-            </button>
-          ))}
-          <button
-            className="px-3 py-1 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
+        {isPageChanging && <div className="flex items-center justify-center my-12">
+          <Rainbow />
+          </div>}
 
-        {/* Blog grid */}
-        <div className="w-full grid place-items-center gap-y-4 2xl:grid-cols-2 2xl:gap-x-8 ">
-          {currentWpPosts.map((post, index) => {
-            const sanitizedContent = DOMPurify.sanitize(post.content);
-            const firstAttachmentKey = Object.keys(post.attachments)[0];
-            const imageUrl = post.attachments[firstAttachmentKey]?.URL || pic1;
+        {!isPageChanging && (
+          <>
+            {/* Pagination */}
+            <div className="flex justify-center items-center my-6 space-x-2">
+              <button
+                className="px-3 py-1 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              {getPaginationRange().map((page) => (
+                <button
+                  key={page}
+                  className={`px-3 py-1 border rounded-lg ${
+                    currentPage === page
+                      ? "bg-primary text-white"
+                      : "bg-gray-200 hover:bg-gray-300"
+                  }`}
+                  onClick={() => handlePageChange(page)}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                className="px-3 py-1 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
 
-            return (
-              <BlogPost
-                key={index}
-                pic={imageUrl}
-                title={he.decode(post.title)}
-                date={post.date}
-                time={post.date}
-                blogpiece={truncateByWords(sanitizedContent, 15)}
-                link={`/blog/${post.ID}`}
-              />
-            );
-          })}
-        </div>
+            {/* Blog grid */}
+            <div className="w-full grid place-items-center gap-y-4 2xl:grid-cols-2 2xl:gap-x-8 ">
+              {currentWpPosts.map((post, index) => {
+                const sanitizedContent = DOMPurify.sanitize(post.content);
+                const firstAttachmentKey = Object.keys(post.attachments)[0];
+                const imageUrl =
+                  post.attachments[firstAttachmentKey]?.URL || pic1;
 
-        {/* Pagination */}
-        <div className="flex justify-center items-center mt-6 space-x-2">
-          <button
-            className="px-3 py-1 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          {getPaginationRange().map((page) => (
-            <button
-              key={page}
-              className={`px-3 py-1 border rounded-lg ${
-                currentPage === page
-                  ? "bg-primary text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
-              }`}
-              onClick={() => handlePageChange(page)}
-            >
-              {page}
-            </button>
-          ))}
-          <button
-            className="px-3 py-1 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
+                return (
+                  <BlogPost
+                    key={index}
+                    pic={imageUrl}
+                    title={he.decode(post.title)}
+                    date={post.date}
+                    time={post.date}
+                    blogpiece={truncateByWords(sanitizedContent, 15)}
+                    link={`/blog/${post.ID}`}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Pagination */}
+            <div className="flex justify-center items-center mt-6 space-x-2">
+              <button
+                className="px-3 py-1 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              {getPaginationRange().map((page) => (
+                <button
+                  key={page}
+                  className={`px-3 py-1 border rounded-lg ${
+                    currentPage === page
+                      ? "bg-primary text-white"
+                      : "bg-gray-200 hover:bg-gray-300"
+                  }`}
+                  onClick={() => handlePageChange(page)}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                className="px-3 py-1 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
       </section>
 
       <Footer />
