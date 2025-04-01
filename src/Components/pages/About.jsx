@@ -15,6 +15,8 @@ import secretariat from "./../../secretariat.json";
 import Marquee from "react-fast-marquee";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
+import OrgHis from "./../../OrgHistory.json";
+import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
 
 const aboutData = [
   {
@@ -60,35 +62,25 @@ function About() {
         <h1 className="h1-text capitalize text-center text-secondary ">
           our history
         </h1>
-        <p className="text-justify sm:text-center body-text p-5 rounded-3xl shadow-custom-shadow lg:p-6 xl:p-8 ">
-          Amkeni Malindi began in 2009 as a small support group dedicated to
-          creating a safe space for men who have sex with men in Malindi, Kilifi
-          County. What started as a community gathering soon blossomed into a
-          powerful movement with a mission to advocate for the rights and health
-          of LGBT individuals in the region. In 2010, a partnership with KEMRI
-          enabled Amkeni to offer a secure environment for community meetings,
-          expanding our reach and deepening our commitment to providing
-          comprehensive services. Through peer education, we began actively
-          championing human rights and addressing critical issues affecting the
-          LGBT community across Kilifi County. <br /> <br /> Over the years, our
-          network of partnerships has grown, enabling us to offer even greater
-          support and resources. Collaborations with the Kenya Red Cross led to
-          the establishment of our Drop-In Center for Education (DICE), while
-          our strategic alliance with UHAI developed a roadmap for progress
-          outlined in our 2018-2020 strategic plan. Today, our partnerships span
-          national organizations like the Gay and Lesbian Coalition of Kenya
-          (GALCK), and intersectional HIV programs with the National AIDS
-          Control Council (NACC) and National AIDS and STI Control Program
-          (NASCOP). <br /> <br /> With a dedicated office in Kilifi, Amkeni
-          operates as a cornerstone of advocacy and support for Kenya’s coastal
-          strip, delivering impact through research, partnerships, and a strong
-          governance structure led by a diverse board. Guided by values of
-          integrity and inclusivity, Amkeni remains resilient in the face of
-          changing policies, donor dynamics, and stakeholder needs. As we
-          continue to evolve, our commitment is clear: to offer ethical,
-          impactful services that enhance the lives of our community members and
-          contribute to a fairer, healthier society.
-        </p>
+        <div className="p-8 rounded-3xl shadow-custom-shadow lg:p-6 xl:p-8 ">
+          {bundleTextIntoParagraphs(
+            OrgHis.organizationHis[0].description,
+            3
+          ).map((para, index) => (
+            <ScrollAnimation
+              key={index}
+              animateIn="fadeIn"
+              animateOut="fadeOut"
+              offset={100}
+            >
+              <p className="text-justify sm:text-center body-text ">
+                {para}
+                <br />
+                <br />
+              </p>
+            </ScrollAnimation>
+          ))}
+        </div>
       </section>
 
       {/* Combine the Organization Work and Organigram to "Our Areas of Work" */}
@@ -136,7 +128,11 @@ function About() {
             our organizational structure
           </h1>
           <div className="px-1">
-            <ScrollAnimation animateIn="zoomIn" animateOut="zoomOut" offset={100}>
+            <ScrollAnimation
+              animateIn="zoomIn"
+              animateOut="zoomOut"
+              offset={100}
+            >
               <LazyLoadImage
                 src={staff}
                 alt="our organogram"
@@ -177,9 +173,9 @@ function About() {
       {/* The Staff Team */}
       <section className="py-6 flex flex-col gap-1 md:gap-2 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5">
         <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutRight">
-        <h1 className="h1-text capitalize text-center text-secondary">
-          our staff
-        </h1>
+          <h1 className="h1-text capitalize text-center text-secondary">
+            our staff
+          </h1>
         </ScrollAnimation>
         <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
           {secretariat.Staffs.map((staff, index) => (
@@ -202,9 +198,9 @@ function About() {
       {/* The Volunteers Team */}
       <section className=" ">
         <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutRight">
-        <h1 className="h1-text capitalize text-center text-secondary">
-          our volunteers
-        </h1>
+          <h1 className="h1-text capitalize text-center text-secondary">
+            our volunteers
+          </h1>
         </ScrollAnimation>
         <div className="">
           <Marquee pauseOnHover gradient gradientWidth={50}>

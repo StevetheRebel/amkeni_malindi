@@ -160,7 +160,7 @@ function NewsBlog() {
             </div>
 
             {/* Blog grid */}
-            <div className="w-full grid place-items-center gap-y-4 2xl:grid-cols-2 2xl:gap-x-8 ">
+            <div className="w-full grid place-items-center gap-y-4 lg:grid-cols-2 lg:gap-x-8 ">
               {currentWpPosts.map((post, index) => {
                 const sanitizedContent = DOMPurify.sanitize(post.content);
                 const firstAttachmentKey = Object.keys(post.attachments)[0];

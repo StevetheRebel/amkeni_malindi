@@ -27,6 +27,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "90vw",
+  maxWidth: "700px",
   maxHeight: "90vh",
   overflowY: "auto",
   bgcolor: "background.paper",
@@ -190,13 +191,13 @@ function Program() {
                           className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
                         />
                       </div>
-                      <ol className="list-decimal body-text list-outside flex flex-col gap-4 px-8 pb-4 md:gap-6 lg:gap-8 lg:px-12 xl:gap-10 2xl:gap-12">
+                      <ol className="list-decimal body-text list-outside flex flex-col gap-4 px-8 pb-4 md:gap-6 lg:gap-8 lg:px-12 xl:gap-2 2xl:gap-4">
                         {/* Pre-Testing counseling */}
                         <li>
                           <h3 className="h3-text text-accent">
                             Pre-Test Counseling
                           </h3>
-                          <ol className="list-disc list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10 ">
+                          <ol className="list-disc list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-2 2xl:gap-2 ">
                             <li>
                               <span className="font-bold">
                                 Introduction and Rapport Building
@@ -230,7 +231,7 @@ function Program() {
                         {/* HIV Test */}
                         <li>
                           <h3 className="h3-text text-accent">HIV Testing</h3>
-                          <ol className="list-disc list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10 ">
+                          <ol className="list-disc list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-2 2xl:gap-2 ">
                             <li>
                               <span className="font-bold">
                                 Selection of Test
@@ -270,12 +271,12 @@ function Program() {
                           <h3 className="h3-text text-accent">
                             Post-Test Counseling
                           </h3>
-                          <ol className="list-lower-alpha list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
+                          <ol className="list-lower-alpha list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-2 2xl:gap-10">
                             <li>
                               <span className="font-bold h4-text">
                                 For HIV-Negative Result:
                               </span>
-                              <ol className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 md:p-2 lg:gap-4 xl:gap-6 2xl:gap-8">
+                              <ol className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 md:p-2 lg:gap-4 xl:gap-2 2xl:gap-8">
                                 <li>
                                   <span className="font-bold">
                                     Risk Reduction Counseling
@@ -304,7 +305,7 @@ function Program() {
                               <span className="font-bold h4-text">
                                 For HIV-Positive Result:
                               </span>
-                              <ol className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 md:p-2 lg:gap-4 xl:gap-6 2xl:gap-8">
+                              <ol className="list-disc list-inside text-pretty body-text indent-6 flex flex-col gap-1 md:gap-2 md:p-2 lg:gap-4 xl:gap-2 2xl:gap-8">
                                 <li>
                                   <span className="font-bold">
                                     Emotional Support
@@ -346,7 +347,7 @@ function Program() {
                           <h3 className="h3-text text-accent">
                             Documentation and Follow-Up
                           </h3>
-                          <ol className="list-disc list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-8 2xl:gap-10">
+                          <ol className="list-disc list-inside text-pretty body-text flex flex-col gap-2 md:gap-4 md:pt-2 lg:gap-6 xl:gap-2 2xl:gap-10">
                             <li>
                               <span className="font-bold">Record-Keeping</span>:
                               Ensure all tests and counseling sessions are
