@@ -16,7 +16,7 @@ function Opportunities() {
           </div>
           <div className="bg-white/40 p-2 backdrop-blur-sm rounded-2xl md:bg-white md:w-[80%] md:absolute md:top-[90%] md:right-10 md:px-4 lg:px-8 ">
             <h5 className="h5-text text-secondary text-pretty">
-              At present, there's no available opportunities. We encourage you
+              Current, there are no available opportunities. We encourage you
               to check back regularly and stay connected through our social
               media platforms for timely updates.
             </h5>
