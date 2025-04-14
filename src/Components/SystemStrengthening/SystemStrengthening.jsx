@@ -21,6 +21,7 @@ function SystemStrengthening({ id }) {
           animateIn="fadeInLeft"
           animateOut="fadeOutRight"
           offset={100}
+          animateOnce
         >
           <h2 className="h2-text font-bold text-center text-secondary/70">
             {programData.pillars[3].title}
@@ -36,6 +37,7 @@ function SystemStrengthening({ id }) {
               animateOut="fadeOutRight"
               offset={100}
               className="flex justify-center"
+              animateOnce
             >
               <img
                 src={SystemStrengtheningImg}
