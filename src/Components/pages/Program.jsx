@@ -160,7 +160,7 @@ function Program() {
               <LazyLoadImage
                 src={photo1}
                 alt="HIV Testing Services"
-                className="absolute h-full z-10 group-hover:brightness-50 group-hover:z-0 group-hover:scale-150 transition-all duration-500"
+                className="absolute object-cover h-full z-10 group-hover:brightness-50 group-hover:z-0 group-hover:scale-150 transition-all duration-500"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -543,7 +543,7 @@ function Program() {
               <LazyLoadImage
                 src={photo3}
                 alt="Condom and Lubricants"
-                className="absolute h-full z-10 group-hover:brightness-50 group-hover:z-0 group-hover:scale-150 transition-all duration-500"
+                className="absolute object-cover h-full z-10 group-hover:brightness-50 group-hover:z-0 group-hover:scale-150 transition-all duration-500"
                 placeholder={
                   <div className="flex items-center justify-center bg-gray-300 h-full">
                     <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
