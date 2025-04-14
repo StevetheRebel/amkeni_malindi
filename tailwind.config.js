@@ -55,7 +55,8 @@ export default {
         fadeOut: "fadeOut 0.5s ease-in-out forwards",
         slideUp: "slideUp 0.5s ease-in-out forwards",
         slideDown: "slideDown 0.5s ease-in-out forwards",
-        spinCustom: "spin 1.5s infinite"
+        spinCustom: "spin 1.5s infinite",
+        shrink: "shrink 0.5s ease-in-out forwards",
       },
       keyframes: {
         spin: {
@@ -81,6 +82,10 @@ export default {
           "0%": { bottom: 0 },
           "100%": { top: 0 },
         },
+        shrink: {
+          "0%": { width: "100%" },
+          "100%": { width: "50%" },
+        }
       },
       listStyleType: {
         "lower-alpha": "lower-alpha",
