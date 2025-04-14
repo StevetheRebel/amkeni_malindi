@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export const useNavigationLoading = (minLoadingTime = 5000) => {
+export const useNavigationLoading = (minLoadingTime = 2000) => {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
