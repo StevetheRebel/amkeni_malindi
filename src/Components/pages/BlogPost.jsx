@@ -23,10 +23,16 @@ import {
 import { useForm } from "react-hook-form";
 import OrgLogo from "./../../assets/Amkeni Brand.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronUp,
+  faEnvelope,
+  faPenToSquare,
+  faReply,
+  faUser,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 import "animate.css/animate.min.css";
 import RainbowSpinner from "../Loader/RainbowSpinner";
-import ScrollAnimation from "react-animate-on-scroll";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -228,8 +234,12 @@ const BlogPost = () => {
               <h5 className="h5-text tracking-widest">Post Tags</h5>
               <div className="w-12 h-0 border border-black/30"></div>
               {Object.keys(post.tags).map((tag, index) => (
-                <div key={index} >
-                  <p className={`border border-black/60 px-2 font-button-links uppercase tracking-widest animate__animated animate__pulse animate__fast animate__delay-${index + 1}s animate__infinite`}>
+                <div key={index}>
+                  <p
+                    className={`border border-black/60 px-2 font-button-links uppercase tracking-widest animate__animated animate__pulse animate__fast animate__delay-${
+                      index + 1
+                    }s animate__infinite`}
+                  >
                     {tag}
                   </p>
                 </div>
@@ -245,7 +255,9 @@ const BlogPost = () => {
           <img src={OrgLogo} alt="Organization Logo" className="" />
         </div>
         <div className="w-[80%]">
-          <h5 className="h4-text tracking-wider xl:tracking-tight ">Amkeni Organization</h5>
+          <h5 className="h4-text tracking-wider xl:tracking-tight ">
+            Amkeni Organization
+          </h5>
           <p className="body-text text-justify sm:text-pretty">
             Founded in November 2009 as a support group for MSM/MSW and
             officially registered as a Community-Based Organization (CBO) in
@@ -325,25 +337,38 @@ const BlogPost = () => {
           <h3 className="h3-text text-secondary">
             {`${comments.found}`} {comments.found > 1 ? "Comments" : "Comment"}
           </h3>
-          {comments.comments.map((comment, index) => {
-            console.log(comment.author.avatar_URL);
-            return (
+          {organizeComments(comments.comments).map((comment, index) => (
+            <div key={comment.ID} className="mb-8 ">
               <CommentContainer
-                key={index}
                 imageLink={comment.author.avatar_URL}
                 name={comment.author.name}
                 detail={comment}
                 dateString={comment.date}
               />
-            );
-          })}
+              {/* Render replies if any */}
+              {comment.replies.length > 0 && (
+                <div className="ml-8 md:ml-16 lg:ml-24 mt-4 border-l-2 border-gray-300 pl-4">
+                  {comment.replies.map((reply) => (
+                    <CommentContainer
+                      key={reply.ID}
+                      imageLink={reply.author.avatar_URL}
+                      name={reply.author.name}
+                      detail={reply}
+                      dateString={reply.date}
+                      isReply={true}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </section>
       )}
 
       {/* Comment Input */}
       <section className="px-4 lg:px-[6%] ">
         <h4 className="h4-text text-muted">Leave a Comment</h4>
-        <CommentInputcontainer />
+        <CommentInputcontainer rows={8} />
       </section>
 
       {/* Related Posts */}
@@ -427,7 +452,15 @@ const Relatedpost = ({ image, title, date, time, detail, nav }) => {
 };
 
 // Comment Container
-const CommentContainer = ({ name, detail, dateString, imageLink }) => {
+const CommentContainer = ({
+  name,
+  detail,
+  dateString,
+  imageLink,
+  isReply = false,
+}) => {
+  const [openReply, setOpenReply] = useState(false);
+
   const cleanContent = (html) => {
     return html
       .replace(/<p>\s*<\/p>/g, "") // Remove empty paragraphs
@@ -449,11 +482,30 @@ const CommentContainer = ({ name, detail, dateString, imageLink }) => {
     hour12: true,
   });
 
+  const handleReplyClick = () => {
+    setOpenReply(!openReply);
+  };
+
+  const handleReplySubmit = () => {
+    setOpenReply(false);
+  };
+
   return (
     <>
-      <div className="flex w-full p-2 justify-between md:w-[80%] md:justify-start md:gap-8 xl:gap-10 xl:w-[70%] ">
+      <div
+        className={`flex w-full p-2 ${
+          isReply
+            ? "md:w-[90%] justify-start gap-6"
+            : "md:w-full lg:w-[95%] justify-between"
+        } md:justify-start md:gap-8 xl:gap-10 ${
+          isReply ? "xl:w-[85%]" : "xl:w-[70%]"
+        }`}
+      >
         {/* Commentor image container */}
-        <div className="w-16 h-16 rounded-full overflow-hidden border-black mt-3 lg:w-24 lg:h-24">
+        <div
+          className={`rounded-full overflow-hidden border-black mt-3 
+    ${isReply ? "w-4 h-4 xs:w-6 xs:h-6 lg:w-12 lg:h-12 " : "w-16 h-16 lg:w-24 lg:h-24"}`}
+        >
           <img
             src={imageLink}
             alt="profile"
@@ -461,19 +513,26 @@ const CommentContainer = ({ name, detail, dateString, imageLink }) => {
           />
         </div>
 
-        {/* Content image container */}
-        <div className="w-[70%]">
+        {/* Content container */}
+        <div
+          className={`${isReply ? "w-[90%] md:w-[80%] xl:w-[60%] " : "w-[70%] md:w-[80%] "}`}
+        >
           {/* Commentor's name */}
           <h5 className="h5-text font-bold tracking-wider">{name}</h5>
 
           {/* Time of comment publication and reply button */}
-          <div className="flex gap-4">
-            <p className="body-text tracking-wider">
+          <div className="flex gap-4 flex-col s:flex-row ">
+            <p className="font-button-links">
               {`${formattedDate} @ ${formattedTime}`}
             </p>
-            <p className="body-text font-bold text-blue-900 hover:text-primary active:text-secondary uppercase">
-              reply
-            </p>
+            {!isReply && (
+              <button
+                onClick={handleReplyClick}
+                className="self-start body-text font-bold text-blue-900 hover:text-primary active:text-secondary uppercase"
+              >
+                <FontAwesomeIcon icon={faReply} /> reply
+              </button>
+            )}
           </div>
 
           {/* Comment */}
@@ -493,17 +552,122 @@ const CommentContainer = ({ name, detail, dateString, imageLink }) => {
           </div>
         </div>
       </div>
+      {/* Comment reply */}
+      {!isReply && openReply && (
+        <div className="flex items-center gap-2 animate__animated animate__zoomIn animate__faster lg:pl-32 ">
+          <CommentReplyContainer
+            rows={3}
+            onReplySubmit={handleReplySubmit}
+            parentId={detail.ID} // Pass the parent comment ID
+          />
+        </div>
+      )}
     </>
   );
 };
 
 // Comment Reply Container
-const CommentReplyContainer = () => {
-  return <></>;
+const CommentReplyContainer = ({ onReplySubmit }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const form = useRef();
+
+  const onSubmit = (data) => {
+    reset();
+
+    if (onReplySubmit) {
+      onReplySubmit();
+    }
+  };
+
+  return (
+    <div className="w-[500px] h-auto mt-2 rounded-2xl md:ml-24 lg:ml-0 xl:ml-4 shadow-custom-chat ">
+      <form
+        action=""
+        name="replyContainer"
+        id="replyContainer"
+        onSubmit={handleSubmit(onSubmit)}
+        ref={form}
+        className="relative flex flex-col p-4 gap-2 body-text group"
+      >
+        <div className="absolute z-10 right-1 top-1 w-6 h-6 rounded-full bg-gray-500 border flex items-center justify-center lg:opacity-0 group-hover:opacity-100 animate__animated group-hover:animate__bounceIn " onClick={() => onReplySubmit()} ><FontAwesomeIcon icon={faX} size="xs" /></div>
+        <fieldset className="relative border-b-2 border-black/60 ">
+          <legend className="absolute top-0 ">
+            <FontAwesomeIcon icon={faUser} />
+          </legend>
+          <input
+            type="text"
+            name="replierName"
+            id="replierName"
+            className="pl-6 pb-1 w-full focus:outline-none focus:border-none xl:pl-8 "
+            placeholder="Name"
+            {...register("replierName", {
+              required: "Name is required",
+            })}
+          />
+          {errors.replierName && (
+            <p className="text-secondary text-[10px] xs:text-sm lg:text-base ">
+              {errors.replierName.message}
+            </p>
+          )}
+        </fieldset>
+        <fieldset className="relative border-b-2 border-black/60 ">
+          <legend className="absolute top-0 ">
+            <FontAwesomeIcon icon={faEnvelope} />
+          </legend>
+          <input
+            type="email"
+            name="replierEmail"
+            id="replierEmail"
+            className="pl-6 pb-1 w-full focus:outline-none focus:border-none xl:pl-8 "
+            placeholder="Email"
+            {...register("replierEmail", {
+              required: "Email is required",
+            })}
+          />
+          {errors.replierEmail && (
+            <p className="text-secondary text-[10px] xs:text-sm lg:text-base ">
+              {errors.replierEmail.message}
+            </p>
+          )}
+        </fieldset>
+        <fieldset className="relative">
+          <legend className="absolute top-0 ">
+            <FontAwesomeIcon icon={faPenToSquare} />
+          </legend>
+          <textarea
+            name="replierMsg"
+            id="replierMsg"
+            className="pl-6 pb-2 body-text w-full focus:outline-none focus:border-none xl:pl-8 "
+            rows={4}
+            placeholder="Reply..."
+            {...register("replierMsg", {
+              required: "Reply is required",
+            })}
+          ></textarea>
+          {errors.replierMsg && (
+            <p className="text-secondary text-[10px] xs:text-sm lg:text-base ">
+              {errors.replierMsg.message}
+            </p>
+          )}
+        </fieldset>
+        <button
+          type="submit"
+          className="border border-black self-end font-button-links px-4 py-1 rounded-xl hover:bg-primary hover:border-primary hover:shadow-custom-chat "
+        >
+          Reply
+        </button>
+      </form>
+    </div>
+  );
 };
 
 // Comment Input Container
-const CommentInputcontainer = () => {
+const CommentInputcontainer = ({ rows, onFormSubmit }) => {
   const {
     register,
     handleSubmit,
@@ -515,6 +679,10 @@ const CommentInputcontainer = () => {
   const onSubmit = (data) => {
     console.log("data:", data);
     reset();
+
+    if (onFormSubmit) {
+      onFormSubmit();
+    }
   };
 
   return (
@@ -572,7 +740,7 @@ const CommentInputcontainer = () => {
             id="commentMsg"
             className="pb-4 pt-2 body-text w-full focus:outline-none focus:border-none "
             placeholder="Your Comment..."
-            rows={8}
+            rows={rows}
             {...register("commentMsg", {
               required: "Add Comment",
             })}
@@ -638,6 +806,34 @@ const ScrollToTopButton = () => {
       )}
     </div>
   );
+};
+
+const organizeComments = (comments) => {
+  const commentMap = {};
+  const result = [];
+
+  // First pass: create a map of all comments by ID
+  comments.forEach((comment) => {
+    commentMap[comment.ID] = {
+      ...comment,
+      replies: [],
+    };
+  });
+
+  // Second pass: organize into hierarchy
+  comments.forEach((comment) => {
+    if (comment.parent && comment.parent.ID) {
+      // This is a reply, add it to its parent's replies array
+      if (commentMap[comment.parent.ID]) {
+        commentMap[comment.parent.ID].replies.push(commentMap[comment.ID]);
+      }
+    } else {
+      // This is a top-level comment
+      result.push(commentMap[comment.ID]);
+    }
+  });
+
+  return result;
 };
 
 export default BlogPost;
