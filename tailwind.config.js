@@ -23,18 +23,25 @@ export default {
         pride: 'url("/pride.jpg")',
         image1:
           'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image1.jpg")',
-        image2: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image2.jpg")',
-        image3: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image3.jpg")',
-        image4: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image4.jpg")',
+        image2:
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image2.jpg")',
+        image3:
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image3.jpg")',
+        image4:
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image4.jpg")',
         image5: 'url("/image5.jpg")',
-        image6: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image6.jpg")',
+        image6:
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image6.jpg")',
         image7: 'url("/image7.jpg")',
         image8: 'url("/image8.jpg")',
         image9:
           'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image9.jpg")',
-        image10: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image10.jpg")',
-        image11: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image11.jpg")',
-        image12: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image12.jpg")',
+        image10:
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image10.jpg")',
+        image11:
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image11.jpg")',
+        image12:
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image12.jpg")',
         image13: 'url("/image13.jpg")',
         image14: 'url("/image14.jpg")',
         image15: 'url("/image15.jpg")',
@@ -57,6 +64,7 @@ export default {
         slideDown: "slideDown 0.5s ease-in-out forwards",
         spinCustom: "spin 1.5s infinite",
         shrink: "shrink 0.5s ease-in-out forwards",
+        rainbowSlide: "rainbowSlide 1.5s ease-in-out forwards",
       },
       keyframes: {
         spin: {
@@ -85,7 +93,11 @@ export default {
         shrink: {
           "0%": { width: "100%" },
           "100%": { width: "50%" },
-        }
+        },
+        rainbowSlide: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
       },
       listStyleType: {
         "lower-alpha": "lower-alpha",
@@ -95,9 +107,10 @@ export default {
         "white-custom": "10px 4px 8px rgba(255, 255, 255, 0.7)",
       },
       boxShadow: {
-        custom: "0px 0px 20px rgba(255, 255, 255, 0.7)",
+        "custom": "0px 0px 20px rgba(255, 255, 255, 0.7)",
         "custom-shadow":
           "inset 19px 19px 16px #959f9d, inset -19px -19px 16px #ffffff",
+        "custom-chat": "0px 3px 25px 0px rgba(0, 145, 255, 0.64);",
       },
     },
   },

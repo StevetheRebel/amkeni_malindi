@@ -30,6 +30,7 @@ import "animate.css/animate.compat.css";
 import "swiper/css/effect-fade";
 import ALogo from "./../../assets/Amkeni A.webp";
 import Typewriter from "../Typewriter";
+import RainbowSlider from "../RainbowSlider";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -139,16 +140,21 @@ function Home() {
               loop={true}
               spaceBetween={30}
               speed={1000}
-              allowTouchMove={false}
-              noSwiping={true}
+              // allowTouchMove={false}
+              // noSwiping={true}
               onSlideChange={handleSlideChange}
+              init={false}
+              onAfterInit={(swiper) => {
+                swiper.init()
+                swiper.slideTo(0, 0)
+              }}
               className="h-full w-full"
             >
               {/* Logo */}
               <SwiperSlide>
-                <div className="absolute h-[56px] w-full bg-black top-0 left-0 animate__animated animate__slideOutLeft -z-10 animate__slow animate__delay-1s md:h-[65px] lg:h-[76px] xl:h-[88px] 2xl:h-[113px]"></div>
+                <RainbowSlider />
                 <div>
-                  <h1 className=" h1-text px-2 bg-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide 2xl:tracking-widest ">
+                  <h1 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl 2xl:tracking-widest ">
                     Welcome to
                     <Typewriter text="..." delay={300} />
                   </h1>
@@ -159,7 +165,7 @@ function Home() {
                     alt=""
                     className="w-32 animate__animated animate_fadeIn s:w-36 md:w-56 lg:w-44 xl:w-60 "
                   />
-                  <h1 className="mb-3 text-5xl font-heading tracking-wider xs:text-6xl s:text-7xl md:text-9xl lg:text-8xl 2xl:text-[10rem] 2xl:mb-3 ">
+                  <h1 className="mb-3 text-5xl font-heading tracking-wider xs:text-6xl s:text-7xl md:text-9xl lg:text-8xl xl:text-9xl xl:mb-[18px] 2xl:text-[10rem] 2xl:mb-3 ">
                     <Typewriter text="MKENI" delay={1000} />
                   </h1>
                 </div>
@@ -167,9 +173,9 @@ function Home() {
 
               {/* Vision */}
               <SwiperSlide>
-                <div className="absolute h-[56px] w-full bg-black top-0 left-0 animate__animated animate__fadeIn animate__slideOutLeft -z-10 animate__slow animate__delay-1s md:h-[65px] lg:h-[76px] xl:h-[88px] 2xl:h-[113px] "></div>
+                <RainbowSlider />
                 <div>
-                  <h1 className=" h1-text px-2 bg-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide 2xl:tracking-widest ">
+                  <h1 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
                     Our Vision
                     <Typewriter text="..." delay={300} />
                   </h1>
@@ -184,9 +190,9 @@ function Home() {
 
               {/* Mission */}
               <SwiperSlide>
-                <div className="absolute h-[56px] w-full bg-black top-0 left-0 animate__animated animate__fadeIn animate__slideOutLeft -z-10 animate__slow animate__delay-1s md:h-[65px] lg:h-[76px] xl:h-[88px] 2xl:h-[113px] "></div>
+                <RainbowSlider />
                 <div>
-                  <h1 className=" h1-text px-2 bg-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide 2xl:tracking-widest ">
+                  <h1 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
                     Our Mission
                     <Typewriter text="..." delay={300} />
                   </h1>

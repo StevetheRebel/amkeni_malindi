@@ -4,6 +4,7 @@ import "animate.css";
 const Typewriter = ({ text, delay = 30, onComplete }) => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     if (currentIndex < text.length) {
@@ -29,9 +30,6 @@ const Typewriter = ({ text, delay = 30, onComplete }) => {
           {char}
         </span>
       ))}
-      {currentIndex < text.length && (
-        <span className="animate__animated animate__fadeIn animate__infinite inline-block w-2 h-6 bg-black ml-1 align-middle" />
-      )}
     </span>
   );
 };
