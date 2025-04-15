@@ -140,8 +140,8 @@ function Home() {
               loop={true}
               spaceBetween={30}
               speed={1000}
-              // allowTouchMove={false}
-              // noSwiping={true}
+              allowTouchMove={false}
+              noSwiping={true}
               onSlideChange={handleSlideChange}
               init={false}
               onAfterInit={(swiper) => {
