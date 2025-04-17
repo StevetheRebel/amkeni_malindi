@@ -49,6 +49,10 @@
   font-style: normal;
 }
 
+body {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   h1:not([class]) {
     @apply h2-text tracking-widest xl:tracking-wide;
