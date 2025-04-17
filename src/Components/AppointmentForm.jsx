@@ -95,10 +95,10 @@ const AppointmentForm = ({ handleFormClose }) => {
         name="appointmentForm"
         id="appointmentForm"
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 items-center"
+        className="flex flex-col gap-4 items-center lg:pb-8 "
       >
         {/* Full Name */}
-        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%]">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[90%] xl:w-[80%] 2xl:w-[90%] ">
           <legend className="legend">Full Name</legend>
           <div className="flex flex-col gap-4 justify-end sm:flex-row sm:justify-between sm:gap-0">
             {/* First Name */}
@@ -144,7 +144,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Contact Details */}
-        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%]">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[90%] xl:w-[80%] 2xl:w-[90%]">
           <legend className="legend">Contact Details</legend>
           <div className="flex flex-col gap-4 justify-end sm:flex-row sm:justify-between sm:gap-0">
             {/* Phone No: */}
@@ -202,7 +202,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Contact Method */}
-        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%] ">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[90%] xl:w-[80%] 2xl:w-[90%]">
           <legend className="legend">Preferred Contact method</legend>
 
           <div className="flex justify-between sm:px-10 lg:px-14">
@@ -262,7 +262,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Services Required */}
-        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%] body-text">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[90%] xl:w-[80%] 2xl:w-[90%] body-text">
           <legend className="legend">Select Services You Require</legend>
           <p className="body-text pb-2">
             (You can select more than one option)
@@ -357,7 +357,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Date of appointment */}
-        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%] ">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[90%] xl:w-[80%] 2xl:w-[90%] ">
           <legend className="legend">Appointment Date</legend>
           <p className="body-text pb-2">
             We're open <span className="font-bold">Mon - Fri</span> 9:00AM to
@@ -417,7 +417,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Additional Information Text Area */}
-        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%] ">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[90%] xl:w-[80%] 2xl:w-[90%] ">
           <legend className="legend">Additional Information</legend>
           <textarea
             name="additionalInfo"
@@ -430,7 +430,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         </fieldset>
 
         {/* Consent Confirmation */}
-        <fieldset className="px-2 py-2 w-full border-2 lg:w-[70%] xl:w-[60%] ">
+        <fieldset className="px-2 py-2 w-full border-2 lg:w-[90%] xl:w-[80%] 2xl:w-[90%] ">
           <legend className="legend">Consent</legend>
           <div>
             <input
@@ -458,7 +458,7 @@ const AppointmentForm = ({ handleFormClose }) => {
         <fieldset>
           <button
             type="submit"
-            className="px-4 py-2 rounded-lg bg-primary/40 body-text text-black/50 hover:bg-primary hover:text-black"
+            className="font-button-links px-4 py-2 rounded-lg bg-primary/40 body-text text-black/50 hover:bg-primary hover:text-black"
           >
             Submit
           </button>
