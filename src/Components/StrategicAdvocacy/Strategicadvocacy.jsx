@@ -35,7 +35,7 @@ function Strategicadvocacy({ id }) {
             <img
               src={AdvocacyImg}
               alt="Advocacy Image"
-              className="w-2/3 rounded-2xl sm:h-[90%] sm:absolute sm:top-0 sm:z-0 sm:opacity-20 xl:w-1/2 xl:top-10 2xl:w-[30%]"
+              className="w-2/3 rounded-2xl sm:h-[90%] sm:absolute sm:top-0 sm:z-0 sm:opacity-20 xl:w-1/2 xl:top-10 2xl:w-[20%]"
             />
             <div className="sm:z-10">
               {bundleTextIntoParagraphs(
