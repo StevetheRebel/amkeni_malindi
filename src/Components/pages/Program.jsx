@@ -34,6 +34,7 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   borderRadius: "24px",
+  boxShadow: "inset 0px 0px 11px 7px rgba(132, 202, 234, 0.25)",
 };
 
 function Program() {
@@ -126,7 +127,7 @@ function Program() {
             animateOnce
           >
             <button
-              className="button-type button-text bg-primary/50 rounded-full hover:bg-primary"
+              className="button-type button-text bg-primary/50 rounded-full hover:bg-primary lg:py-2 lg:px-3 hover:tracking-wider transition-all duration-300 hover:text-black "
               onClick={handleOpen6}
             >
               Book an Appointment
@@ -139,17 +140,17 @@ function Program() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <div className="2xl:px-10 relative flex flex-col pb-4">
-                <div className="sticky self-end top-2 right-2">
+              <div className="2xl:px-10 relative flex flex-col pb-4 group ">
+                <div className="sticky self-end top-2 z-30 right-2 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <FontAwesomeIcon
                     icon={faXmark}
                     onClick={handleClose6}
-                    className="body-text p-2 z-30 bg-black rounded-full text-white hover:text-secondary"
+                    className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
                   />
                 </div>
-                <h2 className="h2-text text-secondary/70 text-center pb-2 md:pb-4">
-                  Book An Appointment
-                </h2>
+                  <h2 className="h2-text text-secondary/70 text-center pb-2 md:pb-4">
+                    Book An Appointment
+                  </h2>
                 <AppointmentForm handleFormClose={handleClose6} />
               </div>
             </Box>
