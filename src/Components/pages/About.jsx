@@ -210,6 +210,7 @@ function About() {
                 title={vol.Position}
                 name={vol.Name}
                 image={vol.Image}
+                link={vol.LinkedIn}
               />
             ))}
           </Marquee>
@@ -240,6 +241,8 @@ function CarouselSlide({ title, focusArea, highlights }) {
 
 // Cards component for the board, staff and volunteer display
 function Card({ title, name, link, image }) {
+
+
   return (
     <>
       <div className="relative w-48 m-4 flex-wrap gap-4 aspect-[1/1.5] rounded-xl md:w-48 lg:w-52 2xl:w-72 overflow-hidden group ">
@@ -274,7 +277,10 @@ function Card({ title, name, link, image }) {
           <h4 className="h4-text capitalize text-white">{title}</h4>
           <p className="body-text font-bold text-white">{name}</p>
           <a
+          onClick={() => {console.log(link);
+          }}
             href={link}
+            target="_blank"
             className="w-16 grid place-items-center button-text button-type self-start bg-primary/70 hover:bg-primary hover:text-black rounded-3xl "
           >
             <FontAwesomeIcon icon={faLinkedin} />
