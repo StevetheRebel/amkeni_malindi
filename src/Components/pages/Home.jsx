@@ -156,7 +156,7 @@ function Home() {
                 <div>
                   <h1 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl 2xl:tracking-widest ">
                     Welcome to
-                    <Typewriter text="..." delay={300} />
+                    <Typewriter text="..." delay={1000} />
                   </h1>
                 </div>
                 <div className="mt-6 flex items-end bg-white/20 backdrop-blur-sm rounded-b-2xl xs:justify-center">
@@ -177,7 +177,7 @@ function Home() {
                 <div>
                   <h1 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
                     Our Vision
-                    <Typewriter text="..." delay={300} />
+                    <Typewriter text="..." delay={1000} />
                   </h1>
                   <p className="py-2 font-subheading font-bold text-3xl mt-6 w-full text-center h-fit bg-white/20 backdrop-blur-sm rounded-b-2xl xs:text-4xl xs:py-4 xs:px-2 s:px-6 md:text-6xl lg:text-5xl 2xl:text-7xl 2xl:tracking-widest 2xl:py-8 2xl:px-16 ">
                     <Typewriter
@@ -194,13 +194,32 @@ function Home() {
                 <div>
                   <h1 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
                     Our Mission
-                    <Typewriter text="..." delay={300} />
+                    <Typewriter text="..." delay={1000} />
                   </h1>
                   <p className="mt-6 py-2 font-subheading font-bold w-full text-center px-1 h-fit bg-white/30 backdrop-blur-sm rounded-b-2xl xs:px-4 xs:text-base s:text-lg s:py-4 md:text-2xl md:px-6 2xl:text-4xl 2xl:tracking-wider ">
                     <Typewriter
                       text="To improve the quality of life of sexual and gender diverse communities through an integrated approach to health service provision, social and economic empowerment, knowledge genaration and strategic advocacy."
                       delay={30}
                     />
+                  </p>
+                </div>
+              </SwiperSlide>
+
+              {/* Values */}
+              <SwiperSlide>
+                <RainbowSlider />
+                <div>
+                  <h1 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
+                    Our Values
+                    <Typewriter text="..." delay={1000} />
+                  </h1>
+                  <p className="mt-6 py-2 font-subheading font-bold w-full text-start px-1 h-fit bg-white/30 backdrop-blur-sm rounded-b-2xl xs:px-4 md:px-6 2xl:text-4xl 2xl:tracking-wider ">
+                    <ul className="font-subheading list-disc list-inside flex flex-col indent-4">
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">Accountability</li>
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">Excellence</li>
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">Non-Discrimination</li>
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">Gender-Mainstream</li>
+                    </ul>
                   </p>
                 </div>
               </SwiperSlide>
@@ -341,11 +360,11 @@ function CarouselSlide({ title, description, link, imagePath }) {
 
   return (
     <div className="h-fit w-full rounded-2xl flex flex-col items-center pt-4 pb-8 gap-4 sm:flex-row sm:gap-4 sm:px-4 sm:pb-0 lg:gap-8 lg:px-8 lg:items-start 2xl:gap-12 2xl:px-12">
-      <div className="w-[90%] aspect-square rounded-xl lg:w-auto lg:h-40 2xl:h-48">
+      <div className="w-[90%] aspect-square rounded-xl lg:w-auto lg:h-40 2xl:h-64 2xl:self-center">
         <img
           src={imagePath}
           alt={title}
-          className="w-full h-full rounded-xl bg-cover"
+          className="w-full h-full rounded-xl bg-cover animate__animated animate__fadeIn animate__slow "
         />
       </div>
       <div className="flex flex-col h-[390px] py-4 justify-between md:h-[300px] md:py-6 2xl:h-[350px] 2xl:py-8 ">
