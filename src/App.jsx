@@ -6,7 +6,6 @@ import ScrollToTop from "./Components/ScrollToTop";
 import "./index.css";
 import { useNavigationLoading } from "./Hook/useNavigationLoading";
 import RainbowSpinner from "./Components/Loader/RainbowSpinner";
-import AuthCallback from "./Components/AuthCallback";
 
 const About = lazy(() => import("./../src/Components/pages/About"));
 const Program = lazy(() => import("./../src/Components/pages/Program"));
@@ -19,7 +18,7 @@ const BlogPost = lazy(() => import("./Components/pages/BlogPost"));
 
 function App() {
   const location = useLocation();
-  const isLoading = useNavigationLoading(3000)
+  const isLoading = useNavigationLoading(3000);
 
   return (
     <>
@@ -34,7 +33,6 @@ function App() {
           <Route path="/news-blog" element={<NewsBlog />} />
           <Route path="/reachout" element={<Reachout />} />
           <Route path="/blog/:postId" element={<BlogPost />} />
-          <Route path="/auth/callback" element={<AuthCallback /> } />
         </Routes>
       </ScrollToTop>
     </>

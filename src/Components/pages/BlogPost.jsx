@@ -33,8 +33,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "animate.css/animate.min.css";
 import RainbowSpinner from "../Loader/RainbowSpinner";
-import LoginButton from "../auth/LoginButton";
-import UserBadge from "../auth/UserBadge";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -92,57 +90,28 @@ const BlogPost = () => {
     setIsSubmittingComment(true);
     setSubmitError(null);
 
-    // 1. Get the stored token (added this line)
-    const token = localStorage.getItem("wpcom_token");
-
-    // 2. Check if token exists (new validation)
-    if (!token) {
-      setSubmitError("Please log in to comment");
-      setIsSubmittingComment(false);
-      return; // Exit if no token
-    }
-
     try {
-      // 3. Add authorization header (modified this part)
-      const response = await axios.post(
+      await axios.post(
         `https://public-api.wordpress.com/rest/v1.1/sites/amkenimalindi.wordpress.com/posts/${postId}/replies/new`,
         {
           content: data.commentMsg,
           author: data.name,
           author_email: data.email,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Added auth header
-          },
         }
       );
 
-      // 4. Also add auth to comments refresh (modified this part)
       const allCommentsRes = await axios.get(
         `https://public-api.wordpress.com/rest/v1.1/sites/145259521/posts/${postId}/replies/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
       );
 
       setComments(allCommentsRes.data);
     } catch (error) {
       console.error("Error submitting comment:", error);
 
-      // 5. Enhanced error handling (updated this part)
-      if (error.response?.status === 401) {
-        setSubmitError("Session expired. Please log in again.");
-        // Optional: Clear invalid token
-        localStorage.removeItem("wpcom_token");
-      } else {
-        setSubmitError(
-          error.response?.data?.message ||
-            "Failed to submit comment. Please try again later."
-        );
-      }
+      setSubmitError(
+        error.response?.data?.message || "Failed to submit comment. Please try again later."
+      )
+
     } finally {
       setIsSubmittingComment(false);
     }
@@ -154,7 +123,7 @@ const BlogPost = () => {
     setSubmitError(null);
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `https://public-api.wordpress.com/rest/v1.1/sites/amkenimalindi.wordpress.com/posts/${postId}/replies/new`,
         {
           content: data.replierMsg,
@@ -172,6 +141,7 @@ const BlogPost = () => {
     } catch (error) {
       console.error("Error submitting reply:", error);
       setSubmitError("Failed to submit reply. Please try again.");
+      throw error;
     } finally {
       setIsSubmittingReply(false);
     }
@@ -441,6 +411,8 @@ const BlogPost = () => {
                 name={comment.author.name}
                 detail={comment}
                 dateString={comment.date}
+                onSubmitReply={submitReply}
+                isSubmittingReply={isSubmittingReply}
               />
               {/* Render replies if any */}
               {comment.replies.length > 0 && (
@@ -466,22 +438,8 @@ const BlogPost = () => {
       <section className="px-4 lg:px-[6%] ">
         <h4 className="h4-text text-muted">Leave a Comment</h4>
 
-        {localStorage.getItem("wpcom_token") ? (
-          <>
-            <UserBadge />
-            {submitError && <p className="text-red-500">{submitError}</p>}
-            <CommentInputcontainer
-              rows={8}
-              onSubmit={submitComment}
-              isSubmitting={isSubmittingComment}
-            />
-          </>
-        ) : (
-          <div className="flex flex-col items-center gap-4 py-8">
-            <p className="body-text">You must login to comment</p>
-            <LoginButton />
-          </div>
-        )}
+        {submitError && <p>{submitError}</p>}
+        <CommentInputcontainer rows={8} onSubmit={submitComment} isSubmitting={isSubmittingComment} />
       </section>
 
       {/* Related Posts */}
@@ -571,6 +529,8 @@ const CommentContainer = ({
   dateString,
   imageLink,
   isReply = false,
+  onSubmitReply,
+  isSubmittingReply
 }) => {
   const [openReply, setOpenReply] = useState(false);
 
@@ -676,9 +636,13 @@ const CommentContainer = ({
         <div className="flex items-center gap-2 animate__animated animate__zoomIn animate__faster lg:pl-32 ">
           <CommentReplyContainer
             rows={3}
-            onReplySubmit={handleReplySubmit}
+            onReplySubmit={(data) => {
+              onSubmitReply(data, detail.ID)
+              setOpenReply(false)
+            }}
             parentId={detail.ID} // Pass the parent comment ID
             isSubmitting={isSubmittingReply}
+            onClose={() => setOpenReply(false)}
           />
         </div>
       )}
@@ -687,7 +651,7 @@ const CommentContainer = ({
 };
 
 // Comment Reply Container
-const CommentReplyContainer = ({ onReplySubmit, onSubmit, isSubmitting }) => {
+const CommentReplyContainer = ({ onReplySubmit, isSubmitting, onClose }) => {
   const {
     register,
     handleSubmit,
@@ -695,6 +659,16 @@ const CommentReplyContainer = ({ onReplySubmit, onSubmit, isSubmitting }) => {
     reset,
   } = useForm();
   const form = useRef();
+
+  const onSubmit = (data) => {
+    onReplySubmit(data);
+    reset(); // Reset the form after submission
+  }
+
+  const handleClose = (e) => {
+    e.preventDefault();
+    onClose()
+  }
 
   return (
     <div className="w-[500px] h-auto mt-2 rounded-2xl md:ml-24 lg:ml-0 xl:ml-4 shadow-custom-chat ">
@@ -708,7 +682,7 @@ const CommentReplyContainer = ({ onReplySubmit, onSubmit, isSubmitting }) => {
       >
         <div
           className="absolute z-10 right-1 top-1 w-6 h-6 rounded-full bg-gray-500 border flex items-center justify-center lg:opacity-0 group-hover:opacity-100 animate__animated group-hover:animate__bounceIn "
-          onClick={() => onReplySubmit()}
+          onClick={handleClose}
         >
           <FontAwesomeIcon icon={faX} size="xs" />
         </div>
