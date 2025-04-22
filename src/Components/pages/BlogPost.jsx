@@ -33,6 +33,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "animate.css/animate.min.css";
 import RainbowSpinner from "../Loader/RainbowSpinner";
+import { addComment, getCommentsForPost } from "../../firebase";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -50,7 +51,7 @@ const BlogPost = () => {
   const [isSubmittingReply, setIsSubmittingReply] = useState(false);
   const [submitError, setSubmitError] = useState(null);
 
-  // Fetch the specific blog post
+  // Fetch the specifics for the blog post
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -65,10 +66,10 @@ const BlogPost = () => {
         );
         setAllPosts(allPostsResponse.data.posts);
 
-        const allCommentsRes = await axios.get(
-          `https://public-api.wordpress.com/rest/v1.1/sites/145259521/posts/${postId}/replies/`
-        );
-        setComments(allCommentsRes.data);
+        // Fetch comments from Firebase
+        const firebaseComments = await getCommentsForPost(postId);
+
+        setComments(firebaseComments);
         setIsExpanded(false);
         setLoading(false);
       } catch (error) {
@@ -91,27 +92,21 @@ const BlogPost = () => {
     setSubmitError(null);
 
     try {
-      await axios.post(
-        `https://public-api.wordpress.com/rest/v1.1/sites/amkenimalindi.wordpress.com/posts/${postId}/replies/new`,
-        {
-          content: data.commentMsg,
-          author: data.name,
-          author_email: data.email,
-        }
-      );
+      await addComment({
+        postId: postId,
+        author: data.name,
+        author_email: data.email,
+        content: data.commentMsg,
+      });
 
-      const allCommentsRes = await axios.get(
-        `https://public-api.wordpress.com/rest/v1.1/sites/145259521/posts/${postId}/replies/`,
-      );
-
-      setComments(allCommentsRes.data);
+      const updatedComments = await getCommentsForPost(postId);
+      setComments(updatedComments);
     } catch (error) {
       console.error("Error submitting comment:", error);
 
       setSubmitError(
-        error.response?.data?.message || "Failed to submit comment. Please try again later."
-      )
-
+        error.message || "Failed to submit comment. Please try again later."
+      );
     } finally {
       setIsSubmittingComment(false);
     }
@@ -123,21 +118,17 @@ const BlogPost = () => {
     setSubmitError(null);
 
     try {
-      await axios.post(
-        `https://public-api.wordpress.com/rest/v1.1/sites/amkenimalindi.wordpress.com/posts/${postId}/replies/new`,
-        {
-          content: data.replierMsg,
-          author: data.replierName,
-          author_email: data.replierEmail,
-          parent: parentId,
-        }
-      );
+      await addComment({
+        postId: postId,
+        author: data.replierName,
+        author_email: data.replierEmail,
+        content: data.replierMsg,
+        parentId: parentId,
+      });
 
       // Refresh comments after successful submission
-      const allCommentsRes = await axios.get(
-        `https://public-api.wordpress.com/rest/v1.1/sites/145259521/posts/${postId}/replies/`
-      );
-      setComments(allCommentsRes.data);
+      const updatedComments = await getCommentsForPost(postId);
+      setComments(updatedComments);
     } catch (error) {
       console.error("Error submitting reply:", error);
       setSubmitError("Failed to submit reply. Please try again.");
@@ -398,39 +389,38 @@ const BlogPost = () => {
         </div>
       </section>
 
-      {/* Comment Container */}
-      {comments.found > 0 && (
+      {/* Comment Display Container */}
+      {comments.length > 0 && (
         <section className="px-4 lg:px-[6%] ">
           <h3 className="h3-text text-secondary">
-            {`${comments.found}`} {comments.found > 1 ? "Comments" : "Comment"}
+            {`${comments.length}`}{" "}
+            {comments.length > 1 ? "Comments" : "Comment"}
           </h3>
-          {organizeComments(comments.comments).map((comment, index) => (
-            <div key={comment.ID} className="mb-8 ">
-              <CommentContainer
-                imageLink={comment.author.avatar_URL}
-                name={comment.author.name}
-                detail={comment}
-                dateString={comment.date}
-                onSubmitReply={submitReply}
-                isSubmittingReply={isSubmittingReply}
-              />
-              {/* Render replies if any */}
-              {comment.replies.length > 0 && (
-                <div className="ml-8 md:ml-16 lg:ml-24 mt-4 border-l-2 border-gray-300 pl-4">
-                  {comment.replies.map((reply) => (
-                    <CommentContainer
-                      key={reply.ID}
-                      imageLink={reply.author.avatar_URL}
-                      name={reply.author.name}
-                      detail={reply}
-                      dateString={reply.date}
-                      isReply={true}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+          {organizeComments(comments).map((comment) => {
+            console.log(comment.id);
+            return (
+              <div key={comment.id} className="mb-8 ">
+                <CommentContainer
+                  key={comment.id}
+                  detail={comment}
+                  onSubmitReply={submitReply}
+                  isSubmittingReply={isSubmittingReply}
+                />
+                {/* Render replies if any */}
+                {comment.replies.length > 0 && (
+                  <div className="ml-8 md:ml-16 lg:ml-24 mt-4 border-l-2 border-gray-300 pl-4">
+                    {comment.replies.map((reply) => (
+                      <CommentContainer
+                        key={reply.id}
+                        detail={reply}
+                        isReply={true}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </section>
       )}
 
@@ -439,7 +429,11 @@ const BlogPost = () => {
         <h4 className="h4-text text-muted">Leave a Comment</h4>
 
         {submitError && <p>{submitError}</p>}
-        <CommentInputcontainer rows={8} onSubmit={submitComment} isSubmitting={isSubmittingComment} />
+        <CommentInputcontainer
+          rows={8}
+          onSubmit={submitComment}
+          isSubmitting={isSubmittingComment}
+        />
       </section>
 
       {/* Related Posts */}
@@ -524,15 +518,17 @@ const Relatedpost = ({ image, title, date, time, detail, nav }) => {
 
 // Comment Container
 const CommentContainer = ({
-  name,
   detail,
-  dateString,
-  imageLink,
   isReply = false,
   onSubmitReply,
-  isSubmittingReply
+  isSubmittingReply,
 }) => {
   const [openReply, setOpenReply] = useState(false);
+
+  const displayName = detail.author || "Anonymous";
+  const displayDate = detail.date || detail.timestamp?.toDate() || new Date();
+  const displayContent = detail.content || "";
+  const avatarUrl = detail.gravatarUrl || OrgLogo;
 
   const cleanContent = (html) => {
     return html
@@ -541,15 +537,13 @@ const CommentContainer = ({
       .replace(/style="[^"]*"/g, ""); // Remove inline styles
   };
 
-  const date = new Date(dateString);
-
-  const formattedDate = date.toLocaleDateString("en-us", {
+  const formattedDate = displayDate.toLocaleDateString("en-us", {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
 
-  const formattedTime = date.toLocaleTimeString("en-US", {
+  const formattedTime = displayDate.toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
@@ -557,10 +551,6 @@ const CommentContainer = ({
 
   const handleReplyClick = () => {
     setOpenReply(!openReply);
-  };
-
-  const handleReplySubmit = () => {
-    setOpenReply(false);
   };
 
   return (
@@ -584,9 +574,12 @@ const CommentContainer = ({
     }`}
         >
           <img
-            src={imageLink}
+            src={avatarUrl}
             alt="profile"
             className="object-cover h-full w-full"
+            onError={(e) => {
+              e.target.src = OrgLogo;
+            }}
           />
         </div>
 
@@ -597,7 +590,7 @@ const CommentContainer = ({
           }`}
         >
           {/* Commentor's name */}
-          <h5 className="h5-text font-bold tracking-wider">{name}</h5>
+          <h5 className="h5-text font-bold tracking-wider">{displayName}</h5>
 
           {/* Time of comment publication and reply button */}
           <div className="flex gap-4 flex-col s:flex-row ">
@@ -620,7 +613,7 @@ const CommentContainer = ({
               className="blog-content"
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(
-                  cleanContent(he.decode(detail.content)),
+                  cleanContent(he.decode(displayContent)),
                   {
                     ALLOWED_TAGS: ["p"],
                     ALLOWED_ATTR: [],
@@ -637,10 +630,10 @@ const CommentContainer = ({
           <CommentReplyContainer
             rows={3}
             onReplySubmit={(data) => {
-              onSubmitReply(data, detail.ID)
-              setOpenReply(false)
+              onSubmitReply(data, detail.id);
+              setOpenReply(false);
             }}
-            parentId={detail.ID} // Pass the parent comment ID
+            parentId={detail.id} // Pass the parent comment ID
             isSubmitting={isSubmittingReply}
             onClose={() => setOpenReply(false)}
           />
@@ -663,12 +656,12 @@ const CommentReplyContainer = ({ onReplySubmit, isSubmitting, onClose }) => {
   const onSubmit = (data) => {
     onReplySubmit(data);
     reset(); // Reset the form after submission
-  }
+  };
 
   const handleClose = (e) => {
     e.preventDefault();
-    onClose()
-  }
+    onClose();
+  };
 
   return (
     <div className="w-[500px] h-auto mt-2 rounded-2xl md:ml-24 lg:ml-0 xl:ml-4 shadow-custom-chat ">
@@ -775,7 +768,10 @@ const CommentInputcontainer = ({ rows, onSubmit, isSubmitting }) => {
         name="commentInput"
         id="commentInput"
         autoComplete="yes"
-        onSubmit={handleSubmit((data) => onSubmit(data))}
+        onSubmit={handleSubmit((data) => {
+          onSubmit(data);
+          reset()
+        })}
         ref={form}
         className="md:w-[65%] xl:w-[50%] "
       >
@@ -893,27 +889,33 @@ const ScrollToTopButton = () => {
 };
 
 const organizeComments = (comments) => {
+  if (!comments || !Array.isArray(comments)) return [];
+
   const commentMap = {};
   const result = [];
 
   // First pass: create a map of all comments by ID
   comments.forEach((comment) => {
-    commentMap[comment.ID] = {
+    commentMap[comment.id] = {
       ...comment,
       replies: [],
+      date: comment.timestamp?.toDate ? comment.timestamp.toDate() : new Date(),
+      author: comment.author || "Anonymous",
+      content: comment.content || "",
+      gravatarUrl: comment.gravatarUrl || OrgLogo,
     };
   });
 
   // Second pass: organize into hierarchy
   comments.forEach((comment) => {
-    if (comment.parent && comment.parent.ID) {
+    if (comment.parentId) {
       // This is a reply, add it to its parent's replies array
-      if (commentMap[comment.parent.ID]) {
-        commentMap[comment.parent.ID].replies.push(commentMap[comment.ID]);
+      if (commentMap[comment.parentId]) {
+        commentMap[comment.parentId].replies.push(commentMap[comment.id]);
       }
     } else {
       // This is a top-level comment
-      result.push(commentMap[comment.ID]);
+      result.push(commentMap[comment.id]);
     }
   });
 
