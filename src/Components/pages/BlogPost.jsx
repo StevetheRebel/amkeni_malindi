@@ -34,6 +34,7 @@ import {
 import "animate.css/animate.min.css";
 import RainbowSpinner from "../Loader/RainbowSpinner";
 import { addComment, getCommentsForPost } from "../../firebase";
+import { getRandomAvatar } from "../../utils/randomAvatar";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -97,6 +98,7 @@ const BlogPost = () => {
         author: data.name,
         author_email: data.email,
         content: data.commentMsg,
+        gravatarUrl: getRandomAvatar(data.name),
       });
 
       const updatedComments = await getCommentsForPost(postId);
@@ -124,6 +126,7 @@ const BlogPost = () => {
         author_email: data.replierEmail,
         content: data.replierMsg,
         parentId: parentId,
+        gravatarUrl: getRandomAvatar(data.replierName),
       });
 
       // Refresh comments after successful submission
@@ -397,7 +400,6 @@ const BlogPost = () => {
             {comments.length > 1 ? "Comments" : "Comment"}
           </h3>
           {organizeComments(comments).map((comment) => {
-            console.log(comment.id);
             return (
               <div key={comment.id} className="mb-8 ">
                 <CommentContainer
@@ -624,6 +626,7 @@ const CommentContainer = ({
           </div>
         </div>
       </div>
+
       {/* Comment reply */}
       {!isReply && openReply && (
         <div className="flex items-center gap-2 animate__animated animate__zoomIn animate__faster lg:pl-32 ">
@@ -770,7 +773,7 @@ const CommentInputcontainer = ({ rows, onSubmit, isSubmitting }) => {
         autoComplete="yes"
         onSubmit={handleSubmit((data) => {
           onSubmit(data);
-          reset()
+          reset();
         })}
         ref={form}
         className="md:w-[65%] xl:w-[50%] "
