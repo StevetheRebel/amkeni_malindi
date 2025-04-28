@@ -103,7 +103,7 @@ function Home() {
           <Swiper
             modules={[Autoplay, EffectFade]}
             effect="fade"
-            autoplay={{ delay: 10000, disableOnInteraction: false }}
+            autoplay={{ delay: 30000, disableOnInteraction: false }}
             loop={true}
             speed={2000}
             className="h-full w-full"
@@ -216,9 +216,9 @@ function Home() {
                   <p className="mt-6 py-2 font-subheading font-bold w-full text-start px-1 h-fit bg-white/30 backdrop-blur-sm rounded-b-2xl xs:px-4 md:px-6 2xl:text-4xl 2xl:tracking-wider ">
                     <ul className="font-subheading list-disc list-inside flex flex-col indent-4">
                       <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">Accountability</li>
-                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">Excellence</li>
-                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">Non-Discrimination</li>
-                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">Gender-Mainstream</li>
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl animate__animated animate__fadeIn animate__delay-2s animate__slow ">Excellence</li>
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl animate__animated animate__fadeIn animate__delay-3s animate__slow ">Non-Discrimination</li>
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl animate__animated animate__fadeIn animate__delay-4s animate__slow">Gender-Mainstream</li>
                     </ul>
                   </p>
                 </div>
