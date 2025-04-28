@@ -492,7 +492,7 @@ const Relatedpost = ({ image, title, date, time, detail, nav }) => {
           <img
             src={image}
             alt={title}
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0"
+            className="w-full h-full object-cover md:grayscale group-hover:grayscale-0"
             onError={(e) => (e.target.src = pic1)}
           />
         </div>
