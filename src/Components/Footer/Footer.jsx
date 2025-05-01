@@ -45,34 +45,50 @@ function Footer() {
   const form = useRef();
 
   const onSubmit = (data) => {
-    console.log("date:", data);
-    setOpenSubmission(true);
+    const formData = new FormData();
+    formData.append("EMAIL", data.subscriberEmail);
+    formData.append("MMERGE7", "get updates"); // Changed from getupdates to MMERGE7
+    formData.append("b_f55ff5eee7cf7f45ff793a98b_5120374c31", ""); // Anti-bot field
 
-    reset();
+    try {
+      const response = fetch(
+        "https://amkenimalindi.us10.list-manage.com/subscribe/post?u=f55ff5eee7cf7f45ff793a98b&amp;id=5120374c31&amp;f_id=00e9d9e3f0",
+        {
+          method: "POST",
+          mode: "no-cors",
+          body: formData,
+        }
+      );
+
+      setOpenSubmission(true);
+      reset();
+    } catch (error) {
+      console.log("Submission is not successfull:", error);
+    }
   };
 
   useEffect(() => {
-      let timer;
-  
-      if (openSubmission) {
-        setCountDown(5);
-  
-        timer = setInterval(() => {
-          setCountDown((prev) => {
-            if (prev <= 1) {
-              clearInterval(timer); 
-              handleModalClose(); 
-              return 0;
-            }
-            return prev - 1;
-          });
-        }, 1000);
-      }
-  
-      return () => {
-        clearInterval(timer);
-      };
-    }, [openSubmission]);
+    let timer;
+
+    if (openSubmission) {
+      setCountDown(5);
+
+      timer = setInterval(() => {
+        setCountDown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            handleModalClose();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [openSubmission]);
 
   return (
     <>
@@ -98,8 +114,14 @@ function Footer() {
               ref={form}
             >
               <input
+                type="text"
+                name="MMERGE7"
+                id="gettingUpdate"
+                className="hidden"
+              />
+              <input
                 type="email"
-                name="subscriberEmail"
+                name="EMAIL"
                 id="subscriberEmail"
                 placeholder="Enter your email"
                 className="bg-light p-2 rounded-xl focus:outline-none focus:bg-accent/60 focus:text-muted"
@@ -137,7 +159,11 @@ function Footer() {
                   >
                     Welcome to the inside scoop🌈!😉
                   </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }} className="text-center" >
+                  <Typography
+                    id="modal-modal-description"
+                    sx={{ mt: 2 }}
+                    className="text-center"
+                  >
                     Closing in {countDown} seconds...
                   </Typography>
                 </Box>

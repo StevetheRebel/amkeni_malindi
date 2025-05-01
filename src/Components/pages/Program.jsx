@@ -99,8 +99,9 @@ function Program() {
                 animateOut="fadeOut"
                 offset={100}
                 animateOnce
+                key={index} 
               >
-                <p key={index} className="text-justify body-text text-white">
+                <p className="text-justify body-text text-white">
                   {para}
                   <br />
                   <br />

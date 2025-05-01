@@ -35,6 +35,8 @@ function Reachout() {
   const [isScrolling, setIsScrolling] = useState(false);
   const [openSubmission, setOpenSubmission] = useState(false);
   const [countDown, setCountDown] = useState(5);
+  const [submitMessage, setSubmitMessage] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleModalClose = () => setOpenSubmission(false);
 
@@ -48,10 +50,31 @@ function Reachout() {
   const form = useRef();
 
   const onSubmit = (data) => {
-    console.log("data:", data);
-    setOpenSubmission(true);
+    const formData = new FormData();
+    formData.append("EMAIL", data.subscriptionMail);
+    formData.append("SUBSCRIBED", "Newsletter Subscription")
+    formData.append("b_f55ff5eee7cf7f45ff793a98b_5120374c31", "")
 
-    reset();
+    try {
+      const response = fetch(
+        "https://amkenimalindi.us10.list-manage.com/subscribe/post?u=f55ff5eee7cf7f45ff793a98b&amp;id=5120374c31&amp;f_id=00e4d9e3f0",
+        {
+          method: "POST",
+          mode: "no-cors",
+          body: formData,
+        }
+      );
+
+      setOpenSubmission(true);
+      reset();
+    } catch (error) {
+      console.log("Submission is not successfull:", error);
+    }
+  };
+
+  const handleCloseReach = () => {
+    setSubmitMessage(false);
+    setIsSubmitted(true);
   };
 
   useEffect(() => {
@@ -121,9 +144,22 @@ function Reachout() {
         {/* Contact Us */}
         <section className="mt-2 px-4 lg:px-[6%] md:mt-4 lg:mt-6">
           <h2 className="h2-text text-secondary/70 ">Get in Touch</h2>
-          <div className="flex flex-col items-center md:flex-row md:justify-between md:gap-2 md:items-start ">
-            <div className="w-full md:w-[60%]">
-              <ContactForm />
+          <div className="flex flex-col items-center md:flex-row md:justify-between md:gap-2 md:items-center ">
+            <div className="w-full md:w-[60%] ">
+              {submitMessage ? (
+                <div className="w-full md:w-[90%] ">
+                  <ContactForm closeReach={handleCloseReach} />
+                </div>
+              ) : (
+                <div className="w-full flex justify-center h-full md:items-center ">
+                  <button
+                    onClick={() => setSubmitMessage(true)}
+                    className="bg-primary/70 py-2 px-4 font-button-links tracking-widest text-xl rounded-2xl text-white hover:bg-primary hover:text-black md:justify-self-center xl:text-3xl transition-all duration-300 "
+                  >
+                    {`${isSubmitted ? "Message Sent" : "Send us a Message"}`}
+                  </button>
+                </div>
+              )}
             </div>
             <LocalAddress />
           </div>
@@ -136,14 +172,19 @@ function Reachout() {
               Subscribe to our Newsletters
             </h2>
             <form
-              action=""
               className="flex flex-col items-center gap-4 py-4 xs:pb-0 "
               ref={form}
               onSubmit={handleSubmit(onSubmit)}
             >
               <input
+                type="text"
+                name="SUBSCRIBED"
+                id="subscribed"
+                className="hidden"
+              />
+              <input
                 type="email"
-                name="subscriptionMail"
+                name="EMAIL"
                 id="subscriptionMail"
                 className="py-1 px-2 text-black rounded-xl w-[90%] h5-text focus:border-0 focus:outline-none invalid:bg-secondary/70 invalid:text-white"
                 placeholder="Enter your Email..."
@@ -204,7 +245,11 @@ function Reachout() {
                   >
                     Success👏🏽! You've joined the inner Circle!
                   </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }} className="text-center">
+                  <Typography
+                    id="modal-modal-description"
+                    sx={{ mt: 2 }}
+                    className="text-center"
+                  >
                     Closing in {countDown} seconds...
                   </Typography>
                 </Box>
@@ -276,38 +321,32 @@ const LocalAddress = () => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col py-2 gap-2 self-center xs:py-4 xs:gap-3 sm:gap-4 sm:self-start">
+
+      {/* Social Media Links */}
+      <div className="flex py-2 gap-2 self-center xs:py-4 xs:gap-3 sm:gap-4 sm:self-start">
         <SocialMediaLinks
           link="https://web.facebook.com/profile.php?id=100017571492191"
           icon={faFacebookF}
-          user="Amkeni Org"
         />
         <SocialMediaLinks
           link="https://www.instagram.com/amkeni_org/"
           icon={faInstagram}
-          user="@amkeni_org"
         />
-        <SocialMediaLinks
-          link="https://x.com/Amkeni_Org"
-          icon={faXTwitter}
-          user="@Amkeni_Org"
-        />
+        <SocialMediaLinks link="https://x.com/Amkeni_Org" icon={faXTwitter} />
         <SocialMediaLinks
           link="https://www.linkedin.com/company/amkeni-malindi/posts/?feedView=all"
           icon={faLinkedin}
-          user="@Amkeni_Org"
         />
         <SocialMediaLinks
           link="https://www.tiktok.com/@amkenimalindiorg?_t=ZM-8s2ZxeBlVnp&_r=1"
           icon={faTiktok}
-          user="Amkenimalindiorg"
         />
       </div>
     </section>
   );
 };
 
-const SocialMediaLinks = ({ link, icon, user }) => {
+const SocialMediaLinks = ({ link, icon }) => {
   return (
     <a
       href={link}
@@ -316,9 +355,8 @@ const SocialMediaLinks = ({ link, icon, user }) => {
     >
       <FontAwesomeIcon
         icon={icon}
-        className="w-6 h-6 xs:w-8 xs:h-8 text-gray-600 group-hover:text-primary "
+        className="w-6 h-6 xs:w-8 xs:h-8 text-gray-600 group-hover:text-primary transition-all duration-300 "
       />
-      <p className="text-gray-600 group-hover:text-black">{user}</p>
     </a>
   );
 };

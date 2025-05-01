@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import emailjs from "@emailjs/browser";
 import { Box, Modal, Typography } from "@mui/material";
+import { addAppointmentBooking } from "../firebase";
 
 const style = {
   position: "absolute",
@@ -20,32 +21,75 @@ const style = {
 const AppointmentForm = ({ handleFormClose }) => {
   const [openSubmission, setOpenSubmission] = useState(false);
   const [countDown, setCountDown] = useState(5);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleModalClose = () => setOpenSubmission(false);
+
+  const time = () => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    };
+
+    return new Date().toLocaleString("en-US", options);
+  };
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      additionalInfo: "",
+    },
+  });
 
   const form = useRef();
 
-  const onSubmit = () => {
-    emailjs
-      .sendForm("service_l8csohb", "template_7q0rjm7", form.current, {
-        publicKey: "zrkXof7Y58Enl4aks",
-      })
-      .then(
-        () => {
-          console.log("SUCCESS!");
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-        }
-      );
+  const onSubmit = async (data) => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
-    setOpenSubmission(true);
+    try {
+      const{ appointmentId } = await addAppointmentBooking({
+        additionalInfo: data.additionalInfo,
+        appointmentDate: data.appointmentDate,
+        appointmentTime: data.appointmentTime,
+        contact: data.contact,
+        consent: data.consent,
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phoneNo: data.phoneNo,
+        services: data.services,
+      });
+
+      setValue("appointmentId", appointmentId);
+      if (form.current) {
+        form.current.appointmentId.value = appointmentId;
+      }
+
+      if (form.current) {
+        const idField = form.current.elements.namedItem("appointmentId");
+        if (idField) idField.value = appointmentId;
+      }
+
+      await emailjs
+        .sendForm("service_a1qw2qj", "template_unmz1hs", form.current, {
+          publicKey: "ILmSuFObwJMgWXT14",
+        })
+        .then(setOpenSubmission(true));
+    } catch (error) {
+      console.error("Error submitting appointment:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -97,6 +141,35 @@ const AppointmentForm = ({ handleFormClose }) => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-4 items-center lg:pb-8 "
       >
+        {/* form title */}
+        <input
+          type="text"
+          name="title"
+          id="title"
+          defaultValue={"Appointment Request"}
+          className="hidden"
+          {...register("title")}
+        />
+
+        {/* Submission time */}
+        <input
+          type="text"
+          name="time"
+          id="time"
+          defaultValue={time()}
+          className="hidden"
+          {...register("time")}
+        />
+
+        {/* Appointment Reference No */}
+        <input
+          type="text"
+          name="appointmentId"
+          id="appointmentId"
+          className="hidden"
+          {...register("appointmentId")}
+        />
+
         {/* Full Name */}
         <fieldset className="px-2 py-2 w-full border-2 lg:w-[90%] xl:w-[80%] 2xl:w-[90%] ">
           <legend className="legend">Full Name</legend>
@@ -132,13 +205,8 @@ const AppointmentForm = ({ handleFormClose }) => {
                 name="lastName"
                 id="lastName"
                 className="input-style w-2/3 sm:w-[90%]"
-                {...register("lastName", { required: "Last name is required" })}
+                {...register("lastName")}
               />
-              {errors.lastName && (
-                <p className="text-secondary/90 text-[10px] xs:text-sm absolute top-[100%] sm:relative sm:top-0">
-                  {errors.lastName.message}
-                </p>
-              )}
             </div>
           </div>
         </fieldset>
@@ -212,7 +280,7 @@ const AppointmentForm = ({ handleFormClose }) => {
                 type="radio"
                 name="contact"
                 id="phoneCall"
-                value="phoneCall"
+                value="phone call"
                 {...register("contact", {
                   required: "Please select a contact method",
                 })}
@@ -228,7 +296,7 @@ const AppointmentForm = ({ handleFormClose }) => {
                 type="radio"
                 name="contact"
                 id="emailContact"
-                value="email me"
+                value="email"
                 {...register("contact", {
                   required: "Please select a contact method",
                 })}
@@ -426,6 +494,11 @@ const AppointmentForm = ({ handleFormClose }) => {
             rows={5}
             placeholder="Any more information you'd like to share..."
             {...register("additionalInfo")}
+            onFocus={(e) => {
+              if (e.target.value === "No additional details provided") {
+                e.target.value = "";
+              }
+            }}
           ></textarea>
         </fieldset>
 
@@ -458,9 +531,10 @@ const AppointmentForm = ({ handleFormClose }) => {
         <fieldset>
           <button
             type="submit"
-            className="font-button-links px-4 py-2 rounded-lg bg-primary/40 body-text text-black/50 hover:bg-primary hover:text-black"
+            disabled={isSubmitting}
+            className={`font-button-links px-4 py-2 rounded-lg bg-primary/40 body-text text-black/50 hover:bg-primary hover:text-black ${isSubmitting ? `opacity-50 cursor-not-allowed` : ``}`}
           >
-            Submit
+            {`${isSubmitting ? "Submitting..." : "Submit"}`}
           </button>
           <Modal
             open={openSubmission}
