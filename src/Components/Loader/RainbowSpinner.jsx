@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 function RainbowSpinner() {
+  const spinnerRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (spinnerRef.current) {
+        spinnerRef.current.classList.add('fade-out')
+      }
+    }, 50)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+
   return (
-    <div className="fixed flex items-center justify-center w-full h-screen bg-primary z-[100]">
+    <div className="rainbow-spinner-container">
       <div className="rainbow">
         <div className="rainbow-inner"></div>
       </div>

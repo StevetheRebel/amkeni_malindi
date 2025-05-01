@@ -18,13 +18,13 @@ const BlogPost = lazy(() => import("./Components/pages/BlogPost"));
 
 function App() {
   const location = useLocation();
-  const isLoading = useNavigationLoading(3000);
+  const { isLoading, isVisible } = useNavigationLoading(3000);
 
   return (
     <>
       {location.pathname.startsWith("/blog") ? null : <Navigation />}
       <ScrollToTop>
-        {isLoading && <RainbowSpinner />}
+        {(isLoading || isVisible) && <RainbowSpinner />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
