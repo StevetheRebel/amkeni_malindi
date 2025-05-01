@@ -33,12 +33,12 @@ function ContactForm({ closeReach }) {
     setIsSubmitting(true)
 
     try {
-      // await addContactMessages({
-      //   name: data.fullName,
-      //   email: data.email,
-      //   subject: data.msgSubject,
-      //   message: data.userMessage,
-      // });
+      await addContactMessages({
+        name: data.fullName,
+        email: data.email,
+        subject: data.msgSubject,
+        message: data.userMessage,
+      });
 
       console.log(data);
       
