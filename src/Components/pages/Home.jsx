@@ -31,12 +31,13 @@ import "swiper/css/effect-fade";
 import ALogo from "./../../assets/Amkeni A.webp";
 import Typewriter from "../Typewriter";
 import RainbowSlider from "../RainbowSlider";
+import Rainbow from "../Loader/Rainbow";
 
 function Home() {
   const [posts, setPosts] = useState([]);
-  const sortedPosts = [...posts];
   const [activeIndex, setActiveIndex] = useState(0);
   const [typingComplete, setTypingComplete] = useState(false);
+  const [loading, setLoading] = useState(true);
   const swiperRef = useRef(null);
   const secondSwiperRef = useRef(null);
 
@@ -60,6 +61,7 @@ function Home() {
     };
 
     fetchPosts();
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -97,7 +99,7 @@ function Home() {
   return (
     <div className="relative h-auto select-none scroll-smooth ">
       {/* Hero Section */}
-      <section className="relative min-h-dvh overflow-hidden flex items-center justify-center pt-40 lg:px-[6%] ">
+      <section className="relative min-h-dvh overflow-hidden flex items-center justify-center pt-40 lg:pt-36 lg:px-[6%] ">
         {/* Background Images carousel */}
         <div className="fixed inset-0 -z-10">
           <Swiper
@@ -138,6 +140,7 @@ function Home() {
                 waitForTransition: true,
               }}
               loop={true}
+              slidesPerView={1}
               spaceBetween={30}
               speed={1000}
               allowTouchMove={false}
@@ -145,8 +148,8 @@ function Home() {
               onSlideChange={handleSlideChange}
               init={false}
               onAfterInit={(swiper) => {
-                swiper.init()
-                swiper.slideTo(0, 0)
+                swiper.init();
+                swiper.slideTo(0, 0);
               }}
               className="h-full w-full"
             >
@@ -213,59 +216,75 @@ function Home() {
                     Our Values
                     <Typewriter text="..." delay={1000} />
                   </h1>
-                  <p className="mt-6 py-2 font-subheading font-bold w-full text-start px-1 h-fit bg-white/30 backdrop-blur-sm rounded-b-2xl xs:px-4 md:px-6 2xl:text-4xl 2xl:tracking-wider ">
+                  <ul className="mt-6 py-2 font-subheading font-bold w-full text-start px-1 h-fit bg-white/30 backdrop-blur-sm rounded-b-2xl xs:px-4 md:px-6 2xl:text-4xl 2xl:tracking-wider ">
                     <ul className="font-subheading list-disc list-inside flex flex-col indent-4">
-                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">Accountability</li>
-                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl animate__animated animate__fadeIn animate__delay-2s animate__slow ">Excellence</li>
-                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl animate__animated animate__fadeIn animate__delay-3s animate__slow ">Non-Discrimination</li>
-                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl animate__animated animate__fadeIn animate__delay-4s animate__slow">Gender-Mainstream</li>
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">
+                        Accountability
+                      </li>
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl animate__animated animate__fadeIn animate__delay-2s animate__slow ">
+                        Excellence
+                      </li>
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl animate__animated animate__fadeIn animate__delay-3s animate__slow ">
+                        Non-Discrimination
+                      </li>
+                      <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl animate__animated animate__fadeIn animate__delay-4s animate__slow">
+                        Gender-Mainstream
+                      </li>
                     </ul>
-                  </p>
+                  </ul>
                 </div>
               </SwiperSlide>
             </Swiper>
           </div>
 
           {/* Blog posts */}
-          <div className="flex flex-col w-[90%] bg-muted/30 backdrop-blur-md rounded-3xl px-4 pb-4 mb-4 grid-span-1 lg:col-span-2 lg:h-[60vh] lg:min-h-[500px] lg:self-start lg:mb-0 lg:pb-0 xl:col-span-2 xl:min-h-[550px] 2xl:h-fit ">
+          <div className="flex flex-col items-center w-[90%] bg-muted/30 backdrop-blur-md rounded-3xl px-4 pb-4 mb-4 grid-span-1 lg:col-span-2 lg:h-[60vh] lg:min-h-[500px] lg:self-start lg:mb-0 lg:pb-0 xl:col-span-2 xl:min-h-[550px] 2xl:min-h-[75vh]  ">
             <h4 className="h4-text text-white text-center w-full ">
               Latest Posts...
             </h4>
 
             {/* Blog Spot */}
-            <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-4 2xl:px-4 2xl:gap-4">
-              {sortedPosts.slice(0, postLimit).map((post, index) => {
-                const firstAttachmentKey = Object.keys(post.attachments)[0];
-                const imageUrl =
-                  post.attachments[firstAttachmentKey]?.URL || pic1;
+            {
+              loading ? (
+                <div className="h-full flex items-center mt-6 md:mt-8 lg:mt-0 ">
+                  <Rainbow />
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-4 2xl:px-4 2xl:gap-4">
+                {posts.slice(0, postLimit).map((post, index) => {
+                  const firstAttachmentKey = Object.keys(post.attachments)[0];
+                  const imageUrl =
+                    post.attachments[firstAttachmentKey]?.URL || pic1;
 
-                return (
-                  <div
-                    key={index}
-                    className={`relative overflow-hidden group w-full rounded-xl h-[88px] xs:h-[112px] md:h-[110px] lg:h-[100px] xl:h-[108px] 2xl:h-[145px] ${
-                      post.hiddenClass || ""
-                    }`}
-                  >
-                    <LazyLoadImage
-                      src={imageUrl}
-                      alt={he.decode(post.title)}
-                      className="group-hover:grayscale group-hover:brightness-50 "
-                    />
-                    <div className="body-text flex flex-col justify-around h-full w-full font-bold text-white p-2 absolute top-[100%] group-hover:animate-slideUp lg:py-2">
-                      <h4 className="body-text">
-                        {truncateByWords(he.decode(post.title), 4)}
-                      </h4>
-                      <Link
-                        to={`/blog/${post.ID}`}
-                        className="button-type button-text self-end bg-primary/70 hover:bg-primary hover:text-black"
-                      >
-                        Read more
-                      </Link>
+                  return (
+                    <div
+                      key={index}
+                      className={`relative overflow-hidden group w-full rounded-xl h-[88px] xs:h-[112px] md:h-[110px] lg:h-[100px] xl:h-[108px] 2xl:h-[145px] ${
+                        post.hiddenClass || ""
+                      }`}
+                    >
+                      <LazyLoadImage
+                        src={imageUrl}
+                        alt={he.decode(post.title)}
+                        className="group-hover:grayscale group-hover:brightness-50 "
+                      />
+                      <div className="body-text flex flex-col justify-around h-full w-full font-bold text-white p-2 absolute top-[100%] group-hover:animate-slideUp lg:py-2">
+                        <h4 className="body-text">
+                          {truncateByWords(he.decode(post.title), 4)}
+                        </h4>
+                        <Link
+                          to={`/blog/${post.ID}`}
+                          className="button-type button-text self-end bg-primary/70 hover:bg-primary hover:text-black"
+                        >
+                          Read more
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+              )
+            }
           </div>
         </div>
       </section>
