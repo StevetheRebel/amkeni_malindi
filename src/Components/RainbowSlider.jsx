@@ -26,7 +26,7 @@ const RainbowSlider = () => {
   return (
     <div
       ref={containerRef}
-      className="absolute rounded-full h-[56px] w-full -z-10 overflow-hidden md:h-[65px] lg:h-[76px] xl:h-[88px] 2xl:h-[113px]"
+      className="absolute top-0 -left-10 rounded-full h-[56px] w-[115%] -z-10 overflow-hidden md:h-[65px] lg:h-[76px] xl:h-[88px] 2xl:h-[113px]"
     >
       {colors.map((color, index) => (
         <div

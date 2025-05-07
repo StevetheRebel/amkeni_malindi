@@ -112,11 +112,11 @@ body {
 }
 
 .h4-text {
-  @apply font-subheading py-1 text-lg xs:text-xl md:text-2xl lg:text-2xl;
+  @apply font-subheading py-1 text-lg xs:text-xl md:text-2xl lg:text-xl;
 }
 
 .h5-text {
-  @apply font-subheading py-2 text-base md:text-xl;
+  @apply font-subheading py-2 text-base md:text-lg lg:text-xl;
 }
 
 .active {
@@ -132,7 +132,7 @@ body {
 }
 
 .button-text {
-  @apply font-button-links text-[14px] text-white xs:text-base lg:text-base;
+  @apply font-button-links text-[12px] text-white xs:text-[14px] s:text-base lg:text-base;
 }
 
 .button-type {
@@ -206,7 +206,7 @@ body {
   }
 }
 
-.rainbow-spinner-container {
+.rainbow-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -215,8 +215,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #84caea;
-  z-index: 100;
+  /* background-color: #84caea; */
+  z-index: 50;
   opacity: 1;
   transition: opacity 1s ease-out;
 }
@@ -224,4 +224,8 @@ body {
 .rainbow-spinner-container.fade-out {
   opacity: 0;
   pointer-events: none;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }

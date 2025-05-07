@@ -32,16 +32,15 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import "animate.css/animate.min.css";
-import RainbowSpinner from "../Loader/RainbowSpinner";
 import { addComment, getCommentsForPost } from "../../firebase";
 import { getRandomAvatar } from "../../utils/randomAvatar";
+import { useWpPosts } from "../context/WpPostsContext";
 
 const BlogPost = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
+  const { wpPosts } = useWpPosts();
   const [post, setPost] = useState(null);
-  const [allposts, setAllPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [comments, setComments] = useState([]);
@@ -62,17 +61,11 @@ const BlogPost = () => {
         );
         setPost(response.data);
 
-        const allPostsResponse = await axios.get(
-          "https://public-api.wordpress.com/rest/v1.1/sites/amkenimalindi.wordpress.com/posts"
-        );
-        setAllPosts(allPostsResponse.data.posts);
-
         // Fetch comments from Firebase
         const firebaseComments = await getCommentsForPost(postId);
 
         setComments(firebaseComments);
         setIsExpanded(false);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching post:", error);
         if (error.response && error.response.status === 404) {
@@ -80,7 +73,6 @@ const BlogPost = () => {
         } else {
           setError("Failed to load the blog post. Please try again later.");
         }
-        setLoading(false);
       }
     };
 
@@ -148,14 +140,6 @@ const BlogPost = () => {
 
     window.scrollTo({ top: yPosition, behavior: "smooth" });
   };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center bg-gray-300 h-dvh">
-        <RainbowSpinner />
-      </div>
-    );
-  }
 
   if (error) {
     return (
@@ -442,7 +426,7 @@ const BlogPost = () => {
       <div className="px-4 lg:px-[6%] mb-4">
         <h3 className="h3-text text-secondary">Related Posts</h3>
         <ul className="flex flex-col gap-4 md:gap-8 xl:grid xl:gap-x-4 xl:grid-cols-2">
-          {allposts
+          {wpPosts
             .filter((p) => p.ID !== post.ID) // Exclude the current post
             .sort(() => Math.random() - 0.5) // Randomize the order
             .slice(0, 4) // Limit to 4 posts

@@ -4,57 +4,18 @@ import portfolioData from "./../../portfolio.json";
 import { Link } from "react-router-dom";
 import { truncateByWords } from "../../truncateByWords";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import axios from "axios";
 import pic1 from "./../../assets/Office Pics/Office1.webp";
 import DOMPurify from "dompurify";
 import he from "he";
-import RainbowSpinner from "../Loader/RainbowSpinner";
 import Rainbow from "../Loader/Rainbow";
+import { useWpPosts } from "../context/WpPostsContext";
 
 function NewsBlog() {
+  const {wpPosts, loading, isFetchingComplete } = useWpPosts();
   const [currentPage, setCurrentPage] = useState(1);
   const postPerPage = 8;
-  const [wpPosts, setWpPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [isFetchingComplete, setIsFetchingComplete] = useState(false);
   const [isPageChanging, setIsPageChanging] = useState(false);
   const blogSpotRef = useRef(null);
-
-  const fetchAllPosts = async (page = 1, accumulatedPosts = []) => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        "https://public-api.wordpress.com/rest/v1.1/sites/amkenimalindi.wordpress.com/posts",
-        {
-          params: {
-            page: page,
-            number: 20, // Maximum per request
-          },
-        }
-      );
-
-      const newPosts = response.data.posts;
-      const allPosts = [...accumulatedPosts, ...newPosts];
-
-      // If we got fewer than 20 posts, we've reached the end
-      if (newPosts.length < 20) {
-        setWpPosts(allPosts);
-        setIsFetchingComplete(true);
-        setLoading(false);
-        return;
-      }
-
-      // Otherwise, fetch the next page
-      await fetchAllPosts(page + 1, allPosts);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllPosts();
-  }, []);
 
   useEffect(() => {
     if (blogSpotRef.current) {
@@ -68,14 +29,6 @@ function NewsBlog() {
       });
     }
   }, [currentPage]);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center bg-gray-300 h-dvh">
-        <RainbowSpinner />
-      </div>
-    );
-  }
 
   const totalPages = Math.ceil(wpPosts.length / postPerPage);
 
@@ -122,11 +75,11 @@ function NewsBlog() {
       >
         <h2 className="h2-text text-center text-secondary">Blog Spot</h2>
 
-        {isPageChanging && <div className="flex items-center justify-center my-12">
+        {(isPageChanging || loading) && <div className="flex items-center justify-center my-12">
           <Rainbow />
           </div>}
 
-        {!isPageChanging && (
+        {!loading && (!isPageChanging && (
           <>
             {/* Pagination */}
             <div className="flex justify-center items-center my-6 space-x-2">
@@ -174,7 +127,7 @@ function NewsBlog() {
                     title={he.decode(post.title)}
                     date={post.date}
                     time={post.date}
-                    blogpiece={truncateByWords(sanitizedContent, 15)}
+                    blogpiece={truncateByWords(sanitizedContent, 11)}
                     link={`/blog/${post.ID}`}
                   />
                 );
@@ -212,7 +165,7 @@ function NewsBlog() {
               </button>
             </div>
           </>
-        )}
+        ))}
       </section>
 
       <Footer />
@@ -236,14 +189,14 @@ const EventTimeline = () => {
     <>
       <div className=" bg-white/40 backdrop-blur-sm flex flex-col w-full gap-4 p-4 rounded-2xl sm:flex-row sm:gap-6">
         {/* Render Button for Each Year */}
-        <div className="flex gap-2 flex-wrap justify-center py-2 sm:flex-col sm:gap-5 xl:gap-6 ">
+        <div className="grid gap-2 grid-cols-3 justify-center py-2 sm:flex-col sm:gap-5 xl:gap-6 ">
           {sortedData.map((item) => (
             <button
               key={item.year}
               onClick={() => setSelectedYear(item.year)}
-              className={`px-2 py-1 body-text rounded-2xl text-nowrap ${
+              className={`px-1 py-1 button-text rounded-2xl text-nowrap ${
                 selectedYear === item.year ? "bg-primary" : "bg-primary/50"
-              } xs:px-4 xs:py-2`}
+              } xs:px-1 xs:py-2`}
             >
               Year {item.year}
             </button>
@@ -306,7 +259,7 @@ const BlogPost = ({ pic, title, date, blogpiece, link }) => {
   const sanitizedContent = DOMPurify.sanitize(removeImages(blogpiece));
 
   const displayContent =
-    sanitizedContent.trim() === "" ? "No content available." : sanitizedContent;
+    sanitizedContent.trim() === "" ? "Read more..." : sanitizedContent;
 
   // Handle image error
   const handleImageError = (e) => {
@@ -314,11 +267,11 @@ const BlogPost = ({ pic, title, date, blogpiece, link }) => {
   };
 
   return (
-    <div className="w-[80%] aspect-[1/1.5] p-2 bg-muted/50 shadow-custom-shadow rounded-2xl overflow-hidden flex relative group md:w-full md:h-80 xl:h-96">
+    <div className="bg-[linear-gradient(145deg,_#c8d6d4,_#eefffb)] w-[80%] aspect-[1/1.7] p-2 shadow-neomorph-shadow rounded-[2rem] overflow-hidden flex flex-col md:flex-row relative group md:w-full md:h-80 md:p-6 xl:h-96 lg:p-2 lg:rounded-2xl lg:shadow-neomorph-soft">
       <LazyLoadImage
         src={pic}
         alt={title}
-        className="w-full rounded-2xl object-cover h-full group-hover:brightness-50"
+        className="w-full h-[40%] rounded-2xl object-cover md:h-full md:group-hover:brightness-50"
         onError={handleImageError}
         placeholder={
           <div className="flex items-center justify-center bg-gray-300 h-full">
@@ -326,15 +279,15 @@ const BlogPost = ({ pic, title, date, blogpiece, link }) => {
           </div>
         }
       />
-      <div className="w-full h-full px-2 pb-4 absolute right-[100%] group-hover:right-0 group-hover:animate-slideIn z-10 flex flex-col justify-around ">
-        <h4 className="h3-text text-white px-2">{title}</h4>
-        <div className="text-white flex gap-4 px-2 text-xs">
+      <div className="w-full px-2 z-10 flex flex-col justify-around h-[60%] md:pb-4 md:h-full md:absolute md:right-[100%] md:top-0 md:group-hover:right-0 md:group-hover:animate-slideIn max-h-none md:p-6">
+        <h4 className="h3-text text-black px-2 md:text-white">{title}</h4>
+        <div className="text-black flex gap-4 px-2 text-xs md:text-white ">
           <p>{formattedDate}</p>
           <p>{formattedTime}</p>
         </div>
         {/* Render sanitized HTML content */}
         <div
-          className="px-2 text-white body-text"
+          className="px-2 text-muted body-text md:text-white"
           dangerouslySetInnerHTML={{ __html: displayContent }}
         />
         <Link

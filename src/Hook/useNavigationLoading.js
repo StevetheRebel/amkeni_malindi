@@ -31,5 +31,5 @@ export const useNavigationLoading = (minLoadingTime = 2000) => {
     };
   }, [location.key, minLoadingTime]); // React to route changes
 
-  return {isLoading, isVisible};
+  return { isLoading, isVisible };
 };

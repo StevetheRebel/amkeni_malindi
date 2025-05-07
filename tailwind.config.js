@@ -54,6 +54,7 @@ export default {
       screens: {
         xs: "360px",
         s: "410px",
+        sx: "500px",
       },
       animation: {
         spin: "spin 1s linear infinite",
@@ -111,6 +112,8 @@ export default {
         "custom-shadow":
           "inset 19px 19px 16px #959f9d, inset -19px -19px 16px #ffffff",
         "custom-chat": "0px 3px 25px 0px rgba(0, 145, 255, 0.64);",
+        "neomorph-shadow": "35px 35px 70px #818a88, -35px -35px 70px #ffffff",
+        "neomorph-soft": "7px 7px 14px #818a88, -7px -7px 14px #ffffff",
       },
     },
   },
