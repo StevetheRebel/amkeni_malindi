@@ -7,6 +7,7 @@ import {
   faLinkedin,
   faTiktok,
   faXTwitter,
+  faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
@@ -50,7 +51,7 @@ function Navigation() {
 
         {/* Sign in and social media links */}
         <div className="flex gap-4 text-sm">
-          <p className="capitalize font-subheading font-bold hover:underline">sign in</p>
+          {/* <p className="capitalize font-subheading font-bold hover:underline">sign in</p> */}
           <a
             href="https://web.facebook.com/profile.php?id=100017571492191"
             target="_blank"
@@ -94,6 +95,14 @@ function Navigation() {
               icon={faLinkedin}
               className="text-base hover-text"
             />
+          </a>
+          <a
+            href="https://www.youtube.com/channel/UCLO0qkgaXpQ9QK3WFM5S4zQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className=""
+          >
+            <FontAwesomeIcon icon={faYoutube} className="text-base hover-text" />
           </a>
           <a
             href="https://www.tiktok.com/@amkenimalindiorg?_t=ZM-8s2ZxeBlVnp&_r=1"

@@ -5,6 +5,7 @@ import {
   faLinkedin,
   faTiktok,
   faXTwitter,
+  faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/Amkeni Document Logo.png";
@@ -263,6 +264,17 @@ function Footer() {
             >
               <FontAwesomeIcon
                 icon={faLinkedin}
+                className="text-base hover-text sm:text-lg xl:text-2xl"
+              />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UCLO0qkgaXpQ9QK3WFM5S4zQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=""
+            >
+              <FontAwesomeIcon
+                icon={faYoutube}
                 className="text-base hover-text sm:text-lg xl:text-2xl"
               />
             </a>

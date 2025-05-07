@@ -12,6 +12,7 @@ import {
   faLinkedin,
   faTiktok,
   faXTwitter,
+  faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import Footer from "./../Footer/Footer.jsx";
 import { useForm } from "react-hook-form";
@@ -52,8 +53,8 @@ function Reachout() {
   const onSubmit = (data) => {
     const formData = new FormData();
     formData.append("EMAIL", data.subscriptionMail);
-    formData.append("SUBSCRIBED", "Newsletter Subscription")
-    formData.append("b_f55ff5eee7cf7f45ff793a98b_5120374c31", "")
+    formData.append("SUBSCRIBED", "Newsletter Subscription");
+    formData.append("b_f55ff5eee7cf7f45ff793a98b_5120374c31", "");
 
     try {
       const response = fetch(
@@ -336,6 +337,10 @@ const LocalAddress = () => {
         <SocialMediaLinks
           link="https://www.linkedin.com/company/amkeni-malindi/posts/?feedView=all"
           icon={faLinkedin}
+        />
+        <SocialMediaLinks
+          link="https://www.youtube.com/channel/UCLO0qkgaXpQ9QK3WFM5S4zQ"
+          icon={faYoutube}
         />
         <SocialMediaLinks
           link="https://www.tiktok.com/@amkenimalindiorg?_t=ZM-8s2ZxeBlVnp&_r=1"
