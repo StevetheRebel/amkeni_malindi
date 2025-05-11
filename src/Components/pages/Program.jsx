@@ -20,8 +20,9 @@ import Sustainablelivelihoods from "../SustainableLivelihoods/Sustainablelivelih
 import SystemStrengthening from "../SystemStrengthening/SystemStrengthening";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
+import back5 from "../../../public/background5.webp"
 
-const style = {
+const style1 = {
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -30,11 +31,14 @@ const style = {
   maxWidth: "700px",
   maxHeight: "90vh",
   overflowY: "auto",
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  backgroundImage: `url(${back5})`,
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+  backgroundAttachment: "fixed",
+  backgroundRepeat: "no-repeat",
+  scrollbarWidth: "none",
   boxShadow: 24,
   borderRadius: "24px",
-  boxShadow: "inset 0px 0px 11px 7px rgba(132, 202, 234, 0.25)",
 };
 
 function Program() {
@@ -140,7 +144,7 @@ function Program() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box sx={style1}>
               <div className="2xl:px-10 relative flex flex-col pb-4 group ">
                 <div className="sticky self-end top-2 z-30 right-2 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <FontAwesomeIcon
@@ -184,7 +188,7 @@ function Program() {
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
-                  <Box sx={style}>
+                  <Box sx={style1}>
                     <div className="2xl:px-10 relative flex flex-col select-none">
                       <div className="sticky self-end top-2 right-2">
                         <FontAwesomeIcon
@@ -404,7 +408,7 @@ function Program() {
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
-                  <Box sx={style}>
+                  <Box sx={style1}>
                     <div className="flex flex-col select-none">
                       <div className="sticky self-end top-2 right-2">
                         <FontAwesomeIcon
@@ -567,7 +571,7 @@ function Program() {
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
-                  <Box sx={style}>
+                  <Box sx={style1}>
                     <div className="2xl:px-10 relative flex flex-col select-none">
                       <div className="sticky self-end top-2 right-2">
                         <FontAwesomeIcon
@@ -781,7 +785,7 @@ function Program() {
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
-                  <Box sx={style}>
+                  <Box sx={style1}>
                     <div className="2xl:px-10 relative flex flex-col select-none">
                       <div className="sticky self-end top-2 right-2">
                         <FontAwesomeIcon
@@ -1002,7 +1006,7 @@ function Program() {
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
-                  <Box sx={style}>
+                  <Box sx={style1}>
                     <div className="2xl:px-10 relative flex flex-col select-none">
                       <div className="sticky self-end top-2 right-2">
                         <FontAwesomeIcon
@@ -1230,7 +1234,7 @@ function Program() {
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
-                  <Box sx={style}>
+                  <Box sx={style1}>
                     <div className="2xl:px-10 relative flex flex-col select-none">
                       <div className="sticky self-end top-2 right-2">
                         <FontAwesomeIcon
