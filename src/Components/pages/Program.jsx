@@ -20,7 +20,7 @@ import Sustainablelivelihoods from "../SustainableLivelihoods/Sustainablelivelih
 import SystemStrengthening from "../SystemStrengthening/SystemStrengthening";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
-import back5 from "../../../public/background5.webp"
+import back5 from "/Background5.webp"
 
 const style1 = {
   position: "absolute",
