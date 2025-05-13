@@ -103,6 +103,7 @@ export default {
       listStyleType: {
         "lower-alpha": "lower-alpha",
         "lower-roman": "lower-roman",
+        "circle": "circle"
       },
       dropShadow: {
         "white-custom": "10px 4px 8px rgba(255, 255, 255, 0.7)",
@@ -114,6 +115,7 @@ export default {
         "custom-chat": "0px 3px 25px 0px rgba(0, 145, 255, 0.64);",
         "neomorph-shadow": "35px 35px 70px #818a88, -35px -35px 70px #ffffff",
         "neomorph-soft": "7px 7px 14px #818a88, -7px -7px 14px #ffffff",
+        "neomorph-other": "inset 20px 20px 60px #bdcac8, inset -20px -20px 60px #ffffff",
       },
     },
   },
