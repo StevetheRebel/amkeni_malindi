@@ -92,8 +92,8 @@ function Opportunities() {
 
           const postData = {
             id: post.ID,
-            title: (post.title),
-            content: sanitizeContent(post.content),
+            title: post.title,
+            excerpt: sanitizeContent(post.excerpt),
             location,
             deadline,
             position,
@@ -163,7 +163,7 @@ function Opportunities() {
                 isOpen={openContainerIndex === cardIndex}
                 onToggle={() => toggleCard(cardIndex)}
                 title={post.title}
-                summary={post.content}
+                summary={post.excerpt}
                 location={post.location}
                 duration={post.formattedDeadline}
                 position={post.position}
@@ -179,31 +179,31 @@ function Opportunities() {
       {/* Closed Vacancies */}
       <section className="h-auto px-4 pb-12 lg:px-[6%] flex flex-col gap-4 ">
         <h1 className="h1-text text-center text-white ">Closed Vacancies </h1>
-        <div className="grid place-items-center grid-cols-1 gap-16 xs:pb-12 s:pb-6 md:flex md:flex-wrap md:justify-center md:items-center md:gap-x-0 lg:grid lg:gap-12 lg:grid-cols-3 xl:grid-cols-4 xl:gap-4 2xl:grid-cols-5 ">
-          {
-            loading ? (<div className="h-auto w-full grid place-items-center">
-              <Rainbow />
-            </div>) : (
-              closedPosts.map((post, index) => {
-                return (
-                  <HiringCard
-                    key={post.id}
-                    isOpen={openContainerIndex === `closed-${index}`}
-                    onToggle={() => toggleCard(`closed-${index}`)}
-                    title={he.decode(post.title)}
-                    summary={post.content}
-                    location={post.location}
-                    duration="Closed"
-                    position={post.position}
-                    link={`/blog/${post.id}`}
-                    tag="View Details"
-                    image={closed}
-                  />
-                );
-              })
-            )
-          }
-        </div>
+        {loading ? (
+          <div className="w-full grid place-items-center mt-4">
+            <Rainbow />
+          </div>
+        ) : (
+          <div className="grid place-items-center grid-cols-1 gap-16 xs:pb-12 s:pb-6 md:flex md:flex-wrap md:justify-center md:items-center md:gap-x-0 lg:grid lg:gap-12 lg:grid-cols-3 xl:grid-cols-4 xl:gap-4 2xl:grid-cols-5 ">
+            {closedPosts.map((post, index) => {
+              return (
+                <HiringCard
+                  key={post.id}
+                  isOpen={openContainerIndex === `closed-${index}`}
+                  onToggle={() => toggleCard(`closed-${index}`)}
+                  title={he.decode(post.title)}
+                  summary={post.excerpt}
+                  location={post.location}
+                  duration="Closed"
+                  position={post.position}
+                  link={`/blog/${post.id}`}
+                  tag="View Details"
+                  image={closed}
+                />
+              );
+            })}
+          </div>
+        )}
       </section>
 
       {/* <section className="bg-light min-h-screen flex flex-col gap-4 justify-center p-4 lg:px-[6%]"></section> */}
