@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Footer from "../Footer/Footer";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -17,6 +17,7 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import OrgHis from "./../../OrgHistory.json";
 import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const aboutData = [
   {
@@ -37,6 +38,28 @@ const aboutData = [
 
 function About() {
   const swiperRef = useRef(null);
+  const [selectedProfile, setSelectedProfile] = useState(null);
+
+  useEffect(() => {
+    if (selectedProfile !== null) {
+      bodSectionRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      setTimeout(() => {
+        lastViewedSectionRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 300);
+    }
+  }, [selectedProfile]);
+
+  const bodSectionRef = useRef(null);
+  const staffSectionRef = useRef(null);
+  const lastViewedSectionRef = useRef(null);
+  const profileViewRef = useRef(null);
 
   return (
     <div className="relative h-auto select-none ">
@@ -47,7 +70,7 @@ function About() {
             key={index}
             className="flex flex-col justify-around p-1 bg-muted/45 backdrop-blur-sm min-h-[120px] max-h-[220px] w-[80%] rounded-xl md:gap-3 lg:gap-4 xl:gap-5 2xl:gap-6 "
           >
-            <h1 className="h1-text capitalize text-center text-secondary">
+            <h1 className="h1-text capitalize text-center text-primary">
               {item.title}
             </h1>
             <p className="text-center body-text text-white ">
@@ -86,11 +109,11 @@ function About() {
       {/* Combine the Organization Work and Organigram to "Our Areas of Work" */}
       <section className="bg-image6 bg-cover bg-no-repeat bg-fixed flex flex-col items-center justify-around py-4 px-4 gap-4 md:px-14 md:gap-6 md:py-6 lg:px-20 lg:gap-8 lg:py-8 xl:px-28 xl:gap-10 xl:py-10 ">
         {/* Organizational Work */}
-        <div className="bg-white/50 rounded-3xl backdrop-blur-lg h-auto w-[100%] flex flex-col justify-center ">
-          <h1 className="h1-text text-center capitalize text-secondary">
+        <div className="bg-muted/50 rounded-3xl backdrop-blur-lg h-auto w-[100%] flex flex-col justify-center ">
+          <h1 className="h1-text text-center capitalize text-primary">
             areas of work
           </h1>
-          <div className="p-4">
+          <div className="p-4 lg:px-12 ">
             <Swiper
               modules={[Pagination, Autoplay]}
               pagination={{ clickable: true }}
@@ -123,8 +146,8 @@ function About() {
         </div>
 
         {/* Organigram */}
-        <div className="bg-white/50 rounded-3xl backdrop-blur-lg w-[100%] h-auto flex flex-col gap-1 md:gap-2 md:px-14 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-5 ">
-          <h1 className="h1-text capitalize text-center mt-4 text-secondary">
+        <div className="bg-muted/50 rounded-3xl backdrop-blur-lg w-[100%] h-auto flex flex-col gap-1 md:gap-2 md:px-14 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-5 ">
+          <h1 className="h1-text capitalize text-center mt-4 text-primary">
             our organizational structure
           </h1>
           <div className="px-1">
@@ -150,45 +173,135 @@ function About() {
 
       {/* The Board of Directors */}
       {/* Add Authentication to access this */}
-      <section className="py-6 flex flex-col gap-1 md:gap-2 md:px-14 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-5 ">
-        <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutRight">
-          <h1 className="h1-text capitalize text-center text-secondary">
+      <section
+        ref={bodSectionRef}
+        className="scroll-mt-[130px] xs:scroll-mt-[140px] s:scroll-mt-[150px] sx:scroll-mt-[160px] py-6 flex flex-col gap-1 md:gap-2 md:px-14 md:scroll-mt-32 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-5 "
+      >
+        <ScrollAnimation
+          animateIn="fadeInLeft"
+          animateOut="fadeOutRight"
+          animateOnce
+        >
+          <h1 className="h1-text capitalize text-center text-secondary xs:px-3 ">
             our board of directors
           </h1>
         </ScrollAnimation>
-        <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 ">
-          {secretariat.BodMem.map((bod, index) => (
-            <ScrollAnimation
-              animateIn="fadeIn"
-              animateOut="fadeOut"
-              duration={1}
-              key={index}
-            >
-              <Card title={bod.Position} name={bod.Name} image={profile5} />
-            </ScrollAnimation>
-          ))}
-        </div>
+        {selectedProfile?.type === "bod" ? (
+          <div className="flex justify-center mb-4">
+            <Profile
+              image={profile5}
+              name={secretariat.BodMem[selectedProfile.index].Name}
+              tags={secretariat.BodMem[selectedProfile.index].Profile.Expertise}
+              text={
+                secretariat.BodMem[selectedProfile.index].Profile.Description
+              }
+              onBack={() => setSelectedProfile(null)}
+              scrollRef={profileViewRef}
+            />
+          </div>
+        ) : (
+          <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+            {secretariat.BodMem.map((bod, index) => (
+              <ScrollAnimation
+                animateIn="fadeIn"
+                animateOut="fadeOut"
+                key={index}
+                animateOnce
+              >
+                <Card
+                  title={bod.Position}
+                  name={bod.Name}
+                  image={profile5}
+                  type="bod"
+                  index={index}
+                  onShowProfile={(type, idx) => {
+                    profileViewRef.current =
+                      type === "bod"
+                        ? bodSectionRef.current
+                        : lastViewedSectionRef.current;
+                    setSelectedProfile({ type, index: idx });
+                  }}
+                />
+              </ScrollAnimation>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* The Staff Team */}
-      <section className="py-6 flex flex-col gap-1 md:gap-2 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5">
-        <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutRight">
+      <section
+        ref={staffSectionRef}
+        className="py-6 flex flex-col gap-1 md:gap-2 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5"
+      >
+        <ScrollAnimation
+          animateIn="fadeInLeft"
+          animateOut="fadeOutRight"
+          animateOnce
+        >
           <h1 className="h1-text capitalize text-center text-secondary">
             our staff
           </h1>
         </ScrollAnimation>
+
+        {/* Senior Management Team */}
+        <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+          {selectedProfile?.type === "smt" ? (
+            <div className="flex justify-center mb-4">
+              <Profile
+                image={secretariat.SMT[selectedProfile.index].Image}
+                name={secretariat.SMT[selectedProfile.index].Name}
+                tags={
+                  secretariat.SMT[selectedProfile.index].Profile?.Expertise ||
+                  ""
+                }
+                text={
+                  secretariat.SMT[selectedProfile.index].Profile?.Description ||
+                  ""
+                }
+                onBack={() => setSelectedProfile(null)}
+              />
+            </div>
+          ) : (
+            <>
+              <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                {secretariat.SMT.map((smt, index) => (
+                  <ScrollAnimation
+                    animateIn="fadeIn"
+                    animateOut="fadeOut"
+                    key={index}
+                  >
+                    <Card
+                      title={smt.Position}
+                      name={smt.Name}
+                      image={smt.Image}
+                      type="smt"
+                      index={index}
+                      onShowProfile={(type, idx) =>
+                        setSelectedProfile({ type, index: idx })
+                      }
+                    />
+                  </ScrollAnimation>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Amkeni Staff */}
         <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
           {secretariat.Staffs.map((staff, index) => (
             <ScrollAnimation
               animateIn="fadeIn"
               animateOut="fadeOut"
               key={index}
+              animateOnce
             >
               <Card
                 key={index}
                 title={staff.Position}
                 name={staff.Name}
                 image={staff.Image}
+                showProfileButton={false}
               />
             </ScrollAnimation>
           ))}
@@ -197,7 +310,11 @@ function About() {
 
       {/* The Volunteers Team */}
       <section className=" ">
-        <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutRight">
+        <ScrollAnimation
+          animateIn="fadeInLeft"
+          animateOut="fadeOutRight"
+          animateOnce
+        >
           <h1 className="h1-text capitalize text-center text-secondary">
             our volunteers
           </h1>
@@ -211,6 +328,7 @@ function About() {
                 name={vol.Name}
                 image={vol.Image}
                 link={vol.LinkedIn}
+                showProfileButton={false}
               />
             ))}
           </Marquee>
@@ -227,22 +345,31 @@ function About() {
 function CarouselSlide({ title, focusArea, highlights }) {
   return (
     <div className="flex flex-col min-h-[400px] justify-around pb-6 xs:px-0 md:gap-1 lg:gap-4 xl:gap-5 2xl:gap-10 ">
-      <h3 className="h3-text capitalize text-center text-pretty text-secondary/70 ">
+      <h3 className="h3-text capitalize text-center text-pretty text-primary/70 ">
         {title}
       </h3>
-      <div className="body-text self-center ">
+      <div className="body-text text-white self-center ">
         <p>Our Areas of focus are:</p>
         {focusArea}
       </div>
-      <p className="body-text italic text-center text-muted">"{highlights}"</p>
+      <p className="body-text italic text-center text-white/60">
+        "{highlights}"
+      </p>
     </div>
   );
 }
 
 // Cards component for the board, staff and volunteer display
-function Card({ title, name, link, image }) {
-
-
+function Card({
+  title,
+  name,
+  link,
+  image,
+  type,
+  index,
+  onShowProfile,
+  showProfileButton = true,
+}) {
   return (
     <>
       <div className="relative w-48 m-4 flex-wrap gap-4 aspect-[1/1.5] rounded-xl md:w-48 lg:w-52 2xl:w-72 overflow-hidden group ">
@@ -276,16 +403,91 @@ function Card({ title, name, link, image }) {
         <div className="absolute flex flex-col h-full justify-center opacity-0 gap-10 px-4 group-hover:z-10 group-hover:opacity-100 group-hover:animate-slideIn ">
           <h4 className="h4-text capitalize text-white">{title}</h4>
           <p className="body-text font-bold text-white">{name}</p>
-          <a
-          onClick={() => {console.log(link);
-          }}
-            href={link}
-            target="_blank"
-            className="w-16 grid place-items-center button-text button-type self-start bg-primary/70 hover:bg-primary hover:text-black rounded-3xl "
-          >
-            <FontAwesomeIcon icon={faLinkedin} />
-          </a>
+          {!showProfileButton && (
+            <a
+              onClick={() => {
+                console.log(link);
+              }}
+              href={link}
+              target="_blank"
+              className="w-16 grid place-items-center button-text button-type self-start bg-primary/70 hover:bg-primary hover:text-black rounded-3xl transition-all duration-300 "
+            >
+              <FontAwesomeIcon icon={faLinkedin} />
+            </a>
+          )}
+          {showProfileButton && (
+            <button
+              onClick={() => onShowProfile(type, index)}
+              className="button-type bg-primary/70 self-start button-text hover:text-black hover:bg-primary transition-all duration-300 "
+            >
+              Show profile
+            </button>
+          )}
         </div>
+      </div>
+    </>
+  );
+}
+
+function Profile({ image, name, text, tags, onBack, scrollRef }) {
+  return (
+    <>
+      <div
+        ref={scrollRef}
+        className="scroll-mt-[150px] s:scroll-mt-[156px] xs:scroll-mt-[160px] relative flex w-[90%] min-h-[700px] items-center justify-center flex-col shadow-neomorph-other rounded-3xl overflow-hidden xs:w-[80%] md:scroll-mt-40 md:flex-row md:h-[350px] md:min-h-[400px] md:w-full animate__animated animate__fadeIn xl:w-[75%] 2xl:w-[65%] 2xl:min-h-[450px] "
+      >
+        {/* Profile picture */}
+        <div className="w-full h-[200px] overflow-hidden md:h-full md:w-[40%] xs:h-[250px] s:h-[300px] lg:w-[30%]  ">
+          <img
+            src={image}
+            alt={`image-${name}`}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Show profile details */}
+        <div className="w-full h-[100vh]  md:h-full md:w-[60%] flex flex-col justify-start lg:w-[70%] ">
+          {/* header */}
+          <div className=" bg-primary h-[25%] xs:h-[18%] s:h-[18%] md:h-[40%] xl:px-4 ">
+            <h3 className="h3-text px-2 ">{name}</h3>
+            <h5 className=" p-2 text-bold ">
+              Tags:{" "}
+              {tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className={`text-xs ${
+                    index !== tags.length - 1 ? `border-r-2` : ``
+                  } border-black px-1 text-muted s:text-sm md:px-2 xl:text-base `}
+                >
+                  {tag}{" "}
+                </span>
+              ))}{" "}
+            </h5>
+          </div>
+
+          {/* Profile content */}
+          <div className="overflow-y-auto h-[70%] pt-4 xs:h-[79%] s:h-[80%] ">
+            {bundleTextIntoParagraphs(text, 3).map((p, index) => (
+              <p
+                className="body-text text-justify px-4 s:text-left xs:text-balance lg:px-6 lg:text-pretty "
+                key={index}
+              >
+                {p} <br /> <br />
+              </p>
+            ))}
+          </div>
+        </div>
+
+        {/* Back button */}
+        <div
+          onClick={onBack}
+          className="absolute right-3 top-3 text-white md:text-black"
+        >
+          <FontAwesomeIcon icon={faXmark} className="md:text-2xl " />
+        </div>
+
+        {/* Ends with links to social pages */}
+        <div></div>
       </div>
     </>
   );
