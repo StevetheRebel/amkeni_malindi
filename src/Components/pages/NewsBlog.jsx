@@ -187,9 +187,9 @@ const EventTimeline = () => {
 
   return (
     <>
-      <div className=" bg-white/40 backdrop-blur-sm flex flex-col w-full gap-4 p-4 rounded-2xl sm:flex-row sm:gap-6">
+      <div className=" bg-white/40 backdrop-blur-sm flex flex-col w-full gap-4 py-4 px-2 rounded-2xl sm:flex-row sm:gap-6 md:p-4 xl:py-2 2xl:min-h-[400px]">
         {/* Render Button for Each Year */}
-        <div className="grid gap-2 grid-cols-3 justify-center py-2 sm:flex-col sm:gap-5 xl:gap-6 ">
+        <div className="grid gap-2 grid-cols-3 justify-center py-2 sm:flex-col sm:gap-5 md:flex xl:gap-4 2xl:gap-2 2xl:w-[30%] 2xl:grid 2xl:items-center ">
           {sortedData.map((item) => (
             <button
               key={item.year}
