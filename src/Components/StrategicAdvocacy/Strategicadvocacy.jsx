@@ -48,7 +48,7 @@ function Strategicadvocacy({ id }) {
                   offset={100}
                   key={index}
                 >
-                  <p className="body-text text-justify">
+                  <p className="body-text text-justify px-3 s:px-4 md:px-6">
                     {para}
                     <br />
                     <br />

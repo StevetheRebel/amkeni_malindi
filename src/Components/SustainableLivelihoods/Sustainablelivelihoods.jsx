@@ -63,6 +63,9 @@ function Sustainablelivelihoods({ id }) {
         className="p-4 lg:px-[6%] bg-image6 min-h-screen bg-fixed bg-cover bg-no-repeat bg-center"
         id={id}
       >
+
+        {/* Description Docus Areas and Highlight of the Program */}
+        <div className="flex flex-col items-center rounded-2xl bg-muted/50 backdrop-blur- p-4 xs:px-5 md:mb-4 md:rounded-tr-2xl md:rounded-br-2xl lg:px-8 xl:mb-8">
         {/* Program Heading */}
         <ScrollAnimation
           animateIn="fadeInLeft"
@@ -74,12 +77,9 @@ function Sustainablelivelihoods({ id }) {
             {programData.pillars[2].title}
           </h2>
         </ScrollAnimation>
-
-        {/* Description Docus Areas and Highlight of the Program */}
-        <div className="flex flex-col items-center rounded-2xl bg-white/70 backdrop-blur- p-4 xs:px-5 md:mb-4 md:rounded-tr-2xl md:rounded-br-2xl lg:px-8 xl:mb-8">
           <div className="relative w-full flex flex-col items-center gap-4 pt-2">
             {/* Description of the Program */}
-            <div className="text-justify body-text">
+            <div>
               {bundleTextIntoParagraphs(programData.pillars[2].description).map(
                 (para, index) => (
                   <ScrollAnimation
@@ -88,7 +88,7 @@ function Sustainablelivelihoods({ id }) {
                     animateOut="fadeOut"
                     offset={100}
                   >
-                    <p key={index}>
+                    <p key={index} className="text-justify body-text text-white px-3 s:px-4 md:px-6">
                       {para}
                       <br />
                       <br />
@@ -144,14 +144,14 @@ function Sustainablelivelihoods({ id }) {
                     (area, index) => (
                       <SwiperSlide key={index}>
                         <div className="p-2 min-h-[380px] text-center rounded-2xl xs:p-4  ">
-                          <h3 className="h3-text " data-swiper-parallax="-200">
+                          <h3 className="h3-text text-primary/80 " data-swiper-parallax="-200">
                             {area.title}
                           </h3>
                           <div
                             className="flex flex-col-reverse justify-around gap-3 items-center py-2"
                             data-swiper-parallax="-100"
                           >
-                            <p className="body-text text-center">
+                            <p className="body-text text-center text-white/80">
                               {area.description}
                             </p>
                             <img
@@ -174,7 +174,7 @@ function Sustainablelivelihoods({ id }) {
                 offset={100}
                 animateOnce
               >
-                <p className="body-text italic text-center">
+                <p className="body-text italic text-center text-white/60">
                   {programData.pillars[2].highlights}
                 </p>
               </ScrollAnimation>

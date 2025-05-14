@@ -85,11 +85,11 @@ function Program() {
         className="relative min-h-screen bg-image4 bg-fixed bg-no-repeat bg-cover pt-[154px] xs:pt-[160px] sm:pt-36 flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10"
         id="health-promotion"
       >
-        <h1 className="h1-text capitalize text-center text-secondary">
+        <h1 className="h1-text capitalize text-center text-primary">
           our programs
         </h1>
 
-        <div className="flex flex-col items-center mb-4 md:mb-6">
+        <div className="flex flex-col items-center mb-4 md:mb-6 bg-muted/50 backdrop-blur-sm rounded-2xl ">
           {
             <h2 className="h2-text font-bold text-center text-primary/80">
               {programData.pillars[0].title}
@@ -105,7 +105,7 @@ function Program() {
                 animateOnce
                 key={index} 
               >
-                <p className="text-justify body-text text-white">
+                <p className="text-justify body-text text-white px-3 s:px-4 md:px-6 2xl:px-16">
                   {para}
                   <br />
                   <br />
@@ -119,7 +119,7 @@ function Program() {
             offset={100}
             animateOnce
           >
-            <p className="font-bold body-text text-white py-4 text-center">
+            <p className="font-bold body-text text-white py-4 text-center px-3 s:px-4 md:px-6">
               Check out the detailed steps below and visit us today to get
               started on your journey to better health!
             </p>
@@ -160,7 +160,7 @@ function Program() {
               </div>
             </Box>
           </Modal>
-          <div className="flex flex-col gap-4 items-center justify-center py-4 sm:flex-row flex-wrap lg:gap-6 w-full 2xl:gap-4 ">
+          <div className="flex flex-col gap-4 items-center px-3 s:px-4 md:px-6 justify-center py-4 sm:flex-row flex-wrap lg:gap-6 w-full 2xl:gap-4 ">
             {/* HIV Testing Services */}
             <div className="relative overflow-hidden w-[80%] aspect-[1/1.25] rounded-2xl sm:max-w-44 lg:max-w-60 xl:max-w-72 2xl:max-w-80 group">
               <LazyLoadImage

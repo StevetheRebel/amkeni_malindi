@@ -54,7 +54,7 @@ function SystemStrengthening({ id }) {
                     animateOut="fadeOut"
                     offset={100}
                   >
-                    <p className="body-text text-justify">
+                    <p className="body-text text-justify px-3 s:px-4 md:px-6">
                       {para}
                       <br />
                       <br />
