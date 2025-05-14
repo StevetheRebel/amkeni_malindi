@@ -245,7 +245,7 @@ function HiringCard({
             </h3>
             <div>
               <span className="h4-text">Brief: </span>
-              <span className="body-text">{truncateByWords(summary, 15)}</span>
+              <span className="body-text xl:text-base">{truncateByWords(summary, 15)}</span>
             </div>
             <div className="flex flex-col gap-1">
               <p className="body-text font-bold">
