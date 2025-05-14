@@ -32,6 +32,7 @@ import ALogo from "./../../assets/Amkeni A.webp";
 import Typewriter from "../Typewriter";
 import RainbowSlider from "../RainbowSlider";
 import Rainbow from "../Loader/Rainbow";
+import LatestYoutubeVideo from "../Youtube/LatestYoutubeVideo";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -266,7 +267,7 @@ function Home() {
                       <LazyLoadImage
                         src={imageUrl}
                         alt={he.decode(post.title)}
-                        className="group-hover:grayscale group-hover:brightness-50 "
+                        className="group-hover:grayscale group-hover:brightness-50 object-cover "
                       />
                       <div className="body-text flex flex-col justify-around h-full w-full font-bold text-white p-2 absolute top-[100%] group-hover:animate-slideUp lg:py-2">
                         <h4 className="body-text">
@@ -343,9 +344,13 @@ function Home() {
         </div>
       </section>
 
-      {/* Carousel Donor Logos Marquee */}
-      <section className="pt-6 pb-12 bg-image1 bg-center bg-cover bg-fixed flex flex-col gap-4">
-        <h1 className="h1-text text-center text-primary">
+      {/* Youtube and Carousel Donor Logos Marquee */}
+      <section className="pt-6 pb-12 bg-image1 bg-center bg-cover bg-fixed flex flex-col gap-4 items-center">
+        <h1 className="h1-text text-center text-white ">Youtube Videos</h1>
+        <div className="rounded-2xl w-[90%] aspect-[16/9] overflow-hidden shadow-[10px_13px_34px_3px_rgba(0,0,0,0.65)] md:w-[70%] lg:w-[60%] xl:w-[40%] 2xl:w-[30%] ">
+          <LatestYoutubeVideo />
+        </div>
+        <h1 className="h1-text text-center text-white mt-20">
           Donors and Partners
         </h1>
         <Marquee pauseOnHover>
