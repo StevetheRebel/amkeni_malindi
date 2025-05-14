@@ -100,7 +100,7 @@ body {
 }
 
 .body-text {
-  @apply font-bodyText text-[12px] xs:text-[14px] sm:text-base lg:text-lg;
+  @apply font-bodyText text-[12px] xs:text-[14px] sm:text-base 2xl:text-lg;
 }
 
 .h1-text {
