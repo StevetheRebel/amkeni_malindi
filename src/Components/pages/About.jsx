@@ -297,7 +297,7 @@ function About() {
         {/* The Staff Team */}
         <div
           ref={staffSectionRef}
-          className="scroll-mt-[130px] xs:scroll-mt-[140px] s:scroll-mt-[150px] sx:scroll-mt-[160px] py-6 flex flex-col gap-1 md:gap-2 md:scroll-mt-32 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5"
+          className="scroll-mt-[130px] xs:scroll-mt-[140px] s:scroll-mt-[150px] sx:scroll-mt-[160px] py-6 flex flex-col gap-1 md:gap-y-8 md:scroll-mt-32 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5"
         >
           <ScrollAnimation
             animateIn="fadeInLeft"
@@ -383,7 +383,7 @@ function About() {
         </div>
 
         {/* The Volunteers Team */}
-        <div>
+        <div className="pb-6">
           <ScrollAnimation
             animateIn="fadeInLeft"
             animateOut="fadeOutRight"
@@ -447,7 +447,7 @@ function Card({
 }) {
   return (
     <>
-      <div className="relative w-48 m-4 flex-wrap gap-4 aspect-[1/1.5] rounded-xl md:w-48 lg:w-52 2xl:w-72 overflow-hidden group ">
+      <div className=" mb-8 md:mb-0 relative w-48 m-4 flex-wrap gap-4 aspect-[1/1.5] rounded-xl md:w-48 lg:w-52 2xl:w-72 overflow-hidden group shadow-profile-shadow ">
         {/* Display the image or a placeholder */}
         {image ? (
           // Show the image if image path is valid
@@ -509,7 +509,7 @@ function Profile({ image, name, text, tags, onBack, scrollRef, socialMedia }) {
     <>
       <div
         ref={scrollRef}
-        className="scroll-mt-[150px] s:scroll-mt-[156px] xs:scroll-mt-[160px] relative flex w-[90%] min-h-[700px] items-center justify-center flex-col shadow-neomorph-other rounded-3xl overflow-hidden xs:w-[80%] md:scroll-mt-40 md:flex-row md:h-[350px] md:min-h-[400px] md:w-full animate__animated animate__fadeIn xl:w-[75%] 2xl:w-[65%] 2xl:min-h-[450px] "
+        className="scroll-mt-[150px] s:scroll-mt-[156px] xs:scroll-mt-[160px] relative flex w-[90%] min-h-[700px] items-center justify-center flex-col shadow-neomorph-other rounded-3xl overflow-hidden xs:w-[80%] md:scroll-mt-40 md:flex-row md:h-[350px] md:min-h-[400px] md:mb-8 md:w-full animate__animated animate__fadeIn xl:w-[75%] 2xl:w-[65%] 2xl:min-h-[450px] shadow-profile-shadow "
       >
         {/* Profile picture */}
         <div className="w-full h-[300px] overflow-hidden md:h-full md:w-[40%] xs:h-[350px] s:h-[400px] lg:w-[30%]  ">
@@ -521,7 +521,7 @@ function Profile({ image, name, text, tags, onBack, scrollRef, socialMedia }) {
         </div>
 
         {/* Show profile details */}
-        <div className="w-full h-[100vh]  md:h-full md:w-[60%] flex flex-col justify-start lg:w-[70%] ">
+        <div className="w-full h-[100vh] bg-white  md:h-full md:w-[60%] flex flex-col justify-start lg:w-[70%] ">
           {/* header */}
           <div className=" bg-primary h-[25%] xs:h-[18%] s:h-[18%] md:h-[40%] xl:px-4 ">
             <h3 className="h3-text px-2 ">{name}</h3>
@@ -619,18 +619,5 @@ function Profile({ image, name, text, tags, onBack, scrollRef, socialMedia }) {
     </>
   );
 }
-
-const ResponsivePicture = ({
-  laptop,
-  tablet,
-  mobile,
-  alt = "background image",
-}) => (
-  <picture className="h-full w-full object-cover">
-    <source srcSet={laptop} media="(min-width: 1024px)" />
-    <source srcSet={tablet} media="(min-width: 640px)" />
-    <img src={mobile} alt={alt} className="h-full w-full object-cover" />
-  </picture>
-);
 
 export default About;
