@@ -93,7 +93,7 @@ function Footer() {
 
   return (
     <>
-      <div className="bg-gradient-bottom-top py-4">
+      <div className="bg-gradient-top-bottom py-4">
         <div className="flex flex-col sm:flex-row sm:justify-around sm:gap-4 ">
           {/* First part of the Footer */}
           <div className="flex flex-col gap-1 items-center pb-2 sm:items-start ">
@@ -220,7 +220,7 @@ function Footer() {
         {/* copyrights and socials link */}
         <div className="flex flex-col justify-between items-center gap-2 sm:flex-row sm:px-[5%] lg:px-[9%] xl:px-[10%] 2xl:px-[12%] ">
           <p className="font-bodyText text-xs sm:text-sm 2xl:text-base">
-            Copyright &copy;{year} Amkeni Malindi. All Rights Reserved.
+            Copyright &copy;{year} Amkeni. All Rights Reserved.
           </p>
           <div className="flex gap-2 sm:gap-4">
             <a
