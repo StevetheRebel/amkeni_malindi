@@ -60,7 +60,7 @@ function Sustainablelivelihoods({ id }) {
   return (
     <>
       <section
-        className="p-4 lg:px-[6%] bg-image6 min-h-screen bg-fixed bg-cover bg-no-repeat bg-center"
+        className="p-4 lg:px-[6%] bg-image5 min-h-screen bg-fixed bg-cover bg-no-repeat bg-center"
         id={id}
       >
 
