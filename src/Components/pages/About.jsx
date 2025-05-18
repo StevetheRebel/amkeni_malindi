@@ -3,10 +3,16 @@ import Footer from "../Footer/Footer";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay, EffectFade } from "swiper/modules";
 import staff from "./../../assets/Our Staff.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import {
+  faFacebookF,
+  faInstagramSquare,
+  faLinkedin,
+  faLinkedinIn,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 import profile1 from "./../../assets/Profiles/Profile1.webp";
 import profile5 from "./../../assets/Profiles/Profile5.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -18,6 +24,11 @@ import "animate.css/animate.min.css";
 import OrgHis from "./../../OrgHistory.json";
 import { bundleTextIntoParagraphs } from "../../bundleTextIntroParagraphs";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  aboutusLapBackground,
+  aboutusMobiBackground,
+  aboutusTabBackground,
+} from "../../../public/Backgrounds";
 
 const aboutData = [
   {
@@ -40,9 +51,17 @@ function About() {
   const swiperRef = useRef(null);
   const [selectedProfile, setSelectedProfile] = useState(null);
 
+  const lapImages = Object.values(aboutusLapBackground);
+  const tabImages = Object.values(aboutusTabBackground);
+  const mobiImages = Object.values(aboutusMobiBackground);
+
   useEffect(() => {
     if (selectedProfile !== null) {
-      bodSectionRef.current.scrollIntoView({
+      const sectionRef =
+        selectedProfile.type === "bod"
+          ? bodSectionRef.current
+          : staffSectionRef.current;
+      sectionRef.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
@@ -64,7 +83,48 @@ function About() {
   return (
     <div className="relative h-auto select-none ">
       {/* Mission, Vision and Our Values✅ */}
-      <section className="bg-image10 bg-fixed bg-center bg-no-repeat flex flex-col pt-[150px] min-h-screen gap-6 items-center xs:justify-around xs:pt-[160px] sm:pt-36 md:pt-40 md:gap-12 md:py-8 md:px-14 lg:px-20 xl:px-28 2xl:gap-24 ">
+      <section className="flex flex-col pt-[150px] min-h-screen gap-6 items-center xs:justify-around xs:pt-[160px] sm:pt-36 md:pt-40 md:gap-12 md:py-8 md:px-14 lg:px-20 xl:px-28 2xl:gap-24 ">
+        {/* Background Images carousel */}
+        <div className="fixed inset-0 -z-10">
+          <Swiper
+            modules={[Autoplay, EffectFade]}
+            effect="fade"
+            autoplay={{ delay: 15000, disableOnInteraction: false }}
+            loop
+            speed={2000}
+            className="h-full w-full"
+          >
+            {Array.from({
+              length: Math.max(
+                lapImages.length,
+                tabImages.length,
+                mobiImages.length
+              ),
+            }).map((_, index) => {
+              const lapImg = lapImages[index % lapImages.length];
+              const tabImg = tabImages[index % tabImages.length];
+              const mobiImg = mobiImages[index % mobiImages.length];
+
+              return (
+                <SwiperSlide key={index}>
+                  <picture className="block w-full h-full">
+                    {/* Mobile First */}
+                    <source media="(max-width: 639px)" srcSet={mobiImg} />
+                    <source media="(max-width: 1023px)" srcSet={tabImg} />
+                    <img
+                      src={lapImg}
+                      alt={`about background ${index + 1}`}
+                      className="object-cover w-full h-full"
+                    />
+                  </picture>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+        <div className="fixed inset-0 bg-black/50 -z-10"></div>
+        {/* Background Images carousel */}
+
         {aboutData.map((item, index) => (
           <div
             key={index}
@@ -155,6 +215,7 @@ function About() {
               animateIn="zoomIn"
               animateOut="zoomOut"
               offset={100}
+              animateOnce
             >
               <LazyLoadImage
                 src={staff}
@@ -171,37 +232,138 @@ function About() {
         </div>
       </section>
 
-      {/* The Board of Directors */}
-      {/* Add Authentication to access this */}
-      <section
-        ref={bodSectionRef}
-        className="scroll-mt-[130px] xs:scroll-mt-[140px] s:scroll-mt-[150px] sx:scroll-mt-[160px] py-6 flex flex-col gap-1 md:gap-2 md:px-14 md:scroll-mt-32 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-5 "
-      >
-        <ScrollAnimation
-          animateIn="fadeInLeft"
-          animateOut="fadeOutRight"
-          animateOnce
+      <section className="bg-light">
+        {/* The Board of Directors */}
+        <div
+          ref={bodSectionRef}
+          className="scroll-mt-[130px] xs:scroll-mt-[140px] s:scroll-mt-[150px] sx:scroll-mt-[160px] py-6 flex flex-col gap-1 md:gap-2 md:px-14 md:scroll-mt-32 lg:px-20 xl:px-28 lg:gap-3 xl:gap-4 2xl:gap-5 "
         >
-          <h1 className="h1-text capitalize text-center text-secondary xs:px-3 ">
-            our board of directors
-          </h1>
-        </ScrollAnimation>
-        {selectedProfile?.type === "bod" ? (
-          <div className="flex justify-center mb-4">
-            <Profile
-              image={profile5}
-              name={secretariat.BodMem[selectedProfile.index].Name}
-              tags={secretariat.BodMem[selectedProfile.index].Profile.Expertise}
-              text={
-                secretariat.BodMem[selectedProfile.index].Profile.Description
-              }
-              onBack={() => setSelectedProfile(null)}
-              scrollRef={profileViewRef}
-            />
+          <ScrollAnimation
+            animateIn="fadeInLeft"
+            animateOut="fadeOutRight"
+            animateOnce
+          >
+            <h1 className="h1-text capitalize text-center text-secondary xs:px-3 ">
+              our board of directors
+            </h1>
+          </ScrollAnimation>
+          {selectedProfile?.type === "bod" ? (
+            <div className="flex justify-center mb-4">
+              <Profile
+                image={profile5}
+                name={secretariat.BodMem[selectedProfile.index].Name}
+                tags={
+                  secretariat.BodMem[selectedProfile.index].Profile.Expertise
+                }
+                text={
+                  secretariat.BodMem[selectedProfile.index].Profile.Description
+                }
+                onBack={() => setSelectedProfile(null)}
+                scrollRef={profileViewRef}
+                socialMedia={
+                  secretariat.BodMem[selectedProfile.index].SocialMedia
+                }
+              />
+            </div>
+          ) : (
+            <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+              {secretariat.BodMem.map((bod, index) => (
+                <ScrollAnimation
+                  animateIn="fadeIn"
+                  animateOut="fadeOut"
+                  key={index}
+                  animateOnce
+                >
+                  <Card
+                    title={bod.Position}
+                    name={bod.Name}
+                    image={profile5}
+                    type="bod"
+                    index={index}
+                    onShowProfile={(type, idx) => {
+                      profileViewRef.current =
+                        type === "bod"
+                          ? bodSectionRef.current
+                          : lastViewedSectionRef.current;
+                      setSelectedProfile({ type, index: idx });
+                    }}
+                  />
+                </ScrollAnimation>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* The Staff Team */}
+        <div
+          ref={staffSectionRef}
+          className="scroll-mt-[130px] xs:scroll-mt-[140px] s:scroll-mt-[150px] sx:scroll-mt-[160px] py-6 flex flex-col gap-1 md:gap-2 md:scroll-mt-32 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5"
+        >
+          <ScrollAnimation
+            animateIn="fadeInLeft"
+            animateOut="fadeOutRight"
+            animateOnce
+          >
+            <h1 className="h1-text capitalize text-center text-secondary">
+              our staff
+            </h1>
+          </ScrollAnimation>
+
+          {/* Senior Management Team */}
+          <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 md:mx-4 lg:mx-0">
+            {selectedProfile?.type === "smt" ? (
+              <div className="flex justify-center mb-4">
+                <Profile
+                  image={secretariat.SMT[selectedProfile.index].Image}
+                  name={secretariat.SMT[selectedProfile.index].Name}
+                  tags={
+                    secretariat.SMT[selectedProfile.index].Profile?.Expertise ||
+                    ""
+                  }
+                  text={
+                    secretariat.SMT[selectedProfile.index].Profile
+                      ?.Description || ""
+                  }
+                  scrollRef={profileViewRef}
+                  onBack={() => setSelectedProfile(null)}
+                  socialMedia={
+                    secretariat.SMT[selectedProfile.index].SocialMedia
+                  }
+                />
+              </div>
+            ) : (
+              <>
+                <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+                  {secretariat.SMT.map((smt, index) => (
+                    <ScrollAnimation
+                      animateIn="fadeIn"
+                      animateOut="fadeOut"
+                      key={index}
+                    >
+                      <Card
+                        title={smt.Position}
+                        name={smt.Name}
+                        image={smt.Image}
+                        type="smt"
+                        index={index}
+                        onShowProfile={(type, idx) => {
+                          profileViewRef.current =
+                            type === "smt"
+                              ? staffSectionRef.current
+                              : lastViewedSectionRef.current;
+                          setSelectedProfile({ type, index: idx });
+                        }}
+                      />
+                    </ScrollAnimation>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
-        ) : (
+
+          {/* Amkeni Staff */}
           <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
-            {secretariat.BodMem.map((bod, index) => (
+            {secretariat.Staffs.map((staff, index) => (
               <ScrollAnimation
                 animateIn="fadeIn"
                 animateOut="fadeOut"
@@ -209,129 +371,42 @@ function About() {
                 animateOnce
               >
                 <Card
-                  title={bod.Position}
-                  name={bod.Name}
-                  image={profile5}
-                  type="bod"
-                  index={index}
-                  onShowProfile={(type, idx) => {
-                    profileViewRef.current =
-                      type === "bod"
-                        ? bodSectionRef.current
-                        : lastViewedSectionRef.current;
-                    setSelectedProfile({ type, index: idx });
-                  }}
+                  key={index}
+                  title={staff.Position}
+                  name={staff.Name}
+                  image={staff.Image}
+                  showProfileButton={false}
                 />
               </ScrollAnimation>
             ))}
           </div>
-        )}
-      </section>
-
-      {/* The Staff Team */}
-      <section
-        ref={staffSectionRef}
-        className="py-6 flex flex-col gap-1 md:gap-2 lg:px-20 lg:gap-3 xl:px-28 xl:gap-4 2xl:gap-5"
-      >
-        <ScrollAnimation
-          animateIn="fadeInLeft"
-          animateOut="fadeOutRight"
-          animateOnce
-        >
-          <h1 className="h1-text capitalize text-center text-secondary">
-            our staff
-          </h1>
-        </ScrollAnimation>
-
-        {/* Senior Management Team */}
-        <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
-          {selectedProfile?.type === "smt" ? (
-            <div className="flex justify-center mb-4">
-              <Profile
-                image={secretariat.SMT[selectedProfile.index].Image}
-                name={secretariat.SMT[selectedProfile.index].Name}
-                tags={
-                  secretariat.SMT[selectedProfile.index].Profile?.Expertise ||
-                  ""
-                }
-                text={
-                  secretariat.SMT[selectedProfile.index].Profile?.Description ||
-                  ""
-                }
-                onBack={() => setSelectedProfile(null)}
-              />
-            </div>
-          ) : (
-            <>
-              <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
-                {secretariat.SMT.map((smt, index) => (
-                  <ScrollAnimation
-                    animateIn="fadeIn"
-                    animateOut="fadeOut"
-                    key={index}
-                  >
-                    <Card
-                      title={smt.Position}
-                      name={smt.Name}
-                      image={smt.Image}
-                      type="smt"
-                      index={index}
-                      onShowProfile={(type, idx) =>
-                        setSelectedProfile({ type, index: idx })
-                      }
-                    />
-                  </ScrollAnimation>
-                ))}
-              </div>
-            </>
-          )}
         </div>
 
-        {/* Amkeni Staff */}
-        <div className="flex gap-2 flex-wrap justify-center gap-y-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
-          {secretariat.Staffs.map((staff, index) => (
-            <ScrollAnimation
-              animateIn="fadeIn"
-              animateOut="fadeOut"
-              key={index}
-              animateOnce
-            >
-              <Card
-                key={index}
-                title={staff.Position}
-                name={staff.Name}
-                image={staff.Image}
-                showProfileButton={false}
-              />
-            </ScrollAnimation>
-          ))}
-        </div>
-      </section>
-
-      {/* The Volunteers Team */}
-      <section className=" ">
-        <ScrollAnimation
-          animateIn="fadeInLeft"
-          animateOut="fadeOutRight"
-          animateOnce
-        >
-          <h1 className="h1-text capitalize text-center text-secondary">
-            our volunteers
-          </h1>
-        </ScrollAnimation>
-        <div className="">
-          <Marquee pauseOnHover gradient gradientWidth={50}>
-            {secretariat.Volunteers.map((vol, index) => (
-              <Card
-                key={index}
-                title={vol.Position}
-                name={vol.Name}
-                image={vol.Image}
-                link={vol.LinkedIn}
-                showProfileButton={false}
-              />
-            ))}
-          </Marquee>
+        {/* The Volunteers Team */}
+        <div>
+          <ScrollAnimation
+            animateIn="fadeInLeft"
+            animateOut="fadeOutRight"
+            animateOnce
+          >
+            <h1 className="h1-text capitalize text-center text-secondary">
+              our volunteers
+            </h1>
+          </ScrollAnimation>
+          <div className="">
+            <Marquee pauseOnHover gradient gradientWidth={50}>
+              {secretariat.Volunteers.map((vol, index) => (
+                <Card
+                  key={index}
+                  title={vol.Position}
+                  name={vol.Name}
+                  image={vol.Image}
+                  link={vol.LinkedIn}
+                  showProfileButton={false}
+                />
+              ))}
+            </Marquee>
+          </div>
         </div>
       </section>
 
@@ -429,7 +504,7 @@ function Card({
   );
 }
 
-function Profile({ image, name, text, tags, onBack, scrollRef }) {
+function Profile({ image, name, text, tags, onBack, scrollRef, socialMedia }) {
   return (
     <>
       <div
@@ -437,11 +512,11 @@ function Profile({ image, name, text, tags, onBack, scrollRef }) {
         className="scroll-mt-[150px] s:scroll-mt-[156px] xs:scroll-mt-[160px] relative flex w-[90%] min-h-[700px] items-center justify-center flex-col shadow-neomorph-other rounded-3xl overflow-hidden xs:w-[80%] md:scroll-mt-40 md:flex-row md:h-[350px] md:min-h-[400px] md:w-full animate__animated animate__fadeIn xl:w-[75%] 2xl:w-[65%] 2xl:min-h-[450px] "
       >
         {/* Profile picture */}
-        <div className="w-full h-[200px] overflow-hidden md:h-full md:w-[40%] xs:h-[250px] s:h-[300px] lg:w-[30%]  ">
+        <div className="w-full h-[300px] overflow-hidden md:h-full md:w-[40%] xs:h-[350px] s:h-[400px] lg:w-[30%]  ">
           <img
             src={image}
             alt={`image-${name}`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover "
           />
         </div>
 
@@ -475,13 +550,65 @@ function Profile({ image, name, text, tags, onBack, scrollRef }) {
                 {p} <br /> <br />
               </p>
             ))}
+
+            {/* social media links */}
+            <div className="flex gap-2 items-center justify-center mb-2 s:gap-4 ">
+              {socialMedia?.Facebook && (
+                <a
+                  href={socialMedia.Facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon
+                    icon={faFacebookF}
+                    className="p-2 bg-primary w-4 aspect-square rounded-full hover:bg-inherit hover:text-[#4267B2]"
+                  />
+                </a>
+              )}
+              {socialMedia?.LinkedIn && (
+                <a
+                  href={socialMedia.LinkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon
+                    icon={faLinkedinIn}
+                    className="p-2 bg-primary w-4 aspect-square rounded-full hover:bg-inherit hover:text-[#0077B5]"
+                  />
+                </a>
+              )}
+              {socialMedia?.X && (
+                <a
+                  href={socialMedia.X}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon
+                    icon={faXTwitter}
+                    className="p-2 bg-primary w-4 aspect-square rounded-full hover:bg-inherit hover:text-black"
+                  />
+                </a>
+              )}
+              {socialMedia?.Instagram && (
+                <a
+                  href={socialMedia.Instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon
+                    icon={faInstagramSquare}
+                    className="p-2 bg-primary w-4 aspect-square rounded-full hover:bg-inherit hover:text-[#f56040]"
+                  />
+                </a>
+              )}
+            </div>
           </div>
         </div>
 
         {/* Back button */}
         <div
           onClick={onBack}
-          className="absolute right-3 top-3 text-white md:text-black"
+          className="grid place-items-center absolute right-3 top-3 h-8 w-8 rounded-full bg-black text-white md:text-black md:bg-inherit"
         >
           <FontAwesomeIcon icon={faXmark} className="md:text-2xl " />
         </div>
@@ -492,5 +619,18 @@ function Profile({ image, name, text, tags, onBack, scrollRef }) {
     </>
   );
 }
+
+const ResponsivePicture = ({
+  laptop,
+  tablet,
+  mobile,
+  alt = "background image",
+}) => (
+  <picture className="h-full w-full object-cover">
+    <source srcSet={laptop} media="(min-width: 1024px)" />
+    <source srcSet={tablet} media="(min-width: 640px)" />
+    <img src={mobile} alt={alt} className="h-full w-full object-cover" />
+  </picture>
+);
 
 export default About;

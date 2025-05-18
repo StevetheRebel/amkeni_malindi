@@ -20,7 +20,15 @@ import Sustainablelivelihoods from "../SustainableLivelihoods/Sustainablelivelih
 import SystemStrengthening from "../SystemStrengthening/SystemStrengthening";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
-import back5 from "/Background5.webp"
+import back5 from "/Background5.webp";
+import {
+  programLapBackground,
+  programMobiBackground,
+  programTabBackground,
+} from "../../../public/Backgrounds/index.js";
+import "swiper/css";
+import { Autoplay, EffectFade } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const style1 = {
   position: "absolute",
@@ -78,13 +86,57 @@ function Program() {
     link.click();
   };
 
+  const lapImages = Object.values(programLapBackground);
+  const tabImages = Object.values(programTabBackground);
+  const mobiImages = Object.values(programMobiBackground);
+
   return (
     <div className="relative h-auto select-none scroll-smooth ">
       {/* Integrated and Intersectional Health Promotion and Access */}
       <section
-        className="relative min-h-screen bg-image4 bg-fixed bg-no-repeat bg-cover pt-[154px] xs:pt-[160px] sm:pt-36 flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10"
+        className="relative min-h-screen pt-[154px] xs:pt-[160px] sm:pt-36 flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10"
         id="health-promotion"
       >
+        {/* Background Images carousel */}
+        <div className="fixed inset-0 -z-10">
+          <Swiper
+            modules={[Autoplay, EffectFade]}
+            effect="fade"
+            autoplay={{ delay: 15000, disableOnInteraction: false }}
+            loop
+            speed={2000}
+            className="h-full w-full"
+          >
+            {Array.from({
+              length: Math.max(
+                lapImages.length,
+                tabImages.length,
+                mobiImages.length
+              ),
+            }).map((_, index) => {
+              const lapImg = lapImages[index % lapImages.length];
+              const tabImg = tabImages[index % tabImages.length];
+              const mobiImg = mobiImages[index % mobiImages.length];
+
+              return (
+                <SwiperSlide key={index}>
+                  <picture className="block w-full h-full">
+                    <source media="(max-width: 639px)" srcSet={mobiImg} />
+                    <source media="(max-width: 1023px)" srcSet={tabImg} />
+                    <img
+                      src={lapImg}
+                      alt={`about background ${index + 1}`}
+                      className="object-cover w-full h-full"
+                    />
+                  </picture>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+        <div className="fixed inset-0 bg-black/50 -z-10"></div>
+        {/* Background Images carousel */}
+
         <h1 className="h1-text capitalize text-center text-primary">
           our programs
         </h1>
@@ -103,7 +155,7 @@ function Program() {
                 animateOut="fadeOut"
                 offset={100}
                 animateOnce
-                key={index} 
+                key={index}
               >
                 <p className="text-justify body-text text-white px-3 s:px-4 md:px-6 2xl:px-16">
                   {para}
@@ -153,9 +205,9 @@ function Program() {
                     className="body-text p-2 bg-black rounded-full text-white hover:text-secondary"
                   />
                 </div>
-                  <h2 className="h2-text text-secondary/70 text-center pb-2 md:pb-4">
-                    Book An Appointment
-                  </h2>
+                <h2 className="h2-text text-secondary/70 text-center pb-2 md:pb-4">
+                  Book An Appointment
+                </h2>
                 <AppointmentForm handleFormClose={handleClose6} />
               </div>
             </Box>
