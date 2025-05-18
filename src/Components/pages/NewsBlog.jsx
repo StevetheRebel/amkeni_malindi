@@ -9,9 +9,10 @@ import DOMPurify from "dompurify";
 import he from "he";
 import Rainbow from "../Loader/Rainbow";
 import { useWpPosts } from "../context/WpPostsContext";
+import "animate.css/animate.compat.css";
 
 function NewsBlog() {
-  const {wpPosts, loading, isFetchingComplete } = useWpPosts();
+  const { wpPosts, loading, isFetchingComplete } = useWpPosts();
   const [currentPage, setCurrentPage] = useState(1);
   const postPerPage = 8;
   const [isPageChanging, setIsPageChanging] = useState(false);
@@ -28,7 +29,7 @@ function NewsBlog() {
         behavior: "smooth",
       });
     }
-  }, [currentPage]);
+  }, [currentPage, isPageChanging]);
 
   const totalPages = Math.ceil(wpPosts.length / postPerPage);
 
@@ -69,17 +70,19 @@ function NewsBlog() {
 
       {/* Blog Spot */}
       <section
-        className="bg-light pt-4 pb-4 px-4 lg:px-[6%] h-auto flex flex-col items-center justify-center"
+        className="bg-light pt-4 pb-4 px-4 lg:px-[6%] h-auto flex flex-col items-center justify-center scroll-mt-[130px] xs:scroll-mt-[140px] s:scroll-mt-[150px] sx:scroll-mt-[160px] "
         id="blogSpot"
         ref={blogSpotRef}
       >
         <h2 className="h2-text text-center text-secondary">Blog Spot</h2>
 
-        {(isPageChanging || loading) && <div className="flex items-center justify-center my-12">
-          <Rainbow />
-          </div>}
+        {(isPageChanging || loading) && (
+          <div className="flex items-center justify-center my-12">
+            <Rainbow />
+          </div>
+        )}
 
-        {!loading && (!isPageChanging && (
+        {!loading && !isPageChanging && (
           <>
             {/* Pagination */}
             <div className="flex justify-center items-center my-6 space-x-2">
@@ -113,7 +116,7 @@ function NewsBlog() {
             </div>
 
             {/* Blog grid */}
-            <div className="w-full grid place-items-center gap-y-4 lg:grid-cols-2 lg:gap-x-8 ">
+            <div className="w-full grid place-items-center gap-y-8 lg:grid-cols-2 lg:gap-8 ">
               {currentWpPosts.map((post, index) => {
                 const sanitizedContent = DOMPurify.sanitize(post.content);
                 const firstAttachmentKey = Object.keys(post.attachments)[0];
@@ -165,7 +168,7 @@ function NewsBlog() {
               </button>
             </div>
           </>
-        ))}
+        )}
       </section>
 
       <Footer />
@@ -267,11 +270,11 @@ const BlogPost = ({ pic, title, date, blogpiece, link }) => {
   };
 
   return (
-    <div className="bg-[linear-gradient(145deg,_#c8d6d4,_#eefffb)] w-[80%] aspect-[1/1.7] p-2 shadow-neomorph-shadow rounded-[2rem] overflow-hidden flex flex-col md:flex-row relative group md:w-full md:h-80 md:p-6 xl:h-96 lg:p-2 lg:rounded-2xl lg:shadow-neomorph-soft">
+    <div className="bg-light w-[80%] aspect-[1/1.7] py-6 px-2 shadow-custom-shadow rounded-[2rem] overflow-hidden flex flex-col md:flex-row items-center relative group md:w-full md:h-80 md:p-6 lg:h-64 lg:p-6 lg:rounded-2xl lg:shadow-neomorph-soft xl:h-96 ">
       <LazyLoadImage
         src={pic}
         alt={title}
-        className="w-full h-[40%] rounded-2xl object-cover md:h-full md:group-hover:brightness-50"
+        className="w-[90%] h-[40%] rounded-2xl object-cover md:w-full md:h-full md:group-hover:brightness-50 bg-muted/50"
         onError={handleImageError}
         placeholder={
           <div className="flex items-center justify-center bg-gray-300 h-full">
@@ -279,8 +282,11 @@ const BlogPost = ({ pic, title, date, blogpiece, link }) => {
           </div>
         }
       />
-      <div className="w-full px-2 z-10 flex flex-col justify-around h-[60%] md:pb-4 md:h-full md:absolute md:right-[100%] md:top-0 md:group-hover:right-0 md:group-hover:animate-slideIn max-h-none md:p-6">
-        <h4 className="h3-text text-black px-2 md:text-white">{title}</h4>
+
+      <div className="w-full relative px-2 z-10 flex flex-col justify-around h-[60%] md:pb-4 md:h-full md:absolute md:right-[100%] md:top-0 md:group-hover:right-0 md:group-hover:animate-slideIn max-h-none md:p-6">
+        <h4 className="h4-text font-bold text-black px-2 md:text-white">
+          {title}
+        </h4>
         <div className="text-black flex gap-4 px-2 text-xs md:text-white ">
           <p>{formattedDate}</p>
           <p>{formattedTime}</p>
