@@ -128,7 +128,7 @@ function Opportunities() {
 
       <section className="h-auto px-4 pb-12 pt-[154px] xs:pt-[160px] sm:pt-36 lg:px-[6%] flex flex-col gap-4 ">
         <h1 className="h1-text text-center text-white ">Join our Team </h1>
-        <div className="grid place-items-center grid-cols-1 gap-16 xs:pb-12 s:pb-6 md:flex md:flex-wrap md:justify-center md:items-center md:gap-x-0 lg:grid lg:gap-12 lg:grid-cols-3 xl:grid-cols-4 xl:gap-4 2xl:grid-cols-5 ">
+        <div className="grid place-items-center grid-cols-1 gap-16 xs:pb-12 s:pb-6 md:flex md:flex-wrap md:justify-center md:items-center md:gap-x-0 lg:grid lg:gap-12 lg:gap-y-16 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-4 2xl:grid-cols-5 ">
           <HiringCard
             isOpen={openContainerIndex === 0}
             onToggle={() =>
@@ -184,7 +184,7 @@ function Opportunities() {
             <Rainbow />
           </div>
         ) : (
-          <div className="grid place-items-center grid-cols-1 gap-16 xs:pb-12 s:pb-6 md:flex md:flex-wrap md:justify-center md:items-center md:gap-x-0 lg:grid lg:gap-12 lg:grid-cols-3 xl:grid-cols-4 xl:gap-4 2xl:grid-cols-5 ">
+          <div className="grid place-items-center grid-cols-1 gap-16 xs:pb-12 s:pb-6 md:flex md:flex-wrap md:justify-center md:items-center md:gap-x-0 lg:grid lg:gap-12 lg:gap-y-16 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-4 2xl:grid-cols-5 ">
             {closedPosts.map((post, index) => {
               return (
                 <HiringCard
