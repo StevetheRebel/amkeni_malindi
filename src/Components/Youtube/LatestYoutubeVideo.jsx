@@ -31,7 +31,7 @@ function LatestYoutubeVideo() {
         <iframe
           src={`https://youtube.com/embed/${videoId}`}
           title="Latest Youtube video"
-          frameborder="0"
+          frameBorder="0"
           allowFullScreen
           className="w-full h-full object-cover"
         ></iframe>
