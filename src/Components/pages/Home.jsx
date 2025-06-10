@@ -72,7 +72,7 @@ function Home() {
       return setPostLimit(5);
     };
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -179,10 +179,10 @@ function Home() {
               <SwiperSlide>
                 <RainbowSlider />
                 <div>
-                  <h1 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
+                  <h2 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
                     Our Vision
                     <Typewriter text="..." delay={1000} />
-                  </h1>
+                  </h2>
                   <p className="py-2 font-subheading font-bold text-3xl mt-6 w-full text-center h-fit bg-white/20 backdrop-blur-sm rounded-b-2xl xs:text-4xl xs:py-4 xs:px-2 s:px-6 md:text-6xl lg:text-5xl 2xl:text-7xl 2xl:tracking-widest 2xl:py-8 2xl:px-16 ">
                     <Typewriter
                       text="An Empowered, Just and Inclusive Society."
@@ -196,10 +196,10 @@ function Home() {
               <SwiperSlide>
                 <RainbowSlider />
                 <div>
-                  <h1 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
+                  <h2 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
                     Our Mission
                     <Typewriter text="..." delay={1000} />
-                  </h1>
+                  </h2>
                   <p className="mt-6 py-2 font-subheading font-bold w-full text-center px-1 h-fit bg-white/30 backdrop-blur-sm rounded-b-2xl xs:px-4 xs:text-base s:text-lg s:py-4 md:text-2xl md:px-6 2xl:text-4xl 2xl:tracking-wider ">
                     <Typewriter
                       text="To improve the quality of life of sexual and gender diverse communities through an integrated approach to health service provision, social and economic empowerment, knowledge genaration and strategic advocacy."
@@ -213,10 +213,10 @@ function Home() {
               <SwiperSlide>
                 <RainbowSlider />
                 <div>
-                  <h1 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
+                  <h2 className=" h1-text px-2 bg-black/40 text-white tracking-tight xs:tracking-widest w-fit s:tracking-tight md:tracking-widest lg:tracking-wide xl:text-7xl 2xl:text-8xl  2xl:tracking-widest ">
                     Our Values
                     <Typewriter text="..." delay={1000} />
-                  </h1>
+                  </h2>
                   <ul className="mt-6 py-2 font-subheading font-bold w-full text-start px-1 h-fit bg-white/30 backdrop-blur-sm rounded-b-2xl xs:px-4 md:px-6 2xl:text-4xl 2xl:tracking-wider ">
                     <ul className="font-subheading list-disc list-inside flex flex-col indent-4">
                       <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">
@@ -245,13 +245,12 @@ function Home() {
             </h4>
 
             {/* Blog Spot */}
-            {
-              loading ? (
-                <div className="h-full flex items-center mt-6 md:mt-8 lg:mt-0 ">
-                  <Rainbow />
-                </div>
-              ) : (
-                <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-4 2xl:px-4 2xl:gap-4">
+            {loading ? (
+              <div className="h-full flex items-center mt-6 md:mt-8 lg:mt-0 ">
+                <Rainbow />
+              </div>
+            ) : (
+              <div className="flex flex-col gap-4 h-full sm:flex-row lg:flex-col lg:gap-0 lg:py-4 lg:px-1 lg:justify-between xl:px-2 xl:py-4 2xl:px-4 2xl:gap-4">
                 {posts.slice(0, postLimit).map((post, index) => {
                   const firstAttachmentKey = Object.keys(post.attachments)[0];
                   const imageUrl =
@@ -284,8 +283,7 @@ function Home() {
                   );
                 })}
               </div>
-              )
-            }
+            )}
           </div>
         </div>
       </section>
@@ -294,9 +292,9 @@ function Home() {
       <section className="pt-6 pb-12 bg-light">
         {/* title */}
         <ScrollAnimation animateIn="flipInY" animateOut="flipOutY">
-          <h1 className="font-heading capitalize h1-text text-center text-secondary">
+          <h2 className="font-heading capitalize h1-text text-center text-secondary">
             what we do
-          </h1>
+          </h2>
         </ScrollAnimation>
 
         {/* Carousel Container */}
@@ -346,13 +344,13 @@ function Home() {
 
       {/* Youtube and Carousel Donor Logos Marquee */}
       <section className="pt-6 pb-12 bg-image1 bg-center bg-cover bg-fixed flex flex-col gap-4 items-center">
-        <h1 className="h1-text text-center text-white ">Youtube Videos</h1>
+        <h2 className="h1-text text-center text-white ">Youtube Videos</h2>
         <div className="rounded-2xl w-[90%] aspect-[16/9] overflow-hidden shadow-[10px_13px_34px_3px_rgba(0,0,0,0.65)] md:w-[70%] lg:w-[60%] xl:w-[40%] 2xl:w-[30%] ">
           <LatestYoutubeVideo />
         </div>
-        <h1 className="h1-text text-center text-white mt-20">
+        <h2 className="h1-text text-center text-white mt-20">
           Donors and Partners
-        </h1>
+        </h2>
         <Marquee pauseOnHover>
           {Object.values(donorLogos).map((logo, index) => (
             <img
