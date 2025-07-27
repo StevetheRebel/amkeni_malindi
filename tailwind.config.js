@@ -22,19 +22,19 @@ export default {
         "gradient-bottom-top": "linear-gradient(to top, #DEEEEB, #FFF)",
         pride: 'url("/pride.jpg")',
         image1:
-          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image1.jpg")',
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image1.webp")',
         image2:
-          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image2.jpg")',
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image2.webp")',
         image3:
-          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image3.jpg")',
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image3.webp")',
         image5:
-          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image5.jpg")',
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image5.webp")',
         image6:
-          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image6.jpg")',
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image6.webp")',
         image11:
-          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image11.jpg")',
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/image11.webp")',
         image12:
-          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image12.jpg")',
+          'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)) ,url("/image12.webp")',
       },
       screens: {
         xs: "360px",
