@@ -17,6 +17,8 @@ import {
 import Footer from "./../Footer/Footer.jsx";
 import { useForm } from "react-hook-form";
 import { Box, Modal, Typography } from "@mui/material";
+import { Helmet } from "react-helmet-async";
+import amkeni from "./../../../public/Collection/Amkeni Avatar.webp";
 
 const style = {
   position: "absolute",
@@ -117,6 +119,111 @@ function Reachout() {
   return (
     <>
       <div className="relative h-auto select-none ">
+        <Helmet>
+          <title>Contact Us | Amkeni Malindi</title>
+          <meta
+            name="description"
+            content="Reach out to Amkeni Malindi via phone, email, or our online form. Visit us in Malindi, Kenya or connect on social media. Let’s support communities together."
+          />
+          <meta
+            name="keywords"
+            content="Contact Amkeni Malindi, community health Malindi, NGO Kilifi, call Amkeni, visit Amkeni office, Amkeni contact form, newsletter"
+          />
+          <meta name="author" content="Amkeni Malindi" />
+          <link rel="canonical" href="https://amkenimalindi.org/contact" />
+
+          {/* Open Graph */}
+          <meta
+            property="og:title"
+            content="Contact Amkeni Malindi | We're Here to Help"
+          />
+          <meta
+            property="og:description"
+            content="Get in touch with Amkeni Malindi through our contact form, email, phone, or visit us in Malindi. Connect with our team to learn more or partner with us."
+          />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://amkenimalindi.org/contact" />
+          <meta property="og:image" content={amkeni} />
+          <meta
+            property="og:image:alt"
+            content="Amkeni Malindi Contact Information"
+          />
+
+          {/* Twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Contact Amkeni Malindi" />
+          <meta
+            name="twitter:description"
+            content="Visit us in Malindi, Kenya, or get in touch online. We’re ready to support and collaborate."
+          />
+          <meta name="twitter:image" content={amkeni} />
+
+          <script type="application/ld+json">
+            {`
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NGO",
+      "name": "Amkeni Malindi",
+      "url": "https://amkenimalindi.org/",
+      "logo": "https://amkenimalindi.org/assets/logo.webp",
+      "description": "Community-led organization advancing health, advocacy, and empowerment in Kilifi County, Kenya.",
+      "foundingDate": "2009",
+      "sameAs": [
+        "https://web.facebook.com/profile.php?id=100017571492191",
+        "https://x.com/Amkeni_Org",
+        "https://www.instagram.com/amkeni_org/",
+        "https://www.linkedin.com/company/amkeni-malindi/",
+        "https://www.tiktok.com/@amkeni_org",
+        "https://www.youtube.com/@amkenimalindi"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Mtangani Rd, Opposite Kiddie Stars",
+        "postalCode": "5438 - 80200",
+        "addressLocality": "Malindi",
+        "addressRegion": "Kilifi County",
+        "addressCountry": "KE"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "General Inquiries",
+        "telephone": "+254796237882",
+        "email": "info@amkenimalindi.ke",
+        "availableLanguage": "English",
+        "areaServed": "KE",
+        "hoursAvailable": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://amkenimalindi.org/contact",
+      "url": "https://amkenimalindi.org/contact",
+      "name": "Contact Us",
+      "description": "Reach out to Amkeni Malindi via phone, email, contact form, or visit us in person. Subscribe to our newsletter or follow us on social media."
+    },
+    {
+      "@type": "ContactPage",
+      "url": "https://amkenimalindi.org/contact"
+    }
+  ]
+}
+`}
+          </script>
+        </Helmet>
+
         <section className="pt-[154px] xs:pt-[160px] sm:pt-36 bg-image11 bg-fixed bg-cover bg-center min-h-screen ">
           {/* Page Heading */}
           <h1 className="h1-text text-center text-secondary">Contact Us</h1>

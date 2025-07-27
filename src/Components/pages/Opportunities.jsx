@@ -16,6 +16,8 @@ import { useWpPosts } from "../context/WpPostsContext";
 import DOMPurify from "dompurify";
 import he from "he";
 import Rainbow from "../Loader/Rainbow";
+import { Helmet } from "react-helmet-async";
+import amkeni from "./../../../public/Collection/Amkeni Avatar.webp";
 
 function Opportunities() {
   const [openContainerIndex, setOpenContainerIndex] = useState(null);
@@ -122,6 +124,52 @@ function Opportunities() {
 
   return (
     <div className="relative select-none h-auto scroll-smooth">
+      <Helmet>
+        <title>Opportunities & Events | Amkeni Malindi</title>
+        <meta
+          name="description"
+          content="Explore open volunteer and professional opportunities with Amkeni Malindi. Join registries or apply for current staff and pro-bono roles to support community programs."
+        />
+        <meta
+          name="keywords"
+          content="Amkeni Malindi opportunities, volunteer Kilifi, legal aid registry, pro-bono roles, NGO jobs Kenya, apply Amkeni Malindi"
+        />
+        <meta name="author" content="Amkeni Malindi" />
+        <link
+          rel="canonical"
+          href="https://amkenimalindi.org/opportunities-events"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Join Amkeni | Opportunities" />
+        <meta
+          property="og:description"
+          content="View active volunteer and staff roles with Amkeni Malindi. Apply to support our work in Kilifi County and beyond."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://amkenimalindi.org/opportunities-events"
+        />
+        <meta property="og:image" content={amkeni} />
+        <meta
+          property="og:image:alt"
+          content="Community opportunity board at Amkeni Malindi"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Opportunities with Amkeni Malindi"
+        />
+        <meta
+          name="twitter:description"
+          content="Apply for volunteer and pro-bono opportunities supporting community health, legal aid, and education."
+        />
+        <meta name="twitter:image" content={amkeni} />
+      </Helmet>
+
       <div className="fixed w-full bg-image3 bg-center bg-fixed bg-no-repeat min-h-screen -z-10"></div>
 
       {/* New Hiring Position */}
@@ -245,7 +293,9 @@ function HiringCard({
             </h3>
             <div>
               <span className="h4-text">Brief: </span>
-              <span className="body-text xl:text-base">{truncateByWords(summary, 15)}</span>
+              <span className="body-text xl:text-base">
+                {truncateByWords(summary, 15)}
+              </span>
             </div>
             <div className="flex flex-col gap-1">
               <p className="body-text font-bold">

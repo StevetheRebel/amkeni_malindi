@@ -33,6 +33,8 @@ import Typewriter from "../Typewriter";
 import RainbowSlider from "../RainbowSlider";
 import Rainbow from "../Loader/Rainbow";
 import LatestYoutubeVideo from "../Youtube/LatestYoutubeVideo";
+import { Helmet } from "react-helmet-async";
+import amkeniHome from "./../../assets/Office Pics/Amkeni_001.webp";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -99,6 +101,87 @@ function Home() {
 
   return (
     <div className="relative h-auto select-none scroll-smooth ">
+      <Helmet>
+        <title>Amkeni Malindi | Empowering Communities</title>
+        <meta
+          name="description"
+          content="Amkeni Malindi is a community-led organization advancing health, rights, and economic empowerment for sexual and gender diverse (SGD) individuals in Kenya."
+        />
+        <meta
+          name="keywords"
+          content="Amkeni Malindi, SGD rights Kenya, health services Kenya, HIV prevention Kilifi, empowerment programs, community wellness Kenya"
+        />
+        <meta name="author" content="Amkeni Malindi" />
+        <link rel="canonical" href="https://amkenimalindi.org/" />
+
+        {/* Open Graph (Facebook, LinkedIn, etc.) */}
+        <meta
+          property="og:title"
+          content="Amkeni Malindi | Health, Rights & Empowerment for SGD Communities"
+        />
+        <meta
+          property="og:description"
+          content="Join Amkeni Malindi in transforming lives through inclusive health services, legal advocacy, and sustainable development for SGD communities."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://amkenimalindi.org/" />
+        <meta property="og:image" content={amkeniHome} />
+        <meta property="og:image:alt" content="Amkeni Malindi Safe Space" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Amkeni Malindi | Health & Rights for SGD Communities in Kenya"
+        />
+        <meta
+          name="twitter:description"
+          content="Empowering sexual and gender diverse communities through health services, advocacy, and livelihoods."
+        />
+        <meta name="twitter:image" content={amkeniHome} />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {`
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "NGO",
+            "name": "Amkeni Malindi",
+            "url": "https://amkenimalindi.org/",
+            "logo": "https://amkenimalindi.org/assets/logo.webp",
+            "description": "Amkeni Malindi empowers SGD communities in Kenya through health, advocacy, and economic opportunities.",
+            "foundingDate": "2009",
+            "sameAs": [
+              "https://web.facebook.com/profile.php?id=100017571492191",
+              "https://x.com/Amkeni_Org",
+              "https://www.instagram.com/amkeni_org/",
+              "https://www.linkedin.com/company/amkeni-malindi/"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "postalCode": "80200",
+              "addressRegion": "Kilifi County",
+              "addressCountry": "Kenya"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "url": "https://amkenimalindi.org/",
+            "name": "Amkeni Malindi",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://amkenimalindi.org/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          }
+        ]
+      }
+    `}
+        </script>
+      </Helmet>
+
       {/* Hero Section */}
       <section className="relative min-h-dvh overflow-hidden flex items-center justify-center pt-40 lg:pt-36 lg:px-[6%] ">
         {/* Background Images carousel */}
@@ -217,7 +300,7 @@ function Home() {
                     Our Values
                     <Typewriter text="..." delay={1000} />
                   </h2>
-                  <ul className="mt-6 py-2 font-subheading font-bold w-full text-start px-1 h-fit bg-white/30 backdrop-blur-sm rounded-b-2xl xs:px-4 md:px-6 2xl:text-4xl 2xl:tracking-wider ">
+                  <div className="mt-6 py-2 font-bold w-full text-start px-1 h-fit bg-white/30 backdrop-blur-sm rounded-b-2xl xs:px-4 md:px-6 2xl:text-4xl 2xl:tracking-wider ">
                     <ul className="font-subheading list-disc list-inside flex flex-col indent-4">
                       <li className="text-base tracking-widest py-1 s:text-lg md:text-2xl 2xl:py-2 2xl:text-4xl">
                         Accountability
@@ -232,7 +315,7 @@ function Home() {
                         Gender-Mainstream
                       </li>
                     </ul>
-                  </ul>
+                  </div>
                 </div>
               </SwiperSlide>
             </Swiper>

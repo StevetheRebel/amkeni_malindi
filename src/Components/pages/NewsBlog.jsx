@@ -10,6 +10,8 @@ import he from "he";
 import Rainbow from "../Loader/Rainbow";
 import { useWpPosts } from "../context/WpPostsContext";
 import "animate.css/animate.compat.css";
+import { Helmet } from "react-helmet-async";
+import amkeni from "./../../../public/Collection/Amkeni Avatar.webp";
 
 function NewsBlog() {
   const { wpPosts, loading, isFetchingComplete } = useWpPosts();
@@ -61,6 +63,90 @@ function NewsBlog() {
 
   return (
     <div className="select-none ">
+      <Helmet>
+        <title>News & Blog | Amkeni Malindi</title>
+        <meta
+          name="description"
+          content="Stay updated on Amkeni Malindi’s latest milestones, achievements, and community stories. Browse our blog for insights into health, advocacy, and empowerment efforts in Kilifi County."
+        />
+        <meta
+          name="keywords"
+          content="Amkeni Malindi news, Kilifi community updates, Amkeni blog, milestones, health advocacy stories, empowerment in Kenya"
+        />
+        <meta name="author" content="Amkeni Malindi" />
+        <link rel="canonical" href="https://amkenimalindi.org/news-blog" />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Amkeni Malindi | News, Milestones & Blog"
+        />
+        <meta
+          property="og:description"
+          content="Explore Amkeni’s journey, blog posts, and community milestones. Learn how we’re creating impact across Kenya."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://amkenimalindi.org/news-blog" />
+        <meta property="og:image" content={amkeni} />
+        <meta
+          property="og:image:alt"
+          content="Amkeni Malindi News Timeline and Blog Previews"
+        />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="News & Blog | Amkeni Malindi" />
+        <meta
+          name="twitter:description"
+          content="Milestones, community highlights, and insights from Amkeni Malindi’s work in Kilifi County."
+        />
+        <meta name="twitter:image" content={amkeni} />
+
+        <script type="application/ld+json">
+          {`
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NGO",
+      "name": "Amkeni Malindi",
+      "url": "https://amkenimalindi.org/",
+      "logo": "https://amkenimalindi.org/assets/logo.webp",
+      "description": "Amkeni Malindi shares its community journey through blog stories, health updates, and annual milestones.",
+      "foundingDate": "2009",
+      "sameAs": [
+        "https://web.facebook.com/profile.php?id=100017571492191",
+        "https://x.com/Amkeni_Org",
+        "https://www.instagram.com/amkeni_org/",
+        "https://www.linkedin.com/company/amkeni-malindi/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "postalCode": "80200",
+        "addressRegion": "Kilifi County",
+        "addressCountry": "Kenya"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://amkenimalindi.org/news-blog",
+      "url": "https://amkenimalindi.org/news-blog",
+      "name": "News & Blog",
+      "description": "Milestones and updates from Amkeni Malindi's work in community health, rights advocacy, and sustainable empowerment across Kilifi."
+    },
+    {
+      "@type": "Blog",
+      "name": "Amkeni Malindi Blog",
+      "url": "https://amkenimalindi.org/news-blog",
+      "description": "Stories and insights from Amkeni Malindi’s work in health, advocacy, and empowerment. Updated regularly with field experiences and highlights.",
+      "blogPost": []
+    }
+  ]
+}
+`}
+        </script>
+      </Helmet>
+
       <section className="bg-image12 pb-4 bg-fixed bg-cover bg-no-repeat min-h-screen px-4 pt-[154px] xs:pt-[160px] sm:pt-36  lg:px-[6%]">
         <h1 className="h2-text text-secondary text-center mb-2 md:mb-4">
           Annual Milestones and Achievements

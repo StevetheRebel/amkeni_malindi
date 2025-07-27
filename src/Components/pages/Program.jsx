@@ -29,6 +29,7 @@ import {
 import "swiper/css";
 import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Helmet } from "react-helmet-async";
 
 const style1 = {
   position: "absolute",
@@ -92,6 +93,112 @@ function Program() {
 
   return (
     <div className="relative h-auto select-none scroll-smooth ">
+      <Helmet>
+        <title>Programs & Services | Amkeni Malindi</title>
+        <meta
+          name="description"
+          content="Explore Amkeni Malindi’s community programs in health, advocacy, mental wellness, and economic empowerment. Learn how to access services, book appointments, and get support."
+        />
+        <meta
+          name="keywords"
+          content="Amkeni Malindi programs, HIV testing Kilifi, PrEP Kenya, STI screening, mental health support, community empowerment, advocacy, livelihoods"
+        />
+        <meta name="author" content="Amkeni Malindi" />
+        <link
+          rel="canonical"
+          href="https://amkenimalindi.org/programs-services"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Amkeni Malindi | Health, Advocacy & Empowerment Programs"
+        />
+        <meta
+          property="og:description"
+          content="Discover inclusive services in health, mental wellness, economic empowerment, and strategic advocacy tailored to vulnerable communities in Kenya."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://amkenimalindi.org/programs-services"
+        />
+        {lapImages.map((img, index) => (
+          <meta key={index} property="og:image" content={img[1]} />
+        ))}
+        <meta
+          property="og:image:alt"
+          content="Amkeni Malindi Programs and Services"
+        />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Programs & Services | Amkeni Malindi"
+        />
+        <meta
+          name="twitter:description"
+          content="Learn more about Amkeni Malindi’s programs in health access, advocacy, and sustainable livelihoods in Kilifi County, Kenya."
+        />
+        {lapImages.map((img, index) => (
+          <meta key={index} name="twitter:image" content={img[1]} />
+        ))}
+        <script type="application/ld+json">
+          {`
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NGO",
+      "name": "Amkeni Malindi",
+      "url": "https://amkenimalindi.org/",
+      "logo": "https://amkenimalindi.org/assets/logo.webp",
+      "description": "Amkeni Malindi provides inclusive health services, advocacy, and livelihood programs for vulnerable communities in Kenya.",
+      "foundingDate": "2009",
+      "sameAs": [
+        "https://web.facebook.com/profile.php?id=100017571492191",
+        "https://x.com/Amkeni_Org",
+        "https://www.instagram.com/amkeni_org/",
+        "https://www.linkedin.com/company/amkeni-malindi/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "postalCode": "80200",
+        "addressRegion": "Kilifi County",
+        "addressCountry": "Kenya"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://amkenimalindi.org/programs-services",
+      "url": "https://amkenimalindi.org/programs-services",
+      "name": "Programs & Services",
+      "description": "Comprehensive community support in health access, mental health, advocacy, economic empowerment, and system strengthening by Amkeni Malindi."
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Community Health & Empowerment Programs",
+      "provider": {
+        "@type": "NGO",
+        "name": "Amkeni Malindi"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Kilifi County, Kenya"
+      },
+      "audience": {
+        "@type": "Audience",
+        "name": "Vulnerable and marginalized communities"
+      },
+      "description": "Access to services including HIV testing, STI screening, mental health support, PrEP/PEP access, rights advocacy, and skills development."
+    }
+  ]
+}
+`}
+        </script>
+      </Helmet>
+
       {/* Integrated and Intersectional Health Promotion and Access */}
       <section
         className="relative min-h-screen pt-[154px] xs:pt-[160px] sm:pt-36 flex flex-col gap-4 px-4 sm:px-4 lg:gap-6 lg:px-[6%] xl:gap-8 2xl:gap-10"

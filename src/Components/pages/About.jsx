@@ -29,6 +29,7 @@ import {
   aboutusMobiBackground,
   aboutusTabBackground,
 } from "../../../public/Backgrounds";
+import { Helmet } from "react-helmet-async";
 
 const aboutData = [
   {
@@ -82,6 +83,88 @@ function About() {
 
   return (
     <div className="relative h-auto select-none ">
+      <Helmet>
+        <title>About Us | Amkeni Malindi</title>
+        <meta
+          name="description"
+          content="Explore the vision, mission, values, and journey of Amkeni Malindi—a community-led organization advancing health, rights, and opportunity in Kilifi County, Kenya."
+        />
+        <meta
+          name="keywords"
+          content="Amkeni Malindi, Kilifi organization, community health, rights-based work, mission-driven NGO Kenya, health equity, empowerment"
+        />
+        <meta name="author" content="Amkeni Malindi" />
+        <link rel="canonical" href="https://amkenimalindi.org/about-us" />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="About Amkeni Malindi | Vision, Mission & Community Roots"
+        />
+        <meta
+          property="og:description"
+          content="Learn about Amkeni Malindi’s vision, mission, history, and areas of work—dedicated to advancing dignity and opportunity through community-led action."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://amkenimalindi.org/about-us" />
+        {lapImages.map((img, index) => (
+          <meta key={index} property="og:image" content={img[1]} />
+        ))}
+        <meta property="og:image:alt" content="Amkeni Malindi Team" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="About Amkeni Malindi | Who We Are"
+        />
+        <meta
+          name="twitter:description"
+          content="Discover our values, history, and commitment to community empowerment in Kilifi and beyond."
+        />
+        {lapImages.map((img, index) => (
+          <meta key={index} name="twitter:image" content={img[1]} />
+        ))}
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {`
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Amkeni Malindi",
+        "url": "https://amkenimalindi.org/",
+        "logo": "https://amkenimalindi.org/assets/logo.webp",
+        "description": "Amkeni Malindi is a community-led organization working to promote health, dignity, and economic empowerment through rights-based programming in Kenya.",
+        "foundingDate": "2009",
+        "sameAs": [
+          "https://web.facebook.com/profile.php?id=100017571492191",
+          "https://x.com/Amkeni_Org",
+          "https://www.instagram.com/amkeni_org/",
+          "https://www.linkedin.com/company/amkeni-malindi/"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "postalCode": "80200",
+          "addressRegion": "Kilifi County",
+          "addressCountry": "Kenya"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://amkenimalindi.org/about-us",
+        "url": "https://amkenimalindi.org/about-us",
+        "name": "About Us - Amkeni Malindi",
+        "description": "Learn more about Amkeni Malindi’s mission, vision, values, and areas of work as a community-led organization advancing health and dignity in Kilifi County, Kenya."
+      }
+    ]
+  }
+`}
+        </script>
+      </Helmet>
+
       {/* Mission, Vision and Our Values✅ */}
       <section className="flex flex-col pt-[150px] min-h-screen gap-6 items-center xs:justify-around xs:pt-[160px] sm:pt-36 md:pt-40 md:gap-12 md:py-8 md:px-14 lg:px-20 xl:px-28 2xl:gap-24 ">
         {/* Background Images carousel */}

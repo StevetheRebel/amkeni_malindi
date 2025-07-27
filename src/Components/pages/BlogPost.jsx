@@ -35,6 +35,7 @@ import "animate.css/animate.min.css";
 import { addComment, getCommentsForPost } from "../../firebase";
 import { getRandomAvatar } from "../../utils/randomAvatar";
 import { useWpPosts } from "../context/WpPostsContext";
+import { Helmet } from "react-helmet-async";
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -189,6 +190,73 @@ const BlogPost = () => {
 
   return (
     <div className="relative select-none ">
+      <Helmet>
+        <title>{he.decode(post.title)} | Amkeni Malindi Blog</title>
+        <meta
+          name="description"
+          content={truncateByWords(he.decode(post.excerpt || post.content), 20)}
+        />
+        <meta name="author" content="Amkeni Malindi" />
+        <link
+          rel="canonical"
+          href={`https://amkenimalindi.org/blog/${post.ID}`}
+        />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={he.decode(post.title)} />
+        <meta
+          property="og:description"
+          content={truncateByWords(he.decode(post.excerpt || post.content), 20)}
+        />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:url"
+          content={`https://amkenimalindi.org/blog/${post.ID}`}
+        />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:image:alt" content={he.decode(post.title)} />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={he.decode(post.title)} />
+        <meta
+          name="twitter:description"
+          content={truncateByWords(he.decode(post.excerpt || post.content), 20)}
+        />
+        <meta name="twitter:image" content={imageUrl} />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": `https://amkenimalindi.org/blog/${post.ID}`,
+            },
+            headline: he.decode(post.title),
+            description: truncateByWords(
+              he.decode(post.excerpt || post.content),
+              20
+            ),
+            image: imageUrl,
+            author: {
+              "@type": "Organization",
+              name: "Amkeni Malindi",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Amkeni Malindi",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://amkenimalindi.org/assets/logo.webp",
+              },
+            },
+            datePublished: post.date,
+            dateModified: post.modified || post.date,
+          })}
+        </script>
+      </Helmet>
+
       {/* Blog container */}
       <section className="flex flex-col gap-4">
         {/* Header image container */}
